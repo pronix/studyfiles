@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1'
+
 gem 'pg'
 gem "devise"
 gem "paperclip"
@@ -18,6 +19,6 @@ group :test,:development do
   gem "capybara"
   gem 'rspec'
   gem 'rspec-rails'
-  gem "builder", "2.1.2"
+  gem "builder"
   gem "awesome_print"
 end
