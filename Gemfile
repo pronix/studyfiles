@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1'
 gem 'pg'
 gem "devise"
 gem "paperclip"
@@ -20,5 +20,4 @@ group :test,:development do
   gem 'rspec-rails'
   gem "builder", "2.1.2"
   gem "awesome_print"
-  gem "looksee"
 end
