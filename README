@@ -1,0 +1,8 @@
+Для приложения необхадимо дополнение ltree для postgreSQL.
+Если postgreSQL ставился с исходников, тогда в папке от папки с исходниками:
+cd contrib/ltree
+  make
+  make install
+  make installcheck
+
+При условии установки с пакетов или установки вместе с Осью, то ставится пакет postgresql-contrib (проверенно на Ubuntu/Debian)
