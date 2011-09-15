@@ -2,13 +2,13 @@
 <html>
 <head>
   <title>Studyfiles</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag "http://twitter.github.com/bootstrap/assets/css/bootstrap-1.2.0.min.css"%>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<div class="alert-message warning"><%= notice %></div>
+<div class="alert-message error"><%= alert %></div>
 <%= yield %>
 
 </body>
