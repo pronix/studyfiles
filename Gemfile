@@ -1,11 +1,14 @@
-source 'http://rubygems.org'
+  source 'http://rubygems.org'
 
 gem 'rails', '3.1'
 
-gem 'pg'
+gem "pg"
+gem "warden"
 gem "devise"
 gem "paperclip"
 gem "jquery-rails"
+gem "delayed_job", :path => "vendor/plugins/delayed_job"
+gem "hierarchy", :path => "vendor/plugins/hierarchy"
 
 group :test,:development do
   gem "cucumber", "1.0.3"
