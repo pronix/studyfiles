@@ -17,4 +17,6 @@ group :test,:development do
   gem 'rspec'
   gem 'rspec-rails'
   gem "builder"
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
 end

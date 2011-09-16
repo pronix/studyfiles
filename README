@@ -10,3 +10,5 @@ cd contrib/ltree
   make installcheck
 
 При условии установки с пакетов или установки вместе с Осью, то ставится пакет postgresql-contrib (проверенно на Ubuntu/Debian)
+
+Тесты запукаем через cucumber --tags @worked

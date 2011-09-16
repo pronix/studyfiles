@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+
+require 'uri'
+require 'cgi'
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
+
+module WithinHelpers
+  def with_scope(locator)
+    locator ? within(*selector_for(locator)) { yield } : yield
+  end
+end
+World(WithinHelpers)
+
+When /^(?:|я )прикреплю файл "([^\"]*)" в поле "([^\"]*)"$/ do |file_name, field|
+  path = Rails.root.to_s + "/public/test/#{file_name}"
+
+  attach_file(field, path)
+end
+Допустим /^я (?:перешёл|перехожу|перейду) по ссылке "([^\"]*)"$/ do |link|
+  click_link(link)
+end
