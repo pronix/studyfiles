@@ -1,0 +1,18 @@
+<%= form_for @folder,  :url => folder_path(@file.id), :html => { :multipart => true, :method => :put } do |f| %>
+  <fieldset class="column span-18">
+    <p class="column span-14">
+      <%= f.label :name, "Имя папки" %>
+      <%= f.text_field :name, :id => 'title' %>
+    </p>
+    <p class="column span-14">
+      <%= f.label :description, "Описание папки" %>
+
+      <%= f.text_field :description %>
+    </p>
+
+    <p class="column prepend-6 span-8">
+
+      <button type="submit" class="btn primary" title="Изменить папку">Изменить папку</button>
+    </p>
+  </fieldset>
+<% end %>
