@@ -20,3 +20,10 @@ end
 Допустим /^я (?:перешёл|перехожу|перейду) по ссылке "([^\"]*)"$/ do |link|
   click_link(link)
 end
+When /^в папке "([^"]*)" появится файл с именем "([^"]*)"$/ do |folder, file_name|
+  path = Rails.root.to_s + "#{folder}/#{file_name}"
+  File.open(path)
+end
+When /^(?:|я )(?:|введу|запишу) в поле "([^\"]*)" значение "([^\"]*)"$/ do |field, value|
+  fill_in(field, :with => value)
+end
