@@ -1,4 +1,4 @@
 class SubjectFolder < ActiveRecord::Base
-  belongs_to :subjects
-  belongs_to :folders
+  belongs_to :subject
+  belongs_to :folder
 end

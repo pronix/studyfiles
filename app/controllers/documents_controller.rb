@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class DocumentsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:new, :update, :create, :new]
+  before_filter :authenticate_user!
   
   def index
     @files = current_user.documents

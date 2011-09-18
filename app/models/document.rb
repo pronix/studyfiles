@@ -1,6 +1,9 @@
+# Класс для хранения документов
 class Document < ActiveRecord::Base
   
   include Hierarchy
+
+  before_create :add_default_path
   
   belongs_to :users
   
@@ -18,6 +21,21 @@ class Document < ActiveRecord::Base
     self.sha[2..3]
   end
 
+  #копируем файл в папку
+  def copy_to_folder(folder)
+    self.update_attributes(:path => folder.path + "." + folder.name)
+  end
+
+  #Копируем файл в университет
+  def copy_to_university(univer)
+    self.update_attributes(:path => univer.id.to_s)
+  end
+
+  #Копируем файл в предмет
+  def copy_to_subject(subject)
+    subject.documents << self
+  end
+
   private
   
   #делаем интерполяцию, добавляем параметр первой папки
@@ -33,5 +51,11 @@ class Document < ActiveRecord::Base
   #делаем интерполяцию, добавляем параметр имени файла
   Paperclip.interpolates :sha  do |attachment, style|
     attachment.instance.sha
+  end
+
+  #Перед созданием ставим path = 'Top'
+  def add_default_path
+    self.path = 'Top'
+    self.name = self.item_file_name
   end
 end
