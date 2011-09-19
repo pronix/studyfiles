@@ -2,7 +2,7 @@
   Ruby 1.9.2
   Rails 3.1
 
-Для приложения необхадимо дополнение ltree для postgreSQL.
+Для приложения необхадимо дополнение ltree для postgreSQL.(postgresql90-contrib)
 Если postgreSQL ставился с исходников, тогда в папке от папки с исходниками:
 cd contrib/ltree
   make
