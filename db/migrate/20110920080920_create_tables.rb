@@ -1,5 +1,16 @@
 class CreateTables < ActiveRecord::Migration
   def change
+    execute "DROP TABLE IF EXISTS users"
+    execute "DROP TABLE IF EXISTS documents"
+    execute "DROP TABLE IF EXISTS messages"
+    execute "DROP TABLE IF EXISTS universities"
+    execute "DROP TABLE IF EXISTS sections"
+    execute "DROP TABLE IF EXISTS subjects"
+    execute "DROP TABLE IF EXISTS folders"
+    execute "DROP TABLE IF EXISTS university_subjects"
+    execute "DROP TABLE IF EXISTS subject_folders"
+    execute "DROP TABLE IF EXISTS subject_documents"
+    execute "DROP TABLE IF EXISTS delayed_jobs"
     create_table :users do |t|
       t.timestamps
     end
