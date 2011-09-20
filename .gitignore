@@ -12,3 +12,4 @@ public/assets
 db/schema.rb
 Gemfile.lock
 config/database.yml
+db/development_structure.sql
