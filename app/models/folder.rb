@@ -9,9 +9,9 @@ class Folder < ActiveRecord::Base
   #Копирум  из одной папки в другую
   def copy_to_folder(folder)
     #строим новый путь
-    new_path = folder.path + "." + folder.name
+    new_path = folder.path + "." + folder.path_name
     #запоминаем старый путь
-    old_path = self.path + "." + self.name
+    old_path = self.path + "." + self.path_name
     #находим файлы в этой папке
     documents = Document.all(:conditions => ["user_id = ? AND (path = ? or path ~ ?)", self.user_id, old_path, old_path + ".*"])
     #находим папки в этой папке
@@ -19,7 +19,7 @@ class Folder < ActiveRecord::Base
     #изменяем путь этой папки
     self.update_attributes(:path => new_path)
     #строим новый путь для файлов
-    new_path = new_path + "." + self.name
+    new_path = new_path + "." + self.path_name
     #прописываем новый пути
     puts documents.size
     puts folders.size
@@ -59,8 +59,9 @@ class Folder < ActiveRecord::Base
 
   private
   
-  #Перед созданием ставим path = 'Top'
+  #Перед созданием ставим path = 'Top' и генерируем имя для пути
   def add_default_path
     self.path = 'Top'
+    self.path_name = self.name.gsub(" ", "_")
   end
 end

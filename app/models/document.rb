@@ -1,9 +1,13 @@
 # Класс для хранения документов
 class Document < ActiveRecord::Base
-  
+
+  require 'zip/zip'
+
   include Hierarchy
 
   before_create :add_default_path
+
+  after_create :check_for_archive
   
   belongs_to :users
   
@@ -23,7 +27,7 @@ class Document < ActiveRecord::Base
 
   #копируем файл в папку
   def copy_to_folder(folder)
-    self.update_attributes(:path => folder.path + "." + folder.name)
+    self.update_attributes(:path => folder.path + "." + folder.path_name)
   end
 
   #Копируем файл в университет
@@ -35,6 +39,44 @@ class Document < ActiveRecord::Base
   def copy_to_subject(subject)
     subject.documents << self
   end
+
+  
+  #проверка файла на архив
+  def check_for_archive
+    if self.item.content_type == 'application/zip'
+      self.unzip_file "/public/zips"
+    end
+  end
+
+  #Распаковка zip архива
+  def unzip_file (destination)
+    file = self.item.path
+    user = self.user_id
+    destination = Rails.root.to_s + destination
+    files = Array.new
+    Zip::ZipFile.open(file) { |zip_file|
+     zip_file.each { |f|
+       f_path=File.join(destination, f.name)
+       FileUtils.mkdir_p(File.dirname(f_path))
+       zip_file.extract(f, f_path) unless File.exist?(f_path)
+       files.push(f_path)
+     }
+    }
+    self.delete
+    File.delete(file)
+    until files.empty?
+      document_path = files.pop
+      if File.directory? document_path
+        Dir.rmdir(document_path)
+      else
+        document = File.open(document_path)
+        Document.create(:user_id => user, :item => document)
+        File.delete(document_path)
+      end
+    end
+  end
+
+  handle_asynchronously :unzip_file, :run_at => Proc.new { 10.second.from_now }, :priority => 0
 
   private
   
@@ -58,4 +100,5 @@ class Document < ActiveRecord::Base
     self.path = 'Top'
     self.name = self.item_file_name
   end
+
 end
