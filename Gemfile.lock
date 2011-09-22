@@ -1,9 +1,4 @@
 PATH
-  remote: vendor/plugins/delayed_job
-  specs:
-    delayed_job (1.7.0)
-
-PATH
   remote: vendor/plugins/hierarchy
   specs:
     hierarchy (1.0.5)
@@ -65,7 +60,11 @@ GEM
       capybara (>= 1.0.0)
       cucumber (~> 1.0.0)
       nokogiri (>= 1.4.6)
+    daemons (1.1.4)
     database_cleaner (0.6.7)
+    delayed_job (2.1.4)
+      activesupport (~> 3.0)
+      daemons
     devise (1.4.5)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -168,7 +167,7 @@ DEPENDENCIES
   cucumber (= 1.0.3)
   cucumber-rails
   database_cleaner
-  delayed_job!
+  delayed_job
   devise
   hierarchy!
   jquery-rails
@@ -177,4 +176,5 @@ DEPENDENCIES
   rails (= 3.1)
   rspec
   rspec-rails
+  rubyzip
   warden

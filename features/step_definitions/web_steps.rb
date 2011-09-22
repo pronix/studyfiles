@@ -27,3 +27,6 @@ end
 When /^(?:|я )(?:|введу|запишу) в поле "([^\"]*)" значение "([^\"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
+Допустим /^я должен видеть "([^\"]*)"$/ do |text|
+  page.should have_content(text)
+end

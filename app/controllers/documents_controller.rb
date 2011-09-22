@@ -13,7 +13,12 @@ class DocumentsController < ApplicationController
   def create
     @file = Document.new(params[:document])
     if request.post? && @file.save
-      flash[:notice] = "Файл успешно создан"
+      if @file.item.content_type == 'application/zip'
+        flash[:notice] = "Ваш архив принят на обработку"
+      else
+        flash[:notice] = "Файл успешно создан"
+      end
+      
     else
       flash[:alert] = "Файл не создан!"
     end

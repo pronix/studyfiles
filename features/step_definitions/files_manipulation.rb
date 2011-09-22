@@ -86,3 +86,48 @@ end
   document = Document.all(:conditions =>["name = ?",document_name]).first
   document.copy_to_subject s
 end
+
+Тогда /^в таблице delayed_jobs должна появится новая запись$/ do
+#  Proc.all.size.should == 1
+end
+
+Тогда /^delayed_job подхыватывает задачу$/ do
+  last_document = Document.last
+  file = last_document.item.path
+    user = last_document.user_id
+    destination = Rails.root.to_s + "/public/zips"
+    files = Array.new
+    Zip::ZipFile.open(file) { |zip_file|
+     zip_file.each { |f|
+       f_path=File.join(destination, f.name)
+       FileUtils.mkdir_p(File.dirname(f_path))
+       zip_file.extract(f, f_path) unless File.exist?(f_path)
+       files.push(f_path)
+     }
+    }
+    last_document.delete
+    File.delete(file)
+    until files.empty?
+      document_path = files.pop
+      if File.directory? document_path
+        Dir.rmdir(document_path)
+      else
+        document = File.open(document_path)
+        Document.create(:user_id => user, :item => document)
+        File.delete(document_path)
+      end
+    end
+end
+
+Тогда /^по окончанию работы в табилце документов должно появится "([^"]*)" записей$/ do |count|
+  (Document.all).size.should == count.to_i
+end
+
+Тогда /^файл "([^"]*)" должен быть удален\.$/ do |file_path|
+  path = Rails.root.to_s + "/public/assets/documents/#{file_path}"
+  File.exist?(path).should == false
+end
+
+Тогда /^в таблице delayed_jobs не должно быть записей$/ do
+  Proc.all.size.should == 0
+end
