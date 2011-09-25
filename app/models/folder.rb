@@ -2,7 +2,8 @@ class Folder < ActiveRecord::Base
   
   before_create :add_default_path
 
-  belongs_to :users
+  
+  belongs_to :user
   has_many :subject_folders
   has_many :subjects, :through => :subject_folders
   
@@ -13,9 +14,9 @@ class Folder < ActiveRecord::Base
     #запоминаем старый путь
     old_path = self.path + "." + self.path_name
     #находим файлы в этой папке
-    documents = Document.all(:conditions => ["user_id = ? AND (path = ? or path ~ ?)", self.user_id, old_path, old_path + ".*"])
+    documents = Document.where(["user_id = ? AND (path = ? or path ~ ?)", self.user_id, old_path, old_path + ".*"])
     #находим папки в этой папке
-    folders = Folder.all(:conditions => ["user_id = ? AND (path = ? or path ~ ?)", self.user_id, old_path, old_path + ".*"])
+    folders = Folder.where(["user_id = ? AND (path = ? or path ~ ?)", self.user_id, old_path, old_path + ".*"])
     #изменяем путь этой папки
     self.update_attributes(:path => new_path)
     #строим новый путь для файлов
@@ -38,8 +39,8 @@ class Folder < ActiveRecord::Base
     splited[0] = univer.id.to_s
     new_path = splited.join(".")
     old_path = old_path + "." + self.name
-    documents = Document.all(:conditions => ["path = ? or path ~ ?", old_path, old_path + ".*"])
-    folders = Folder.all(:conditions => ["path = ? or path ~ ?", old_path, old_path  + ".*"])
+    documents = Document.where(["path = ? or path ~ ?", old_path, old_path + ".*"])
+    folders = Folder.where(["path = ? or path ~ ?", old_path, old_path  + ".*"])
     puts documents.size
     puts folders.size
     self.update_attributes(:path => new_path)
@@ -55,6 +56,29 @@ class Folder < ActiveRecord::Base
   #Копируем папку в предмет
   def copy_to_subject(subject)
     subject.folders << self
+  end
+
+  #Создаем архив для скачки папки
+  def zip_folder(folder)
+    file_name = "tmp/ziped_clients/#{folder.name}.zip"
+    documents = Documents.where(["path = ? or path ~ ?", folder.path, folder.path + ".*"])
+    file = Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) { |zipfile|
+      documents.each {|current_document|
+        zipfile.add(current_document.name, current_document.item.path)
+      }
+     }
+     return file
+     #send_file file_name, :size => file.size,  :filename => "#{folder.name}.zip"
+  end
+
+  #Подсчет рейтинга папки
+  def raiting
+    Document.where(["path = ? or path ~ ?", self.children_path, self.children_path + ".*" ]).sum(:raiting)
+  end
+
+  #Путь у вложеных объектов
+  def children_path
+    self.path + "." + self.path_name
   end
 
   private

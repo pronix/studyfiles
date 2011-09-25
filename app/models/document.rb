@@ -8,8 +8,11 @@ class Document < ActiveRecord::Base
   before_create :add_default_path
 
   after_create :check_for_archive
+
+  has_many :votes
+  has_many :user_votes, :through => :votes, :source => :user
   
-  belongs_to :users
+  belongs_to :user
   
   has_attached_file :item,
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",
@@ -78,6 +81,47 @@ class Document < ActiveRecord::Base
 
   handle_asynchronously :unzip_file, :run_at => Proc.new { 10.second.from_now }, :priority => 0
 
+  #Увеличение рейтинга файла при скачке
+  def to_download_file
+    unless self.raiting == -1
+      self.raiting += 1
+    else
+      self.raiting += 2
+    end
+  end
+
+  #увелчение рейтинга пользователем
+  def increase_raiting_by(user)
+    unless self.raiting == -1
+      self.raiting += 1
+    else
+      self.raiting += 2
+    end
+    user.votes << Vote.new(:user_id => user.id, :document_id => self.id, :type => true)
+  end
+
+  #уменьшение рейтинга пользователем
+  def decrease_raiting_by(user)
+    unless self.raiting == 1
+      self.raiting -= 1
+    else
+      self.raiting -= 2
+    end
+    user.votes << Vote.new(:user_id => user.id, :document_id => self.id, :type => false)
+  end
+
+  #Создаем архив для скачки файлов
+  def zip_files(documents)
+    file_name = "tmp/ziped_clients/#{documents.first.sha}.zip"
+    file = Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) { |zipfile|
+      documents.each {|current_document|
+        zipfile.add(current_document.name, current_document.item.path)
+      }
+     }
+     return file
+     #send_file file_name, :size => file.size,  :filename => "#{documents.first.sha}.zip""
+  end
+
   private
   
   #делаем интерполяцию, добавляем параметр первой папки
@@ -96,9 +140,12 @@ class Document < ActiveRecord::Base
   end
 
   #Перед созданием ставим path = 'Top'
+  #Назначаем имя и нулевой рейтинг
+  #TODO изменить в миграции
   def add_default_path
     self.path = 'Top'
     self.name = self.item_file_name
+    self.raiting = 0
   end
 
 end
