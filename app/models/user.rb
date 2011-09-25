@@ -10,4 +10,17 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :folders
   has_many :messages
+  #FIXME придумать разделение положительного и отрицательного рейтинга
+  #TODO реализовать через коллекции.
+  has_many :votes
+  has_many :user_votes, :through => :votes, :source => :document
+  
+  def my_messages
+    Message.where(["user_id = ? or to_user_id = ?", self.id, self.id])
+  end
+
+  #Подсчет рейтинга пользователя
+  def raiting
+    self.documents.sum(:raiting)
+  end
 end
