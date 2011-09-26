@@ -32,52 +32,52 @@ end
 end
 
 Тогда /^я скопирую папку "([^"]*)" в папку "([^"]*)"$/ do |folder_name1, folder_name2|
-  folder1 = Folder.all(:conditions =>["name = ?",folder_name1]).first
-  folder2 = Folder.all(:conditions =>["name = ?",folder_name2]).first
+  folder1 = Folder.where(["name = ?",folder_name1]).first
+  folder2 = Folder.where(["name = ?",folder_name2]).first
   folder1.copy_to_folder(folder2)
 end
 
 Тогда /^у меня есть университет "([^"]*)" с аббривиатурой "([^"]*)"$/ do |name, abbreviation|
-  University.create(:id => 100, :name => name, :abbreviation => abbreviation)
+  University.create(:id => 100, :name => name, :abbreviation => abbreviation, :city => "Новосибирск")
 end
 
 Тогда /^я скопирую папку "([^"]*)" в университет "([^"]*)"$/ do |folder_name, university_name|
-  folder = Folder.all(:conditions =>["name = ?",folder_name]).first
-  u = University.all(:conditions =>["name = ?",university_name]).first
+  folder = Folder.where(["name = ?",folder_name]).first
+  u = University.where(["name = ?",university_name]).first
   folder.copy_to_university u
 end
 
 Тогда /^я скопирую файл "([^"]*)" в университет "([^"]*)"$/ do |file_name, university_name|
-  u = University.all(:conditions =>["name = ?",university_name]).first
-  document = Document.all(:conditions =>["name = ?",file_name]).first
+  u = University.where(["name = ?",university_name]).first
+  document = Document.where(["name = ?",file_name]).first
   document.copy_to_university u
 end
 
 Тогда /^у меня есть предмет "([^"]*)" в университете "([^"]*)"$/ do |subject_name, university_name|
-  s = Subject.create(:name => subject_name)
-  u = University.all(:conditions =>["name = ?",university_name]).first
+  s = Subject.create(:name => subject_name, :abbreviation => "ФЗ", :section_id => 1)
+  u = University.where(["name = ?",university_name]).first
   u.subjects << s
 end
 
 Тогда /^я скопирую папку "([^"]*)" в предмет "([^"]*)"$/ do |folder_name, subject_name|
-  s = Subject.all(:conditions =>["name = ?",subject_name]).first
-  folder = Folder.all(:conditions =>["name = ?",folder_name]).first
+  s = Subject.where(["name = ?",subject_name]).first
+  folder = Folder.where(["name = ?",folder_name]).first
   folder.copy_to_subject s
 end
 
 Тогда /^в БД изменится запись в таблице subject_folders:$/ do |table|
   table.hashes.each{ |rel|
-    folder = Folder.all(:conditions =>["name = ?", rel[:folder]]).first
-    subject = Subject.all(:conditions =>["name = ?", rel[:subject]]).first
-    SubjectFolder.all(:conditions => ["folder_id = ? AND subject_id = ?", folder.id, subject.id]).size.should == 1
+    folder = Folder.where(["name = ?", rel[:folder]]).first
+    subject = Subject.where(["name = ?", rel[:subject]]).first
+    SubjectFolder.where(["folder_id = ? AND subject_id = ?", folder.id, subject.id]).size.should == 1
   }
 end
 
 Тогда /^в БД в изменится запись в таблице subject_documents:$/ do |table|
   table.hashes.each{ |rel|
-    document = Document.all(:conditions =>["name = ?", rel[:document]]).first
-    subject = Subject.all(:conditions =>["name = ?", rel[:subject]]).first
-    SubjectDocument.all(:conditions => ["document_id = ? AND subject_id = ?", document.id, subject.id]).size.should == 1
+    document = Document.where(["name = ?", rel[:document]]).first
+    subject = Subject.where(["name = ?", rel[:subject]]).first
+    SubjectDocument.where(["document_id = ? AND subject_id = ?", document.id, subject.id]).count.should == 1
   }
 end
 
