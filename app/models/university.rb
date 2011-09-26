@@ -6,6 +6,7 @@ class University < ActiveRecord::Base
 
   has_many :university_subjects
   has_many :subjects, :through => :university_subjects
+  has_many :sections, :through => :subjects
 
   #Подсчет рейтинга университета
   def raiting
@@ -26,6 +27,11 @@ class University < ActiveRecord::Base
   #количество предметов
   def subject_count
     self.subjects.size
+  end
+
+  #Список разделов в алфавитном порядке
+  def sections_order
+    self.sections.order(:name)
   end
 
 end
