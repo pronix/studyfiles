@@ -81,6 +81,11 @@ class Folder < ActiveRecord::Base
     self.path + "." + self.path_name
   end
 
+  #Количество файлов
+  def files_count
+    Document.where(["path = ? or path ~ ?", self.children_path, self.children_path + ".*" ]).count(:raiting)
+  end
+
   private
   
   #Перед созданием ставим path = 'Top' и генерируем имя для пути
