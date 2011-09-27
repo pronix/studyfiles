@@ -7,6 +7,10 @@ class University < ActiveRecord::Base
   has_many :university_subjects
   has_many :subjects, :through => :university_subjects
   has_many :sections, :through => :subjects
+  has_many :user_universities
+  has_many :users,    :through => :user_universities
+
+  has_attached_file :logo, :styles => {:thumb => "100x100>" }
 
   #Подсчет рейтинга университета
   def raiting

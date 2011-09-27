@@ -13,8 +13,10 @@ class User < ActiveRecord::Base
   #FIXME придумать разделение положительного и отрицательного рейтинга
   #TODO реализовать через коллекции.
   has_many :votes
-  has_many :user_votes, :through => :votes, :source => :document
-  
+  has_many :user_votes,   :through => :votes, :source => :document
+  has_many :user_universities
+  has_many :universities, :through => :user_universities
+
   def my_messages
     Message.where(["user_id = ? or to_user_id = ?", self.id, self.id])
   end
