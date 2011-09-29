@@ -2,6 +2,7 @@
 class Document < ActiveRecord::Base
 
   require 'zip/zip'
+  require 'coderay'
 
   include Hierarchy
 
@@ -120,6 +121,42 @@ class Document < ActiveRecord::Base
      }
      return file
      #send_file file_name, :size => file.size,  :filename => "#{documents.first.sha}.zip""
+  end
+
+  #определение разрешение файла (для вывода в html)
+  def permission
+    self.item_file_name.split(".").last
+  end
+
+  #предпросмотр текстового файла
+  def text_to_html
+    string = File.open(self.item.path, 'r'){ |file| file.read }
+  end
+
+  #конвертирование исходного кода в html
+  def source_to_html
+    type = ""
+    case self.permission
+    when "rb"
+      type = "ruby"
+    when "pl"
+      type = "python"
+    when "c"
+      type = "c"
+    when "php"
+      type = "php"
+    end
+    source_file = File.expand_path(self.item.path)
+    CodeRay.encode(File.read(source_file), type, :html, :css => :style, :wrap => :div)
+  end
+
+  #представление msofice документа кода в html
+  def office_to_html
+    unless File.exist? self.item.path + "html"
+      cmd = "abiword --to=html #{self.item.path}"
+      system(cmd)
+    end
+    return self.item.path + "html"
   end
 
   private

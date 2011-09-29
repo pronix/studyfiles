@@ -10,6 +10,8 @@ gem "jquery-rails"
 gem "delayed_job"
 gem "hierarchy", :path => "vendor/plugins/hierarchy"
 gem "rubyzip"
+#использользуем для подсветки синтаксиса в исходных кодах
+gem "coderay"
 
 group :test,:development do
   gem "cucumber", "1.0.3"
