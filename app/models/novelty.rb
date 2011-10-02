@@ -1,3 +1,4 @@
+#Модель для новостей на сайте
 class Novelty < ActiveRecord::Base
 
   validates :text, :presence => true
