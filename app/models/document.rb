@@ -86,11 +86,7 @@ class Document < ActiveRecord::Base
 
   #Увеличение рейтинга файла при скачке
   def to_download_file
-    unless self.raiting == -1
-      self.raiting += 1
-    else
-      self.raiting += 2
-    end
+    self.raiting += (self.raiting == -1 ? 2 : 1)
   end
 
   #увелчение рейтинга пользователем

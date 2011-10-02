@@ -6,8 +6,4 @@ class Vote < ActiveRecord::Base
     self.vote_type
   end
 
-  def positiv
-    self.vote_type = true
-    self.save
-  end
 end
