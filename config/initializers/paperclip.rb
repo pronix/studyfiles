@@ -35,7 +35,7 @@ module Paperclip
       if instance.respond_to?("sha=")
         instance.send("sha=", Digest::SHA1.hexdigest(@queued_for_write[:original].read))
       end
-      
+
       @dirty = true
 
       post_process if @post_processing

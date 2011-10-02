@@ -20,16 +20,14 @@ class FoldersController < ApplicationController
     redirect_to folders_path
   end
 
-  def edit
-    @folder = Folder.find_by_id(params[:id])
-  end
-
   def update
     @folder = Folder.find_by_id(params[:id])
-    if @folder.update_attributes(params[:folder])
-      flash[:notice] = "Папка успешно изменена"
-    else
-      flash[:alert] = "Папка не изменена!"
+    if @folder.user == current_user || current_user.admin?
+      if @folder.update_attributes(params[:folder])
+        flash[:notice] = "Папка успешно изменена"
+      else
+        flash[:alert] = "Папка не изменена!"
+      end
     end
     redirect_to folders_path
   end

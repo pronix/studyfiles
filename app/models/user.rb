@@ -10,8 +10,6 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :folders
   has_many :messages
-  #FIXME придумать разделение положительного и отрицательного рейтинга
-  #TODO реализовать через коллекции.
   has_many :votes
   has_many :user_votes,   :through => :votes, :source => :document
   has_many :user_universities
@@ -25,4 +23,5 @@ class User < ActiveRecord::Base
   def raiting
     self.documents.sum(:raiting)
   end
+
 end

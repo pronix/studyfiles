@@ -1,5 +1,5 @@
 module Hierarchy
-  
+
   # An array of integers representing an ordered list of IDs. Duck-types an
   # @Array@ in many ways.
 

@@ -42,12 +42,12 @@ require 'hierarchy/node'
 
 module Hierarchy
   extend ActiveSupport::Concern
-  
+
   # @private
   included do |base|
     base.extend ActiveSupport::Memoizable
     base.memoize :index_path, :ancestors
-    
+
     base.scope :parent_of, ->(obj) { obj.top_level? ? base.where('false') : base.where(id: obj.index_path.last) }
     base.scope :children_of, ->(obj) { base.where(path: obj.my_path) }
     base.scope :ancestors_of, ->(obj) { obj.top_level? ? base.where('false') : base.where(id: obj.index_path.to_a) }
@@ -55,7 +55,7 @@ module Hierarchy
     base.scope :siblings_of, ->(obj) { base.where(path: obj.path) }
     base.scope :priority_order, base.order("NLEVEL(path) ASC")
     base.scope :top_level, base.where([ "path IS NULL or path = ?", '' ])
-    
+
     base.before_save { |obj| obj.path ||= '' }
   end
 

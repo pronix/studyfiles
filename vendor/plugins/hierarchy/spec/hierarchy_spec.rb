@@ -107,7 +107,7 @@ describe Hierarchy do
       parent.should_not be_bottom_level
     end
   end
-  
+
   describe "#ancestors" do
     it "should return an empty array for a top-level object" do
       Model.create!.ancestors.should eql([])

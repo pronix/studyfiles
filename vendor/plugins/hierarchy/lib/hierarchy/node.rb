@@ -1,5 +1,5 @@
 module Hierarchy
-  
+
   # A node in a tree structure. A node can have zero or more {#children}, and
   # has a reverse link back to its parent.
 

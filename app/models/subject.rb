@@ -10,7 +10,7 @@ class Subject < ActiveRecord::Base
 
   has_many :university_subjects
   has_many :universities, :through => :university_subjects
-  
+
   has_many :subject_documents
   has_many :documents, :through => :subject_documents
 

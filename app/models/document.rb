@@ -12,13 +12,15 @@ class Document < ActiveRecord::Base
 
   has_many :votes
   has_many :user_votes, :through => :votes, :source => :user
-  
+
   belongs_to :user
-  
+
+  scope :in_path, lambda { |path| where(["path = ? or path ~ ?", path.to_s, path.to_s + ".*" ])}
+
   has_attached_file :item,
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",
       :path => ":rails_root/public/assets/documents/:first_folder/:second_folder/:sha"
-      
+
   #вытаскиваем первые два символа с хеша
   def first_folder
     self.sha[0..1]
@@ -44,7 +46,7 @@ class Document < ActiveRecord::Base
     subject.documents << self
   end
 
-  
+
   #проверка файла на архив
   def check_for_archive
     if self.item.content_type == 'application/zip'
@@ -93,22 +95,14 @@ class Document < ActiveRecord::Base
 
   #увелчение рейтинга пользователем
   def increase_raiting_by(user)
-    unless self.raiting == -1
-      self.raiting += 1
-    else
-      self.raiting += 2
-    end
-    user.votes << Vote.new(:user_id => user.id, :document_id => self.id, :type => true)
+    self.raiting += (self.raiting == -1 ? 2 : 1)
+    user.user_votes << self
   end
 
   #уменьшение рейтинга пользователем
   def decrease_raiting_by(user)
-    unless self.raiting == 1
-      self.raiting -= 1
-    else
-      self.raiting -= 2
-    end
-    user.votes << Vote.new(:user_id => user.id, :document_id => self.id, :type => false)
+    self.raiting -= (self.raiting == 1 ? 2 : 1)
+    user.votes << Vote.new(:user_id => user.id, :document_id => self.id, :vote_type => false)
   end
 
   #Создаем архив для скачки файлов
@@ -160,25 +154,22 @@ class Document < ActiveRecord::Base
   end
 
   private
-  
+
   #делаем интерполяцию, добавляем параметр первой папки
   Paperclip.interpolates :first_folder  do |attachment, style|
     attachment.instance.first_folder
   end
-  
+
   #делаем интерполяцию, добавляем параметр второй папки
   Paperclip.interpolates :second_folder  do |attachment, style|
     attachment.instance.second_folder
   end
-  
+
   #делаем интерполяцию, добавляем параметр имени файла
   Paperclip.interpolates :sha  do |attachment, style|
     attachment.instance.sha
   end
 
-  #Перед созданием ставим path = 'Top'
-  #Назначаем имя и нулевой рейтинг
-  #TODO изменить в миграции
   def add_default_path
     self.path = 'Top'
     self.name = self.item_file_name

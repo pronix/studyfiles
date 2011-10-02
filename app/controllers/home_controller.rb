@@ -8,7 +8,6 @@ class HomeController < ApplicationController
   end
 
   #Поиск университетов по названию и предеметам
-  #FIXME переделать в один красивый запрос
   def search
     @universities = University.where(["name LIKE ?", "%"+params[:text]+"%"])
     subjects = Subject.where(["name LIKE ?", "%"+params[:text]+"%"])

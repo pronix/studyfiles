@@ -4,10 +4,6 @@ class Message < ActiveRecord::Base
   validates :text, :presence => true
 
   def my_message?(user)
-    if self.user_id == user.id
-      return true
-    else
-      return false
-    end
+    self.user_id == user.id
   end
 end

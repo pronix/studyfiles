@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class DocumentsController < ApplicationController
   before_filter :authenticate_user!
-  
+
   def index
     @files = current_user.documents
   end
@@ -18,7 +18,7 @@ class DocumentsController < ApplicationController
       else
         flash[:notice] = "Файл успешно создан"
       end
-      
+
     else
       flash[:alert] = "Файл не создан!"
     end
@@ -30,11 +30,13 @@ class DocumentsController < ApplicationController
   end
 
   def update
-    @file = Document.find_by_id(params[:id])
-    if @file.update_attributes(params[:document])
-      flash[:notice] = "Файл успешно изменен."
-    else
-      flash[:alert] = "Файл не изменен!"
+    @file = Documents.find_by_id(params[:id])
+    if @file.user == current_user || current_user.admin?
+      if @file.update_attributes(params[:document])
+        flash[:notice] = "Файл успешно изменен."
+      else
+        flash[:alert] = "Файл не изменен!"
+      end
     end
     redirect_to documents_path
   end

@@ -6,7 +6,7 @@
     </p>
     <p class="column span-14">
       <%= f.label :description, "Описание файла" %>
-      
+
       <%= f.text_field :description %>
     </p>
     <p class="column span-14">
@@ -14,7 +14,7 @@
       <%= f.file_field :item %>
 
     </p>
-    <%= f.hidden_field :user_id, :value => current_user.id %> 
+    <%= f.hidden_field :user_id, :value => current_user.id %>
     <p class="column prepend-6 span-8">
 
       <button type="submit" class="btn primary" title="Загрузить файл">Загрузить</button>
