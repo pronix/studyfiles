@@ -21,7 +21,7 @@ class FoldersController < ApplicationController
   end
 
   def update
-    @folder = Folder.find_by_id(params[:id])
+    @folder = (current_user.admin? ? Folder.find_by_id(params[:id]) : current_user.folders.find_by_id(params[:id]))
     if @folder.user == current_user || current_user.admin?
       if @folder.update_attributes(params[:folder])
         flash[:notice] = "Папка успешно изменена"

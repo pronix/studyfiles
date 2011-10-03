@@ -30,13 +30,11 @@ class DocumentsController < ApplicationController
   end
 
   def update
-    @file = Documents.find_by_id(params[:id])
-    if @file.user == current_user || current_user.admin?
-      if @file.update_attributes(params[:document])
-        flash[:notice] = "Файл успешно изменен."
-      else
-        flash[:alert] = "Файл не изменен!"
-      end
+    @file = (current_user.admin? ? Document.find_by_id(params[:id]) : current_user.documents.find_by_id(params[:id]))
+    if @file.update_attributes(params[:document])
+      flash[:notice] = "Файл успешно изменен."
+    else
+      flash[:alert] = "Файл не изменен!"
     end
     redirect_to documents_path
   end
