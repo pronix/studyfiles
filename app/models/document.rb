@@ -4,9 +4,10 @@ class Document < ActiveRecord::Base
   require 'zip/zip'
   require 'coderay'
 
+  include Models::Path
   include Hierarchy
 
-  before_create :add_default_path
+  before_create :default_name
 
   after_create :check_for_archive
 
@@ -14,8 +15,6 @@ class Document < ActiveRecord::Base
   has_many :user_votes, :through => :votes, :source => :user
 
   belongs_to :user
-
-  scope :in_path, lambda { |path| where(["path = ? or path ~ ?", path.to_s, path.to_s + ".*" ])}
 
   has_attached_file :item,
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",
@@ -55,7 +54,7 @@ class Document < ActiveRecord::Base
   end
 
   #Распаковка zip архива
-  def unzip_file (destination)
+  def unzip_file(destination)
     file = self.item.path
     user = self.user_id
     destination = Rails.root.to_s + destination
@@ -166,10 +165,9 @@ class Document < ActiveRecord::Base
     attachment.instance.sha
   end
 
-  def add_default_path
-    self.path = 'Top'
+  #прописывает имя файла по умолчанию
+  def default_name
     self.name = self.item_file_name
-    self.raiting = 0
   end
 
 end

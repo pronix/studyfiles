@@ -1,13 +1,13 @@
 class Folder < ActiveRecord::Base
 
-  before_create :add_default_path
+  before_create :default_path_name
 
+  include Models::Path
 
   belongs_to :user
   has_many :subject_folders
   has_many :subjects, :through => :subject_folders
 
-  scope :in_path, lambda { |path| where(["path = ? or path ~ ?", path.to_s, path.to_s + ".*" ])}
 
   #Копирум  из одной папки в другую
   def copy_to_folder(folder)
@@ -82,9 +82,8 @@ class Folder < ActiveRecord::Base
 
   private
 
-  #Перед созданием ставим path = 'Top' и генерируем имя для пути
-  def add_default_path
-    self.path = 'Top'
+  #Перед созданием генерируем path_name
+  def default_path_name
     self.path_name = self.name.gsub(" ", "_")
   end
 end
