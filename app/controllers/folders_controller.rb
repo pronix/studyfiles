@@ -22,12 +22,10 @@ class FoldersController < ApplicationController
 
   def update
     @folder = (current_user.admin? ? Folder.find_by_id(params[:id]) : current_user.folders.find_by_id(params[:id]))
-    if @folder.user == current_user || current_user.admin?
-      if @folder.update_attributes(params[:folder])
-        flash[:notice] = "Папка успешно изменена"
-      else
-        flash[:alert] = "Папка не изменена!"
-      end
+    if @folder.update_attributes(params[:folder])
+      flash[:notice] = "Папка успешно изменена"
+    else
+      flash[:alert] = "Папка не изменена!"
     end
     redirect_to folders_path
   end
