@@ -1,0 +1,29 @@
+<div id="header">
+  <div class="login-bar">
+    <div class="help-news">
+      <%= link_to t("help"), faqs_path %>&nbsp;&nbsp;/&nbsp;&nbsp;<%= link_to t("novelties"), novelties_path %>
+    </div>
+    <%= render 'shared/login-bar' %>
+  </div>
+  <div class="nav-bar">
+    <div class="logo-box">
+      <img src="images/logo.png" alt="StudyFiles" />
+      <div class="about-logo">
+        Учебные материалы.<br />
+        Все предметы. Все ВУЗы
+      </div>
+    </div>
+    <ul class="nav">
+      
+      <li class="<%= 'current' if controller_name =~ /universities/ %>">
+        <%= link_to t("universities"), universities_path %>
+      </li>
+      <li class="<%= 'current' if controller_name =~ /documents/ %>">
+	<%= link_to t("documents"), documents_path %>
+      </li>
+      <li class="<%= 'current' if controller_name =~ /users/ %>">
+	<%= link_to t("users"), users_path %>
+      </li>
+    </ul>
+  </div>
+</div>
