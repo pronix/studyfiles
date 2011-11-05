@@ -2,7 +2,12 @@ Studyfiles::Application.routes.draw do
 
   devise_for :users
 
-  root :to => "home#index"
+  root :to => "universities#index"
   resources :documents
+  resources :universities
   resources :folders
+  resources :users
+  resources :faqs
+  resources :novelties
+  resources :subjects
 end

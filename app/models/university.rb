@@ -37,4 +37,9 @@ class University < ActiveRecord::Base
     self.sections.order(:name)
   end
 
+  #Первые пять пердметов университета
+  def short_subjects_list
+    self.subjects.limit(5)
+  end
+
 end

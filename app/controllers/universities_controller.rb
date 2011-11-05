@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class UniversitiesController < ApplicationController
 
   before_filter :get_right_column
 
