@@ -1,5 +1,8 @@
 .bundle
 db/*.sqlite3
+.rvmrc
+*.swp
+*.swo
 log/*.log
 tmp/
 nbproject

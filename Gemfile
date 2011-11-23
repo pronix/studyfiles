@@ -8,6 +8,7 @@ gem "devise"
 gem "paperclip"
 gem "jquery-rails"
 gem "delayed_job"
+gem "unicorn"
 gem "hierarchy", :path => "vendor/plugins/hierarchy"
 gem "rubyzip"
 #использользуем для подсветки синтаксиса в исходных кодах

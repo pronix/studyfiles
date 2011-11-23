@@ -1,6 +1,6 @@
 class Ltree < ActiveRecord::Migration
   def up
-    cmd = "psql --username=#{ActiveRecord::Base.connection.instance_variable_get(:@config)[:username]} -w -f `pg_config --sharedir`/contrib/ltree.sql #{ActiveRecord::Base.connection.instance_variable_get(:@config)[:database]}"
+    cmd = "psql --username=#{ActiveRecord::Base.connection.instance_variable_get(:@config)[:username]} -W -f `pg_config --sharedir`/contrib/ltree.sql #{ActiveRecord::Base.connection.instance_variable_get(:@config)[:database]}"
     puts cmd
     result = system(cmd)
     raise "Bad exit" unless result
@@ -11,7 +11,7 @@ class Ltree < ActiveRecord::Migration
   def down
     update "ALTER TABLE \"documents\" DROP \"path\""
     update "ALTER TABLE \"folders\" DROP \"path\""
-    cmd = "psql --username=#{ActiveRecord::Base.connection.instance_variable_get(:@config)[:username]} -w -f `pg_config --sharedir`/contrib/uninstall_ltree.sql #{ActiveRecord::Base.connection.instance_variable_get(:@config)[:database]}"
+    cmd = "psql --username=#{ActiveRecord::Base.connection.instance_variable_get(:@config)[:username]} -W -f `pg_config --sharedir`/contrib/uninstall_ltree.sql #{ActiveRecord::Base.connection.instance_variable_get(:@config)[:database]}"
     puts cmd
     result = system(cmd)
     raise "Bad exit" unless resul
