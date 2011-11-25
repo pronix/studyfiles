@@ -1,6 +1,6 @@
   source 'http://rubygems.org'
 
-gem 'rails', '3.1'
+gem 'rails', '3.1.3'
 
 gem "pg"
 gem "warden"
@@ -10,6 +10,7 @@ gem "jquery-rails"
 gem "delayed_job"
 gem "hierarchy", :path => "vendor/plugins/hierarchy"
 gem "rubyzip"
+gem "ffi", "1.0.11"
 #использользуем для подсветки синтаксиса в исходных кодах
 gem "coderay"
 
