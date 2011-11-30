@@ -69,15 +69,14 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "bee0f6f5c6a2c27b2e66a6b9f81bd49ebf588a8576819989ed6adb3e80cb3f8a0f665834fb10f9cd448b68cde63739dd2e648efbe8f7a905f5a6ffc4c9088007"
+  # config.pepper = "e8f459d0a6d1e2f19bf59a609f7d2b787ebdf4b3897a7b05ec0603f2e27a43cff867e798fb6dbba14c3301981ead7e7a95abaec2620b15d652630b072bc5c473"
 
   # ==> Configuration for :confirmable
-  # The time you want to give your user to confirm his account. During this time
-  # he will be able to access your application without confirming. Default is 0.days
-  # When confirm_within is zero, the user won't be able to sign in without confirming.
-  # You can use this to let your user access some features of your application
-  # without confirming the account, but blocking it after a certain period
-  # (ie 2 days).
+  # A period that the user is allowed to access the website even without
+  # confirming his account. For instance, if set to 2.days, the user will be
+  # able to access the website for two days without confirming his account,
+  # access will be blocked just in the third day. Default is 0.days, meaning
+  # the user cannot access the website without confirming his account.
   # config.confirm_within = 2.days
 
   # Defines which key will be used when confirming an account
@@ -204,7 +203,6 @@ Devise.setup do |config|
   # change the failure app, you can configure them inside the config.warden block.
   #
   # config.warden do |manager|
-  #   manager.failure_app   = AnotherApp
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end

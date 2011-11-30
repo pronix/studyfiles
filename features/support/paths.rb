@@ -11,6 +11,8 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+    when /^главной странице$/
+      '/'
     when /^Мои файлы$/
       '/documents'
 
