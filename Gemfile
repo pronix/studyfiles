@@ -11,10 +11,11 @@ gem "delayed_job"
 gem "hierarchy", :path => "vendor/plugins/hierarchy"
 gem "rubyzip"
 gem "ffi", "1.0.11"
-#использользуем для подсветки синтаксиса в исходных кодах
-gem "coderay"
+gem 'recaptcha', :require => 'recaptcha/rails'
 
 group :test,:development do
+  #использользуем для подсветки синтаксиса в исходных кодах
+  gem "coderay"
   gem "cucumber", "1.0.3"
   gem 'Selenium', '1.1.14'
   gem "capybara"
