@@ -17,7 +17,7 @@ When /^(?:|я )прикреплю файл "([^\"]*)" в поле "([^\"]*)"$/ d
 
   attach_file(field, path)
 end
-Допустим /^я (?:перешёл|перехожу|перейду) по ссылке "([^\"]*)"$/ do |link|
+When /^я (?:перешёл|перехожу|перейду) по ссылке "([^\"]*)"$/ do |link|
   click_link(link)
 end
 When /^в папке "([^"]*)" появится файл с именем "([^"]*)"$/ do |folder, file_name|
@@ -182,12 +182,13 @@ end
 Then /^(?:|I )should see "([^"]*)"(?: within "([^"]*)")?$/ do |text, selector|
   with_scope(selector) do
     if page.respond_to? :should
-      page.has_content?(text)
+      page.should have_content(text)
     else
       assert page.has_content?(text)
     end
   end
 end
+
 
 Then /^(?:|I )should see \/([^\/]*)\/(?: within "([^"]*)")?$/ do |regexp, selector|
   regexp = Regexp.new(regexp)
@@ -290,6 +291,10 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
 end
 
 Then /^show me the page$/ do
+  save_and_open_page
+end
+
+Then /^покажи страницу/ do
   save_and_open_page
 end
 

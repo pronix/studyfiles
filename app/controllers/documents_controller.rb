@@ -3,7 +3,11 @@ class DocumentsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @files = current_user.documents
+    @folders = if params[:university]
+               University.find(params[:university]).primary_folders
+             else
+               Document.all
+             end
   end
 
   def new

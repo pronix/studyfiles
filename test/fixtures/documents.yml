@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+#
+#(id: integer, 
+#raiting: integer, 
+#created_at: datetime, 
+#updated_at: datetime, 
+#item_file_name: string, 
+#item_content_type: string, 
+#item_file_size: integer, 
+#item_updated_at: datetime, 
+#user_id: integer, 
+#name: string, 
+#description: boolean, 
+#sha: string, 
+#folder_id: integer) 
+#mgu:
+#  name: "Московский государственный университет"
+#  abbreviation: "МГУ"
+#  city: "Москва"
+#pnipu:
+#  name: "Пермский национальный исследовательский политехнический институт"
+#  abbreviation: "ПНИПУ"
+#  city: "Пермь"
+#hse:
+#  name: "Высшая школа экономики"
+#  abbreviation: "ВШЭ"
+#  city: "Москва"
+#

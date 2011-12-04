@@ -3,10 +3,14 @@ class Folder < ActiveRecord::Base
   before_create :default_path_name
 
   include Models::Path
+  include Hierarchy
 
   belongs_to :user
+  belongs_to :university
   has_many :subject_folders
   has_many :subjects, :through => :subject_folders
+
+  has_many :documents
 
 
   #Копирум  из одной папки в другую

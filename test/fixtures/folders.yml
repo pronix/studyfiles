@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+folder1:
+  id: 900
+  name: "Учебники"
+  description: ""
+  path: "Top"
+  university_id: 800
+folder2:
+  id: 901
+  name: "Методички"
+  description: ""
+  path: "Top"
+  university_id: 800
+folder3:
+  id: 902
+  name: "Конспекты"
+  description: ""
+  path: "Top"
+  university_id: 800
+folder4:
+  id: 903
+  name: "Разное"
+  description: ""
+  path: "Top"
+  university_id: 800
+folder5:
+  id: 904
+  name: "Мои конспекты"
+  description: ""
+  path: "Top.902"
+  university_id: 800
+folder6:
+  id: 905
+  name: "Иванова"
+  description: ""
+  path: "Top.903"
+  university_id: 800
+folder7:
+  id: 906
+  name: "Петрова"
+  description: ""
+  path: "Top.903"
+  university_id: 800

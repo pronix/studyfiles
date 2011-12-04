@@ -37,7 +37,6 @@ class AlterTables < ActiveRecord::Migration
     add_column :documents, :name,                 :string
     add_column :documents, :description,          :boolean
     add_column :documents, :sha,                  :string
-    add_column :folders,   :path_name,            :string
 
     add_index :delayed_jobs, [:priority, :run_at], :name => 'delayed_jobs_priority'
   end

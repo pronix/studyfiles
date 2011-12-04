@@ -1,0 +1,14 @@
+<%= folder.name %>
+<ul>
+  <% folder.children.each do |node_folder| %>
+    <li>
+      <%= render "shared/folder", :folder => node_folder %>
+    </li>
+  <% end %>
+</ul>
+<ul>
+  <% folder.documents.each do |document| %>
+    <li><%= document.name %></li>
+  <% end %>
+</ul>
+
