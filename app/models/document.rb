@@ -31,12 +31,12 @@ class Document < ActiveRecord::Base
 
   #копируем файл в папку
   def copy_to_folder(folder)
-    self.update_attributes(:path => folder.path + "." + folder.path_name)
+    self.update_attributes(:folder_id => folder.id)
   end
 
   #Копируем файл в университет
-  def copy_to_university(univer)
-    self.update_attributes(:path => univer.id.to_s)
+  def copy_to_university(university)
+    self.update_attributes(:university_id => university.id)
   end
 
   #Копируем файл в предмет

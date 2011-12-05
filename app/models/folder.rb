@@ -16,20 +16,13 @@ class Folder < ActiveRecord::Base
   #Копирум  из одной папки в другую
   def copy_to_folder(folder)
     #строим новый путь
-    new_path = folder.path + "." + folder.path_name
-    #запоминаем старый путь
-    old_path = self.path + "." + self.path_name
-    self.update_folders_path new_path, old_path
+    self.parent = folder
+    self.save
   end
 
   #Копируем папку в университет
-  def copy_to_university(univer)
-    old_path = self.path
-    splited = old_path.split(".")
-    splited[0] = univer.id.to_s
-    new_path = splited.join(".")
-    old_path = old_path + "." + self.name
-    self.update_folders_path new_path, old_path
+  def copy_to_university(university)
+    self.update_attributes(:university_id => university.id)
   end
 
   #обновляему пути папки, подпапок и дочерних файлов

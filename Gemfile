@@ -16,6 +16,7 @@ gem "ffi", "1.0.11"
 gem "coderay"
 
 group :test,:development do
+  gem 'seed-fu', '~> 2.1.0'
   gem "cucumber", "1.0.3"
   gem 'Selenium', '1.1.14'
   gem "capybara"
@@ -24,6 +25,7 @@ group :test,:development do
   gem 'rspec-rails'
   gem 'pickle'
   gem "builder"
+  gem 'rails-erd'
   gem 'cucumber-rails'
   gem 'database_cleaner'
 end

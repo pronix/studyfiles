@@ -1,9 +1,33 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
+# -*- coding: utf-8 -*-
 
-Rake::Task["db:load_dir"].invoke("../spec/fixtures")
+Rake::Task["db:fixtures:load"].invoke
+
+files = Document.create([
+  { 
+    :name => "Конспект.doc",
+    :item => File.new("#{Rails.root}/sample_documents/Конспект.doc"),
+    :university_id => 800,
+    :folder_id => 902
+  },
+
+  {
+    :name => "документ 1",
+    :item => File.new("#{Rails.root}/sample_documents/документ1.doc"),
+    :university_id => 800,
+    :folder_id => 902
+  },
+
+  {
+    :name => "Документ 3",
+    :item => File.new("#{Rails.root}/sample_documents/документ3.doc"),
+    :university_id => 800,
+    :folder_id => 903
+  },
+
+  {
+    :name => "Длинные названия и описания сокращаются до коротких названий и описаний",
+    :item => File.new("#{Rails.root}/sample_documents/hugo.doc"),
+    :university_id => 800,
+    :folder_id => 903
+  },
+])
