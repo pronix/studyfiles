@@ -13,16 +13,24 @@
 #description: boolean, 
 #sha: string, 
 #folder_id: integer) 
-#mgu:
-#  name: "Московский государственный университет"
-#  abbreviation: "МГУ"
-#  city: "Москва"
-#pnipu:
-#  name: "Пермский национальный исследовательский политехнический институт"
-#  abbreviation: "ПНИПУ"
-#  city: "Пермь"
-#hse:
-#  name: "Высшая школа экономики"
-#  abbreviation: "ВШЭ"
-#  city: "Москва"
-#
+file1:
+  name: "Конспект.doc"
+  item_file_name: "Конспект.doc"
+  university_id: 800
+  folder_id: 902
+file2:
+  name: "Документ 1"
+  item_file_name: "документ1.doc"
+  university_id: 800
+  folder_id: 902
+file3:
+  name: "Документ 3"
+  item_file_name: "документ3.doc"
+  university_id: 800
+  folder_id: 903
+file4:
+  name: "Длинные названия и описания сокращаются до коротких названий и описаний"
+  item_file_name: "hugo.doc"
+  university_id: 800
+  folder_id: 903
+  

@@ -6,7 +6,7 @@ class DocumentsController < ApplicationController
     @folders = if params[:university]
                University.find(params[:university]).primary_folders
              else
-               Document.all
+               nil
              end
   end
 

@@ -566,6 +566,6 @@ cursor: pointer;
 
 
 
-ul > li > ul {
+ul li > ul {
   padding-left: 30px;
 }
