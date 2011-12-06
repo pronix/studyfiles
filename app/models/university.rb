@@ -9,6 +9,8 @@ class University < ActiveRecord::Base
   has_many :sections, :through => :subjects
   has_many :user_universities
   has_many :users,    :through => :user_universities
+  has_many :folders
+  has_many :documents
 
   has_attached_file :logo, :styles => {:thumb => "100x100>" }
 
@@ -40,6 +42,11 @@ class University < ActiveRecord::Base
   #Первые пять пердметов университета
   def short_subjects_list
     self.subjects.limit(5)
+  end
+
+
+  def primary_folders
+    self.folders.where(:path => "Top")
   end
 
 end

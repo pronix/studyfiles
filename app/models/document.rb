@@ -4,9 +4,6 @@ class Document < ActiveRecord::Base
   require 'zip/zip'
   require 'coderay'
 
-  include Models::Path
-  include Hierarchy
-
   before_create :default_name
 
   after_create :check_for_archive
@@ -15,6 +12,8 @@ class Document < ActiveRecord::Base
   has_many :user_votes, :through => :votes, :source => :user
 
   belongs_to :user
+  belongs_to :university
+  belongs_to :folder
 
   has_attached_file :item,
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",

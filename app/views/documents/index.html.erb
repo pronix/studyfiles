@@ -1,3 +1,10 @@
-<%= "index.html" %>
+<% if @folders %>
+  <ul>
+    <% @folders.each do |folder| %>
+      <li><%= render "shared/folder", :folder => folder %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= link_to "Выбрать университет", universities_path %>
 <%= link_to "загрузить файлы", new_document_path %>
 <%= link_to "Создать папку", new_folder_path %>

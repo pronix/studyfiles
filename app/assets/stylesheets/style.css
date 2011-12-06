@@ -2,13 +2,12 @@ html, body {
   margin: 0;
   padding: 0;
   font:  11px/18px  arial;
-  color: #fff;
 }
 html {
-  background: #ffffff url('../images/top-gradient.png') top center repeat-x;
+  background: #ffffff url('top-gradient.png') top center repeat-x;
 }
 body {
-  background: #ffffff url('../images/bottom-gradient.png') bottom center repeat-x;
+  background: #ffffff url('bottom-gradient.png') bottom center repeat-x;
 }
 img {
   border: 0;
@@ -73,7 +72,7 @@ button {
   color: #999999;
   font-size: 11px;
   line-height: 12px;
-  background: transparent url('../images/enter-key.png') left center no-repeat;
+  background: transparent url('enter-key.png') left center no-repeat;
 }
 #header .login-bar .sign-in-up a{
   color: #0071b9;
@@ -142,13 +141,13 @@ button {
   position: relative;
 }
 .content .search-form {
-  background: transparent url('../images/search-left-bg.png') left top no-repeat;
+  background: transparent url('search-left-bg.png') left top no-repeat;
 }
 .content .search-form .search-right-form {
-  background: transparent url('../images/search-right-bg.png') right top no-repeat;
+  background: transparent url('search-right-bg.png') right top no-repeat;
 }
 .content .search-form .search-right-form .search-form-body {
-  background: transparent url('../images/search-body-bg.png') left top repeat-x;
+  background: transparent url('search-body-bg.png') left top repeat-x;
   height: 82px;
   margin: 0 4px 0 3px;
 }
@@ -171,11 +170,11 @@ button {
   padding: 3px 5px;
   height: 19px;
   border: 0;
-  background: transparent url('../images/search-input.png') left top no-repeat;
+  background: transparent url('search-input.png') left top no-repeat;
 }
 .content .search-form .search-right-form .search-form-body form button {
 border: 0px;
-background: transparent url('../images/search-button.png') left -1px no-repeat;
+background: transparent url('search-button.png') left -1px no-repeat;
 height: 25px;
 width: 92px;
 margin: 0 5px;
@@ -297,21 +296,21 @@ cursor: pointer;
 }
 
 .sidebar .salat-box-left {
-  background: url('../images/salat-box-left.png') left top no-repeat;
+  background: url('salat-box-left.png') left top no-repeat;
   margin-bottom: 18px;
 }
 .sidebar .salat-box-left .salat-box-right {
-  background: url('../images/salat-box-right.png') right top no-repeat;
+  background: url('salat-box-right.png') right top no-repeat;
 }
 .sidebar .salat-box-left .salat-box-right .salat-box-body {
-  background: url('../images/salat-box-body.png') left top repeat-x;
+  background: url('salat-box-body.png') left top repeat-x;
   height: 82px;
   margin: 0 2px 0 3px;
   text-align: center;
 }
 .sidebar .salat-box-left .salat-box-right .salat-box-body .add-file-button {
   border: none;
-  background: url('../images/add-file-button.png') left top no-repeat;
+  background: url('add-file-button.png') left top no-repeat;
   width: 206px;
   height: 38px;
   cursor: pointer;
@@ -319,7 +318,7 @@ cursor: pointer;
 }
 .sidebar .news-box {
   width: 220px;
-  background: url('../images/news-box-bottom.png') bottom left no-repeat;
+  background: url('news-box-bottom.png') bottom left no-repeat;
   padding-bottom: 8px;
   margin-bottom: 20px;
 }
@@ -405,10 +404,10 @@ cursor: pointer;
   right: 0px;
   padding-left: 10px;
   height:22px;
-  background: url('../images/top-10-white-gradient.png') left top no-repeat;
+  background: url('top-10-white-gradient.png') left top no-repeat;
 }
 .sidebar .top-10 li.odd .user-rait {
-  background: url('../images/top-10-biege-gradient.png') left top no-repeat;
+  background: url('top-10-biege-gradient.png') left top no-repeat;
 }
 .sidebar .top-10 li .user-rait span{
   padding-right: 5px;
@@ -459,7 +458,7 @@ cursor: pointer;
   position: absolute;
   width: 677px !important;
   height: 417px !important;
-  background: url('../images/modal-enter.png') left top repeat-x;
+  background: url('modal-enter.png') left top repeat-x;
   padding: 25px 25px 25px 45px;
   border-radius: 5px;
   box-shadow: 0 0 25px 7px #C8CDCF;
@@ -517,7 +516,7 @@ cursor: pointer;
 
 #registration-modal input {
   margin: 0;
-  background: url('../images/reg-form-inputs.png') left -28px no-repeat;
+  background: url('reg-form-inputs.png') left -28px no-repeat;
   width: 211px;
   height: 16px;
   padding: 5px;
@@ -533,14 +532,14 @@ cursor: pointer;
 }
 #registration-modal .registration .captcha input {
   margin: 0;
-  background: url('../images/reg-form-inputs.png') left -54px no-repeat;
+  background: url('reg-form-inputs.png') left -54px no-repeat;
   width: 126px;
   height: 16px;
   padding: 5px;
 }
 #registration-modal .registration .name input, #registration-modal .login .email input {
   margin: 0;
-  background: url('../images/reg-form-inputs.png') left top no-repeat;
+  background: url('reg-form-inputs.png') left top no-repeat;
   width: 273px;
   height: 18px;
   padding: 5px;
@@ -563,4 +562,10 @@ cursor: pointer;
   right: 28px;
   top: 25px;
   border: none;
+}
+
+
+
+ul > li > ul {
+  padding-left: 30px;
 }

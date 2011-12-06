@@ -1,14 +1,16 @@
 development:
   adapter: postgresql
-  database: studyfiles
+  database: studyfiles_development
   username: postgres
+  password: qweqwe
   pool: 5
   timeout: 5000
 
 test:
   adapter: postgresql
-  database: studyfiles
+  database: studyfiles_test
   username: postgres
+  password: qweqwe
   pool: 5
   timeout: 5000
 

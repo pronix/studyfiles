@@ -15,7 +15,7 @@
           </div>
           <div class="unversity">
             <div class="unversity-name">
-              <%= link_to univer.name, university_url(univer) %>
+              <%= link_to univer.name, documents_path(:university => univer) %>
             </div>
             <div class="unversity-subjects">
               <% univer.short_subjects_list.each do |subject| %>
