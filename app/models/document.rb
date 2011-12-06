@@ -166,7 +166,7 @@ class Document < ActiveRecord::Base
 
   #прописывает имя файла по умолчанию
   def default_name
-    self.name = self.item_file_name
+    self.name ||= self.item_file_name
   end
 
 end
