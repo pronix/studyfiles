@@ -1,4 +1,4 @@
-<%= folder.name %>
+<%= folder.name %> | <%= link_to "Скачать", download_folder_path(folder) %>
 <ul>
   <% folder.children.each do |node_folder| %>
     <li>

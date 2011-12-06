@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Folder < ActiveRecord::Base
 
   before_create :default_path_name
@@ -77,10 +78,24 @@ class Folder < ActiveRecord::Base
     Document.in_path(self.children_path).count(:raiting)
   end
 
+  def zip_files
+    if !documents.empty?
+      file_name = "tmp/ziped_clients/#{self.name}.zip" 
+      file = Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) { |zipfile|
+        documents.each {|current_document|
+          zipfile.add(current_document.name, current_document.item.path)
+        }
+      }
+      return file_name
+    end
+  end
+
   private
 
   #Перед созданием генерируем path_name
   def default_path_name
     self.path_name = self.name.gsub(" ", "_")
   end
+
+
 end

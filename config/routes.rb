@@ -5,7 +5,11 @@ Studyfiles::Application.routes.draw do
   root :to => "universities#index"
   resources :documents
   resources :universities
-  resources :folders
+  resources :folders do
+    member do 
+      get 'download'
+    end
+  end
   resources :users
   resources :faqs
   resources :novelties

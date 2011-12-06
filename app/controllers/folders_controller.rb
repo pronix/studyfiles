@@ -29,4 +29,9 @@ class FoldersController < ApplicationController
     end
     redirect_to folders_path
   end
+
+  def download
+    @folder = Folder.find(params[:id])
+    send_file @folder.zip_files, :type => "application/zip"
+  end
 end
