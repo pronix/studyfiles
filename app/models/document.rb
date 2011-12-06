@@ -101,7 +101,7 @@ class Document < ActiveRecord::Base
 
   #Создаем архив для скачки файлов
   def zip_files(documents)
-    file_name = "tmp/ziped_clients/#{documents.first.sha}.zip"
+    file_name = "tmp/ziped_clients/#{documents.first.name}.zip"
     file = Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) { |zipfile|
       documents.each {|current_document|
         zipfile.add(current_document.name, current_document.item.path)
