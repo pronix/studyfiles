@@ -6,22 +6,23 @@
     Допустим в системе существует пользователь с логином и паролем "user@example.com/secret"
     Допустим я на главной странице
 
+  @green
   Сценарий:
     Если я перейду по ссылке "Войти"
-    Тогда увижу "ЗАВЕСТИ НОВЫЙ АККАУНТ"
+    Тогда увижу "Sign in"
     И увижу "Войти"
     Если я введу в поле "user_email" значение "user@example.com"
     И я введу в поле "user_password" значение "secret"
     И я нажму "Sign in"
-    Тогда увижу "Выйти"
+    Тогда увижу "Sign Out"
 
+  @green
   Сценарий:
     Если я перейду по ссылке "Зарегистрироваться"
-    Тогда увижу "ЗАВЕСТИ НОВЫЙ АККАУНТ"
+    Тогда увижу "Sign up"
     И увижу "Войти"
-    Если я введу в поле "user_email" значение "user@example.com"
+    Если я введу в поле "user_email" значение "user1@example.com"
     И я введу в поле "user_password" значение "secret"
     И я введу в поле "user_password_confirmation" значение "secret"
-    #    И введу валидную каптчу https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise
     И нажму "Sign up"
-    Тогда увижу "Выйти"
+    Тогда увижу "Sign Out"

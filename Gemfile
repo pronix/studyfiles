@@ -8,7 +8,6 @@ gem "devise"
 gem "paperclip"
 gem "jquery-rails"
 gem "delayed_job"
-gem "unicorn"
 gem "hierarchy", :path => "vendor/plugins/hierarchy"
 gem "rubyzip"
 gem "ffi", "1.0.11"
@@ -16,6 +15,7 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 
 group :test,:development do
   #использользуем для подсветки синтаксиса в исходных кодах
+  gem "unicorn"
   gem "coderay"
   gem "cucumber", "1.0.3"
   gem 'Selenium', '1.1.14'
@@ -23,7 +23,6 @@ group :test,:development do
   gem 'factory_girl_rails'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'pickle'
   gem "builder"
   gem 'cucumber-rails'
   gem 'database_cleaner'
