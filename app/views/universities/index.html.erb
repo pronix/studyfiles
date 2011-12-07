@@ -4,7 +4,7 @@
   <ul>
   <% @universities.each do |univer| %>
     <li>
-      <%= link_to univer.name, documents_path(univer) %>
+      <%= link_to univer.name, documents_path(:university => univer) %>
     </li>
   <% end %>
   </ul>
