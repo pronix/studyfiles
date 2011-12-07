@@ -1,65 +1,11 @@
 <%= render 'shared/sidebar' %>
 <div class="content">
   <%= render 'shared/univer-search' %>
-  <dl class="universities">
-    <% sort_by_city(@universities).each do |one_city| %>
-    <dt>
-      <%= one_city.first.city %>
-    </dt>
-    <dd>
-      <ul>
-        <% one_city.each do |univer| %>
-        <li>
-          <div class="university-logo">
-            <%= image_tag univer.logo.url(:thumb) %>
-          </div>
-          <div class="unversity">
-            <div class="unversity-name">
-              <%= link_to univer.name, documents_path(:university => univer) %>
-            </div>
-            <div class="unversity-subjects">
-              <% univer.short_subjects_list.each do |subject| %>
-                <%= link_to subject.name, subject_path(subject), :title => subject.name %>,
-              <% end %>
-              &nbsp;
-              <a href="#" class="slide-subjects" title="Раскрыть список предметов">...</a>
-            </div>
-            <dl class="university-subjects-full">
-              <dt>
-                Астрономия
-              </dt>
-              <dd>
-                <div>
-                  <span></span>
-                  <a href="#">Астрономия</a>
-                </div>
-                <div>
-                  <span>Аст.Физика</span>
-                  <a href="#">Астрофизика</a>
-                </div>
-              </dd>
-              <dt>
-                Астрономия
-              </dt>
-              <dd>
-                <div>
-                  <span></span>
-                  <a href="#">Астрономия</a>
-                </div>
-                <div>
-                  <span>Аст.Физика</span>
-                  <a href="#">Астрофизика</a>
-                </div>
-              </dd>
-            </dl>
-            <div class="unversity-raiting">
-              <span>+100 500</span> 27 предметов, 228 файлов, 1000,8 Мб
-            </div>
-          </div>
-        </li>
-        <% end %>
-      </ul>
-    </dd>
-    <% end %>
-  </dl>
+  <ul>
+  <% @universities.each do |univer| %>
+    <li>
+      <%= link_to univer.name, documents_path(univer) %>
+    </li>
+  <% end %>
+  </ul>
 </div>

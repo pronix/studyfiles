@@ -11,22 +11,25 @@ class DocumentsController < ApplicationController
   end
 
   def new
-    @file = Document.new
+    @user = User.find(params[:user_id])
+    @files = Array.new(5)  { @user.documents.build }
   end
 
   def create
-    @file = Document.new(params[:document])
-    if request.post? && @file.save
-      if @file.item.content_type == 'application/zip'
-        flash[:notice] = "Ваш архив принят на обработку"
-      else
-        flash[:notice] = "Файл успешно создан"
-      end
+    @user = User.find(params[:user_id])
+    @files = params[:documents].values.collect { |file| @user.documents.new(file) }
+    if request.post? && @files.all?(&:valid?)
+      @files.each(&:save!)
+      #if @file.item.content_type == 'application/zip'
+      #  flash[:notice] = "Ваш архив принят на обработку"
+      #else
+      #  flash[:notice] = "Файл успешно создан"
+      #end
 
     else
       flash[:alert] = "Файл не создан!"
     end
-    redirect_to documents_path
+    redirect_to user_path(@user)
   end
 
   def edit

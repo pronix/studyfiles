@@ -10,7 +10,9 @@ Studyfiles::Application.routes.draw do
       get 'download'
     end
   end
-  resources :users
+  resources :users do
+    resources :documents
+  end
   resources :faqs
   resources :novelties
   resources :subjects

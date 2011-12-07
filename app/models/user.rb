@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :votes
   has_many :user_votes,   :through => :votes, :source => :document
-  has_many :user_universities
-  has_many :universities, :through => :user_universities
+  has_many :user_universities, :dependent => :destroy
+  has_many :universities, :through => :user_universities, :uniq => true
 
   def my_messages
     Message.where(["user_id = ? or to_user_id = ?", self.id, self.id])

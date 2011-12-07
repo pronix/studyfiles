@@ -364,6 +364,8 @@ ru:
       last_word_connector: " и "
   universities: "ВУЗы"
   documents: "Файлы"
+  my_documents: "Мои файлы"
+  unsorted_documents: "Несортированные файлы"
   users: "Пользователи"
   help: "Помощь"
   novelties: "Новости"

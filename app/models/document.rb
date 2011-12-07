@@ -19,6 +19,8 @@ class Document < ActiveRecord::Base
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",
       :path => ":rails_root/public/assets/documents/:first_folder/:second_folder/:sha"
 
+  scope :unsorted, where(:university_id => nil)
+
   #вытаскиваем первые два символа с хеша
   def first_folder
     self.sha[0..1]

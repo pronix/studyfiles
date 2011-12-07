@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 class UniversitiesController < ApplicationController
 
   before_filter :get_right_column
 
   #Главная страница
   def index
-    @universities = University.limit(3).order(:city)
+    @universities = University.all
   end
 
   #Поиск университетов по названию и предеметам
@@ -15,6 +16,22 @@ class UniversitiesController < ApplicationController
       @universities = @universities | subject
     }
   end
+
+  def new
+    @university = University.new
+  end
+
+  def create
+    @university = University.new(params[:university])
+    if @university.save
+        current_user.universities << @university
+        flash[:notice] = "Добавлен университет"
+    else
+      flash[:alert] = "Не получилось добавить университет"
+    end
+    redirect_to user_path(current_user)
+  end
+
 
   private
 
