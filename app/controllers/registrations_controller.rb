@@ -1,0 +1,12 @@
+class RegistrationsController < Devise::RegistrationsController
+  def create
+    if verify_recaptcha || Rails.env.test? || Rails.env.cucumber? || Rails.env.development?
+      super
+    else
+      build_resource
+      clean_up_passwords(resource)
+      flash[:alert] = "There was an error with the recaptcha code below. Please re-enter the code."
+      render_with_scope :new
+    end
+  end
+end

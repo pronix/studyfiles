@@ -1,4 +1,4 @@
-<%= fields_for "[document_attributes][]", document do |f| %>
-  <p><%= f.text_field :name %></p>
-  <p><%= f.file_field :item %></p>
+<%= fields_for "[documents][]", document do |f| %>
+<p><%= f.text_field :name %></p>
+<p><%= f.file_field :item %></p>
 <% end %>

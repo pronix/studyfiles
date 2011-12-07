@@ -13,10 +13,8 @@
 //<![CDATA[
   
   $(function() {
-      $("#addDocument").click(function(e) {
-          e.preventDefault();
-           $("#documents").append('<%= escape_javascript(render :partial => "document", :object => Document.new) %>');
- 
+      $("#addDocument").click(function() {
+           $("#documents").append('<%= escape_javascript(render :partial => "document", :object => Document.new ) %>');
       });
   });
 //]]>

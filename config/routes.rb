@@ -1,6 +1,6 @@
 Studyfiles::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" },:sign_out_via => [ :post, :delete, :get ]
 
   root :to => "universities#index"
   resources :documents

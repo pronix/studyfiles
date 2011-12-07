@@ -17,7 +17,7 @@ class DocumentsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    @files = params[:document_attributes].collect { |file| @user.documents.new(file) }
+    @files = params[:documents].collect { |file| @user.documents.new(file) }
     if request.post? && @files.all?(&:valid?)
       @files.each(&:save!)
       #if @file.item.content_type == 'application/zip'
