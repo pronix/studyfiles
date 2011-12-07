@@ -1,7 +1,8 @@
 <%= form_tag user_documents_path, :multipart => true, :action => 'create' do %>
 
   <div id="documents">
-    <%= render :partial => "document", :collection => @documents %>
+    <!-- FIXME -->
+    <%= render "document", :collection => @documents %>
   </div>
   
   <%= submit_tag %>
