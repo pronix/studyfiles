@@ -1,34 +1,23 @@
 <%= form_tag user_documents_path, :multipart => true, :action => 'create' do %>
 
-<% @files.each_with_index do |file, index| %>
-  <%= fields_for "documents[#{index}]", file do |f| %>
-    <p><%= f.text_field :name %></p>
-    <p><%= f.file_field :item %></p>
-  <% end %>
-<% end %>
+  <div id="documents">
+    <%= render :partial => "document", :collection => @documents %>
+  </div>
+  
   <%= submit_tag %>
+  <%= link_to "Добавить ещё", "#", :id => "addDocument" %>
 <% end %>
 
-<!--
-<%#= form_for [@user, @file],  :url => user_documents_path, :html => { :multipart => true, :method => :post } do |f| %>
-  <fieldset class="column span-18">
-    <p class="column span-14">
-      <%#= f.label :name, "Имя файла" %>
-      <%#= f.text_field :name, :id => 'title' %>
-    </p>
-    <p class="column span-14">
-      <%#= f.label :description, "Описание файла" %>
 
-      <%#= f.text_field :description %>
-    </p>
-    <p class="column span-14">
-      <%#= f.label :item, "Загрузите файл" %>
-      <%#= f.file_field :item %>
-
-    </p>
-    <p class="column prepend-6 span-8">
-
-      <button type="submit" class="btn primary" title="Загрузить файл">Загрузить</button>
-    </p>
-  </fieldset>
-<#% end %>-->
+<script type="text/javascript" language="javascript" charset="utf-8">
+//<![CDATA[
+  
+  $(function() {
+      $("#addDocument").click(function(e) {
+          e.preventDefault();
+           $("#documents").append('<%= escape_javascript(render :partial => "document", :object => Document.new) %>');
+ 
+      });
+  });
+//]]>
+</script>
