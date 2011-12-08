@@ -26,4 +26,7 @@ class User < ActiveRecord::Base
     self.documents.sum(:raiting)
   end
 
+  def get_new_documents_names(size)
+    self.documents.last(size).map { |f| f.name }.join("; ")
+  end
 end

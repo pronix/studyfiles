@@ -17,8 +17,14 @@ class DocumentsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+    
     @user.update_attributes(params[:user])
-    @user.save
+    flash[:notice] = "Обрабатываются файлы: #{@user.get_new_documents_names(params[:user][:documents_attributes].size)}"
+    redirect_to user_path(@user)
+    #else 
+    #  flash[:notice] = "Ошибка!"
+    #  render :action => "new"
+    #end
     #@files = params[:documents].collect { |file| @user.documents.new(file) }
     #if request.post? && @files.all?(&:valid?)
       #@files.each(&:save!)
@@ -31,7 +37,6 @@ class DocumentsController < ApplicationController
     #else
      # flash[:alert] = "Файл не создан!"
    # end
-    redirect_to user_path(@user)
   end
 
   def edit
@@ -47,4 +52,5 @@ class DocumentsController < ApplicationController
     end
     redirect_to documents_path
   end
+
 end
