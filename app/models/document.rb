@@ -7,8 +7,8 @@ class Document < ActiveRecord::Base
   before_save :default_name
 
   validates :item,         :presence => true
-
-  after_create :check_for_archive
+ 
+  after_save :queue_process_item
 
   has_many :votes
   has_many :user_votes, :through => :votes, :source => :user
@@ -17,13 +17,13 @@ class Document < ActiveRecord::Base
   belongs_to :university
   belongs_to :folder
 
+  scope :unsorted, where(:university_id => nil)
 
 
   has_attached_file :item,
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",
       :path => ":rails_root/public/assets/documents/:first_folder/:second_folder/:sha"
 
-  scope :unsorted, where(:university_id => nil)
 
   #вытаскиваем первые два символа с хеша
   def first_folder
@@ -51,13 +51,6 @@ class Document < ActiveRecord::Base
   end
 
 
-  #проверка файла на архив
-  def check_for_archive
-    if self.item.content_type == 'application/zip'
-      self.unzip_file "/public/zips"
-    end
-  end
-
   #Распаковка zip архива
   def unzip_file(destination)
     file = self.item.path
@@ -72,21 +65,33 @@ class Document < ActiveRecord::Base
        files.push(f_path)
      }
     }
-    self.delete
-    File.delete(file)
-    until files.empty?
-      document_path = files.pop
-      if File.directory? document_path
-        Dir.rmdir(document_path)
-      else
-        document = File.open(document_path)
-        Document.create(:user_id => user, :item => document)
-        File.delete(document_path)
-      end
-    end
+    #self.delete
+    #File.delete(file)
+    #until files.empty?
+    #  document_path = files.pop
+    #  if File.directory? document_path
+    #    Dir.rmdir(document_path)
+    #  else
+    #    document = File.open(document_path)
+    #    Document.create(:user_id => user, :item => document)
+    #    File.delete(document_path)
+    #  end
+    #end
   end
 
-  handle_asynchronously :unzip_file, :run_at => Proc.new { 10.second.from_now }, :priority => 0
+  def queue_process_item
+    send_later(:process_file) if !self.item_processed
+  end
+  
+  def process_file
+    if self.item.content_type == 'application/zip'
+      self.unzip_file "/public/zips"
+    end
+    self.item_processed = true
+    self.save!
+  end
+
+  #handle_asynchronously :unzip_file, :run_at => Proc.new { 10.second.from_now }, :priority => 0
 
   #Увеличение рейтинга файла при скачке
   def to_download_file
@@ -118,7 +123,7 @@ class Document < ActiveRecord::Base
   end
 
   #определение разрешение файла (для вывода в html)
-  def permission
+  def extension
     self.item_file_name.split(".").last
   end
 
@@ -130,7 +135,7 @@ class Document < ActiveRecord::Base
   #конвертирование исходного кода в html
   def source_to_html
     type = ""
-    case self.permission
+    case self.extension
     when "rb"
       type = "ruby"
     when "pl"

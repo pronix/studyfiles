@@ -2,7 +2,10 @@
     <h2><%= t("unsorted_documents") %></h2>
     <ul>
     <% @user.documents.unsorted.each do |file| %>
-      <li><%= file.name %> | <%= file.item.url %></li>
+      <li> 
+        <b style="color: green"><%= file.item_processed %></b>
+          <%= file.name %> | <%= file.item.url %>
+        </li>
     <% end %>
     </ul>
 </div>

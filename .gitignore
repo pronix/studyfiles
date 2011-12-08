@@ -12,6 +12,7 @@ Gemfile.lock
 config/database.yml
 public/assets/*
 public/assets
+public/zips
 db/schema.rb
 Gemfile.lock
 config/database.yml
