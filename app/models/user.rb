@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
 
   has_many :documents
-  accepts_nested_attributes_for :documents
+  accepts_nested_attributes_for :documents, :allow_destroy => true
   has_many :folders
   has_many :messages
   has_many :votes

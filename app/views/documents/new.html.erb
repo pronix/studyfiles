@@ -1,26 +1,11 @@
-<%= form_for @user, :url => user_documents_url, :action => :create, :method => "post",  :multipart => true do |f| %>
+<%= nested_form_for @user, :url => user_documents_url,  :method => "post",  :multipart => true do |f| %>
 
-  <%= @user.documents %>
   <div id="documents">
-    <!-- FIXME -->
-    <%= f.fields_for :documents do |builder| %>
+    <%= f.fields_for :documents, @documents do |builder| %>
       <%= render "documents/form", :f => builder %>
     <% end %>
   </div>
-  
+ <p><%= f.link_to_add "Добавить файл", :documents %></p>
+ 
   <%= submit_tag %>
-  <%= link_to "Добавить ещё", "#", :id => "addDocument" %>
 <% end %>
-
-
-<script type="text/javascript" language="javascript" charset="utf-8">
-//<![CDATA[
-  
-  $(function() {
-      $("#addDocument").click(function(e) {
-           e.preventDefault();
-           $("#documents").append('<#%= escape_javascript(render :partial => "form", :object => Document.new ) %>');
-      });
-  });
-//]]>
-</script>

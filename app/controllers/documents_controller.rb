@@ -12,7 +12,7 @@ class DocumentsController < ApplicationController
 
   def new
     @user = User.find(params[:user_id])
-    3.times { @user.documents.build }
+    @documents = Array.new(3) { @user.documents.build }
   end
 
   def create
