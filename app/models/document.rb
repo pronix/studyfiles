@@ -4,7 +4,9 @@ class Document < ActiveRecord::Base
   require 'zip/zip'
   require 'coderay'
 
-  before_create :default_name
+  before_save :default_name
+
+  validates :item,         :presence => true
 
   after_create :check_for_archive
 
@@ -14,6 +16,8 @@ class Document < ActiveRecord::Base
   belongs_to :user
   belongs_to :university
   belongs_to :folder
+
+
 
   has_attached_file :item,
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",
@@ -149,6 +153,11 @@ class Document < ActiveRecord::Base
     return self.item.path + "html"
   end
 
+  protected
+    def default_name
+      self.name = self.item_file_name if self.name.blank?
+    end
+
   private
 
   #делаем интерполяцию, добавляем параметр первой папки
@@ -167,8 +176,5 @@ class Document < ActiveRecord::Base
   end
 
   #прописывает имя файла по умолчанию
-  def default_name
-    self.name ||= self.item_file_name
-  end
 
 end
