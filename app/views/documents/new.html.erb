@@ -1,8 +1,11 @@
-<%= form_tag user_documents_path, :multipart => true, :action => 'create' do %>
+<%= form_for @user, :url => user_documents_url, :action => :create, :method => "post",  :multipart => true do |f| %>
 
+  <%= @user.documents %>
   <div id="documents">
     <!-- FIXME -->
-    <%= render :partial => "document", :collection => @documents %>
+    <%= f.fields_for :documents do |builder| %>
+      <%= render "documents/form", :f => builder %>
+    <% end %>
   </div>
   
   <%= submit_tag %>
@@ -14,8 +17,9 @@
 //<![CDATA[
   
   $(function() {
-      $("#addDocument").click(function() {
-           $("#documents").append('<%= escape_javascript(render :partial => "document", :object => Document.new ) %>');
+      $("#addDocument").click(function(e) {
+           e.preventDefault();
+           $("#documents").append('<#%= escape_javascript(render :partial => "form", :object => Document.new ) %>');
       });
   });
 //]]>

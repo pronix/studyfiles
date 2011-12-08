@@ -29,3 +29,12 @@ Given /^в системе есть файлы$/ do
       :folder_id => 903
   )
 end
+
+Given /^у пользователя "([^"]*)" нету файлов$/ do |email|
+  user = User.find_by_email(email)
+  user.documents.count.should be 0
+end
+
+
+
+

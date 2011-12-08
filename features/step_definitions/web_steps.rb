@@ -13,7 +13,7 @@ end
 World(WithinHelpers)
 
 When /^(?:|я )прикреплю файл "([^\"]*)" в поле "([^\"]*)"$/ do |file_name, field|
-  path = Rails.root.to_s + "/public/test/#{file_name}"
+  path = Rails.root.to_s + "/sample_documents/#{file_name}"
 
   attach_file(field, path)
 end

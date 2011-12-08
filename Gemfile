@@ -5,6 +5,7 @@ gem 'rails', '3.1.3'
 gem "pg"
 gem "warden"
 gem "devise"
+gem "nested_form"
 gem "paperclip"
 gem "jquery-rails"
 gem "delayed_job"
