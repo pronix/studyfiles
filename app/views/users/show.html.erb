@@ -14,7 +14,14 @@
 
 <ul>
 <% @user.universities.each do |univer| %>
-  <li><%= univer.name %></li>
+  <li>
+    <%= univer.name %> | <%= link_to "Добавить предмет", university_subjects_path(univer) %>
+    <ul>
+      <% univer.subjects.each do |subject| %>
+        <li><%= subject.name %></li>
+      <% end %>
+    </ul>
+  </li>
 <% end %>
 </ul>
 

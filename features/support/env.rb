@@ -5,14 +5,18 @@
 # files.
 
 require 'cucumber/rails'
-
+require 'cucumber/thinking_sphinx/external_world'
 require "selenium-webdriver"
+require 'database_cleaner'
+
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
 # prefer to use XPath just remove this line and adjust any selectors in your
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
+
+Cucumber::ThinkingSphinx::ExternalWorld.new
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how
@@ -29,16 +33,18 @@ Capybara.default_selector = :css
 # 2) Set the value below to true. Beware that doing this globally is not
 # recommended as it will mask a lot of errors for you!
 #
+
 ActionController::Base.allow_rescue = false
+
+Cucumber::Rails::World.use_transactional_fixtures = true
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
-  DatabaseCleaner.strategy = :transaction
+  DatabaseCleaner.strategy = :truncation
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
-
 
 ActionController::TestCase.class_eval do
     def self.fixture_path
@@ -46,13 +52,32 @@ ActionController::TestCase.class_eval do
     end
 end
 
+
+#FIXME?
+ts = ThinkingSphinx::Configuration.instance
+ts.build
+FileUtils.mkdir_p ts.searchd_file_path
+ts.controller.index
+ts.controller.start
+at_exit do
+  ts.controller.stop
+end
+ThinkingSphinx.deltas_enabled = true
+ThinkingSphinx.updates_enabled = true
+ThinkingSphinx.suppress_delta_output = true
+
+
 Before do
   ActiveRecord::Fixtures.reset_cache
   fixtures_folder = File.join(Rails.root, 'test', 'fixtures')
   fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
   ActiveRecord::Fixtures.create_fixtures(fixtures_folder, fixtures)
+  ts.controller.index
 end
 
+After do
+  DatabaseCleaner.clean
+end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:

@@ -9,15 +9,6 @@ class UniversitiesController < ApplicationController
     @universities = University.search params[:search]
   end
 
-  #Поиск университетов по названию и предеметам
-  def search
-    @universities = University.where(["name LIKE ?", "%"+params[:text]+"%"])
-    subjects = Subject.where(["name LIKE ?", "%"+params[:text]+"%"])
-    subjects.each { |subject|
-      @universities = @universities | subject
-    }
-  end
-
   def new
     @university = University.new
   end
