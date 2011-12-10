@@ -112,36 +112,11 @@ class Document < ActiveRecord::Base
     self.item_file_name.split(".").last
   end
 
-  #предпросмотр текстового файла
-  def text_to_html
-    string = File.open(self.item.path, 'r'){ |file| file.read }
+  def item_html
+    return self.item.path + ".html" if item_processed
   end
 
   #конвертирование исходного кода в html
-  def source_to_html
-    type = ""
-    case self.extension
-    when "rb"
-      type = "ruby"
-    when "pl"
-      type = "python"
-    when "c"
-      type = "c"
-    when "php"
-      type = "php"
-    end
-    source_file = File.expand_path(self.item.path)
-    CodeRay.encode(File.read(source_file), type, :html, :css => :style, :wrap => :div)
-  end
-
-  #представление msofice документа кода в html
-  def office_to_html
-    unless File.exist? self.item.path + "html"
-      cmd = "abiword --to=html #{self.item.path}"
-      system(cmd)
-    end
-    return self.item.path + "html"
-  end
 
   protected
     def default_name
@@ -160,8 +135,40 @@ class Document < ActiveRecord::Base
       end
     end
 
-  private
+    def source_to_html
+      type = ""
+      case self.extension
+      when "rb"
+        type = "ruby"
+      when "pl"
+        type = "python"
+      when "c"
+        type = "c"
+      when "php"
+        type = "php"
+      end
+      source_file = File.expand_path(self.item.path)
+      highlighted = CodeRay.encode(File.read(source_file), type, :html, :css => :style, :wrap => :div)
+      File.open(self.item.path + ".html", "w"){ |f| f.write(highlighted) }
+    end
 
+    #представление msofice документа кода в html
+    def office_to_html
+      unless File.exist? self.item.path + "html"
+        cmd = "abiword --to=html #{self.item.path}"
+        system(cmd)
+      end
+      return self.item.path + "html"
+    end
+
+    #предпросмотр текстового файла
+    def text_to_html
+      string = File.open(self.item.path, 'r'){ |file| file.read }
+    end
+
+
+
+  private
   #делаем интерполяцию, добавляем параметр первой папки
   Paperclip.interpolates :first_folder  do |attachment, style|
     attachment.instance.first_folder

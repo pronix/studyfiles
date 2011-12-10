@@ -5,7 +5,9 @@
       <li> 
         <b style="color: green"><%= file.item_processed %></b>
           <%= file.name %> | <%= file.item.url %>
-        </li>
+
+          <%= render :file => file.item_html if file.item_html %>
+      </li>
     <% end %>
     </ul>
 </div>
