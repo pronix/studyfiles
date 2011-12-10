@@ -35,7 +35,8 @@ Spork.prefork do
     end
   end
 
-  #FIXME?
+  #FIXME приходится перед тестами делать rake thinking_sphinx:stop, и после тестов обратно запускать
+  # можно автоматизировать остановку\запуск сфинкса внутри env.rb, но возможно есть более красивое решение
   ts = ThinkingSphinx::Configuration.instance
   ts.build
   FileUtils.mkdir_p ts.searchd_file_path
