@@ -24,7 +24,6 @@ class Document < ActiveRecord::Base
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",
       :path => ":rails_root/public/assets/documents/:first_folder/:second_folder/:sha"
 
-
   #вытаскиваем первые два символа с хеша
   def first_folder
     self.sha[0..1]
@@ -80,13 +79,11 @@ class Document < ActiveRecord::Base
   end
 
   def queue_process_item
-    send_later(:process_file) if !self.item_processed
+    send_later(:file_processing) if !self.item_processed
   end
   
-  def process_file
-    if self.item.content_type == 'application/zip'
-      self.unzip_file "/public/zips"
-    end
+  def file_processing
+    self.process
     self.item_processed = true
     self.save!
   end
@@ -108,18 +105,6 @@ class Document < ActiveRecord::Base
   def decrease_raiting_by(user)
     self.raiting -= (self.raiting == 1 ? 2 : 1)
     user.votes << Vote.new(:user_id => user.id, :document_id => self.id, :vote_type => false)
-  end
-
-  #Создаем архив для скачки файлов
-  def zip_files(documents)
-    file_name = "tmp/ziped_clients/#{documents.first.name}.zip"
-    file = Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) { |zipfile|
-      documents.each {|current_document|
-        zipfile.add(current_document.name, current_document.item.path)
-      }
-     }
-     return file
-     #send_file file_name, :size => file.size,  :filename => "#{documents.first.sha}.zip""
   end
 
   #определение разрешение файла (для вывода в html)
@@ -163,6 +148,18 @@ class Document < ActiveRecord::Base
       self.name = self.item_file_name if self.name.blank?
     end
 
+    def process
+      file_type = self.item.content_type
+      case file_type
+        when 'application/zip'
+          self.unzip_file "/public/zips"
+        when 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/rtf'
+          self.office_to_html
+        else 
+          self.source_to_html
+      end
+    end
+
   private
 
   #делаем интерполяцию, добавляем параметр первой папки
@@ -181,5 +178,4 @@ class Document < ActiveRecord::Base
   end
 
   #прописывает имя файла по умолчанию
-
 end
