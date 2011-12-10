@@ -7,3 +7,4 @@ default: --drb  <%= std_opts %> features
 wip: --drb --tags @wip:3 --wip features
 current: --drb --tags @current:3 --wip features
 rerun: <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags ~@wip
+green: --drb --format pretty --strict --tags @green

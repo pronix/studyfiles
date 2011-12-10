@@ -6,7 +6,7 @@ gem 'rails', '3.1.3'
 gem 'pg'
 gem 'warden'
 gem 'devise'
-gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
+
 gem 'paperclip'
 gem 'jquery-rails'
 gem 'delayed_job'
@@ -14,6 +14,10 @@ gem 'hierarchy', :path => 'vendor/plugins/hierarchy'
 gem 'rubyzip'
 gem 'ffi', '1.0.11'
 gem 'recaptcha', :require => 'recaptcha/rails'
+
+gem 'rails-settings-cached', :require => 'rails-settings'
+gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
+
 
 group :test,:development do
   # For help

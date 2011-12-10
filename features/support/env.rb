@@ -39,5 +39,10 @@ Spork.prefork do
 end
 
 Spork.each_run do
+  # When all routes are rigth and fixtures too => comment this
+  FactoryGirl.factories.clear
+  Dir[Rails.root.join('spec/factories/**/*.rb')].each{|f| load f}
+  Studyfiles::Application.reload_routes!
+
   Cucumber::Rails::Database.javascript_strategy = :truncation
 end

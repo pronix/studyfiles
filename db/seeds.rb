@@ -2,6 +2,8 @@
 
 Rake::Task["db:fixtures:load"].invoke
 
+Setting.create(:var => 'admin_email', :value => 'admin@example.com')
+
 files = Document.create([
   { 
     :name => "Конспект.doc",
