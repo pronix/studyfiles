@@ -298,3 +298,14 @@ Then /^покажи страницу/ do
   save_and_open_page
 end
 
+Допустим /^я введу "(.+)" в поле "(.+)"$/ do |value, field|
+  fill_in(field, :with => value)
+end
+
+Тогда /^я должен увидеть "(.+)"$/ do |text|
+  if page.respond_to? :should
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
+end

@@ -53,6 +53,11 @@ Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails?$/ do |address, a
   unread_emails_for(address).size.should == parse_email_count(amount)
 end
 
+Тогда /^должено отправиться (\d+) email на адрес "(.+)"$/ do |amount, address|
+  unread_emails_for(address).size.should == parse_email_count(amount)
+end
+
+
 Then /^(?:I|they|"([^"]*?)") should have (an|no|\d+) emails?$/ do |address, amount|
   mailbox_for(address).size.should == parse_email_count(amount)
 end
@@ -77,6 +82,11 @@ end
 When /^(?:I|they|"([^"]*?)") opens? the email$/ do |address|
   open_email(address)
 end
+
+Тогда /^открываем последнее письмо для "(.+)"$/ do |address|
+  open_email(address)
+end
+
 
 When /^(?:I|they|"([^"]*?)") opens? the email with subject "([^"]*?)"$/ do |address, subject|
   open_email(address, :with_subject => subject)
@@ -109,6 +119,11 @@ end
 Then /^(?:I|they) should see "([^"]*?)" in the email body$/ do |text|
   current_email.default_part_body.to_s.should include(text)
 end
+
+Тогда /^письмо должно содержать "(.+)"$/ do |text|
+  current_email.default_part_body.to_s.should include(text)
+end
+
 
 Then /^(?:I|they) should see \/([^"]*?)\/ in the email body$/ do |text|
   current_email.default_part_body.to_s.should =~ Regexp.new(text)

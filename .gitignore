@@ -18,3 +18,4 @@ Gemfile.lock
 config/database.yml
 db/development_structure.sql
 db/sphinx/development/
+db/sphinx/test/
