@@ -14,4 +14,9 @@ class Subject < ActiveRecord::Base
   has_many :subject_documents
   has_many :documents, :through => :subject_documents
 
+  define_index do
+    indexes name
+    indexes abbreviation
+  end
+
 end

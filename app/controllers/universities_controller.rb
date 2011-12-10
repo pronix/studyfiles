@@ -5,7 +5,8 @@ class UniversitiesController < ApplicationController
 
   #Главная страница
   def index
-    @universities = University.all
+    @user = User.find(params[:user_id]) if params[:user_id]
+    @universities = University.search params[:search]
   end
 
   #Поиск университетов по названию и предеметам

@@ -1,26 +1,4 @@
+<h1>Добавить ВУЗ</h1>
 <%= form_for [current_user, @university],  :url => universities_path, :html => { :multipart => true, :method => :post } do |f| %>
-  <fieldset class="column span-18">
-    <p class="column span-14">
-      <%= f.label :name, "Название" %>
-      <%= f.text_field :name, :id => 'name' %>
-    </p>
-    <p class="column span-14">
-      <%= f.label :abbreviation, "Аббревиатура" %>
-
-      <%= f.text_field :abbreviation %>
-    </p>
-    <p class="column span-14">
-      <%= f.label :city, "Город" %>
-
-      <%= f.text_field :city %>
-    </p>
-    <p class="column span-14">
-      <%= f.label :logo, "Логотип" %>
-      <%= f.file_field :logo %>
-
-    </p>
-    <p class="column prepend-6 span-8">
-      <button type="submit" class="btn primary" title="Создать папку">Создать</button>
-    </p>
-  </fieldset>
+  <%= render "form", :f => f %>
 <% end %>

@@ -13,6 +13,7 @@ gem "hierarchy", :path => "vendor/plugins/hierarchy"
 gem "rubyzip"
 gem "ffi", "1.0.11"
 gem 'recaptcha', :require => 'recaptcha/rails'
+gem 'thinking-sphinx', '2.0.10'
 
 group :test,:development do
   gem 'seed-fu', '~> 2.1.0'

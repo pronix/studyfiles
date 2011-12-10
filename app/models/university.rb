@@ -12,6 +12,12 @@ class University < ActiveRecord::Base
   has_many :folders
   has_many :documents
 
+  define_index do
+    indexes name
+    indexes abbreviation
+    indexes city
+  end
+
   has_attached_file :logo, :styles => {:thumb => "100x100>" }
 
   #Подсчет рейтинга университета

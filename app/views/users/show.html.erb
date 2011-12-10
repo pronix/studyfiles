@@ -10,7 +10,7 @@
     </ul>
 </div>
 <%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
-<%= link_to "Добавить ВУЗ", new_university_path(current_user) %>
+<%= link_to "Добавить ВУЗ", user_universities_path(current_user) %>
 
 <ul>
 <% @user.universities.each do |univer| %>

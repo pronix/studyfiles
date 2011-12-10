@@ -19,7 +19,7 @@ class DocumentsController < ApplicationController
     @user = User.find(params[:user_id])
     
     @user.update_attributes(params[:user])
-    flash[:notice] = "Обрабатываются файлы: #{@user.get_new_documents_names(params[:user][:documents_attributes].size)}"
+    flash[:notice] = "Обрабатываются файлы: #{@user.get_new_documents_names(params[:user][:documents_attributes].size)}. После обработки они появятся в списке ваших файлов."
     redirect_to user_path(@user)
     #else 
     #  flash[:notice] = "Ошибка!"

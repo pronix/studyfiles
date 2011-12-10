@@ -12,6 +12,7 @@ Studyfiles::Application.routes.draw do
   end
   resources :users do
     resources :documents
+    resources :universities
   end
   resources :faqs
   resources :novelties
