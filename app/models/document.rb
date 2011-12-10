@@ -64,8 +64,6 @@ class Document < ActiveRecord::Base
        files.push(f_path)
      }
     }
-    #self.delete
-    #File.delete(file)
     until files.empty?
       document_path = files.pop
       if File.directory? document_path
@@ -83,8 +81,13 @@ class Document < ActiveRecord::Base
   end
   
   def file_processing
-    self.process
-    self.item_processed = true
+    self.process #Обрабатываем файл
+    if self.item.content_type == 'application/zip' #Если это был архив, то удаляем его
+      self.delete
+      File.delete(self.item.path)
+    else
+      self.item_processed = true #Иначе отмечаем что файл обработан
+    end
     self.save!
   end
 
@@ -113,7 +116,9 @@ class Document < ActiveRecord::Base
   end
 
   def item_html
-    return self.item.path + ".html" if item_processed
+    if File.exist? self.item.path + ".html"
+      return self.item.path + ".html" if item_processed
+    end
   end
 
   #конвертирование исходного кода в html

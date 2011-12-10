@@ -5,8 +5,6 @@
       <li> 
         <b style="color: green"><%= file.item_processed %></b>
           <%= file.name %> | <%= file.item.url %>
-
-          <%= render :file => file.item_html if file.item_html %>
       </li>
     <% end %>
     </ul>
