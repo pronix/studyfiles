@@ -66,16 +66,16 @@ class Document < ActiveRecord::Base
     }
     #self.delete
     #File.delete(file)
-    #until files.empty?
-    #  document_path = files.pop
-    #  if File.directory? document_path
-    #    Dir.rmdir(document_path)
-    #  else
-    #    document = File.open(document_path)
-    #    Document.create(:user_id => user, :item => document)
-    #    File.delete(document_path)
-    #  end
-    #end
+    until files.empty?
+      document_path = files.pop
+      if File.directory? document_path
+        Dir.rmdir(document_path)
+      else
+        document = File.open(document_path)
+        Document.create(:user_id => user, :item => document)
+        File.delete(document_path)
+      end
+    end
   end
 
   def queue_process_item
