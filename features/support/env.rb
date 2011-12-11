@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'rubygems'
 require 'spork'
 
@@ -17,11 +18,8 @@ Spork.prefork do
   require 'database_cleaner'
   require 'database_cleaner/cucumber'
 
-  begin
-    DatabaseCleaner.strategy = :truncation
-  rescue NameError
-    raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-  end
+  
+  DatabaseCleaner.strategy = :truncation
 
   Capybara.default_selector = :css
   Cucumber::Rails::World.use_transactional_fixtures = true
@@ -55,10 +53,6 @@ Spork.prefork do
     fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
     ActiveRecord::Fixtures.create_fixtures(fixtures_folder, fixtures)
     ts.controller.index
-  end
-  
-  After do
-    DatabaseCleaner.clean
   end
   
   ActionController::Base.allow_rescue = false
