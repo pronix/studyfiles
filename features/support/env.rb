@@ -65,3 +65,4 @@ Spork.each_run do
   Studyfiles::Application.reload_routes!
   Cucumber::Rails::Database.javascript_strategy = :truncation
 end
+

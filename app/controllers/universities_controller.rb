@@ -5,8 +5,7 @@ class UniversitiesController < ApplicationController
 
   #Главная страница
   def index
-    @user = User.find(params[:user_id]) if params[:user_id]
-    @universities = University.search params[:search]
+    @universities = University.search params[:search], :star => true
   end
 
   def new

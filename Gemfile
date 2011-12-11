@@ -35,6 +35,7 @@ group :test,:development do
   gem 'email_spec'
   gem 'cucumber-rails'
   gem 'database_cleaner'
+  gem 'ruby-debug19'
 
   # Spork
   gem 'spork', :git => 'git://github.com/sporkrb/spork.git'

@@ -1,6 +1,6 @@
 class University < ActiveRecord::Base
 
-  validates :abbreviation, :presence => true, :uniqueness => true
+  validates :abbreviation, :presence => true 
   validates :name,         :presence => true, :uniqueness => true
   validates :city,         :presence => true
 
@@ -16,9 +16,11 @@ class University < ActiveRecord::Base
     indexes name
     indexes abbreviation
     indexes city
+    indexes subjects.name, :as => :subject_name
+    indexes folders.name, :as => :folder_name
   end
 
-  has_attached_file :logo, :styles => {:thumb => "100x100>" }
+  has_attached_file :logo, :styles => { :thumb => "100x100>" }
 
   #Подсчет рейтинга университета
   def raiting

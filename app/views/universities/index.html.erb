@@ -1,11 +1,24 @@
 <%= render 'shared/sidebar' %>
 <div class="content">
-  <%= "Выберите ВУЗ" if @user %>
+  <%= "Выберите ВУЗ" if current_user %>
   <%= render 'shared/univer-search' %>
   <ul>
   <% @universities.each do |univer| %>
     <li>
       <%= link_to univer.name, documents_path(:university => univer) %>
+    <ul>
+      <% univer.subjects.sectionized.each do |section| %>
+        <li>
+          <%= section.name %>
+          <ul>
+            <% section.subjects.each do |sub| %>
+              <li><%= sub.name %></li>
+            <% end %>
+          </ul>
+
+        </li>
+      <% end %>
+    </ul>
     </li>
   <% end %>
   </ul>
