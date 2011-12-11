@@ -7,7 +7,6 @@
   step %{я нажму "Sign in"}
 end
 
-
 Given /^в системе существует пользователь с логином и паролем "(.+)\/(.+)"$/ do |email, password|
   Factory(:user, :email => email, :password => password)
 end
@@ -22,7 +21,7 @@ Given /^я авторизован как пользователь с логин�
   visit("/users/sign_in")
   fill_in('user_email',:with => email)
   fill_in('user_password',:with => password)
-  And %q(я нажму "Sign in")
+  step %q(я нажму "Sign in")
 end
 
 When /^(?:|я )нажму "([^"]*)"(?: с "([^"]*)")?$/ do |button, selector|

@@ -6,6 +6,10 @@ development:
   mem_limit: 128M
   max_matches: 25000
 
+test:
+  enable_star: 1
+  min_infix_len: 1
+
 production:
   sql_range_step: 10000000
   enable_star: 1

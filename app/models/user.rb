@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
   has_many :documents
   accepts_nested_attributes_for :documents, :reject_if => proc { |a| a['item'].blank? }, :allow_destroy => true
   has_many :folders
-  has_many :messages
   has_many :votes
   has_many :user_votes,   :through => :votes, :source => :document
   has_many :user_universities, :dependent => :destroy
   has_many :universities, :through => :user_universities, :uniq => true
+  has_inboxes
 
   has_and_belongs_to_many :roles, :uniq => true
 
