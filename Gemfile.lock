@@ -7,6 +7,13 @@ GIT
       guard (>= 0.8.3)
 
 GIT
+  remote: git://github.com/guard/guard-rspec.git
+  revision: 05434648fcf5224a6795ff8631a39e0618384b0a
+  specs:
+    guard-rspec (0.5.9)
+      guard (>= 0.8.4)
+
+GIT
   remote: git://github.com/guard/guard-spork.git
   revision: 3082b9a7d790c5a437abd9f885e376a8a617e595
   specs:
@@ -234,6 +241,7 @@ DEPENDENCIES
   factory_girl_rails
   ffi (= 1.0.11)
   guard-cucumber!
+  guard-rspec!
   guard-spork!
   hierarchy!
   jquery-rails

@@ -40,6 +40,7 @@ group :test,:development do
   gem 'spork', :git => 'git://github.com/sporkrb/spork.git'
   gem 'guard-spork', :git => 'git://github.com/guard/guard-spork.git'
   gem 'guard-cucumber', :git => 'git://github.com/guard/guard-cucumber.git'
+  gem 'guard-rspec', :git => 'git://github.com/guard/guard-rspec.git'
 
   # Not important
   gem 'rails-erd', :require => false

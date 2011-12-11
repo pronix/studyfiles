@@ -20,3 +20,20 @@ guard 'cucumber', :cli => '--profile current -c',
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
 end
 
+
+group 'rspec' do
+  guard 'rspec', :version => 2,
+  :cli => "--color --format nested --fail-fast --drb  --tag current",
+  :bundler => true,
+  :all_on_start => false,
+  :all_after_pass => false do
+    watch('spec/spec_helper.rb')  { "spec" }
+
+    # Rails example
+    watch(%r{^spec/.+_spec\.rb$})
+    watch(%r{^app/models/(.+)\.rb$})                       { |m| "spec/models/#{m[1]}_spec.rb" }
+  end
+end
+
+
+
