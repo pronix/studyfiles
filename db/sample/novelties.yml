@@ -1,0 +1,5 @@
+<% 1.upto(10).each do |n| %>
+news_<%= n %>:
+  title: Titile number <%= n %>
+  text: This is text <%= n %>
+<% end %>

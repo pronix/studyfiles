@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     roles << Role.find_or_create_by_name(role.to_s)
   end
 
+  def admin?
+    true if roles.find_by_name('admin')
+  end
+
   def is_user?
     true if roles.find_by_name('user')
   end

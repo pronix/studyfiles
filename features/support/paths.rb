@@ -13,8 +13,12 @@ module NavigationHelpers
       '/'
     when /^главной странице$/
       '/'
+    when /главную страницу/
+      root_path
     when /^Мои файлы$/
       '/documents'
+    
+      
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

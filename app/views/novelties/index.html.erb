@@ -1,6 +1,15 @@
-<%#
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-%>
+<% if can? :new, Novelty %>
+  <%= link_to "Добавить новость", new_novelty_path %>
+<% end %>
 
-<%= "index.html" %>
+<% @news.each do |novelty| %>
+  <%= novelty.title %>
+  <%= novelty.text %>
+  <% if can? :manage, novelty %>
+    <%= link_to "Редактировать", edit_novelty_path(novelty) %>
+    <%= form_for :novelty, :url => novelty_path(novelty), :html => {:method => :put, :id => "form_novelty_#{novelty.id}"} do |f| %>
+      <%= f.label :main, 'На главной' %>
+      <%= f.check_box :main, :onclick => "$(\"#form_novelty_#{novelty.id}\").submit();" %>
+    <% end %>
+  <% end %>
+<% end %>

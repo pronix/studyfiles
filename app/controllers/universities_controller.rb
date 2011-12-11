@@ -6,6 +6,7 @@ class UniversitiesController < ApplicationController
   #Главная страница
   def index
     @user = User.find(params[:user_id]) if params[:user_id]
+    @news = Novelty.main
     @universities = University.search params[:search]
   end
 

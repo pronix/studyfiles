@@ -309,3 +309,28 @@ end
     assert page.has_content?(text)
   end
 end
+
+Тогда /^я отмечу "(.+)"$/ do |field|
+  check(field)
+end
+
+Тогда /^я не должен видеть "(.+)"$/ do |text|
+  if page.respond_to? :should
+    page.should have_no_content(text)
+  else
+    assert page.has_no_content?(text)
+  end
+end
+
+Тогда /^я перейду на (.+)$/ do |page_name|
+  visit path_to(page_name)
+end
+
+
+Тогда /^подожди (\d+)$/ do |amount|
+  sleep amount.to_i
+end
+
+Тогда /^выполни "(.+)"$/ do |command|
+  puts eval(command)
+end

@@ -15,6 +15,7 @@ gem 'rubyzip'
 gem 'ffi', '1.0.11'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'thinking-sphinx', '2.0.10'
+gem 'cancan'
 
 gem 'rails-settings-cached', :require => 'rails-settings'
 gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
@@ -36,6 +37,7 @@ group :test,:development do
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'faker'
+  gem 'launchy'
 
   # Spork
   gem 'spork', :git => 'git://github.com/sporkrb/spork.git'

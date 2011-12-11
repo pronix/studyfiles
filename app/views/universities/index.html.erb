@@ -11,3 +11,9 @@
   </ul>
   <%= link_to "Создать новый", new_university_path(current_user) %>
 </div>
+
+НОВОСТИ
+<% @news.each do |novelty| %>
+  <%= novelty.title %>
+  <%= novelty.text %>
+<% end %>
