@@ -1,5 +1,6 @@
 <%= render 'shared/sidebar' %>
 <div class="content">
+  <%= "Выберите ВУЗ" if @user %>
   <%= render 'shared/univer-search' %>
   <ul>
   <% @universities.each do |univer| %>
@@ -8,4 +9,5 @@
     </li>
   <% end %>
   </ul>
+  <%= link_to "Создать новый", new_university_path(current_user) %>
 </div>

@@ -34,7 +34,7 @@ Then /^увижу поле для ввода псевдонима пользов
 end
 
 When /^(?:|[Я|я] )заполню поле "([^\"]*)" значением "([^\"]*)"$/ do |field, value|
-  When %Q(fill in "#{field}" with "#{value}")
+  step %Q(fill in "#{field}" with "#{value}")
 end
 
 When /^(?:|[Я|я] )установлю флажок "([^\"]*)"$/ do |field|
@@ -47,15 +47,15 @@ end
 
 
 Then /^(?:|[Я|я] )увижу сообщение "([^\"]*)"$/ do |text|
-  Then %Q(I should see "#{text}")
+  step %Q(I should see "#{text}")
 end
 
 Then /^(?:|[Я|я] )увижу "([^\"]*)"$/ do |text|
-  Then %Q(I should see "#{text}")
+  step %Q(I should see "#{text}")
 end
 
 Then /^(?:|[Я|я] )не увижу "([^\"]*)"$/ do |text|
-  Then %Q(I should not see "#{text}")
+  step %Q(I should not see "#{text}")
 end
 
 Then /^увижу слайды лотов$/ do
@@ -85,11 +85,11 @@ When /^(?:|[Я|я] )перейду по ссылке "([^\"]*)" в "([^\"]*)"$/ 
 end
 
 Then /^(?:|[Я|я] )должен оказаться на странице (.+)$/ do |page_name|
-  Then %Q(I should be on #{page_name})
+  step %Q(I should be on #{page_name})
 end
 
 When /^(?:|[Я|я] )выберу значение "([^\"]*)" в списке "([^\"]*)"$/ do |value, field|
-  When %Q(select "#{value}" from "#{field}")
+  step %Q(select "#{value}" from "#{field}")
 end
 
 Given /^загружен список стран$/ do
@@ -114,14 +114,14 @@ Then /^(?:|[Я|я] )буду на странице (.+)$/ do |page_name|
 end
 
 Then /^(?:|[Я|я] )увижу комиссия с суммы доставки "([^\"]*)"$/ do |value|
-  Then %Q(I should see "#{value}")
+  step %Q(I should see "#{value}")
 end
 
 Then /^я увижу максимальное время ожидания подтверждения заказа пользователем "([^\"]*)"$/ do |value|
-  Then %Q(I should see "#{value}")
+  step %Q(I should see "#{value}")
 end
 When /^(?:|[Я|я] )включу флажок "([^\"]*)"$/ do |field|
-  When %Q(I check "#{field}")
+  step %Q(I check "#{field}")
 end
 
 Then /^адрес страницы будет "([^\"]*)"$/ do |page_name|

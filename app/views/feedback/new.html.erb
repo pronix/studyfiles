@@ -1,0 +1,12 @@
+<%= form_for :feedback, :url => feedback_path do |f| %>
+  <%= f.label :name, "Имя" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :email, "E-mail" %>
+  <%= f.email_field :email %>
+
+  <%= f.label :message, "Ваше сообщение" %>
+  <%= f.text_area :message %>
+
+  <%= f.submit "Отправить" %>  
+<% end %>

@@ -5,16 +5,8 @@ class UniversitiesController < ApplicationController
 
   #Главная страница
   def index
-    @universities = University.all
-  end
-
-  #Поиск университетов по названию и предеметам
-  def search
-    @universities = University.where(["name LIKE ?", "%"+params[:text]+"%"])
-    subjects = Subject.where(["name LIKE ?", "%"+params[:text]+"%"])
-    subjects.each { |subject|
-      @universities = @universities | subject
-    }
+    @user = User.find(params[:user_id]) if params[:user_id]
+    @universities = University.search params[:search]
   end
 
   def new

@@ -11,11 +11,18 @@
   </div>
   <%= link_to "Написать личное сообщение", new_discussion_path(:id => @user.id)%><br/>
 <%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
-<%= link_to "Добавить ВУЗ", new_university_path(current_user) %>
+<%= link_to "Добавить ВУЗ", user_universities_path(current_user) %>
 
 <ul>
 <% @user.universities.each do |univer| %>
-  <li><%= univer.name %></li>
+  <li>
+    <%= univer.name %> | <%= link_to "Добавить предмет", university_subjects_path(univer) %>
+    <ul>
+      <% univer.subjects.each do |subject| %>
+        <li><%= subject.name %></li>
+      <% end %>
+    </ul>
+  </li>
 <% end %>
 </ul>
 
