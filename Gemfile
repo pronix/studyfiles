@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
 
-gem "inboxes",path: "vendor/inboxes"
+gem "inboxes", path: "vendor/inboxes"
 gem 'pg'
 gem 'warden'
 gem 'devise'

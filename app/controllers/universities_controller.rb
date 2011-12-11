@@ -5,8 +5,6 @@ class UniversitiesController < ApplicationController
 
   #Главная страница
   def index
-    # WTF? why not use current_user?
-    @user = User.find(params[:user_id]) if params[:user_id]
     @news = Novelty.main
     @universities = University.search(params[:search], :star => true)
   end

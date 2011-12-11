@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 class University < ActiveRecord::Base
 
-  validates :abbreviation, :presence => true 
+  validates :abbreviation, :presence => true
   validates :name,         :presence => true, :uniqueness => true
   validates :city,         :presence => true
 
@@ -20,7 +21,21 @@ class University < ActiveRecord::Base
     indexes folders.name, :as => :folder_name
   end
 
-  has_attached_file :logo, :styles => { :thumb => "100x100>" }
+  has_attached_file :logo, :styles => { :thumb => "60x60>" }
+
+  def full_title
+    "#{self.abbreviation} - #{self.name}"
+  end
+
+  def sections
+    return self.subjects if self.subjects.sectionized.empty?
+    self.subjects.sectionized
+  end
+
+  def stats
+    "#{subjects.count} предметов, #{documents.count} файлов, #{((documents.sum(:item_file_size).to_f / (1024**2)).round(1))} Мб" #FIXME прикрутить pluralize
+  end
+
 
   #Подсчет рейтинга университета
   def raiting

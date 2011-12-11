@@ -14,7 +14,7 @@
     Если я введу в поле "user_email" значение "user@example.com"
     И я введу в поле "user_password" значение "secret"
     И я нажму "Sign in"
-    Тогда увижу "Sign Out"
+    Тогда увижу "Выйти"
 
   @green
   Сценарий:
@@ -25,4 +25,4 @@
     И я введу в поле "user_password" значение "secret"
     И я введу в поле "user_password_confirmation" значение "secret"
     И нажму "Sign up"
-    Тогда увижу "Sign Out"
+    Тогда увижу "Выйти"

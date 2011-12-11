@@ -1,3 +1,11 @@
-<div class="sign-in-up">
-  <%= link_to t("sign_in"), new_user_session_path %>&nbsp;&nbsp;/&nbsp;&nbsp;<%= link_to t("sign_up"), new_user_registration_path, :class => "sign-up" %>
+<div class="login-bar clearfux">
+    <div class="help-news">
+      <%= link_to t("help"), faqs_path %>&nbsp;&nbsp;/&nbsp;&nbsp;<%= link_to t("novelties"), novelties_path %>
+    </div>
+
+    <div class="sign-in-up">
+      <%= link_to t("sign_in"), new_user_session_path %>
+      &nbsp;&nbsp;/&nbsp;&nbsp;
+      <%= link_to t("sign_up"), new_user_registration_path, :class => "sign-up" %>
+    </div>
 </div>

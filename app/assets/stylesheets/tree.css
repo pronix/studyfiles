@@ -1,0 +1,197 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+/*
+ *
+ *
+ * FILE TREE */
+
+.level-1 .file-row-rating {width: 30px;}
+.level-2 .file-row-rating {width: 40px;}
+.level-3 .file-row-rating {width: 45px;}
+
+.level-2, .level-3 {
+  display: none;
+  border-radius: 5px;
+  clear: both;
+  padding-top: 5px;
+}
+
+.level-2 {
+  border-radius: 2px 2px 5px 5px;
+}
+.level-2 { background: #eef8fa;}
+
+.level-3 {
+  background: #d2f3f7;
+  margin: 6px 0 6px 6px;
+  border-radius: 5px 0 0 5px;
+}
+
+
+/* FILE ROW TITLE WIDTHS */
+.level-1 .file-row-title { width: 277px; }
+.level-1 .folder-row > .file-row-title { width: 305px; }
+.level-2 .file-row-title { width: 267px; }
+.level-2 .folder-row > .file-row-title { width: 295px; }
+.level-3 .file-row-title { width: 256px; }
+
+.level-1.my-files .file-row-title { width: 416px; }
+.level-1.my-files .folder-row > .file-row-title { width: 445px; }
+.my-files .level-2 .file-row-title { width: 407px; }
+.my-files .level-2 .folder-row > .file-row-title { width: 435px; }
+.my-files .level-3 .file-row-title { width: 396px; }
+/* FILE ROW TITLE WIDTHS */
+
+
+.file-row {
+  margin-bottom: 9px;
+  clear: both;
+}
+    .file-row > span {
+      float: left;
+      font-size: 1.1em;
+      line-height: 18px;
+    }
+
+    .file-row.folder-row > span {
+      line-height: 24px;
+    }
+
+    .file-row-title a {
+      text-decoration: none;
+      border-bottom: 1px dotted #08C;
+    }
+
+    .file-row-rating {
+      text-align: right;
+      font-size: 1em !important;
+      white-space: nowrap;
+    }
+
+    .file-row-icons {
+      padding-left: 10px;
+    }
+        .file-row-icons a {
+          margin-right: 3px;
+        }
+
+    .file-row-actions, .file-row-user, .file-row-date, .file-row-size {
+      float: right !important;
+      margin: 0 10px;
+      text-align: right;
+    }
+
+    .file-row-size {
+      width: 70px;
+    }
+
+    .file-row-user {
+      width: 120px;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+      .file-row-user a {
+        color: black;
+      }
+
+      .file-row-previews {
+        clear: both;
+        font-size: 1.1em;
+      }
+
+/* FILE TREE END */
+
+
+/*
+ *
+ * EXPANDER */
+
+
+  .expander {
+    margin: 30px 0;
+  }
+    .expander-header {
+      height: 54px;
+      line-height: 54px;
+      background: url("../images/expander-header.png") repeat-x top left;
+      padding-left: 25px;
+      position: relative;
+      box-shadow: 0 0 11px lightgray; /* Параметры тени */
+      box-shadow: 0 0 11px rgba(0,0,0,0.2); /* Параметры тени */
+      -moz-box-shadow: 0 0 11px rgba(0,0,0,0.2); /* Для Firefox */
+      -webkit-box-shadow: 0 0 11px rgba(0,0,0,0.2); /* Для Safari и Chrome */
+    }
+
+        .expander-header > * {
+          float: left;
+          margin-right: 10px;
+        }
+        .expander-header > h4 {
+          font-size: 1.2em;
+          font-weight: normal;
+        }
+          .expander-header > h4 a {
+            color: #004c62; /* DARK BLUE */
+          }
+        .expander-header.university > h4 {
+          font-size: 1.4em;
+          font-weight: bold;
+        }
+          .expander-header.university > h4 a {
+            color: #08C;
+          }
+        .expander-header.university .avatar {
+          border: 0; padding: 0;
+          margin-top: 12px;
+        }
+        .expander-header .avatar {
+          height: 32px;
+          margin-top: 8px;
+        }
+        .expander-header > .icon {
+          margin-top: 20px;
+        }
+
+        .expander-actions {
+          margin: 0;
+          position: absolute;
+          height: 16px;
+          right: 10px;
+          top: 6px;;
+        }
+        .expander-header > .rating {
+          width: 50px;
+          text-align: right;
+        }
+
+    .expander-content {
+      border: 1px solid #e7e7e7;
+      border-top: none;
+      padding: 25px 6px 25px 6px;
+    }
+
+    .expander-subject > .gray-box {
+      position: relative;
+      line-height: 34px;
+      font-size: 1.2em;
+      padding: 0 0 0 15px;
+      margin-bottom: 17px;
+      background: #fafafa;
+    }
+      .expander-subject > .gray-box > .icon {
+        margin-bottom: -2px;
+      }
+      .expander-subject > .gray-box .expander-actions {
+        top: 6px;
+      }
+
+      .expander .green-button {
+        margin-left: 70px;
+      }
+
+/* EXPANDER END */
+
