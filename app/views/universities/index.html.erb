@@ -7,6 +7,10 @@
     <li>
       <%= link_to univer.name, documents_path(:university => univer) %>
     </li>
+    <%= link_to "Раскрыть #{univer.abbreviation}",  university_subjects_path(univer) %>
+    <% if can? :edit, univer %>
+      <%= link_to "Редактировать #{univer.abbreviation}", edit_university_path(univer) %>
+    <% end %>
   <% end %>
   </ul>
   <%= link_to "Создать новый", new_university_path(current_user) %>

@@ -26,6 +26,9 @@
   <% @subjects.each do |subject| %>
     <li>
       <%= subject.name %>
+      <% if can? :edit, subject %>
+	<%= link_to "Редактировать #{subject.name}", edit_university_subject_path(@university, subject) %>
+      <% end %>
     </li>
   <% end %>
   </ul>

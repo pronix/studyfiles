@@ -20,6 +20,7 @@ class Subject < ActiveRecord::Base
   define_index do
     indexes name
     indexes abbreviation
+    indexes universities.name, :as => :university_name
   end
 
 end

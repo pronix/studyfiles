@@ -5,13 +5,27 @@ class UniversitiesController < ApplicationController
 
   #Главная страница
   def index
+    # WTF? why not use current_user?
     @user = User.find(params[:user_id]) if params[:user_id]
     @news = Novelty.main
-    @universities = University.search params[:search]
+    @universities = University.search(params[:search])
   end
 
   def new
     @university = University.new
+  end
+
+  def edit
+    @university = University.find(params[:id])
+  end
+
+  def update
+    @university = University.find(params[:id])
+    if @university.update_attributes(params[:university])
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   def create

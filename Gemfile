@@ -47,4 +47,7 @@ group :test,:development do
 
   # Not important
   gem 'rails-erd', :require => false
+
+  # This simple awesome )
+  gem 'ruby-debug19'
 end

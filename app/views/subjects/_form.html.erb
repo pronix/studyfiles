@@ -1,16 +1,14 @@
 <fieldset class="column span-18">
   <p class="column span-14">
     <%= f.label :name, "Полное название" %>
-    <%= f.text_field :name, :id => "name" %>
+    <%= f.text_field :name %>
   </p>
   <p class="column span-14">
     <%= f.label :abbreviation, "Аббревиатура" %>
-
-    <%= f.text_field :abbreviation, :id => "abbreviation" %>
+    <%= f.text_field :abbreviation %>
   </p>
   <p>
-    <%= f.label :section, "Раздел" %>
-    <%= f.select :section_id, Subject.sectionized.collect {|p| [ p.name, p.id ] }, { :include_blank => true}, :id => "section"  %>
+    <%= f.label :section_id, "Раздел" %>
+    <%= f.select :section_id, Subject.sectionized.collect {|p| [ p.name, p.id ] }, { :include_blank => true}  %>
   </p>
-  <%= submit_tag "Создать" %>
 </fieldset>

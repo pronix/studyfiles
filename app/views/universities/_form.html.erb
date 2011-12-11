@@ -1,22 +1,19 @@
 <fieldset class="column span-18">
   <p class="column span-14">
     <%= f.label :name, "Название" %>
-    <%= f.text_field :name, :id => "name" %>
+    <%= f.text_field :name %>
   </p>
   <p class="column span-14">
     <%= f.label :abbreviation, "Аббревиатура" %>
-
-    <%= f.text_field :abbreviation, :id => "abbreviation" %>
+    <%= f.text_field :abbreviation %>
   </p>
   <p class="column span-14">
     <%= f.label :city, "Город" %>
-
-    <%= f.text_field :city, :id => "city" %>
+    <%= f.text_field :city %>
   </p>
   <p class="column span-14">
     <%= f.label :logo, "Логотип" %>
-    <%= f.file_field :logo, :id => "logo" %>
-
+    <%= f.file_field :logo %>
   </p>
   <p class="column prepend-6 span-8">
     <button type="submit" class="btn primary" title="Создать папку">Создать</button>
