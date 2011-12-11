@@ -2,13 +2,14 @@
     <h2><%= t("unsorted_documents") %></h2>
     <ul>
     <% @user.documents.unsorted.each do |file| %>
-      <li> 
+      <li>
         <b style="color: green"><%= file.item_processed %></b>
           <%= file.name %> | <%= file.item.url %>
       </li>
     <% end %>
     </ul>
-</div>
+  </div>
+  <%= link_to "Написать личное сообщение", new_discussion_path(:id => @user.id)%><br/>
 <%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
 <%= link_to "Добавить ВУЗ", new_university_path(current_user) %>
 

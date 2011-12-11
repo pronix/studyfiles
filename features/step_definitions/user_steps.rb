@@ -4,6 +4,12 @@ Given /^в системе существует пользователь с ло�
   email, password = email_and_password.split("/");
   User.create!(:email => email, :password => password,:password_confirmation => password)
 end
+
+Given /^в системе существует пользователь с логином и паролем и именем "([^\"]*)"$/ do |email_and_password_and_name|
+  email, password, name = email_and_password_and_name.split("/");
+  User.create!(:email => email, :password => password,:password_confirmation => password, :name => name)
+end
+
 Given /^я на (.+)$/ do |page_name|
     visit path_to(page_name)
 end

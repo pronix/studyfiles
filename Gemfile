@@ -2,6 +2,7 @@
 
 gem 'rails', '3.1.3'
 
+gem "inboxes",path: "vendor/inboxes"
 gem "pg"
 gem "warden"
 gem "devise"
@@ -13,6 +14,7 @@ gem "hierarchy", :path => "vendor/plugins/hierarchy"
 gem "rubyzip"
 gem "ffi", "1.0.11"
 gem 'recaptcha', :require => 'recaptcha/rails'
+gem "haml"
 
 group :test,:development do
   gem 'seed-fu', '~> 2.1.0'

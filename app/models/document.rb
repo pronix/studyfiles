@@ -7,7 +7,7 @@ class Document < ActiveRecord::Base
   before_save :default_name
 
   validates :item,         :presence => true
- 
+
   after_save :queue_process_item
 
   has_many :votes
@@ -78,9 +78,9 @@ class Document < ActiveRecord::Base
   end
 
   def queue_process_item
-    send_later(:file_processing) if !self.item_processed
+    delay.file_processing if !self.item_processed
   end
-  
+
   def file_processing
     self.process #Обрабатываем файл
     if self.item.content_type == 'application/zip' #Если это был архив, то удаляем его
@@ -136,7 +136,7 @@ class Document < ActiveRecord::Base
           self.unzip_file "/public/zips"
         when 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/rtf'
           self.office_to_html
-        else 
+        else
           self.source_to_html
       end
     end

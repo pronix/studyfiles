@@ -218,35 +218,18 @@ When /^(?:|[Я|я] )нажимаю кнопку ОК в диалоге подт�
   JS
 end
 
-# Если /^нажимаю кнопку ОК в даилоге подтверждения$/ do
-#   pending # express the regexp above with the code you wish you had
-# end
-
-
-
-
 When /^будет запущен delayed_job$/ do
   Delayed::Worker.new.work_off
   sleep(10)
-end
-
-Given /^в сервисе прописан метод оплаты Check$/ do
-  Factory(:payment_method_check)
-  Factory(:bogus_payment_method)
-end
-
-Then /^увижу способы оплаты:$/ do |table|
-  table.raw.each do |r|
-    page.should have_content(r.to_s)
-  end
 end
 
 Then /^увижу like$/ do
   page.should have_xpath('//div[@id="fb-root"]')
 end
 
-Given /^в сервисе прописан налог "([^\"]*)"$/ do |vat|
-  @vat = vat.to_f
-  @tax_category = TaxCategory.find_by_name("VAT")||Factory(:tax_category)
-  Factory(:tax_rate, :amount => @vat, :tax_category => @tax_category, :zone_id => 1)
+When /мне ответил пользователь "([^\"]*)" текстом "([^\"]*)"/ do |name,mess|
+  u1 = User.find_by_email 'user@example.com'
+  u2 = User.find_by_name name
+  d=Discussion.find_between_users(u1,u2)
+  d.messages.create(:user => u2,:body => mess )
 end
