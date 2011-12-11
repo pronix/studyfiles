@@ -16,12 +16,11 @@ Spork.prefork do
   require 'email_spec/cucumber'
   require 'database_cleaner'
   require 'database_cleaner/cucumber'
-  require 'ruby-debug'
 
   require 'cucumber/thinking_sphinx/external_world'
   Cucumber::Rails::World.use_transactional_fixtures = true
   DatabaseCleaner.strategy = :truncation
-  
+
   Capybara.default_selector = :css
 
   ActionController::TestCase.class_eval do
