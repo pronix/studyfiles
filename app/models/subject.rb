@@ -1,7 +1,6 @@
 class Subject < ActiveRecord::Base
 
   validates :name,         :presence => true
-  #validates :section_id,   :presence => true
 
   belongs_to :section, :class_name => "Subject", :foreign_key => "section_id"
   has_many :subjects, :foreign_key => "section_id"
