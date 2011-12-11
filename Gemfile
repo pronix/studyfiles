@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
 
+gem "inboxes",path: "vendor/inboxes"
 gem 'pg'
 gem 'warden'
 gem 'devise'
@@ -15,10 +16,9 @@ gem 'rubyzip'
 gem 'ffi', '1.0.11'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'thinking-sphinx', '2.0.10'
-
+gem "haml"
 gem 'rails-settings-cached', :require => 'rails-settings'
 gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
-
 
 group :test,:development do
   # For help
