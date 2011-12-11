@@ -1,0 +1,3 @@
+admin_email:
+  var: admin_email
+  value: admin@example.com

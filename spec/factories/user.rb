@@ -1,8 +1,11 @@
-# -*- coding: utf-8 -*-
 FactoryGirl.define do
   factory :user do
-    email 'user@example.com'
-    password "secret"
-    password_confirmation "secret"
+    email Faker::Internet.email
+    password 'password'
+    password_confirmation {|u| u.password}
+  end
+
+  factory :admin_user, :parent => :user do
+    after_create { |u| u.add_role(:admin) }
   end
 end

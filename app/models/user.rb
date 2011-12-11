@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -16,6 +17,22 @@ class User < ActiveRecord::Base
   has_many :user_votes,   :through => :votes, :source => :document
   has_many :user_universities, :dependent => :destroy
   has_many :universities, :through => :user_universities, :uniq => true
+
+  has_and_belongs_to_many :roles, :uniq => true
+
+  after_create :add_default_role
+  
+  def add_default_role
+    add_role('user')
+  end
+
+  def add_role(role)
+    roles << Role.find_or_create_by_name(role.to_s)
+  end
+
+  def is_user?
+    true if roles.find_by_name('user')
+  end
 
   def my_messages
     Message.where(["user_id = ? or to_user_id = ?", self.id, self.id])
