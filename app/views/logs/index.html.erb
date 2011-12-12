@@ -1,0 +1,6 @@
+<% @logs.each do |log| %>
+  <p><%= log.user ? log.user.name : '' %></p>
+  <p>
+    <%= log.action %> <%= log.folder.university.abbreviation %> / <%= path_folder(log.folder) %>
+  </p>
+<% end %>

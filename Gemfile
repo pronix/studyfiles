@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
 
-gem "inboxes", path: "vendor/inboxes"
+gem 'inboxes', path: 'vendor/inboxes'
 gem 'pg'
 gem 'warden'
 gem 'devise'
@@ -17,15 +17,19 @@ gem 'ffi', '1.0.11'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'thinking-sphinx', '2.0.10'
 gem 'cancan'
-gem "haml"
+gem 'haml'
+gem 'unicorn'
 
 gem 'rails-settings-cached', :require => 'rails-settings'
 gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
 
+gem 'capistrano'
+gem 'capistrano-ext'
+
 group :test,:development do
   # For help
   gem 'seed-fu', '~> 2.1.0'
-  gem 'unicorn'
+
   #использользуем для подсветки синтаксиса в исходных кодах
   gem 'coderay'
   gem 'builder'
@@ -39,7 +43,6 @@ group :test,:development do
   gem 'database_cleaner'
   gem 'faker'
   gem 'launchy'
-  gem 'ruby-debug19'
 
   # Spork
   gem 'spork', :git => 'git://github.com/sporkrb/spork.git'
@@ -49,7 +52,4 @@ group :test,:development do
 
   # Not important
   gem 'rails-erd', :require => false
-
-  # This simple awesome )
-  gem 'ruby-debug19'
 end

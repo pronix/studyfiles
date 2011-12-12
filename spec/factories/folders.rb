@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
 FactoryGirl.define do
   factory :folder do
-    name 'Folder'
+    name Faker::Lorem.words.join(' ')
+    association :user, :factory => :user
+    association :university, :factory => :university
   end
 end

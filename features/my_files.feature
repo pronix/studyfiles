@@ -56,7 +56,7 @@
 
 
 
-  @green @current
+  @green
   Сценарий:
     Допустим я авторизован как пользователь с логином и паролем "user@example.com/secret"
     И у пользователя "user@example.com" нету файлов

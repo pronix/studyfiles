@@ -3,6 +3,8 @@ class Folder < ActiveRecord::Base
 
   before_create :default_path_name
 
+  after_create :create_log
+  
   include Models::Path
   include Hierarchy
 
@@ -12,7 +14,6 @@ class Folder < ActiveRecord::Base
   has_many :subjects, :through => :subject_folders
 
   has_many :documents
-
 
   #Копирум  из одной папки в другую
   def copy_to_folder(folder)
@@ -94,7 +95,13 @@ class Folder < ActiveRecord::Base
 
   #Перед созданием генерируем path_name
   def default_path_name
-    self.path_name = self.name.gsub(" ", "_")
+    path_name = name.gsub(" ", "_")
+  end
+
+  # OPTIMIZE: move it to observer
+
+  def create_log
+    SiteLog.create_foler(self)
   end
 
 

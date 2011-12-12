@@ -39,3 +39,7 @@ end
 Допустим /^в системе существует администратор с логином и паролем "(.+)\/(.+)"$/ do |email, password|
   Factory(:admin_user, :email => email, :password => password)
 end
+
+Допустим /^есть пользователи:$/ do |table|
+  table.hashes.each {|h| Factory(:user, h)}
+end
