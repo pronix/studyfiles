@@ -1,0 +1,22 @@
+<div class="file-row clearfix">
+  <span class="file-row-rating">0</span>
+  <span class="file-row-icons">
+    <%= link_to "", "", :class => "check-true-unselected icon" %>
+    <%= link_to "", "", :class => "check-false-unselected icon" %>
+    <%= extension_icon_link(document) %>
+  </span>
+
+  <span class="file-row-title">
+    <span class="file-row-actions">
+      <%= link_to "", document.item.url, :class => "download icon" %>
+    </span>
+    <%= link_to document.name, "" %>
+  </span>
+  <span class="file-row-size"><%= document.item_file_size %></span>
+
+  <span class="file-row-date"><%= document.created_at.strftime("%d.%m.%Y") %></span>
+
+  <span class="file-row-user"><a href="#">Иван Иваныч</a></span>
+
+  <p class="file-row-previews"></p>
+</div>

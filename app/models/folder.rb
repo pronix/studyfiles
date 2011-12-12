@@ -13,6 +13,12 @@ class Folder < ActiveRecord::Base
 
   has_many :documents
 
+  scope :unsorted, where(:university_id => nil)
+
+
+  def level
+    self.index_path.size
+  end
 
   #Копирум  из одной папки в другую
   def copy_to_folder(folder)
@@ -80,7 +86,7 @@ class Folder < ActiveRecord::Base
 
   def zip_files
     if !documents.empty?
-      file_name = "tmp/ziped_clients/#{self.name}.zip" 
+      file_name = "tmp/ziped_clients/#{self.name}.zip"
       file = Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) { |zipfile|
         documents.each {|current_document|
           zipfile.add(current_document.name, current_document.item.path)

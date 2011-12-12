@@ -115,15 +115,27 @@
     margin: 30px 0;
   }
     .expander-header {
-      height: 54px;
       line-height: 54px;
-      background: url("../images/expander-header.png") repeat-x top left;
+      min-height: 54px;
       padding-left: 25px;
       position: relative;
       box-shadow: 0 0 11px lightgray; /* Параметры тени */
       box-shadow: 0 0 11px rgba(0,0,0,0.2); /* Параметры тени */
       -moz-box-shadow: 0 0 11px rgba(0,0,0,0.2); /* Для Firefox */
       -webkit-box-shadow: 0 0 11px rgba(0,0,0,0.2); /* Для Safari и Chrome */
+
+      background-image: linear-gradient(bottom, rgb(51,51,51) 0%, rgb(76,76,76) 90%);
+      background-image: -o-linear-gradient(bottom, rgb(51,51,51) 0%, rgb(76,76,76) 90%);
+      background-image: -moz-linear-gradient(bottom, rgb(51,51,51) 0%, rgb(76,76,76) 90%);
+      background-image: -webkit-linear-gradient(bottom, rgb(51,51,51) 0%, rgb(76,76,76) 90%);
+      background-image: -ms-linear-gradient(bottom, rgb(51,51,51) 0%, rgb(76,76,76) 90%);
+      background-image: -webkit-gradient(
+      	linear,
+      	left bottom,
+      	left top,
+      	color-stop(0, #f4f4f4),
+      	color-stop(0.9, #fdfdfd)
+      );
     }
 
         .expander-header > * {
@@ -140,6 +152,10 @@
         .expander-header.university > h4 {
           font-size: 1.4em;
           font-weight: bold;
+          float: none;
+          padding: 18px 0 5px 0;
+          margin: 0 70px 0 0;
+          line-height: 19px;
         }
           .expander-header.university > h4 a {
             color: #08C;
@@ -154,6 +170,15 @@
         }
         .expander-header > .icon {
           margin-top: 20px;
+        }
+        .expander-header.university > .icon {
+          margin-top: 22px;
+        }
+        .expander-header > .icon.flag2 {
+          margin-top: 17px;
+        }
+        .expander-header.university > .logo {
+          margin-top: 15px;
         }
 
         .expander-actions {

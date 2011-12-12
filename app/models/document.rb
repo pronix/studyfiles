@@ -19,6 +19,7 @@ class Document < ActiveRecord::Base
 
   scope :unsorted, where(:university_id => nil)
   scope :processed, where(:item_proceed => true)
+  scope :unfolded, where(:folder_id => nil)
 
 
   has_attached_file :item,

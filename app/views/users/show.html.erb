@@ -1,28 +1,75 @@
-<div>
-    <h2><%= t("unsorted_documents") %></h2>
-    <ul>
-    <% @user.documents.unsorted.each do |file| %>
-      <li>
-        <b style="color: green"><%= file.item_processed %></b>
-          <%= file.name %> | <%= file.item.url %>
-      </li>
-    <% end %>
-    </ul>
-  </div>
-  <%= link_to "Написать личное сообщение", new_discussion_path(:id => @user.id)%><br/>
-<%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
-<%= link_to "Добавить ВУЗ", user_universities_path(current_user) %>
+<%= render "shared/univer-search" %>
 
-<ul>
-<% @user.universities.each do |univer| %>
-  <li>
-    <%= univer.name %> | <%= link_to "Добавить предмет", university_subjects_path(univer) %>
-    <ul>
-      <% univer.subjects.each do |subject| %>
-        <li><%= subject.name %></li>
-      <% end %>
-    </ul>
-  </li>
+<div class="expander parent">
+
+       <div class="expander-header university">
+         <a class="blue-collapse icon expand"></a>
+         <a href="#" class="icon flag2"></a>
+         <h4>
+           <a href="#"><%= t("unsorted_documents") %></a>
+         </h4>
+         <div class="expander-actions">
+           <%= link_to "", "", :class => "expand-all expand icon" %>
+           <%= link_to "", "", :class => "folder-plus icon" %>
+           <%= link_to "", "", :class => "file-plus icon" %>
+         </div>
+       </div>
+
+       <div class="expander-content node">
+            <div class="level-1 clearfix node">
+
+              <% @user.folders.unsorted.each do |folder| %>
+                <%= render "shared/folder", :folder => folder %>
+              <% end %>
+
+              <% @user.documents.unfolded.each do |document| %>
+                <%= render "shared/file_row", :document => document %>
+              <% end %>
+
+            </div>
+       </div>
+
+</div>
+
+
+<% @user.universities.each do | univer | %>
+
+    <div class="expander parent">
+      <div class="expander-header clearfix university">
+
+        <a href="" class="blue-collapse icon expand"></a>
+        <%= link_to image_tag(univer.logo.url(:icon)), "", :class => "logo" %>
+
+        <h4>
+          <%= link_to truncate(univer.name, :length => 160), "" %>
+        </h4>
+        <div class="expander-actions">
+          <a class="expand-all icon expand"></a>
+          <a class="green-expand icon"></a>
+          <a class="dred-cross icon"></a>
+        </div>
+      </div>
+
+      <div class="expander-content node">
+
+        <div class="level-1 clearfix node">
+          <% univer.primary_folders.each do |folder| %>
+            <%= render "shared/folder", :folder => folder %>
+          <% end %>
+        </div>
+
+        <%= link_to "Добавить предмет", university_subjects_path(univer), :class => "button green-button" %>
+
+      </div>
+    </div>
+
 <% end %>
-</ul>
+
+<% content_for :sidebar do %>
+  <%= render "detailed", :user => @user %>
+<% end %>
+
+<%= link_to "Написать личное сообщение", new_discussion_path(:id => @user.id)%><br/>
+<%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
+<%= link_to "Добавить ВУЗ", user_universities_path(current_user), :class => "button green-button" %>
 

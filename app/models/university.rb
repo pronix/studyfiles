@@ -21,7 +21,7 @@ class University < ActiveRecord::Base
     indexes folders.name, :as => :folder_name
   end
 
-  has_attached_file :logo, :styles => { :thumb => "60x60>" }
+  has_attached_file :logo, :styles => { :thumb => "60x60>", :icon => "32x32" }
 
   def full_title
     "#{self.abbreviation} - #{self.name}"

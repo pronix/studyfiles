@@ -4,7 +4,7 @@
 
 # Setting.create(:var => 'admin_email', :value => 'admin@example.com')
 # files = Document.create([
-#   { 
+#   {
 #     :name => "Конспект.doc",
 #     :item => File.new("#{Rails.root}/sample_documents/Конспект.doc"),
 #     :university_id => 800,

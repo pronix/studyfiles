@@ -6,22 +6,7 @@
   <% end %>
 </div>
 
-<!-- NEWS BLOCK START -->
-<div class="news-box closable-container with-bg">
-
-  <% @news.each do |novelty| %>
-      <div class="one-news closable">
-        <%= link_to novelty.title, "#" %>
-        <p>
-          <%= novelty.text %>
-        </p>
-        <span><%= novelty.date %></span>
-        <%= link_to image_tag("close-news.png"), "#", :class => "close" %>
-      </div>
-  <% end %>
-
-</div>
-<!-- NEWS BLOCK END -->
+<%= render "shared/news", :news => @news %>
 
 <!-- TOPS BLOCK START -->
 <div class="top-10">

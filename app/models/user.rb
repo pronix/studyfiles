@@ -20,8 +20,10 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :roles, :uniq => true
 
+  has_attached_file :avatar, :styles => { :medium => "128x128", :thumb => "54x54", :icon => "34x34" }
+
   after_create :add_default_role
-  
+
   def add_default_role
     add_role('user')
   end
