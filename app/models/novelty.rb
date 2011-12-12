@@ -17,4 +17,8 @@ class Novelty < ActiveRecord::Base
     self.update_attributes(:main => false)
   end
 
+  def date
+    self.created_at.strftime("%d %B %Y")
+  end
+
 end

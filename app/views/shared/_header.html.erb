@@ -1,14 +1,10 @@
 <div id="header">
-  <div class="login-bar">
-    <div class="help-news">
-      <%= link_to t("help"), faqs_path %>&nbsp;&nbsp;/&nbsp;&nbsp;<%= link_to t("novelties"), novelties_path %>
-    </div>
-    <% if current_user %>
-      <%= link_to t('sign_out'), destroy_user_session_path, :method => :delete %>
-    <% else %>
-      <%= render 'shared/login-bar' %>
-    <% end %>
-  </div>
+  <% if current_user %>
+    <%= render 'shared/user-bar' %>
+  <% else %>
+    <%= render 'shared/login-bar' %>
+  <% end %>
+
   <div class="nav-bar">
     <div class="logo-box">
       <%= image_tag "logo.png", :alt => "StudyFiles" %>
@@ -33,8 +29,6 @@
       <%# FIXME %>
       <li class="<%= 'current' if  current_page?(:controller => "users", :action => "index") rescue ''%>">
 	<%= link_to t("users"), users_path %></li>
-      <li class="<%= 'current' if  current_page?(:controller => "users", :action => "index") rescue ''%>">
-	<%= link_to "Личные сообщения", discussions_path %></li>
 
     </ul>
   </div>

@@ -1,36 +1,79 @@
-<%= render 'shared/sidebar' %>
-<div class="content">
-  <%= "Выберите ВУЗ" if current_user %>
-  <%= render 'shared/univer-search' %>
-  <ul>
-  <% @universities.each do |univer| %>
-    <li>
-      <%= link_to univer.name, documents_path(:university => univer) %>
-    <ul>
-      <% univer.subjects.sectionized.each do |section| %>
-        <li>
-          <%= section.name %>
-          <ul>
-            <% section.subjects.each do |sub| %>
-              <li><%= sub.name %></li>
-            <% end %>
-          </ul>
-
-        </li>
-      <% end %>
-    </ul>
-    </li>
-    <%= link_to "Раскрыть #{univer.abbreviation}",  university_subjects_path(univer) %>
-    <% if can? :edit, univer %>
-      <%= link_to "Редактировать #{univer.abbreviation}", edit_university_path(univer) %>
-    <% end %>
-  <% end %>
-  </ul>
-  <%= link_to "Создать новый", new_university_path(current_user) %>
-</div>
-
-НОВОСТИ
-<% @news.each do |novelty| %>
-  <%= novelty.title %>
-  <%= novelty.text %>
+<% content_for :sidebar do %>
+  <%= render 'shared/sidebar' %>
 <% end %>
+
+  <%= render 'shared/univer-search' %>
+  <%= "Выберите ВУЗ" if current_user %>
+  <ul class="cities-list">
+    <li>
+      <ul class="universities-list">
+        <% @universities.each do |univer| %>
+
+          <li class="clearfix">
+
+            <%= link_to image_tag(univer.logo.url(:thumb)), "#", :class => "university-logo" %>
+
+            <div class="university-short-info">
+              <h4>
+                <%= link_to univer.full_title, documents_path(:university => univer) %>
+                <% if can? :edit, univer %>
+                  <%= link_to "", edit_university_path(univer), :title => "Редактировать #{univer.abbreviation}", :class => "icon edit"   %>
+                <% end %>
+              </h4>
+
+              <ul class="subjects-list">
+                  <% univer.subjects.first(4).each do |sub| %>
+                    <li>
+                      <%= link_to sub.name, "#" %>
+                    </li>
+                  <% end %>
+                  <li><%= link_to "...", "#", :class => "expand-subjects-list", :title => "Раскрыть #{univer.abbreviation}" %></li>
+              </ul>
+
+              <ul class="expanded-subjects-list">
+
+                <% univer.sections.each do |section| %>
+                  <li>
+                    <h5><%= section.name %></h5>
+                    <dl>
+                      <dt></dt>
+                      <dd>
+                        <%= link_to section.name, "#" %>
+                        <% if can? :edit, section %>
+                          <%= link_to "", edit_university_subject_path(univer, section), :title => "Редактировать #{section.name}", :class => "icon edit"   %>
+                        <% end %>
+                      </dd>
+
+                      <% section.subjects.each do |sub| %>
+                        <dt>
+                          <%= sub.abbreviation %>
+                        </dt>
+                        <dd>
+                          <%= link_to sub.name, "#" %>
+                          <% if can? :edit, sub %>
+                            <%= link_to "", edit_university_subject_path(univer, sub), :title => "Редактировать #{sub.name}", :class => "icon edit"   %>
+                          <% end %>
+                        </dd>
+                      <% end %>
+                    </dl>
+                  </li>
+                <% end %>
+
+              </ul>
+
+              <p>
+                <span class="rating">+ 17 240</span>
+                <span class="statistics">
+                  <%= univer.stats %>
+                </span>
+              </p>
+
+            </div>
+
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+
+  <%= link_to "Создать новый", new_university_path(current_user) %>

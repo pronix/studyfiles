@@ -1,111 +1,90 @@
-<div class="sidebar">
-  <div class="salat-box-left"><div class="salat-box-right"><div class="salat-box-body">
-    <button class="add-file-button">&nbsp;</button>
-  </div></div></div>
-  <div class="news-box">
-    <div class="one-news">
-      <a href="#">Добавлен КГУ в список ВУЗов</a>
-      <p>Поздравляем Курский государственный университет с прибытием.</p>
-      <span>25 марта 2010</span>
-      <%= link_to (image_tag "close-news.png", :alt => "Закрыть"), "#", :class => "close" %>
-    </div>
-    <div class="one-news">
-      <a href="#">Добавлен КГУ в список ВУЗов</a>
-      <p>Поздравляем Курский государственный университет с прибытием.</p>
-      <span>25 марта 2010</span>
-      <%= link_to (image_tag "close-news.png", :alt => "Закрыть"), "#", :class => "close" %>
-    </div>
-  </div>
-  <div class="top-10">
-    <h4>Top 10</h4>
-    <div class="tabs">
-      <a href="#" class="current">Пользователей</a>
-      <a href="#">ВУЗов</a>
-    </div>
-    <ul id="users">
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-      <li>
-        <a href="#">
-	  Константин Константинопольский
-	</a>
-	<div class="user-rait">
-	  <span>195</span>
-	</div>
-      </li>
-    </ul>
-    <div class="userc-count">
-      <a href="#">Всего пользователей</a>3250
-    </div>
-  </div>
+<div class="salat-box">
+  <% if current_user %>
+    <%= link_to "", new_user_document_path(current_user), :class => "add-file-button" %>
+  <% else %>
+    <%= link_to "", new_user_session_path, :class => "add-file-button" %>
+  <% end %>
 </div>
+
+<!-- NEWS BLOCK START -->
+<div class="news-box closable-container with-bg">
+
+  <% @news.each do |novelty| %>
+      <div class="one-news closable">
+        <%= link_to novelty.title, "#" %>
+        <p>
+          <%= novelty.text %>
+        </p>
+        <span><%= novelty.date %></span>
+        <%= link_to image_tag("close-news.png"), "#", :class => "close" %>
+      </div>
+  <% end %>
+
+</div>
+<!-- NEWS BLOCK END -->
+
+<!-- TOPS BLOCK START -->
+<div class="top-10">
+  <h3>Top 10</h3>
+
+    <div id="tops-tabs">
+        <ul>
+          <li>
+            <a href="#users-top" >Пользователей</a>
+          </li>
+          <li>
+            <a href="#universities-top">ВУЗов</a>
+          </li>
+        </ul>
+
+        <div id="users-top">
+              <ul>
+                <li>
+                  <a href="#">Константин Константинопольский</a>
+                  <div class="user-rait">
+                    <span>195</span>
+                  </div>
+                </li>
+
+                <li>
+                  <a href="#">Владимир Красносельцев</a>
+                  <div class="user-rait">
+                    <span>186</span>
+                  </div>
+                </li>
+
+                <li>
+                  <a href="#">Борис Румянцев</a>
+                  <div class="user-rait">
+                    <span>180</span>
+                  </div>
+                </li>
+
+                <li>
+                  <a href="#">Игорь Маховецкий</a>
+                  <div class="user-rait">
+                    <span>175</span>
+                  </div>
+                </li>
+
+                <li>
+                  <a href="#">Надежда Рубеншпингель</a>
+                  <div class="user-rait">
+                    <span>162</span>
+                  </div>
+                </li>
+
+              </ul>
+              <div class="userc-count">
+                <%= link_to "Всего пользователей", users_path %>
+                <%= User.count %>
+              </div>
+        </div>
+
+        <div id="universities-top">
+          Hello, tab!
+        </div>
+    </div>
+
+</div>
+<!-- TOPS BLOCK END -->

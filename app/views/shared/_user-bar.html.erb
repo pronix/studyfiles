@@ -1,0 +1,32 @@
+<div id="user-bar" class="login-bar clearfix">
+
+    <span>
+        <big>Иван Иваныч</big>
+        &nbsp;&nbsp;/&nbsp;&nbsp;
+        <%= link_to current_user.documents.count, user_path(current_user) %>
+    </span>
+
+    <span id="inbox-notify" class="has-messages">
+      <%= link_to "1 сообщение", discussions_path, :title => "Личные сообщения" %></li>
+    </span>
+
+
+    <span>
+      <a href="#">Настройки</a>
+      &nbsp;&nbsp;/&nbsp;&nbsp;
+      <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+    </span>
+
+    <span class="ub-right">
+      <%= link_to t("help"), faqs_path %>
+      &nbsp;&nbsp;/&nbsp;&nbsp;
+      <%= link_to t("novelties"), novelties_path %>
+    </span>
+
+    <span class="ub-right my-universities-names">
+      Мой ВУЗ:
+      <% current_user.universities.each do |univer| %>
+        <%= link_to univer.abbreviation, documents_path(:university => univer) %>
+      <% end %>
+    </span>
+</div>
