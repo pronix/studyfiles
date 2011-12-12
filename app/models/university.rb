@@ -66,10 +66,4 @@ class University < ActiveRecord::Base
   def short_subjects_list
     self.subjects.limit(5)
   end
-
-
-  def primary_folders
-    self.folders.where(:path => "Top")
-  end
-
 end

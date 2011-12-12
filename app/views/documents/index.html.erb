@@ -19,7 +19,7 @@
       <div class="expander-content node">
 
         <div class="level-1 clearfix node">
-          <% thing.primary_folders.each do |folder| %>
+          <% thing.folders.top.each do |folder| %>
             <%= render "shared/folder", :folder => folder %>
           <% end %>
         </div>

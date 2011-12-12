@@ -14,6 +14,7 @@ class Folder < ActiveRecord::Base
   has_many :documents
 
   scope :unsorted, where(:university_id => nil)
+  scope :top, where(:path => "Top")
 
 
   def level

@@ -52,8 +52,31 @@
 
       <div class="expander-content node">
 
+        <% univer.subjects.each do |sub| %>
+           <div class="expander-subject parent">
+
+             <div class="gray-box">
+               <a class="blue-collapse icon expand"></a>
+               <a href="#" class="expand"><%= sub.name %></a>
+               <div class="expander-actions">
+                 <a class="expand-all icon expand"></a>
+                 <a class="folder-plus icon"></a>
+                 <a class="file-plus icon"></a>
+                 <a class="dred-cross icon"></a>
+               </div>
+             </div>
+
+            <div class="level-1 clearfix node">
+              <% sub.folders.top.each do |folder| %>
+                <%= render "shared/folder", :folder => folder %>
+              <% end %>
+            </div>
+
+           </div>
+        <% end %>
+
         <div class="level-1 clearfix node">
-          <% univer.primary_folders.each do |folder| %>
+          <% univer.folders.top.each do |folder| %>
             <%= render "shared/folder", :folder => folder %>
           <% end %>
         </div>

@@ -10,7 +10,7 @@
     <span class="file-row-actions">
       <%= link_to "", document.item.url, :class => "download icon" %>
     </span>
-    <%= link_to document.name, "" %>
+    <%= link_to truncate(document.name, :length => 42, :omission => ""), "" %>
   </span>
   <span class="file-row-size"><%= document.item_file_size %></span>
 
