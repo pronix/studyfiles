@@ -20,8 +20,19 @@ class Folder < ActiveRecord::Base
 
 
   def level
-    self.index_path.size
+    index_path.size
   end
+
+  def top_level?
+    path == 'Top'
+  end
+
+  def ext_ancestors(options={})
+    return [] if top_level?
+    objects = self.class.ancestors_of(self).scoped(options).group_by(&:id)
+    index_path.delete_if{|x| x == 0}.map { |id| objects[id].first }
+  end
+   
 
   #Копирум  из одной папки в другую
   def copy_to_folder(folder)

@@ -24,9 +24,9 @@ end
 
 Допустим /^пользователь "(.+)" создал в папку "(.+)" в папке "(.+)"$/ do |user, child, parent|
   # Brrr brain today is stupid and lazy ((
+  # OPTIMIZE:
   user = User.find_by_email(user)
   parent = user.folders.find_by_name(parent)
   child = user.folders.create(:name => child, :university => parent.university)
   child.copy_to_folder(parent)
-  puts child.top_level?
 end
