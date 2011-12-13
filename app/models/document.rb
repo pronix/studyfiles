@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Класс для хранения документов
 class Document < ActiveRecord::Base
 
@@ -49,6 +50,15 @@ class Document < ActiveRecord::Base
   #Копируем файл в предмет
   def copy_to_subject(subject)
     subject.documents << self
+  end
+
+  def file_size
+    size = self.item_file_size
+    if size >= 100000*1000
+      return "#{(self.item_file_size.to_f / (1024**3)).round(1)} Гб"
+    else
+      return "#{(self.item_file_size.to_f / (1024**2)).round(1)} Мб"
+    end
   end
 
 

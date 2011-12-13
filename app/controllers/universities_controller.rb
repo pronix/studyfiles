@@ -6,7 +6,7 @@ class UniversitiesController < ApplicationController
   #Главная страница
   def index
     @news = Novelty.main
-    @universities = University.search(params[:search], :star => true)
+    @universities = University.search(params[:search], :star => true, :page => params[:page], :per_page => 4)
   end
 
   def new

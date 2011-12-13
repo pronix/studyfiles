@@ -5,6 +5,16 @@ ru:
       short: "%d %b"
       long: "%d %B %Y"
 
+  univer_abbr:
+    one:   "ВУЗ"
+    few:   "ВУЗа"
+    many:  "ВУЗов"
+    other: "ВУЗов"
+  file:
+    one:  "файл"
+    few:  "файла"
+    many: "файлов"
+
     day_names:
       - воскресенье
       - понедельник

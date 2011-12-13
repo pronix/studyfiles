@@ -1038,30 +1038,29 @@ html[xmlns] .clearfix {
 
   .pagination {
     font-size: 1.1em;
+    position: relative;
   }
-      .pagination .ctrl-pager {
-        font-size: 1.1em;
-        float: right;
-      }
-      .pagination .ctrl-pager a {
-        margin: 0 13px;
+      .pagination .previous_page, .pagination .next_page {
+        position: absolute;
+        right: 13px;
         text-decoration: none;
       }
-      .pagination .ctrl-pager a.current {
+      .pagination .previous_page {
+        right: 84px;
+      }
+      .pagination .previous_page.disabled, .pagination .next_page.disabled  {
         cursor: default !important;
         color: lightgray;
       }
-          .pagination .ctrl-pager a span {
+          .pagination .previous_page span, .pagination .next_page span{
             text-decoration: underline;
           }
-      .pagination ul {
-        display: inline;
-      }
-          .pagination ul li {
+          .pagination a, .pagination em {
             display: inline;
+            font-style: normal;
             padding: 0 12px;
           }
-            .pagination ul li .passto {
+            .pagination a .passto {
               text-decoration: none;
             }
 
@@ -1287,7 +1286,7 @@ html[xmlns] .clearfix {
     width: 420px;
   }
 
-  #messaging .pagination ul li {
+  #messaging .pagination a {
     padding: 0 7px;
   }
 

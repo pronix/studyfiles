@@ -62,10 +62,10 @@ class Folder < ActiveRecord::Base
     file_name = "tmp/ziped_clients/#{folder.name}.zip"
     documents = Documents.in_path(folder.path)
     file = Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) { |zipfile|
-      documents.each {|current_document|
+     documents.each {|current_document|
         zipfile.add(current_document.name, current_document.item.path)
-      }
      }
+    }
      return file
      #send_file file_name, :size => file.size,  :filename => "#{folder.name}.zip"
   end

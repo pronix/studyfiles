@@ -12,7 +12,7 @@
     </span>
     <%= link_to truncate(document.name, :length => 42, :omission => ""), "" %>
   </span>
-  <span class="file-row-size"><%= document.item_file_size %></span>
+  <span class="file-row-size"><%= number_to_human_size(document.item_file_size) %></span>
 
   <span class="file-row-date"><%= document.created_at.strftime("%d.%m.%Y") %></span>
 

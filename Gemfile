@@ -7,6 +7,8 @@ gem "inboxes", path: "vendor/inboxes"
 gem 'pg'
 gem 'warden'
 gem 'devise'
+gem 'russian'
+gem 'will_paginate'
 
 gem 'paperclip'
 gem 'jquery-rails'

@@ -5,16 +5,20 @@
 
       <dl class="user-statistics clearfix">
         <dt>Зарегистрирован</dt>
-        <dd>24 марта 2007</dd>
+        <dd><%= l user.created_at, :format => "%d %B %Y" %></dd>
 
         <dt>Последний вход</dt>
-        <dd>25 марта 2009</dd>
+        <dd><%= l user.last_sign_in_at, :format => "%d %B %Y" %></dd>
 
         <dt>Загрузил</dt>
-        <dd>19 файлов на  8,0 Мб</dd>
+        <dd>
+          <%= "#{user.documents.count} #{ t(:file, :count => user.documents.count)}" %> на <%= number_to_human_size(user.documents.sum(:item_file_size)) %>
+        </dd>
 
         <dt>Скачал</dt>
-        <dd>244 файла на 126,1 Мб </dd>
+        <dd>
+          244 файла на 126,1 Мб
+        </dd>
       </dl>
 
 
