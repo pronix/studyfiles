@@ -217,5 +217,5 @@ class Document < ActiveRecord::Base
     Paperclip.interpolates :sha  do |attachment, style|
       attachment.instance.sha
     end
-  
+
 end

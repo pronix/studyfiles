@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 class SubjectsController < ApplicationController
 
+  before_filter :load_univer, :only => [:index,:new,:edit,:create]
   def index
-    @university = University.find(params[:university_id])
     @subjects = Subject.search(params[:search], :conditions => {:university_name => @university.name})
   end
 
   def new
-    @university = University.find(params[:university_id])
     @subject = @university.subjects.new
   end
 
   def edit
-    @university = University.find(params[:university_id])
     @subject = @university.subjects.find(params[:id])
   end
 
@@ -26,7 +24,6 @@ class SubjectsController < ApplicationController
   end
 
   def create
-    @university = University.find(params[:university_id])
     @subject = Subject.new(params[:subject])
     if @subject.save
       @university.subjects << @subject
@@ -35,6 +32,10 @@ class SubjectsController < ApplicationController
       flash[:alert] = "Не получилось добавить предмет"
     end
     redirect_to user_path(current_user)
+  end
+  private
+  def load_univer
+    @university = University.find(params[:university_id])
   end
 
 end

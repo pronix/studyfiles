@@ -1,12 +1,12 @@
 class SiteLog < ActiveRecord::Base
   include Hierarchy
-  
+
   belongs_to :user
 
   def f_object
     eval(relation_type).find(relation_id)
   end
-  
+
   class << self
     # OPTIMIZE: brr hell ))
     def create_foler(folder, action='create_folder')

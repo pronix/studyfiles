@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 Given /^сфинкс индексируйся!$/ do
-  ThinkingSphinx::Test.index 
+  ThinkingSphinx::Test.index
 end

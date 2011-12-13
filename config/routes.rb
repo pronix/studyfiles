@@ -8,7 +8,7 @@ Studyfiles::Application.routes.draw do
   end
 
   resources :folders do
-    member do 
+    member do
       get 'download'
     end
   end
@@ -17,12 +17,12 @@ Studyfiles::Application.routes.draw do
     resources :documents
     resources :universities
   end
-  
+
   resources :faqs
   resources :novelties
   resources :subjects
   resource :feedback, :controller => 'feedback', :only => [:new, :create]
   resources :logs
-  
+
   root :to => "universities#index"
 end

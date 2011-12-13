@@ -4,7 +4,7 @@ class Folder < ActiveRecord::Base
   before_create :default_path_name
 
   after_create :create_log
-  
+
   include Models::Path
   include Hierarchy
 
@@ -32,7 +32,7 @@ class Folder < ActiveRecord::Base
     objects = self.class.ancestors_of(self).scoped(options).group_by(&:id)
     index_path.delete_if{|x| x == 0}.map { |id| objects[id].first }
   end
-   
+
 
   #Копирум  из одной папки в другую
   def copy_to_folder(folder)

@@ -11,7 +11,7 @@ set :user, "rvm_user"
 
 set :thinking_sphinx_configure_args, "./configure --with-pgsql=/usr/include/pgsql --prefix=#{shared_path}/sphinx"
 
-set :rvm_type, :user 
+set :rvm_type, :user
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require "rvm/capistrano"
 set :rvm_ruby_string, 'ruby-1.9.2-head'
@@ -35,7 +35,7 @@ after 'deploy:load_seed', 'deploy:load_sample'
 after 'deploy:migrate', 'deploy:activate_sphinx'
 after 'deploy:migrate', 'deploy:precompile_assets'
 
-namespace :delayed_job do 
+namespace :delayed_job do
   task :restart do
         run "cd #{latest_release}; RAILS_ENV=#{rails_env} script/delayed_job restart"
   end
@@ -62,12 +62,12 @@ namespace :deploy do
   task :prepare_db do
     run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake db:drop db:create"
   end
-  
+
   task :create_log do
     run "rm -rf #{latest_release}/log"
     run "mkdir #{latest_release}/log"
   end
-  
+
   namespace :db do
     task :symlink do
       run "ln -nfs #{shared_path}/database.yml #{latest_release}/config/database.yml"
