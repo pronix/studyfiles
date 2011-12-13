@@ -58,16 +58,15 @@ class Folder < ActiveRecord::Base
   end
 
   #Создаем архив для скачки папки
-  def zip_folder(folder)
-    file_name = "tmp/ziped_clients/#{folder.name}.zip"
-    documents = Documents.in_path(folder.path)
+  def zip_folder
+    file_name = "tmp/ziped_clients/#{self.name}.zip"
+    docs = self.get_documents #получаем документы детей
     file = Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) { |zipfile|
-     documents.each {|current_document|
+     docs.each {|current_document|
         zipfile.add(current_document.name, current_document.item.path)
      }
     }
-     return file
-     #send_file file_name, :size => file.size,  :filename => "#{folder.name}.zip"
+    return file_name
   end
 
   #Подсчет рейтинга папки
@@ -82,22 +81,21 @@ class Folder < ActiveRecord::Base
 
   #Количество файлов
   def files_count
-    Document.in_path(self.children_path).count(:raiting)
+    docs = self.get_documents
+    docs.size
   end
 
-  def zip_files
-    if !documents.empty?
-      file_name = "tmp/ziped_clients/#{self.name}.zip"
-      file = Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) { |zipfile|
-        documents.each {|current_document|
-          zipfile.add(current_document.name, current_document.item.path)
-        }
-      }
-      return file_name
+  def get_documents
+    docs = []
+    docs.concat(self.documents)
+    self.descendants.each do |folder|
+      docs.concat(folder.documents)
     end
+    docs
   end
 
   private
+
 
   #Перед созданием генерируем path_name
   def default_path_name

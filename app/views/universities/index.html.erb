@@ -78,10 +78,8 @@
 
   <%= link_to "Создать новый", new_university_path(current_user) %>
 
-
   <div class="pagination">
       <span>Страница:</span>
-
 
       <%= will_paginate @universities, :previous_label => raw("&larr; <span>Ctrl</span>"),
         :next_label => raw("<span>Ctrl</span> &rarr;"), :container => false  %>

@@ -32,6 +32,6 @@ class FoldersController < ApplicationController
 
   def download
     @folder = Folder.find(params[:id])
-    send_file @folder.zip_files, :type => "application/zip"
+    send_file @folder.zip_folder, :type => "application/zip"
   end
 end
