@@ -27,6 +27,7 @@ gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
 
 gem 'capistrano'
 gem 'capistrano-ext'
+gem 'coderay'
 
 group :test,:development do
   # For help
