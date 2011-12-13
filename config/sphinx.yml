@@ -22,5 +22,5 @@ production:
   config_file: "/var/www/studyfiles/current/config/production.sphinx.conf"
   searchd_log_file: "/var/www/studyfiles/current/log/searchd.log"
   query_log_file: "/var/www/studyfiles/current/log/searchd.query.log"
-  pid_file: "/var/www/studyfiles/current/log/searchd.production.pid"
   bin_path: "/var/www/studyfiles/shared/sphinx/bin"
+  pid_file: "/var/www/studyfiles/current/tmp/pids/searchd.production.pid"
