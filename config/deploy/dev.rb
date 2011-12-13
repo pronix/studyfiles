@@ -1,3 +1,4 @@
+# OPTIMIZE: need to state - for release and quick update
 role :web, "studyfiles.adenin.ru:6022"
 role :app, "studyfiles.adenin.ru:6022"
 role :db,  "studyfiles.adenin.ru:6022", :primary => true
