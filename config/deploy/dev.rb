@@ -8,20 +8,47 @@ set :deploy_to, "/var/www/#{application}"
 set :branch, "ezo"
 set :user, "rvm_user"
 
+set :thinking_sphinx_configure_args, "./configure --with-pgsql=/usr/include/pgsql --prefix=#{shared_path}/sphinx"
+
 set :rvm_type, :user 
-$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
-require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, 'ruby-1.9.2-head'        # Or whatever env you want it to run in.
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require "rvm/capistrano"
+set :rvm_ruby_string, 'ruby-1.9.2-head'
 
 after "deploy:finalize_update", "deploy:db:symlink"
 after "deploy:finalize_update", "deploy:create_log"
+
+
+after 'deploy:update_code', 'deploy:stop_sphinx'
+
+before 'deploy:migrate', 'unicorn:graceful_stop'
+before 'deploy:migrate', 'deploy:prepare_db'
 after  'deploy:update',  'deploy:migrate'
 
+after 'deploy:migrate', 'deploy:load_seed'
+after 'deploy:load_seed', 'deploy:load_sample'
 
-before 'deploy:update_code', 'thinking_sphinx:stop'
-after 'deploy:update_code', 'deploy:activate_sphinx'
+after 'deploy:migrate', 'deploy:activate_sphinx'
+after 'deploy:migrate', 'deploy:precompile_assets'
 
 namespace :deploy do
+
+  task :load_seed do
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake db:seed"
+  end
+
+  task :load_sample do
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake db:load_sample"
+  end
+
+  task :precompile_assets do
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
+  end
+
+  task :prepare_db do
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake db:drop db:create"
+  end
+  
   task :create_log do
     run "rm -rf #{latest_release}/log"
     run "mkdir #{latest_release}/log"
@@ -33,10 +60,15 @@ namespace :deploy do
     end
   end
 
-  task :activate_sphinx do
-    thinking_sphinx.configure
-    thinking_sphinx.index
-    thinking_sphinx.start
+  task :stop_sphinx do
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:stop"
   end
-  
+
+  task :activate_sphinx do
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:configure"
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:index"
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:start"
+  end
 end
+
+require 'capistrano-unicorn'
