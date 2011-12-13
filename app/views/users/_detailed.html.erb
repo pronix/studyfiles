@@ -1,0 +1,94 @@
+  <div class="user-details">
+    <%= image_tag user.avatar.url, :class => "avatar" %>
+
+      <h3><%= user.name %></h3>
+
+      <dl class="user-statistics clearfix">
+        <dt>Зарегистрирован</dt>
+        <dd>24 марта 2007</dd>
+
+        <dt>Последний вход</dt>
+        <dd>25 марта 2009</dd>
+
+        <dt>Загрузил</dt>
+        <dd>19 файлов на  8,0 Мб</dd>
+
+        <dt>Скачал</dt>
+        <dd>244 файла на 126,1 Мб </dd>
+      </dl>
+
+
+      <p class="gray-box clearfix">
+        Рейтинг:
+        <span style="float: right;">1 058</span>
+      </p>
+
+      <div class="place clearfix">
+        <span>
+          <span>место</span>
+          <b>12</b>
+        </span>
+        <span>- в общем ТОПе</span>
+      </div>
+
+      <div class="place gray-box clearfix">
+        <span>
+          <%= image_tag "icons/first-place.png" %>
+        </span>
+        <span>- в МГУ</span>
+      </div>
+
+      <div class="place clearfix">
+        <span>
+          <span>место</span>
+          <b>143</b>
+        </span>
+        <span>- в МИЭТ</span>
+      </div>
+  </div>
+  <!-- USER DETAILS BLOCK END -->
+
+  <!-- LEGEND START -->
+  <div class="yellow-notification notification closable legend">
+    <a class="close icon"></a>
+    <div>
+      <h4>Действия</h4>
+      <ul>
+        <li>
+          Редактировать название и описание
+        </li>
+        <li>
+          Вставить выделенные файлы в эту папку
+        </li>
+        <li>
+          Скачать (можно применять для нескольких выделенных файлов)
+        </li>
+        <li>
+          Создать папку
+        </li>
+        <li>
+          Добавить файлы со своего компьютера
+        </li>
+        <li>
+          Удалить (можно применять для нескольких выделенных файлов)
+        </li>
+        <li>
+          Развернуть всё дерево вкладок
+        </li>
+        <li>
+          Добавить предмет
+        </li>
+        <li>
+          Файлы и папки можно перетаскивать мышкой, схватив их за иконку (можно применять для нескольких выделенных файлов)
+        </li>
+        <li>
+          Чтобы выделить несколько  файлов нажмите на них правой кнопкой мыши
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- LEGEND END -->
+
+<% if user == current_user %>
+  <%= render "shared/news", :news => @news %>
+<% end %>

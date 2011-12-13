@@ -1,10 +1,33 @@
-<% if @folders %>
-  <ul>
-    <% @folders.each do |folder| %>
-      <li><%= render "shared/folder", :folder => folder %></li>
-    <% end %>
-  </ul>
+<% @group.each do | thing | %>
+
+    <div class="expander parent">
+      <div class="expander-header clearfix university">
+
+        <a href="" class="blue-collapse icon expand"></a>
+        <%= link_to image_tag(thing.logo.url(:icon)), "", :class => "logo" %>
+
+        <h4>
+          <%= link_to truncate(thing.name, :length => 160), "" %>
+        </h4>
+        <div class="expander-actions">
+          <a class="expand-all icon expand"></a>
+          <a class="green-expand icon"></a>
+          <a class="dred-cross icon"></a>
+        </div>
+      </div>
+
+      <div class="expander-content node">
+
+        <div class="level-1 clearfix node">
+          <% thing.folders.top.each do |folder| %>
+            <%= render "shared/folder", :folder => folder %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
 <% end %>
+
 <%= link_to "Выбрать университет", universities_path %>
 <%= link_to "загрузить файлы", new_document_path %>
 <%= link_to "Создать папку", new_folder_path %>

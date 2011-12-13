@@ -3,11 +3,7 @@ class DocumentsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @folders = if params[:university]
-               University.find(params[:university]).primary_folders
-             else
-               nil
-             end
+    @group = University.all
   end
 
   def new
@@ -17,11 +13,11 @@ class DocumentsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    
+
     @user.update_attributes(params[:user])
     flash[:notice] = "Обрабатываются файлы: #{@user.get_new_documents_names(params[:user][:documents_attributes].size)}. После обработки они появятся в списке ваших файлов."
     redirect_to user_path(@user)
-    #else 
+    #else
     #  flash[:notice] = "Ошибка!"
     #  render :action => "new"
     #end

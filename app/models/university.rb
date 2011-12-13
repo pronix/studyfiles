@@ -21,7 +21,7 @@ class University < ActiveRecord::Base
     indexes folders.name, :as => :folder_name
   end
 
-  has_attached_file :logo, :styles => { :thumb => "60x60>" }
+  has_attached_file :logo, :styles => { :thumb => "60x60>", :icon => "32x32" }
 
   def full_title
     "#{self.abbreviation} - #{self.name}"
@@ -66,10 +66,4 @@ class University < ActiveRecord::Base
   def short_subjects_list
     self.subjects.limit(5)
   end
-
-
-  def primary_folders
-    self.folders.where(:path => "Top")
-  end
-
 end

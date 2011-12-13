@@ -6,5 +6,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @news = Novelty.main
   end
 end
