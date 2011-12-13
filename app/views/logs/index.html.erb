@@ -1,0 +1,20 @@
+<% @logs.each do |log| %>
+  <% if log.action == 'create_folder' %>
+    <p><%= log.user ? log.user.name : '' %></p>
+    <p>
+      Создана папка <%= log.f_object.university.abbreviation %> / <%= path_folder(log.relation_id) %>
+    </p>
+  <% elsif log.action == 'move_docs' %>
+    <p><%= log.user ? log.user.name : '' %></p>
+    <p>
+      <% d_univer = log.children.first.f_object.folder.university.abbreviation %>
+      <% d_path = log.children.first.f_object.folder.id %>
+      Перенесено <%= log.children.count %> файла в <%= d_univer %> / <%= path_folder(d_path) %>
+      Источник: <%= log.f_object.university.abbreviation %> / <%= path_folder(log.relation_id) %>
+      <% log.children.each do |ch| %>
+        <%= ch.f_object.name %>
+      <% end %>
+    </p>
+  <% end %>
+
+<% end %>

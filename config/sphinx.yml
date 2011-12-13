@@ -18,3 +18,9 @@ production:
   mem_limit: 128M
   max_matches: 500
   port: 9313
+  searchd_file_path: "/var/www/studyfiles/shared/sphinx"
+  config_file: "/var/www/studyfiles/current/config/production.sphinx.conf"
+  searchd_log_file: "/var/www/studyfiles/current/log/searchd.log"
+  query_log_file: "/var/www/studyfiles/current/log/searchd.query.log"
+  bin_path: "/var/www/studyfiles/shared/sphinx/bin"
+  pid_file: "/var/www/studyfiles/current/tmp/pids/searchd.production.pid"

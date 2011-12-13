@@ -42,6 +42,12 @@ class Document < ActiveRecord::Base
     self.update_attributes(:folder_id => folder.id)
   end
 
+  # def move_to_folder(folder)
+  #   transaction do
+  #     update_attribute(:folder, folder)
+  #   end
+  # end
+
   #Копируем файл в университет
   def copy_to_university(university)
     self.update_attributes(:university_id => university.id)
@@ -183,23 +189,33 @@ class Document < ActiveRecord::Base
       string = File.open(self.item.path, 'r'){ |file| file.read }
     end
 
+    class << self
+      # OPTIMIZE: bbbbrr
+      def move_to_folder(docs, folder, user)
+        docs = find(docs) if docs.first.class.to_s == 'Fixnum'
+        l_parent = SiteLog.doc_move_p(docs.first.folder, user)
+        docs.each do |d|
+          d.update_attribute(:folder, folder)
+          _log = SiteLog.doc_move_c(d, user, l_parent)
+        end
+      end
+    end
 
 
-  private
-  #делаем интерполяцию, добавляем параметр первой папки
-  Paperclip.interpolates :first_folder  do |attachment, style|
-    attachment.instance.first_folder
-  end
+    private
+    #делаем интерполяцию, добавляем параметр первой папки
+    Paperclip.interpolates :first_folder  do |attachment, style|
+      attachment.instance.first_folder
+    end
 
-  #делаем интерполяцию, добавляем параметр второй папки
-  Paperclip.interpolates :second_folder  do |attachment, style|
-    attachment.instance.second_folder
-  end
+    #делаем интерполяцию, добавляем параметр второй папки
+    Paperclip.interpolates :second_folder  do |attachment, style|
+      attachment.instance.second_folder
+    end
 
-  #делаем интерполяцию, добавляем параметр имени файла
-  Paperclip.interpolates :sha  do |attachment, style|
-    attachment.instance.sha
-  end
-
-  #прописывает имя файла по умолчанию
+    #делаем интерполяцию, добавляем параметр имени файла
+    Paperclip.interpolates :sha  do |attachment, style|
+      attachment.instance.sha
+    end
+  
 end

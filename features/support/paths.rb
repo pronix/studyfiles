@@ -17,7 +17,8 @@ module NavigationHelpers
       root_path
     when /^Мои файлы$/
       '/documents'
-    
+    when /страницу логов/
+      logs_path
       
 
     # Add more mappings here.

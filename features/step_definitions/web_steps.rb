@@ -334,3 +334,7 @@ end
 Тогда /^выполни "(.+)"$/ do |command|
   puts eval(command)
 end
+
+Допустим /^я иду на (.+)$/ do |page_name|
+  visit path_to(page_name)
+end

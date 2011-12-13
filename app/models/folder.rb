@@ -3,6 +3,8 @@ class Folder < ActiveRecord::Base
 
   before_create :default_path_name
 
+  after_create :create_log
+  
   include Models::Path
   include Hierarchy
 
@@ -18,8 +20,19 @@ class Folder < ActiveRecord::Base
 
 
   def level
-    self.index_path.size
+    index_path.size
   end
+
+  def top_level?
+    path == 'Top'
+  end
+
+  def ext_ancestors(options={})
+    return [] if top_level?
+    objects = self.class.ancestors_of(self).scoped(options).group_by(&:id)
+    index_path.delete_if{|x| x == 0}.map { |id| objects[id].first }
+  end
+   
 
   #Копирум  из одной папки в другую
   def copy_to_folder(folder)
@@ -99,7 +112,13 @@ class Folder < ActiveRecord::Base
 
   #Перед созданием генерируем path_name
   def default_path_name
-    self.path_name = self.name.gsub(" ", "_")
+    path_name = name.gsub(" ", "_")
+  end
+
+  # OPTIMIZE: move it to observer
+
+  def create_log
+    SiteLog.create_foler(self)
   end
 
 
