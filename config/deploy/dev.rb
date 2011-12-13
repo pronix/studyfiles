@@ -20,16 +20,29 @@ after "deploy:finalize_update", "deploy:create_log"
 
 
 after 'deploy:update_code', 'deploy:stop_sphinx'
+after 'deploy:update_code', 'delayed_job:stop'
+after 'deploy:update_code', 'unicorn:graceful_stop'
 
-before 'deploy:migrate', 'unicorn:graceful_stop'
+
 before 'deploy:migrate', 'deploy:prepare_db'
-after  'deploy:update',  'deploy:migrate'
+after 'deploy:update',  'deploy:migrate'
+after 'deploy:migrate', 'delayed_job:restart'
 
 after 'deploy:migrate', 'deploy:load_seed'
 after 'deploy:load_seed', 'deploy:load_sample'
 
 after 'deploy:migrate', 'deploy:activate_sphinx'
 after 'deploy:migrate', 'deploy:precompile_assets'
+
+namespace :delayed_job do 
+  task :restart do
+        run "cd #{latest_release}; RAILS_ENV=#{rails_env} script/delayed_job restart"
+  end
+  task :stop do
+    run "cd #{latest_release}; RAILS_ENV=#{rails_env} script/delayed_job stop"
+  end
+end
+
 
 namespace :deploy do
 
