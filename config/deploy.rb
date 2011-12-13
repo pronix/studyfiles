@@ -1,5 +1,6 @@
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
+require 'thinking_sphinx/deploy/capistrano'
 
 set :ssh_options, {:forward_agent => true }
 set :use_sudo, false
