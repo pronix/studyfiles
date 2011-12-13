@@ -36,14 +36,6 @@ class User < ActiveRecord::Base
     true if roles.find_by_name('admin')
   end
 
-  def is_user?
-    true if roles.find_by_name('user')
-  end
-
-  def my_messages
-    Message.where(["user_id = ? or to_user_id = ?", self.id, self.id])
-  end
-
   #Подсчет рейтинга пользователя
   def raiting
     self.documents.sum(:raiting)
