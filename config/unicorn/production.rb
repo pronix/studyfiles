@@ -2,9 +2,8 @@
 worker_processes 1
 preload_app true
 timeout 180
-listen "tmp/unicorn.sock", :backlog => 64
-# listen '0.0.0.0:9000'
-
+pid "/var/www/studyfiles/current/tmp/pids/unicorn.pid"
+listen "/var/www/studyfiles/current/tmp/unicorn.sock", :backlog => 64
 
 # Log everything to one file
 stderr_path "log/unicorn.log"
