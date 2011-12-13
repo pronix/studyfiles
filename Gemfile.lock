@@ -101,7 +101,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.2.3)
       ffi (~> 1.0.6)
-    cocaine (0.2.0)
+    cocaine (0.2.1)
     coderay (1.0.4)
     cucumber (1.1.4)
       builder (>= 2.1.2)
@@ -214,7 +214,7 @@ GEM
       rake
     rdoc (3.11)
       json (~> 1.4)
-    recaptcha (0.3.1)
+    recaptcha (0.3.4)
     riddle (1.5.0)
     rspec (2.7.0)
       rspec-core (~> 2.7.0)

@@ -11,6 +11,7 @@ Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'factories'
+  # require 'ruby-debug'
 
   RSpec.configure do |config|
     config.use_transactional_fixtures = true
