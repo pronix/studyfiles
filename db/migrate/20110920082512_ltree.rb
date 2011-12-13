@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# This file should be migrated after all files
 class Ltree < ActiveRecord::Migration
   def up
     # для постгреса 9.1 используем механизм расширений

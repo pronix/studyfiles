@@ -1,6 +1,7 @@
 module LogsHelper
   # OPTIMIZE: bbrbrbrbrrb!!!!
   def path_folder(folder)
+    folder = Folder.find(folder)
     if folder.top_level?
       folder.name
     else

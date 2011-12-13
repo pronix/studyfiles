@@ -2,7 +2,7 @@ class LogsController < ApplicationController
   before_filter :authorize
 
   def index
-    @logs = SiteLog.all
+    @logs = SiteLog.top_level
   end
 
   private
