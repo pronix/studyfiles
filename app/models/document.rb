@@ -68,6 +68,10 @@ class Document < ActiveRecord::Base
   end
 
 
+  def hard_copy_to(folder)
+    FileUtils.cp_r(item.path, Rails.root.join(folder, item_file_name))
+  end
+
   #Распаковка zip архива
   def unzip_file(destination)
     file = self.item.path

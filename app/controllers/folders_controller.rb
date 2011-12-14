@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 class FoldersController < ApplicationController
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
+  before_filter :find_university
 
   def index
-    @folders = current_user.folders
+    @folders = @university.folders
+    @documents = @university.documents_without_folder
   end
 
   def new
@@ -32,6 +34,12 @@ class FoldersController < ApplicationController
 
   def download
     @folder = Folder.find(params[:id])
-    send_file @folder.zip_folder, :type => "application/zip"
+    send_file @folder.zip_folder, :filename => @folder.zip_name, :type => "application/zip"
+  end
+
+  private
+
+  def find_university
+    @university = University.find(params[:university_id]) if params[:university_id].present?
   end
 end

@@ -15,7 +15,7 @@
 
             <div class="university-short-info">
               <h4>
-                <%= link_to univer.full_title, documents_path(:university => univer) %>
+                <%= link_to univer.full_title, university_folders_path(univer) %>
                 <% if can? :edit, univer %>
                   <%= link_to "", edit_university_path(univer), :title => "Редактировать #{univer.abbreviation}", :class => "icon edit"   %>
                 <% end %>

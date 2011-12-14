@@ -1,2 +1,29 @@
-<%= "index.html" %>
-<%= link_to "загрузить файлы", new_folder_path %>
+<div class="expander parent">
+  <div class="expander-header clearfix university">
+
+    <a href="" class="blue-collapse icon expand"></a>
+    <%= link_to image_tag(@university.logo.url(:icon)), "", :class => "logo" %>
+
+    <h4>
+      <%= link_to truncate(@university.name, :length => 160), "" %>
+    </h4>
+    <div class="expander-actions">
+      <a class="expand-all icon expand"></a>
+      <a class="green-expand icon"></a>
+      <a class="dred-cross icon"></a>
+    </div>
+  </div>
+
+  <div class="expander-content node">
+
+    <div class="level-1 clearfix node">
+      <% @folders.top.each do |folder| %>
+        <%= render "shared/folder", :folder => folder %>
+      <% end %>
+      <% @documents.each do |doc| %>
+	<%= render 'shared/file_row', :document => doc %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

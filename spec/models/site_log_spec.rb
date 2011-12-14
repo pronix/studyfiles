@@ -16,7 +16,7 @@ describe SiteLog do
     end
   end
 
-  describe "Create log when folder move", :current => true do
+  describe "Create log when folder move" do
     it "Should create logs" do
       s_folder = Factory(:folder)
       d_folder = Factory(:folder)

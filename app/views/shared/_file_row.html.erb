@@ -8,7 +8,7 @@
 
   <span class="file-row-title">
     <span class="file-row-actions">
-      <%= link_to "", document.item.url, :class => "download icon" %>
+      <%= link_to "", download_document_path(document), :class => "download icon", :title => "Скачать #{document.name}" %>
     </span>
     <%= link_to truncate(document.name, :length => 42, :omission => ""), "" %>
   </span>

@@ -23,6 +23,11 @@ class University < ActiveRecord::Base
 
   has_attached_file :logo, :styles => { :thumb => "60x60>", :icon => "32x32" }
 
+  # Return university documents without folder
+  def documents_without_folder
+    documents.unfolded
+  end
+
   def full_title
     "#{self.abbreviation} - #{self.name}"
   end

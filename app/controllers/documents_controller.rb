@@ -49,4 +49,9 @@ class DocumentsController < ApplicationController
     redirect_to documents_path
   end
 
+  def download
+    @doc = Document.find_by_id(params[:id])
+    send_file(@doc.item.path, :filename => @doc.item_file_name)
+  end
+
 end
