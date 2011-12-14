@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class Folder < ActiveRecord::Base
   require 'zip/zipfilesystem'
-  
+
   before_create :default_path_name
 
   after_create :create_log
@@ -80,13 +80,13 @@ class Folder < ActiveRecord::Base
       folders.each do |f|
         current_path = File.join(path, f.name)
         FileUtils.mkdir current_path
-        f.documents.each {|d| d.hard_copy_to(current_path)}   
+        f.documents.each {|d| d.hard_copy_to(current_path)}
         if f.children.present?
           create_subfolders(f.children, current_path)
         end
       end
     end
-    
+
     main_path = "tmp/ziped_clients/#{id}"
     FileUtils.mkdir File.join(main_path)
     create_subfolders(children, main_path)
@@ -113,8 +113,9 @@ class Folder < ActiveRecord::Base
   end
 
   #Подсчет рейтинга папки
-  def raiting
-    Document.in_path(self.children_path).sum(:raiting)
+  def rating
+    docs = self.get_documents
+    docs.sum{|d| d.rating }
   end
 
   #Путь у вложеных объектов
