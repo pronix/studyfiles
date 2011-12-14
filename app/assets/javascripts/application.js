@@ -1,3 +1,6 @@
+//= require jquery
+//= require jquery_ujs
+
 $(document).ready(function(){
 
   //TODO переделать только для старых бразуеров

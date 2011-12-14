@@ -1,8 +1,7 @@
 <div class="file-row clearfix">
-  <span class="file-row-rating">0</span>
+  <span class="file-row-rating"><%= document.rating %></span>
   <span class="file-row-icons">
-    <%= link_to "", "", :class => "check-true-unselected icon" %>
-    <%= link_to "", "", :class => "check-false-unselected icon" %>
+    <%= document_rating(document) %>
     <%= extension_icon_link(document) %>
   </span>
 

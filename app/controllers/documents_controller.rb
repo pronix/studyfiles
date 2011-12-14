@@ -54,4 +54,24 @@ class DocumentsController < ApplicationController
     send_file(@doc.item.path, :filename => @doc.item_file_name)
   end
 
+  def rate
+    @doc = Document.find(params[:id])
+
+    conditions = { :document_id => @doc.id, :user_id => current_user.id }
+
+    vote = Vote.where(conditions).first || Vote.create(conditions)
+
+    type = params[:vote_type]
+
+    if type
+      grade = 1
+    else
+      grade = -1
+    end
+
+    vote.update_attributes(:grade => grade, :vote_type => type)
+
+    redirect_to documents_path
+  end
+
 end

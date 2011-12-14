@@ -137,6 +137,10 @@ class Document < ActiveRecord::Base
     self.item_file_name.split(".").last
   end
 
+  def rating
+    self.votes.sum(:grade)
+  end
+
   def item_html
     if File.exist? self.item.path + ".html"
       return self.item.path + ".html" if item_processed
