@@ -39,7 +39,7 @@ class FoldersController < ApplicationController
   def download
     unless current_user
       flash[:notice] = 'Для скачивания папок необхадимо зарегистрироваться'
-      redirect_to(:back) and return
+      redirect_to_back and return
     end
     @folder = Folder.find(params[:id])
     send_file @folder.zip_folder, :filename => @folder.zip_name, :type => "application/zip"
