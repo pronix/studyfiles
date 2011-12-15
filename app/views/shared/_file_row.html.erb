@@ -15,7 +15,7 @@
 
   <span class="file-row-date"><%= document.created_at.strftime("%d.%m.%Y") %></span>
 
-  <span class="file-row-user"><a href="#">Иван Иваныч</a></span>
+  <span class="file-row-user"><%= link_to truncate(document.user.nickname, :length => 17, :omission => ""), user_path(document.user) if document.user %></span>
 
   <p class="file-row-previews"></p>
 </div>

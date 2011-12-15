@@ -5,7 +5,7 @@ class FoldersController < ApplicationController
 
   def index
     @folders = @university.folders
-    @documents = @university.documents_without_folder
+    @documents = @university.documents_without_folder.unsubjected
   end
 
   def new

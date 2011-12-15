@@ -17,10 +17,12 @@ class Document < ActiveRecord::Base
   belongs_to :user
   belongs_to :university
   belongs_to :folder
+  belongs_to :subject
 
   scope :unsorted, where(:university_id => nil)
   scope :processed, where(:item_proceed => true)
   scope :unfolded, where(:folder_id => nil)
+  scope :unsubjected, where(:subject_id => nil)
 
 
   has_attached_file :item,
@@ -140,6 +142,7 @@ class Document < ActiveRecord::Base
   def rating
     self.votes.sum(:grade)
   end
+
 
   def item_html
     if File.exist? self.item.path + ".html"

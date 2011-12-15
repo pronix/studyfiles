@@ -11,13 +11,13 @@ class Folder < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :university
-  has_many :subject_folders
-  has_many :subjects, :through => :subject_folders
 
+  belongs_to :subject
   has_many :documents
 
   scope :unsorted, where(:university_id => nil)
   scope :top, where(:path => "Top")
+  scope :unsubjected, where(:subject_id => nil)
 
 
   def level

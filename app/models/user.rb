@@ -36,9 +36,16 @@ class User < ActiveRecord::Base
     true if roles.find_by_name('admin')
   end
 
+  def nickname
+    if !name
+      return email
+    end
+    name
+  end
+
   #Подсчет рейтинга пользователя
   def raiting
-    self.documents.sum(:raiting)
+    self.documents.sum{|d| d.rating }
   end
 
   def get_new_documents_names(size)
