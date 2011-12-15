@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 class FoldersController < ApplicationController
   # before_filter :authenticate_user!
-  before_filter :find_university
+  before_filter :find_folder
 
   def index
-    @folders = @university.folders
-    @documents = @university.documents_without_folder.unsubjected
   end
 
   def new
@@ -47,7 +45,12 @@ class FoldersController < ApplicationController
 
   private
 
-  def find_university
-    @university = University.find(params[:university_id]) if params[:university_id].present?
+  def find_folder
+    if params[:university_id].present?
+      @university = University.find(params[:university_id])
+      @folder = @university.folders.find(params[:id]) if params[:id].present?
+    else
+      @folder = Folder.find(params[:id])
+    end
   end
 end

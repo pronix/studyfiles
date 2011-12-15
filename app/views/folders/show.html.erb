@@ -2,8 +2,4 @@
 <%= link_to "Пожаловаться на папку", "#" %>
 <%= link_to "Скачать все", "#" %>
 
-<%= render "shared/folder", :folder => @folder %>
-
-<% @folder.documents.each do |doc| %>
-  <%= render 'shared/file_row', :document => doc %>
-<% end %>
+<%= render "shared/folder", :folder => @folder, :univer => (@university ? @university : nil) %>

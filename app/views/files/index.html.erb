@@ -1,13 +1,55 @@
 <%= sort_link @search, :rating, "По рейтингу" %>
 <% @universities.each do |univer| %>
-  <div class="univer" id="<%= dom_id univer %>">
-    <%= univer.name %> (<%= univer.abbreviation %>)
-    <% univer.subjects.each do |subject| %>
-      <%= subject.name %>
-      <% subject.folders.each do |folder| %>
-	<%= folder.name %>
-      <% end %>
-    <% end %>
-  </div>
+  <div class="expander parent">
+    <%= univer.rating %>
+    <div class="expander-header clearfix university">
+      <a href="" class="blue-collapse icon expand"></a>
+      <%= link_to image_tag(univer.logo.url(:icon)), "", :class => "logo" %>
 
+      <h4>
+	<%= link_to "#{univer.abbreviation} #{truncate(univer.name, :length => 160)}", "" %>
+      </h4>
+      <div class="expander-actions">
+	<a class="expand-all icon expand"></a>
+	<a class="green-expand icon"></a>
+	<a class="dred-cross icon"></a>
+      </div>
+    </div>
+
+    <div class="expander-content node">
+      <% univer.subjects.each do |sub| %>
+	<div class="expander-subject parent">
+          <div class="gray-box">
+            <a class="blue-collapse icon expand"></a>
+            <a href="#" class="expand"><%= sub.name %></a>
+            <div class="expander-actions">
+              <a class="expand-all icon expand"></a>
+              <a class="folder-plus icon"></a>
+              <a class="file-plus icon"></a>
+              <a class="dred-cross icon"></a>
+            </div>
+          </div>
+
+          <div class="level-1 clearfix node">
+            <% sub.folders.top.each do |folder| %>
+              <%= render "shared/folder", :folder => folder, :univer => univer %>
+            <% end %>
+            <% sub.documents.each do |doc| %>
+              <%= render 'shared/file_row', :document => doc %>
+            <% end %>
+          </div>
+
+	</div>
+      <% end %>
+
+      <div class="level-1 clearfix node">
+	<% univer.folders.top.unsubjected.each do |folder| %>
+          <%= render "shared/folder", :folder => folder, :univer => univer %>
+	<% end %>
+	<% univer.documents.each do |doc| %>
+	  <%= render 'shared/file_row', :document => doc %>
+	<% end %>
+      </div>
+    </div>
+  </div>
 <% end %>

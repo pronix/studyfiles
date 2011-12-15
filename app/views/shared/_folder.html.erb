@@ -7,11 +7,11 @@
 
      <span class="file-row-title">
        <span class="file-row-actions">
-         <a href="#" class="flag icon"></a>
+	 <%= link_to "", university_folder_path(univer, folder), :class => "flag icon",
+	     :title => "Открыть #{folder.name}", :target => '_blank' %>
          <%= link_to "", download_folder_path(folder), :class => "download icon", :title => "Скачать #{folder.name}" %>
        </span>
        <%= link_to folder.name, "#", :class => "expand", :title => "Раскрыть #{folder.name}" %>
-       <%= link_to folder.name, university_folder_path(@university, folder), :title => "Открыть #{folder.name}"  %>
      </span>
 
      <span class="file-row-size"><%= folder.files_count %></span>
@@ -23,16 +23,13 @@
      <p class="file-row-previews"></p>
 
      <div class="<%== "level-#{folder.level+1}" %> clearfix node">
-
-        <% folder.children.each do |node_folder| %>
-            <%= render "shared/folder", :folder => node_folder %>
-        <% end %>
-
-        <% folder.documents.each do |document| %>
-          <%= render "shared/file_row", :document => document %>
-        <% end %>
+       <% folder.documents.each do |document| %>
+         <%= render "shared/file_row", :document => document %>
+       <% end %>
+       <% folder.children.each do |node_folder| %>
+         <%= render "shared/folder", :folder => node_folder, :univer => univer %>
+       <% end %>
      </div>
-
 </div>
 
 
