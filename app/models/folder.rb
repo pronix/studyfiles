@@ -87,7 +87,7 @@ class Folder < ActiveRecord::Base
       end
     end
 
-    main_path = "tmp/ziped_clients/#{id}"
+    main_path = "public/system/ziped_clients/#{id}"
     FileUtils.mkdir File.join(main_path)
     documents.each {|d| d.hard_copy_to(main_path)}
     create_subfolders(children, main_path)
@@ -97,13 +97,13 @@ class Folder < ActiveRecord::Base
   #Создаем архив для скачки папки
   # OPTIMIZE: WTF:
   def zip_folder
-    FileUtils.mkdir Rails.root.join('tmp/ziped_clients/') unless File.exist?('tmp/ziped_clients')
+    FileUtils.mkdir Rails.root.join('public/system/ziped_clients/') unless File.exist?('public/system/ziped_clients')
     # TODO: If zipped folder exists and folder not change
     # send it without zip
-    file_name = "tmp/ziped_clients/#{id}.zip"
+    file_name = "public/system/ziped_clients/#{id}.zip"
     if children.present?
       folder_path = create_folders_tree
-      %x(cd #{Rails.root.join('tmp/ziped_clients')} && zip -r #{id} `basename #{folder_path}`)
+      %x(cd #{Rails.root.join('public/system/ziped_clients')} && zip -r #{id} `basename #{folder_path}`)
       FileUtils.rm_r Rails.root.join(file_name).to_s.chomp(File.extname(Rails.root.join(file_name).to_s))
     else
       Zip::ZipFile.open(file_name, Zip::ZipFile::CREATE) do |zipfile|

@@ -14,3 +14,4 @@ db/sphinx/*
 config/*.sphinx.conf
 public/system/logos/*
 .rvmrc
+public/system

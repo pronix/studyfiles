@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 def unzip(file)
-  destination = Rails.root.join('tmp/ziped_clients')
+  destination = Rails.root.join('public/system/ziped_clients')
   %x[cd #{destination} && unzip #{file}]
 end
 
@@ -13,14 +13,14 @@ def has_files?(dir, files)
 end
 
 describe Folder do
-  describe "Zip folder" do
+  describe "Zip folder", :current => true do
     before(:all) do
-      @zip_path = Rails.root.join('tmp/ziped_clients')
+      @zip_path = Rails.root.join('public/system/ziped_clients')
       @doc_file1 = File.new(Rails.root.join('test/fixtures/files/document1.doc'))
       @doc_file2 = File.new(Rails.root.join('test/fixtures/files/document2.doc'))
     end
     before(:each) do
-      FileUtils.rm_r Dir.glob(Rails.root.join('tmp/ziped_clients/*'))
+      FileUtils.rm_r Dir.glob(Rails.root.join('public/system/ziped_clients/*'))
     end
     describe "Create zip folder with only files" do
       before(:each) do
@@ -61,7 +61,7 @@ describe Folder do
 
       it "Should create zipped folder with folder tree" do
         zip_path = @folder.zip_folder
-        zip_path.should == Rails.root.join('tmp/ziped_clients', "#{@folder.id.to_s}.zip")
+        zip_path.should == Rails.root.join('public/system/ziped_clients', "#{@folder.id.to_s}.zip")
         unzip(zip_path)
         Dir.glob(File.join(@zip_path, @folder.id.to_s, '**', '*.doc')).present?.should == true
       end
