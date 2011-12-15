@@ -1,31 +1,4 @@
-# -*- coding: utf-8 -*-
-# OPTIMIZE:
-Document.create([
-  {
-    :name => "Конспект.doc",
-    :item => File.new("#{Rails.root}/sample_documents/Конспект.doc"),
-    :university_id => 800,
-    :folder_id => 902
-  },
-
-  {
-    :name => "документ 1",
-    :item => File.new("#{Rails.root}/sample_documents/документ1.doc"),
-    :university_id => 800,
-    :folder_id => 902
-  },
-
-  {
-    :name => "Документ 3",
-    :item => File.new("#{Rails.root}/sample_documents/документ3.doc"),
-    :university_id => 800,
-    :folder_id => 903
-  },
-
-  {
-    :name => "Длинные названия и описания сокращаются до коротких названий и описаний",
-    :item => File.new("#{Rails.root}/sample_documents/hugo.doc"),
-    :university_id => 800,
-    :folder_id => 903
-                 }
-])
+Document.all.each do |d|
+  d.update_attribute(:item, File.new(Rails.root.join("sample_documents/#{d.name}")))
+  d.process
+end

@@ -1,4 +1,5 @@
 require 'active_record/fixtures'
+require 'faker'
 
 namespace :db do
   task :load_default => :environment do

@@ -6,8 +6,7 @@ class Subject < ActiveRecord::Base
   has_many :subjects, :foreign_key => "section_id"
 
 
-  has_many :university_subjects
-  has_many :universities, :through => :university_subjects
+  has_and_belongs_to_many :universities
 
   has_many :documents
   has_many :folders

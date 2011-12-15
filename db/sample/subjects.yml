@@ -1,3 +1,16 @@
 # -*- coding: utf-8 -*-
 math:
-  name: "Математика"
+  name: Математика
+  universities: mgu
+
+russian_language:
+  name: Русский язык
+  universities: mgu
+  
+coding:
+  name: Программирование
+  universities: mgu
+  
+history:
+  name: История
+  universities: mgu

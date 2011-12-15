@@ -5,6 +5,10 @@ class Document < ActiveRecord::Base
   require 'zip/zip'
   require 'coderay'
 
+  has_attached_file :item,
+      :url  => "/assets/documents/:first_folder/:second_folder/:sha",
+      :path => ":rails_root/public/assets/documents/:first_folder/:second_folder/:sha"
+  
   before_save :default_name
 
   validates :item,         :presence => true
@@ -24,11 +28,6 @@ class Document < ActiveRecord::Base
   scope :unfolded, where(:folder_id => nil)
   scope :unsubjected, where(:subject_id => nil)
 
-
-  has_attached_file :item,
-      :url  => "/assets/documents/:first_folder/:second_folder/:sha",
-      :path => ":rails_root/public/assets/documents/:first_folder/:second_folder/:sha"
-
   #вытаскиваем первые два символа с хеша
   def first_folder
     self.sha[0..1]
@@ -42,6 +41,10 @@ class Document < ActiveRecord::Base
   #копируем файл в папку
   def copy_to_folder(folder)
     self.update_attributes(:folder_id => folder.id)
+  end
+
+  def already_processed!
+    update_attribute(:item_processed, true)
   end
 
   # def move_to_folder(folder)
@@ -155,15 +158,17 @@ class Document < ActiveRecord::Base
     end
 
   def process
-    file_type = self.item.content_type
+    file_type = item.content_type
     case file_type
     when 'application/zip'
       self.unzip_file "/public/zips"
     when 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/rtf'
       self.office_to_html
     else
-      self.source_to_html
+      return
+      # self.source_to_html
     end
+    already_processed!
   end
 
   def source_to_html

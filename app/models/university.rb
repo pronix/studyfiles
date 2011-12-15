@@ -5,8 +5,8 @@ class University < ActiveRecord::Base
   validates :name,         :presence => true, :uniqueness => true
   validates :city,         :presence => true
 
-  has_many :university_subjects
-  has_many :subjects, :through => :university_subjects
+  has_and_belongs_to_many :subjects
+  
   has_many :sections, :through => :subjects
   has_many :user_universities, :dependent => :destroy
   has_many :users,    :through => :user_universities, :uniq => true

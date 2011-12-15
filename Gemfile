@@ -32,6 +32,9 @@ gem 'capistrano-ext'
 gem 'coderay'
 gem 'capistrano-unicorn'
 
+# For sample migrations on dev server
+gem 'faker'
+
 group :test,:development do
   # For help
   gem 'seed-fu', '~> 2.1.0'
@@ -49,7 +52,7 @@ group :test,:development do
   gem 'email_spec'
   gem 'cucumber-rails'
   gem 'database_cleaner'
-  gem 'faker'
+
   gem 'launchy'
 
   # Spork

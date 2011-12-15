@@ -1,21 +1,13 @@
+# -*- coding: utf-8 -*-
 class CreateTables < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.timestamps
-    end
-    create_table :documents do |t|
       t.timestamps
     end
     create_table :messages do |t|
       t.integer :user_id
       t.text :text
       t.integer :from_user_id
-      t.timestamps
-    end
-    create_table :universities do |t|
-      t.string :name
-      t.string :abbreviation
-      t.string :city
       t.timestamps
     end
     create_table :sections do |t|
@@ -27,17 +19,6 @@ class CreateTables < ActiveRecord::Migration
       t.string :abbreviation
       t.integer :section_id
       t.timestamps
-    end
-    create_table :folders do |t|
-      t.string :name
-      t.text :description
-      t.integer :user_id
-      t.timestamps
-    end
-    #отношение университетов и предметов
-    create_table :university_subjects, :id => false do |t|
-      t.integer :university_id
-      t.integer :subject_id
     end
 
     #отношение предметов и папок

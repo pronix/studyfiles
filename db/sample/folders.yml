@@ -1,43 +1,35 @@
 # -*- coding: utf-8 -*-
 folder1:
-  id: 900
-  name: "Учебники"
-  description: ""
-  path: "Top"
-  university_id: 800
+  name: Учебники
+  description: <%= Faker::Lorem.paragraph %>
+  university: mgu
+
 folder2:
-  id: 901
-  name: "Методички"
-  description: ""
-  path: "Top"
-  university_id: 800
+  name: Методички
+  description: <%= Faker::Lorem.paragraph %>
+  university: mgu
+  
 folder3:
-  id: 902
-  name: "Конспекты"
-  description: ""
-  path: "Top"
-  university_id: 800
+  name: Конспекты
+  description: <%= Faker::Lorem.paragraph %>
+  university: mgu
+  
 folder4:
-  id: 903
-  name: "Разное"
-  description: ""
-  path: "Top"
-  university_id: 800
+  name: Разное
+  description: <%= Faker::Lorem.paragraph %>
+  university: mgu
+
 folder5:
-  id: 904
-  name: "Мои конспекты"
-  description: ""
-  path: "Top.902"
-  university_id: 800
+  name: Мои конспекты
+  description: <%= Faker::Lorem.paragraph %>
+  university: mgu
+
 folder6:
-  id: 905
-  name: "Иванова"
-  description: ""
-  path: "Top.903"
-  university_id: 800
+  name: Иванова
+  description: <%= Faker::Lorem.paragraph %>
+  university: mgu
+
 folder7:
-  id: 906
-  name: "Петрова"
-  description: ""
-  path: "Top.903"
-  university_id: 800
+  name: Петрова
+  description: <%= Faker::Lorem.paragraph %>
+  university: mgu

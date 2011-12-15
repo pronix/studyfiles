@@ -6,7 +6,7 @@ class Folder < ActiveRecord::Base
 
   after_create :create_log
 
-  include Models::Path
+  # include Models::Path
   include Hierarchy
 
   belongs_to :user
@@ -16,7 +16,7 @@ class Folder < ActiveRecord::Base
   has_many :documents
 
   scope :unsorted, where(:university_id => nil)
-  scope :top, where(:path => "Top")
+  scope :top, where(:path => '')
   scope :unsubjected, where(:subject_id => nil)
 
 
@@ -25,7 +25,7 @@ class Folder < ActiveRecord::Base
   end
 
   def top_level?
-    path == 'Top'
+    path == ''
   end
 
   def ext_ancestors(options={})
