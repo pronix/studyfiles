@@ -16,7 +16,7 @@ module DocumentsHelper
 
 
   def document_rater(document)
-    vote = Vote.where(:document_id => document.id, :user_id => current_user.id)
+    vote = Vote.where(:document_id => document.id, :user_id => (current_user ? current_user.id : nil))
 
     inc_rate = if !vote.first || !vote.first.vote_type
                   link_to "", rate_document_path(document, :vote_type => true), :class => "check-true-unselected icon", :method => :put, :title => "Увеличить рейтинг #{document.name}"

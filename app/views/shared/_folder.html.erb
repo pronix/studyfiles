@@ -11,6 +11,7 @@
          <%= link_to "", download_folder_path(folder), :class => "download icon", :title => "Скачать #{folder.name}" %>
        </span>
        <%= link_to folder.name, "#", :class => "expand", :title => "Раскрыть #{folder.name}" %>
+       <%= link_to folder.name, university_folder_path(@university, folder), :title => "Открыть #{folder.name}"  %>
      </span>
 
      <span class="file-row-size"><%= folder.files_count %></span>

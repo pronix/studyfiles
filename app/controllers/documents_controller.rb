@@ -56,7 +56,7 @@ class DocumentsController < ApplicationController
   def download
     @doc = Document.find_by_id(params[:id])
 
-    conditions = { :document_id => @doc.id, :user_id => current_user.id }
+    conditions = { :document_id => @doc.id, :user_id => (current_user ? current_user.id : nil) }
 
     if Vote.where(conditions).empty?
       vote = Vote.create(conditions)

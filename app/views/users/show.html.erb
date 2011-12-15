@@ -96,6 +96,7 @@
 <% end %>
 
 <%= link_to "Написать личное сообщение", new_discussion_path(:id => @user.id)%><br/>
-<%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
-<%= link_to "Добавить ВУЗ", user_universities_path(current_user), :class => "button green-button" %>
-
+<% if current_user %>
+  <%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
+  <%= link_to "Добавить ВУЗ", user_universities_path(current_user), :class => "button green-button" %>
+<% end %>

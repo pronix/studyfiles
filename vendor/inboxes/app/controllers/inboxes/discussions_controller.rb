@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 class Inboxes::DiscussionsController < Inboxes::BaseController
-  load_and_authorize_resource
-  # before_filter :authenticate_user!
+  # load_and_authorize_resource
+  before_filter :authenticate_user!
   # before_filter :init_and_check_permissions, :only => :show
   before_filter :load_and_check_discussion_recipient, :only => [:create, :new]
 
@@ -11,7 +12,7 @@ class Inboxes::DiscussionsController < Inboxes::BaseController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
-    # @discussion = Discussion.includes(:messages, :speakers).find(params[:id])
+    @discussion = Discussion.includes(:messages, :speakers).find(params[:id])
     @discussion.mark_as_read_for(current_user)
   end
 

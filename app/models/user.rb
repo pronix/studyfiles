@@ -45,7 +45,8 @@ class User < ActiveRecord::Base
 
   #Подсчет рейтинга пользователя
   def raiting
-    self.documents.sum{|d| d.rating }
+    return 0 unless documents.present?
+    documents.sum{|d| d.rating }
   end
 
   def get_new_documents_names(size)
