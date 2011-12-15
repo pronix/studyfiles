@@ -11,6 +11,7 @@
       <%= link_to "", download_document_path(document), :class => "download icon", :title => "Скачать #{document.name}" %>
     </span>
     <%= link_to truncate(document.name, :length => 42, :omission => ""), "" %>
+    <%= link_to "Предпросмотр #{document.name}", document_path(document) %>
   </span>
   <span class="file-row-size"><%= number_to_human_size(document.item_file_size) %></span>
 

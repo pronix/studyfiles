@@ -10,7 +10,7 @@
          <a href="#" class="flag icon"></a>
          <%= link_to "", download_folder_path(folder), :class => "download icon", :title => "Скачать #{folder.name}" %>
        </span>
-       <a href="#" class="expand"><%= folder.name %></a>
+       <%= link_to folder.name, university_folder_path(@university, folder)  %>
      </span>
 
      <span class="file-row-size"><%= folder.files_count %></span>

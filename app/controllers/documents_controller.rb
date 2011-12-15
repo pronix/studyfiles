@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class DocumentsController < ApplicationController
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
 
   def index
     @group = University.all
@@ -9,6 +9,10 @@ class DocumentsController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @documents = Array.new(3) { @user.documents.build }
+  end
+
+  def show
+    @document = Document.find(params[:id])
   end
 
   def create

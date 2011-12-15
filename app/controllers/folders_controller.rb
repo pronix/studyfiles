@@ -22,6 +22,10 @@ class FoldersController < ApplicationController
     redirect_to folders_path
   end
 
+  def show
+    @folder = Folder.find(params[:id])
+  end
+
   def update
     @folder = (current_user.admin? ? Folder.find_by_id(params[:id]) : current_user.folders.find_by_id(params[:id]))
     if @folder.update_attributes(params[:folder])
@@ -33,6 +37,10 @@ class FoldersController < ApplicationController
   end
 
   def download
+    unless current_user
+      flash[:notice] = 'Для скачивания папок необхадимо зарегистрироваться'
+      redirect_to(:back) and return
+    end
     @folder = Folder.find(params[:id])
     send_file @folder.zip_folder, :filename => @folder.zip_name, :type => "application/zip"
   end

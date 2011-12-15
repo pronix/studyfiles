@@ -138,88 +138,84 @@ class Document < ActiveRecord::Base
   end
 
   def item_html
-    if File.exist? self.item.path + ".html"
-      return self.item.path + ".html" if item_processed
-    end
+    html_path = item.path + '.html'
+    return html_path if File.exist?(html_path)
   end
 
   #конвертирование исходного кода в html
-
-  protected
-    def default_name
+  def default_name
       self.name = self.item_file_name if self.name.blank?
     end
 
-    def process
-      file_type = self.item.content_type
-      case file_type
-        when 'application/zip'
-          self.unzip_file "/public/zips"
-        when 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/rtf'
-          self.office_to_html
-        else
-          self.source_to_html
+  def process
+    file_type = self.item.content_type
+    case file_type
+    when 'application/zip'
+      self.unzip_file "/public/zips"
+    when 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/rtf'
+      self.office_to_html
+    else
+      self.source_to_html
+    end
+  end
+
+  def source_to_html
+    type = ""
+    case self.extension
+    when "rb"
+      type = "ruby"
+    when "pl"
+      type = "python"
+    when "c"
+      type = "c"
+    when "php"
+      type = "php"
+    end
+    source_file = File.expand_path(self.item.path)
+    highlighted = CodeRay.encode(File.read(source_file), type, :html, :css => :style, :wrap => :div)
+    File.open(self.item.path + ".html", "w"){ |f| f.write(highlighted) }
+  end
+
+  #представление msofice документа кода в html
+  def office_to_html
+    unless File.exist? item.path + "html"
+      %x[abiword --to=html #{self.item.path}]
+    end
+    return item.path + "html"
+  end
+
+  #предпросмотр текстового файла
+  def text_to_html
+    string = File.open(self.item.path, 'r'){ |file| file.read }
+  end
+
+  class << self
+    # OPTIMIZE: bbbbrr
+    def move_to_folder(docs, folder, user)
+      docs = find(docs) if docs.first.class.to_s == 'Fixnum'
+      l_parent = SiteLog.doc_move_p(docs.first.folder, user)
+      docs.each do |d|
+        d.update_attribute(:folder, folder)
+        _log = SiteLog.doc_move_c(d, user, l_parent)
       end
     end
-
-    def source_to_html
-      type = ""
-      case self.extension
-      when "rb"
-        type = "ruby"
-      when "pl"
-        type = "python"
-      when "c"
-        type = "c"
-      when "php"
-        type = "php"
-      end
-      source_file = File.expand_path(self.item.path)
-      highlighted = CodeRay.encode(File.read(source_file), type, :html, :css => :style, :wrap => :div)
-      File.open(self.item.path + ".html", "w"){ |f| f.write(highlighted) }
-    end
-
-    #представление msofice документа кода в html
-    def office_to_html
-      unless File.exist? self.item.path + "html"
-        cmd = "abiword --to=html #{self.item.path}"
-        system(cmd)
-      end
-      return self.item.path + "html"
-    end
-
-    #предпросмотр текстового файла
-    def text_to_html
-      string = File.open(self.item.path, 'r'){ |file| file.read }
-    end
-
-    class << self
-      # OPTIMIZE: bbbbrr
-      def move_to_folder(docs, folder, user)
-        docs = find(docs) if docs.first.class.to_s == 'Fixnum'
-        l_parent = SiteLog.doc_move_p(docs.first.folder, user)
-        docs.each do |d|
-          d.update_attribute(:folder, folder)
-          _log = SiteLog.doc_move_c(d, user, l_parent)
-        end
-      end
-    end
+  end
 
 
-    private
-    #делаем интерполяцию, добавляем параметр первой папки
-    Paperclip.interpolates :first_folder  do |attachment, style|
-      attachment.instance.first_folder
-    end
+  private
+  #делаем интерполяцию, добавляем параметр первой папки
+  Paperclip.interpolates :first_folder  do |attachment, style|
+    attachment.instance.first_folder
+  end
 
-    #делаем интерполяцию, добавляем параметр второй папки
-    Paperclip.interpolates :second_folder  do |attachment, style|
-      attachment.instance.second_folder
-    end
+  #делаем интерполяцию, добавляем параметр второй папки
+  Paperclip.interpolates :second_folder  do |attachment, style|
+    attachment.instance.second_folder
+  end
 
-    #делаем интерполяцию, добавляем параметр имени файла
-    Paperclip.interpolates :sha  do |attachment, style|
-      attachment.instance.sha
-    end
+  #делаем интерполяцию, добавляем параметр имени файла
+  Paperclip.interpolates :sha  do |attachment, style|
+    attachment.instance.sha
+  end
 
 end

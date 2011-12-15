@@ -6,7 +6,9 @@ rake db:seed
 Проект использует:
   Ruby 1.9.2
   Rails 3.1
-
+  abiword
+  rar
+  
 Для приложения необхадимо дополнение ltree для postgreSQL.(postgresql90-contrib)
 Если postgreSQL ставился с исходников, тогда в папке от папки с исходниками:
 cd contrib/ltree
@@ -23,3 +25,4 @@ cd contrib/ltree
 Использование Guard + Spork + Cucumber
 1. Запускается bundle exec guard -A. Для быстроты поставил что он будет выполнять сценарии с тегом @current
 2. При изменении структуры бд обязательно сначала запустить rake cucumber[:wip] что бы обновить тестовую базу
+

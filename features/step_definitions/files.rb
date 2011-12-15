@@ -55,6 +55,19 @@ end
   Factory(:document, :university_id => univer.id, :folder_id => nil, :name => file)
 end
 
+Допустим /^в папке "(.+)" есть документ "(.+)"$/ do |folder, document|
+  folder = Folder.find_by_name(folder)
+  Factory(:document, :name => document, :folder_id => folder.id,
+          :item => File.new(Rails.root.join('sample_documents/сознание.doc')))
+end
+
+Допустим /^документ "(.+)" уже сконвертировался$/ do |doc|
+  doc = Document.find_by_name(doc)
+  doc.update_attribute(:item_processed, true)
+  doc.office_to_html
+end
+
+
 Допустим /^есть следующие папки принадлежащии универу "(.+)":$/ do |univer, table|
   univer = University.find_by_abbreviation(univer)
   table.hashes.each {|h| Factory(:folder, h.merge(:university => univer))}
