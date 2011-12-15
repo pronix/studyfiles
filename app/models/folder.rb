@@ -89,6 +89,7 @@ class Folder < ActiveRecord::Base
 
     main_path = "tmp/ziped_clients/#{id}"
     FileUtils.mkdir File.join(main_path)
+    documents.each {|d| d.hard_copy_to(main_path)}
     create_subfolders(children, main_path)
     return main_path
   end
