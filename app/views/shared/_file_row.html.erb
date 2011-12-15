@@ -1,8 +1,7 @@
 <div class="file-row clearfix">
-  <span class="file-row-rating">0</span>
+  <span class="file-row-rating"><%= rating(document) %></span>
   <span class="file-row-icons">
-    <%= link_to "", "", :class => "check-true-unselected icon" %>
-    <%= link_to "", "", :class => "check-false-unselected icon" %>
+    <%= document_rater(document) %>
     <%= extension_icon_link(document) %>
   </span>
 
@@ -17,7 +16,7 @@
 
   <span class="file-row-date"><%= document.created_at.strftime("%d.%m.%Y") %></span>
 
-  <span class="file-row-user"><a href="#">Иван Иваныч</a></span>
+  <span class="file-row-user"><%= link_to truncate(document.user.nickname, :length => 17, :omission => ""), user_path(document.user) if document.user %></span>
 
   <p class="file-row-previews"></p>
 </div>

@@ -1,5 +1,5 @@
 <div class="file-row clearfix folder-row parent">
-     <span class="file-row-rating">0</span>
+  <span class="file-row-rating"><%= rating(folder) %></span>
 
      <span class="file-row-icons">
        <%= link_to "", "", :class => "folder-full icon expand" %>
@@ -10,14 +10,14 @@
          <a href="#" class="flag icon"></a>
          <%= link_to "", download_folder_path(folder), :class => "download icon", :title => "Скачать #{folder.name}" %>
        </span>
-       <%= link_to folder.name, university_folder_path(@university, folder)  %>
+       <%= link_to folder.name, "#", :class => "expand", :title => "Раскрыть #{folder.name}" %>
      </span>
 
      <span class="file-row-size"><%= folder.files_count %></span>
 
      <span class="file-row-date"><%= folder.created_at.strftime("%d.%m.%Y") %></span>
 
-     <span class="file-row-user"><a href="#">Иван Иваныч</a></span>
+     <span class="file-row-user"><%= link_to truncate(folder.user.nickname, :length => 17, :omission => ""), user_path(folder.user) if folder.user %></span> <!-- FIXME -->
 
      <p class="file-row-previews"></p>
 

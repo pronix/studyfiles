@@ -233,3 +233,7 @@ When /мне ответил пользователь "([^\"]*)" текстом "
   d=Discussion.find_between_users(u1,u2)
   d.messages.create(:user => u2,:body => mess )
 end
+
+When /^я обновлю страницу/ do
+  visit current_path
+end

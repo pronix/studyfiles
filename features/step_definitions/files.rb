@@ -73,6 +73,14 @@ end
   table.hashes.each {|h| Factory(:folder, h.merge(:university => univer))}
 end
 
+Допустим /^есть следующие папки принадлежащии универу "(.+)" и разным пользователям:$/ do |univer, table|
+  univer = University.find_by_abbreviation(univer)
+  table.hashes.each do |hash|
+    user = User.find_by_name(hash[:user])
+    Factory(:folder, :name => hash[:name], :university => univer, :user_id => user.id)
+  end
+end
+
 Допустим /^папка "(.+)" пренадлежит папке "(.+)"$/ do |c_folder, p_folder|
   c_folder = Folder.find_by_name(c_folder)
   c_folder.parent = Folder.find_by_name(p_folder)
@@ -81,5 +89,16 @@ end
 
 
 Допустим /^в папке "(.+)" есть документ$/ do |folder|
-  Factory(:document, :folder_id => Folder.find_by_name(folder).id)  
+  Factory(:document, :folder_id => Folder.find_by_name(folder).id)
 end
+
+Given /^университет "([^"]*)" имеет следующие файлы:$/ do |univer, table|
+  univer = University.find_by_abbreviation(univer)
+  table.hashes.each do |hash|
+    user = User.find_by_name(hash[:user])
+    Factory(:document, :name => hash[:name], :university_id => univer.id, :user => user, :folder_id => nil)
+  end
+end
+
+
+

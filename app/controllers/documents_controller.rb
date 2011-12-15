@@ -55,7 +55,37 @@ class DocumentsController < ApplicationController
 
   def download
     @doc = Document.find_by_id(params[:id])
+
+    conditions = { :document_id => @doc.id, :user_id => current_user.id }
+
+    if Vote.where(conditions).empty?
+      vote = Vote.create(conditions)
+      vote.update_attributes(:grade => 1, :vote_type => true)
+      cookies["download_finished"] = { :value => "true", :expires => 1.second.from_now }
+    end
+
     send_file(@doc.item.path, :filename => @doc.item_file_name)
+  end
+
+  def rate
+    @doc = Document.find(params[:id])
+    conditions = { :document_id => @doc.id, :user_id => current_user.id }
+    vote = Vote.where(conditions).first || Vote.create(conditions)
+    type = params[:vote_type]
+
+    if type
+      grade = 1
+    else
+      grade = -1
+    end
+
+    vote.update_attributes(:grade => grade, :vote_type => type)
+
+    if params[:redirect_to]
+      redirect_to params[:redirect_to]
+    else
+      redirect_to request.referer
+    end
   end
 
 end

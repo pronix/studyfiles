@@ -10,10 +10,10 @@ class User < ActiveRecord::Base
 
 
   has_many :documents
+  has_many :votes
+  has_many :downloads, :class_name => "Document", :through => :votes
   accepts_nested_attributes_for :documents, :reject_if => proc { |a| a['item'].blank? }, :allow_destroy => true
   has_many :folders
-  has_many :votes
-  has_many :user_votes,   :through => :votes, :source => :document
   has_many :user_universities, :dependent => :destroy
   has_many :universities, :through => :user_universities, :uniq => true
   has_inboxes
@@ -36,9 +36,16 @@ class User < ActiveRecord::Base
     true if roles.find_by_name('admin')
   end
 
+  def nickname
+    if !name
+      return email
+    end
+    name
+  end
+
   #Подсчет рейтинга пользователя
   def raiting
-    self.documents.sum(:raiting)
+    self.documents.sum{|d| d.rating }
   end
 
   def get_new_documents_names(size)

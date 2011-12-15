@@ -41,6 +41,8 @@ group :test,:development do
   gem 'builder'
   gem 'silent-postgres'
 
+  gem 'jquery-rails'
+
   # For test
   gem 'factory_girl_rails'
   gem 'rspec-rails'

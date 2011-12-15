@@ -1,10 +1,13 @@
 Studyfiles::Application.routes.draw do
 
+
   devise_for :users, :controllers => { :registrations => "registrations" },:sign_out_via => [ :post, :delete, :get ]
 
   resources :documents do
+    resources :votes
     member do
       get 'download'
+      put 'rate'
     end
   end
   resources :universities do

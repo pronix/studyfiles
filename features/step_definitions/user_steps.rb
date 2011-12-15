@@ -11,6 +11,7 @@ Given /^в системе существует пользователь с ло�
   Factory(:user, :email => email, :password => password)
 end
 
+
 Given /^в системе существует пользователь с логином и паролем и именем "([^\"]*)"$/ do |email_and_password_and_name|
   email, password, name = email_and_password_and_name.split("/");
   Factory(:user, :email => email, :password => password, :name => name)

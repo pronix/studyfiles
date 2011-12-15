@@ -5,9 +5,10 @@
   <title>Studyfiles</title>
   <link rel="icon" type="image/image/vnd.microsoft.icon" href="/images/favi.ico" />
   <%= stylesheet_link_tag "style.css", "forms.css", "tree.css", "jquery-ui.css" %>
-  <%= javascript_include_tag "jquery", "jquery-ui", "application", "nested_form", "files" %>
+  <%= javascript_include_tag "application", "jquery-ui", "nested_form", "files", "cookies" %>
   <%= csrf_meta_tag %>
 </head>
+
 <body>
 <div class="alert-message warning"><%= notice %></div>
 <div class="alert-message error"><%= alert %></div>
@@ -32,4 +33,14 @@
   <%= render 'shared/footer' %>
 
 </body>
+<script>
+  $(function() {
+    setInterval(function() {
+        if( $.cookie('download_finished') == "true" ) {
+          $.cookie('download_finished', null);
+          location.reload();
+        }
+    }, 200);
+  })
+</script>
 </html>
