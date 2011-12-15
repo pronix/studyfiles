@@ -1,0 +1,13 @@
+<%= sort_link @search, :rating, "По рейтингу" %>
+<% @universities.each do |univer| %>
+  <div class="univer" id="<%= dom_id univer %>">
+    <%= univer.name %> (<%= univer.abbreviation %>)
+    <% univer.subjects.each do |subject| %>
+      <%= subject.name %>
+      <% subject.folders.each do |folder| %>
+	<%= folder.name %>
+      <% end %>
+    <% end %>
+  </div>
+
+<% end %>

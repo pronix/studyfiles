@@ -1,25 +1,20 @@
 # -*- coding: utf-8 -*-
 class Folder < ActiveRecord::Base
-  require 'zip/zipfilesystem'
-
-  before_create :default_path_name
-
-  after_create :create_log
-
-  # include Models::Path
   include Hierarchy
 
+  has_many :documents
+  
   belongs_to :user
   belongs_to :university
-
   belongs_to :subject
-  has_many :documents
 
   scope :unsorted, where(:university_id => nil)
   scope :top, where(:path => '')
   scope :unsubjected, where(:subject_id => nil)
 
-
+  after_create :create_log
+  before_create :default_path_name
+  
   def level
     index_path.size
   end

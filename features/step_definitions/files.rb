@@ -70,14 +70,14 @@ end
 
 Допустим /^есть следующие папки принадлежащии универу "(.+)":$/ do |univer, table|
   univer = University.find_by_abbreviation(univer)
-  table.hashes.each {|h| Factory(:folder, h.merge(:university => univer))}
+  table.hashes.each {|h| Factory(:folder, h.merge(:university => univer, :subject => nil))}
 end
 
 Допустим /^есть следующие папки принадлежащии универу "(.+)" и разным пользователям:$/ do |univer, table|
   univer = University.find_by_abbreviation(univer)
   table.hashes.each do |hash|
     user = User.find_by_name(hash[:user])
-    Factory(:folder, :name => hash[:name], :university => univer, :user_id => user.id)
+    f = Factory(:folder, :name => hash[:name], :university => univer, :user_id => user.id)
   end
 end
 
@@ -92,7 +92,7 @@ end
   Factory(:document, :folder_id => Folder.find_by_name(folder).id)
 end
 
-Given /^университет "([^"]*)" имеет следующие файлы:$/ do |univer, table|
+Given /^университет "(.+)" имеет следующие файлы:$/ do |univer, table|
   univer = University.find_by_abbreviation(univer)
   table.hashes.each do |hash|
     user = User.find_by_name(hash[:user])
@@ -100,5 +100,25 @@ Given /^университет "([^"]*)" имеет следующие файл�
   end
 end
 
+Допустим /^в университете "(.+)" есть следующие предметы:$/ do |univer, table|
+  univer = University.find_by_abbreviation(univer)
+  table.hashes.each do |h|
+    s = Factory(:subject, h)
+    s.universities << univer
+  end
+end
 
+Допустим /^предмет в универе "(.+)" "(.+)" имеет следующие папки:$/ do |univer, subject, table|
+  univer = University.find_by_abbreviation(univer)
+  subject = univer.subjects.find_by_name(subject)
+  table.hashes.each {|h| Factory(:folder, h.merge(:university => univer, :subject => subject))}
+end
 
+Допустим /^рейтинг университета "(.+)" (\d+)$/ do |univer, rating|
+  University.find_by_abbreviation(univer).update_attribute(:rating, rating.to_i)
+end
+
+Допустим /^университет "(.+)" должен быть первый на странице$/ do |univer|
+  univer = University.find_by_abbreviation(univer)
+  find(:xpath, "//div[@class=\"univer\"]")[:id].should == "university_#{univer.id}"
+end

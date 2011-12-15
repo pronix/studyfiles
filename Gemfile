@@ -18,6 +18,7 @@ gem 'thinking-sphinx', '2.0.10'
 gem 'cancan'
 gem 'haml'
 gem 'unicorn'
+gem 'meta_search'
 
 gem 'inboxes', :path => 'vendor/inboxes'
 gem 'hierarchy', :path => 'vendor/plugins/hierarchy'

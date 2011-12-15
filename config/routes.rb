@@ -31,6 +31,7 @@ Studyfiles::Application.routes.draw do
   resources :subjects
   resource :feedback, :controller => 'feedback', :only => [:new, :create]
   resources :logs
+  resources :files
 
   root :to => "universities#index"
 end
