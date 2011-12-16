@@ -42,8 +42,10 @@ class UniversitiesController < ApplicationController
     @university = University.new(params[:university])
     if @university.save
         current_user.universities << @university
-        @university.update_attributes(:logo => @preview.asset)
-        @preview.destroy
+        if @preview
+          @university.update_attributes(:logo => @preview.asset)
+          @preview.destroy
+        end
         flash[:notice] = "Добавлен университет"
     else
       flash[:alert] = "Не получилось добавить университет"
