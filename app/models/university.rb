@@ -6,7 +6,7 @@ class University < ActiveRecord::Base
   validates :city,         :presence => true
 
   has_and_belongs_to_many :subjects
-  
+
   has_many :sections, :through => :subjects
   has_many :user_universities, :dependent => :destroy
   has_many :users,    :through => :user_universities, :uniq => true
@@ -14,8 +14,7 @@ class University < ActiveRecord::Base
   has_many :documents
 
   define_index do
-    indexes name
-    indexes abbreviation
+    indexes [name, abbreviation], :as => :name
     indexes city
     indexes subjects.name, :as => :subject_name
     indexes folders.name, :as => :folder_name

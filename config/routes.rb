@@ -11,6 +11,9 @@ Studyfiles::Application.routes.draw do
     end
   end
   resources :universities do
+    collection do
+      get 'search'
+    end
     resources :folders
     resources :subjects
   end

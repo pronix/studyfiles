@@ -9,6 +9,15 @@ class UniversitiesController < ApplicationController
     @universities = University.search(params[:search], :star => true, :page => params[:page], :per_page => 4)
   end
 
+  def search
+    if params[:search].strip.length > 0
+      @universities = University.search(:conditions => {:name => params[:search]}, :star => true)
+    else
+      @universities = University.all
+    end
+  end
+
+
   def new
     @university = University.new
   end

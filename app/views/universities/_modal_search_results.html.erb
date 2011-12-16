@@ -1,0 +1,13 @@
+<% if universities.empty? %>
+  <%= link_to "Создать новый", new_university_path(current_user) %>
+<% end %>
+<ul class="expanded-subjects-list">
+  <li>
+  <% universities.each do |univer| %>
+        <dl>
+          <dt><%= univer.abbreviation %></dt>
+          <dd><%= link_to univer.name, university_folders_path(univer) %></dd>
+        </dl>
+  <% end %>
+  </li>
+</ul>
