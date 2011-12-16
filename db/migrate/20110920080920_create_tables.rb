@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 class CreateTables < ActiveRecord::Migration
   def change
-    create_table :users do |t|
-      t.timestamps
-    end
     create_table :messages do |t|
       t.integer :user_id
       t.text :text

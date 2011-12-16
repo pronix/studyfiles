@@ -70,9 +70,6 @@
               <% sub.folders.top.each do |folder| %>
                 <%= render "shared/folder", :folder => folder %>
               <% end %>
-              <% sub.documents.each do |doc| %>
-                <%= render 'shared/file_row', :document => doc %>
-              <% end %>
             </div>
 
            </div>
@@ -96,7 +93,5 @@
 <% end %>
 
 <%= link_to "Написать личное сообщение", new_discussion_path(:id => @user.id)%><br/>
-<% if current_user %>
-  <%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
-  <%= link_to "Добавить ВУЗ", universities_path, :class => "button green-button", :remote => true %>
-<% end %>
+<%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
+<%= link_to "Добавить ВУЗ", universities_path, :class => "button green-button", :remote => true %>

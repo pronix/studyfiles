@@ -3,6 +3,7 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password 'password'
     password_confirmation {|u| u.password}
+    name { Faker::Name.name }
   end
 
   factory :admin_user, :parent => :user do

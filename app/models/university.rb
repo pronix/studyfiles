@@ -8,11 +8,14 @@ class University < ActiveRecord::Base
   has_and_belongs_to_many :subjects
 
   has_many :sections, :through => :subjects
-  has_many :user_universities, :dependent => :destroy
-  has_many :users,    :through => :user_universities, :uniq => true
   has_many :folders
   has_many :documents
   has_attached_file :logo, :styles => {:full => "130x130", :thumb => "60x60>", :icon => "32x32" }
+
+  has_many :users
+
+  has_many :user_universities, :dependent => :destroy
+  has_many :users, :through => :user_universities, :uniq => true
 
   define_index do
     indexes [name, abbreviation], :as => :name
@@ -40,10 +43,15 @@ class University < ActiveRecord::Base
     "#{subjects.count} предметов, #{documents.count} файлов, #{((documents.sum(:item_file_size).to_f / (1024**2)).round(1))} Мб" #FIXME прикрутить pluralize
   end
 
-
   #Подсчет рейтинга университета
-  def raiting
-    Document.in_path(self.id.to_s).sum(:raiting)
+  # def raiting
+  #   Document.in_path(self.id.to_s).sum(:raiting)
+  # end
+
+  # Reculculate rating.
+  # TODO: Create cron task to reculculate ratings for all
+  def rating!
+    update_attribute(:rating, documents.map {|d| d.rating}.sum)
   end
 
   #Количество файлов
@@ -69,5 +77,13 @@ class University < ActiveRecord::Base
   #Первые пять пердметов университета
   def short_subjects_list
     self.subjects.limit(5)
+  end
+
+  def update_user_rating!
+    users.sort_by{ |elem| elem.raiting }.each do |u|
+      r = 1
+      user_universities.find(u).update_attribute(:rating, r)
+      r += 1
+    end
   end
 end

@@ -19,6 +19,7 @@ gem 'cancan'
 gem 'haml'
 gem 'unicorn'
 gem 'meta_search'
+gem 'whenever'
 
 gem 'inboxes', :path => 'vendor/inboxes'
 gem 'hierarchy', :path => 'vendor/plugins/hierarchy'

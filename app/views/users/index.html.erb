@@ -1,3 +1,9 @@
 <% @users.each do |user| %>
   <%= link_to user.name, user_path(user) %>
+  Рейтинг: <%= user.raiting %>
+  Рейтинг в вузе <%= user.top_university_rating %>
+  Файлов: <%= user.documents.count %>
+  <% if user.top_university.present? %>
+    <%= user.top_university.abbreviation %>
+  <% end %>
 <% end %>
