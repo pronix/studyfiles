@@ -12,14 +12,15 @@ class User < ActiveRecord::Base
   has_many :downloads, :class_name => "Document", :through => :votes
   accepts_nested_attributes_for :documents, :reject_if => proc { |a| a['item'].blank? }, :allow_destroy => true
   has_many :folders
+
+  has_many :user_universities, :dependent => :destroy
+  has_many :universities, :through => :user_universities, :uniq => true
   
   has_inboxes
 
   has_and_belongs_to_many :roles, :uniq => true
 
   has_attached_file :avatar, :styles => { :medium => "128x128", :thumb => "54x54", :icon => "34x34" }
-
-  belongs_to :university
 
   after_create :add_default_role
 
@@ -50,5 +51,15 @@ class User < ActiveRecord::Base
 
   def get_new_documents_names(size)
     self.documents.last(size).map { |f| f.name }.join("; ")
+  end
+
+  def top_university
+    return nil unless user_universities.present?
+    user_universities.order('rating DESC').first.university
+  end
+
+  def top_university_rating
+    return nil unless user_universities.present?
+    user_universities.order('rating DESC').first.rating
   end
 end

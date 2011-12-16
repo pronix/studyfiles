@@ -73,7 +73,7 @@ end
 
 Допустим /^пользователь "(.+)" из универа "(.+)"$/ do |user, univer|
   User.find_by_email(user).
-    update_attribute(:university, University.find_by_abbreviation(univer))
+    universities << University.find_by_abbreviation(univer)
 end
 
 Допустим /^пользователь "(.+)" имеет имя "(.+)"$/ do |user, name|

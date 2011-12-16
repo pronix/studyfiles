@@ -12,6 +12,9 @@ class University < ActiveRecord::Base
   has_many :documents
   has_many :users
 
+  has_many :user_universities, :dependent => :destroy
+  has_many :users, :through => :user_universities, :uniq => true
+
   define_index do
     indexes [name, abbreviation], :as => :name
     indexes city
@@ -72,7 +75,7 @@ class University < ActiveRecord::Base
   def update_user_rating!
     users.sort_by{ |elem| elem.raiting }.each do |u|
       r = 1
-      u.update_attribute(:university_rating, r)
+      user_universities.find(u).update_attribute(:rating, r)
       r += 1
     end
   end

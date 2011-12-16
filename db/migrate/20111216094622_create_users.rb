@@ -7,7 +7,6 @@ class CreateUsers < ActiveRecord::Migration
       t.trackable
       t.string :name
       t.boolean :subscriber
-      t.integer :university_id, :university_rating
 
       t.string :avatar_file_name, :avatar_content_type
       t.integer :avatar_file_size
