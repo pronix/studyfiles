@@ -12,6 +12,7 @@ class University < ActiveRecord::Base
   has_many :users,    :through => :user_universities, :uniq => true
   has_many :folders
   has_many :documents
+  has_attached_file :logo, :styles => {:full => "130x130", :thumb => "60x60>", :icon => "32x32" }
 
   define_index do
     indexes [name, abbreviation], :as => :name
@@ -20,7 +21,6 @@ class University < ActiveRecord::Base
     indexes folders.name, :as => :folder_name
   end
 
-  has_attached_file :logo, :styles => { :thumb => "60x60>", :icon => "32x32" }
 
   # Return university documents without folder
   def documents_without_folder

@@ -1,0 +1,27 @@
+<div class="modal-window" id="create-univer-modal">
+  <h3>Добавить ВУЗ</h3>
+
+  <dl class="form-list">
+
+  <%= form_for [current_user, @university],  :url => universities_path, :html => { :multipart => true, :method => :post } do |f| %>
+    <%= render "form", :f => f %>
+  <% end %>
+
+  <dt><label>Логотип:</label></dt>
+
+  <dd>
+    <div class="fakeupload">
+        <%= form_for :image_preview, :url => preview_logo_universities_url, :html => { :multipart => true, :target => 'upload_frame', :id => "ajaxuploader"} do |preview| %>
+            <input type="text" name="fakeupload"  style="width: 225px;" /> <!-- browse button is here as background -->
+            <span class="button blue-button">Выбрать</span>
+            <%= preview.file_field :asset, :id => "logo" %>
+        <% end %>
+        <iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+    </div>
+  </dd>
+</dl>
+
+  <a href="#" class="close-modal">
+    <%= image_tag("close-modal.png") %>
+  </a>
+</div>

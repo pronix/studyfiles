@@ -25,6 +25,11 @@ $(document).ready(function(){
       });
   });
 
+  //Если нужен переход от одного модального к другому
+  $(".popuper").live('click', function() {
+    $.modal.close();
+  })
+
 
   //Очищалка инпутов
   $('.clearer').click(function() {
@@ -41,6 +46,13 @@ $(document).ready(function(){
     if ( container.children().length == 0) {
       container.css('background', 'none');
     }
+  });
+
+
+  //Что бы была работа форма загрузки как в дизайне
+  $('.fakeupload input[type=file]').live('change', function() {
+    $(this).parent().find("input[name=fakeupload]").val($(this).val());
+    $("#ajaxuploader").submit();
   });
 
 });

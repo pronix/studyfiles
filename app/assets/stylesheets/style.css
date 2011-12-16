@@ -528,6 +528,7 @@ html[xmlns] .clearfix {
   border: none !important;
  }
       .clearable-container {
+        display: inline-block;
         position: relative;
       }
 
@@ -1589,9 +1590,40 @@ html[xmlns] .clearfix {
 
 
 #chooser-modal {
-  width: 650px;
   height: 515px;
 }
 
+#univer-chooser-modal {
+  width: 580px;
+}
+#create-univer-modal {
+  width: 570px;
+  padding-bottom: 40px;
+}
+  #create-univer-modal .button.green-button {
+    position: absolute;
+    left: 165px;
+    bottom: 25px;
+  }
+
+#univer-chooser-modal .search-form-container {
+  margin: 0 -15px;
+}
+
+#univer-chooser-modal .search-form div {
+  width: 78%;
+}
+
+#preview1 { width: 130px; height: 130px; }
+#preview2 { width: 54px; height: 54px; }
+#preview3 { width: 34px; height: 34px; }
+
+#univer-chooser-modal .button.blue-button {
+  line-height: 25px;
+  height: 25px;
+  color: white !important;
+  float: right;
+}
 /* MODAL WINDOWS END */
+
 

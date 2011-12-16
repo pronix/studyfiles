@@ -32,6 +32,7 @@ gem 'capistrano'
 gem 'capistrano-ext'
 gem 'coderay'
 gem 'capistrano-unicorn'
+gem 'prototype-rails', :git => 'git://github.com/rails/prototype-rails.git' #для ajax-загрузки превью изображений
 
 # For sample migrations on dev server
 gem 'faker'

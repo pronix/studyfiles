@@ -1,0 +1,6 @@
+$(".modal-window").remove();
+$("body").append("<%= escape_javascript(render 'new') %>");
+$("#create-univer-modal").modal({
+  closeClass: 'close-modal',
+  autoResize: true
+});

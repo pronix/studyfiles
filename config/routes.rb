@@ -13,6 +13,7 @@ Studyfiles::Application.routes.draw do
   resources :universities do
     collection do
       get 'search'
+      post 'preview_logo'
     end
     resources :folders
     resources :subjects

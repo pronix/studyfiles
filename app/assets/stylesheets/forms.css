@@ -20,3 +20,35 @@ input[type=text], input[type=email], input[type=password], textarea {
    border: none;
    border-radius: 3px;
 }
+
+.form-list dt, .form-list dd {
+  margin-bottom: 12px;
+}
+
+.form-list dt {
+  float: left;
+  width: 120px;
+}
+
+
+.fakeupload {
+  display: inline-block;
+  width: 360px;
+  position: relative;
+}
+
+.fakeupload input[type=file] {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  width: 110px;
+}
+
+#logo-previews {
+  margin: 12px 0 12px 120px;
+}
+
+#logo-previews > img {
+  margin-right: 13px;
+}
