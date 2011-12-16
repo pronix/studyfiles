@@ -524,7 +524,7 @@ html[xmlns] .clearfix {
   width: 16px;
   background: url('icons/clearer.png') no-repeat top left;
   right: 5px;
-  top: 5px;
+  bottom: 5px;
   border: none !important;
  }
       .clearable-container {
@@ -1502,6 +1502,13 @@ html[xmlns] .clearfix {
         border: none;
         padding: 0;
         margin: 0;
+      }
+
+      #registration-modal input {
+        width: 180px;
+      }
+      #registration-modal input.button {
+        width: auto;
       }
       #registration-modal form {
         display: inline-block;

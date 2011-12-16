@@ -16,22 +16,24 @@
         <%= form_for(:user, :as => :user, :url => user_registration_path, :html => { :class => "registration" } ) do |f| %>
             <h2>Завести новый аккаунт</h2>
 
-            <p class="name">
-    	      <label>Имя и фамилия</label><br />
-    	      <input type="text"/>
-    	    </p>
+            <div class="clearable-container name">
+              <%= f.label :name %><br />
+              <%= f.text_field :name, :class => "clearable" %>
+              <a class="clearer icon"></a>
+            </div>
+
     	    <p class="email">
-              <%= f.label :email %>
+              <%= f.label :email %><br />
               <%= f.email_field :email, :id => "new_user_email" %>
     	    </p>
 
     	    <p class="passwd">
-               <%= f.label :password %>
+               <%= f.label :password %><br />
                <%= f.password_field :password, :id => "new_user_password" %>
     	    </p>
 
     	    <p class="passwd">
-               <%= f.label :password_confirmation %>
+               <%= f.label :password_confirmation %><br />
                <%= f.password_field :password_confirmation %>
     	    </p>
 
@@ -44,12 +46,12 @@
         <%= form_for(:user, :as => :user, :html => {:class => "login"}, :url => user_session_path) do |f| %>
     	<h2>Войти</h2>
     	    <p class="email">
-              <%= f.label :email %>
+              <%= f.label :email %><br />
               <%= f.email_field :email, :id => "exist_user_email"  %>
     	    </p>
 
     	    <p class="passwd">
-               <%= f.label :password %>
+               <%= f.label :password %><br />
                <%= f.password_field :password, :id => "exist_user_password" %>
     	    </p>
 
