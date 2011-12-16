@@ -6,15 +6,14 @@ class University < ActiveRecord::Base
   validates :city,         :presence => true
 
   has_and_belongs_to_many :subjects
-  
+
   has_many :sections, :through => :subjects
   has_many :folders
   has_many :documents
   has_many :users
 
   define_index do
-    indexes name
-    indexes abbreviation
+    indexes [name, abbreviation], :as => :name
     indexes city
     indexes subjects.name, :as => :subject_name
     indexes folders.name, :as => :folder_name

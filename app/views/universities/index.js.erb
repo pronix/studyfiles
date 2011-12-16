@@ -1,0 +1,6 @@
+$("#univer-chooser-modal").remove();
+$("body").append("<%= escape_javascript(render 'shared/univer_modal_search', :universities => @universities) %>");
+$("#univer-chooser-modal").modal({
+  closeClass: 'close-modal',
+  autoResize: true
+});

@@ -96,5 +96,5 @@
 <%= link_to "Написать личное сообщение", new_discussion_path(:id => @user.id)%><br/>
 <% if current_user %>
   <%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
-  <%= link_to "Добавить ВУЗ", user_universities_path(current_user), :class => "button green-button" %>
+  <%= link_to "Добавить ВУЗ", universities_path, :class => "lopen-modal button green-button", :rel => "univer-chooser-modal", :remote => true %>
 <% end %>

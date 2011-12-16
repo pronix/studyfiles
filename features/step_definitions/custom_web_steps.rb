@@ -237,3 +237,26 @@ end
 When /^я обновлю страницу/ do
   visit current_path
 end
+
+Then /^я отправлю "([^"]*)"$/ do |arg1|
+  find_field(arg1).native.send_key(:enter)
+end
+
+
+Then /^я жду ajax$/ do
+  keep_looping = true
+  # FIXME add counter
+  while keep_looping do
+    sleep 1
+    begin
+      count = page.evaluate_script('window.running_ajax_calls').to_i
+      keep_looping = false if count == 0
+    rescue => e
+      if (e.message.include? 'HTMLunitCorejsJavascript::Undefined')
+        raise "For 'I wait for the AJAX call to finish' to work, please include culerity.js after including jQuery."
+      else
+        raise e
+      end
+    end
+  end
+end
