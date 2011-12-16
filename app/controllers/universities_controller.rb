@@ -29,7 +29,7 @@ class UniversitiesController < ApplicationController
   def create
     @university = University.new(params[:university])
     if @university.save
-        current_user.universities << @university
+        current_user.update_attribute(:university, @university)
         flash[:notice] = "Добавлен университет"
     else
       flash[:alert] = "Не получилось добавить университет"
