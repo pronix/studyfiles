@@ -24,9 +24,8 @@
     </span>
 
     <span class="ub-right my-universities-names">
-      Мой ВУЗ:
-      <% current_user.universities.each do |univer| %>
-        <%= link_to univer.abbreviation, documents_path(:university => univer) %>
+      <% if current_user.university.present? %>
+	Мой ВУЗ: <%= link_to current_user.university.abbreviation, documents_path(current_user.university) %>
       <% end %>
     </span>
 </div>

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -14,13 +12,14 @@ class User < ActiveRecord::Base
   has_many :downloads, :class_name => "Document", :through => :votes
   accepts_nested_attributes_for :documents, :reject_if => proc { |a| a['item'].blank? }, :allow_destroy => true
   has_many :folders
-  has_many :user_universities, :dependent => :destroy
-  has_many :universities, :through => :user_universities, :uniq => true
+  
   has_inboxes
 
   has_and_belongs_to_many :roles, :uniq => true
 
   has_attached_file :avatar, :styles => { :medium => "128x128", :thumb => "54x54", :icon => "34x34" }
+
+  belongs_to :university
 
   after_create :add_default_role
 
@@ -46,7 +45,7 @@ class User < ActiveRecord::Base
   #Подсчет рейтинга пользователя
   def raiting
     return 0 unless documents.present?
-    documents.sum{|d| d.rating }
+    documents.map {|d| d.rating}.sum
   end
 
   def get_new_documents_names(size)

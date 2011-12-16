@@ -32,16 +32,14 @@
 </div>
 
 
-<% @user.universities.each do | univer | %>
-
     <div class="expander parent">
       <div class="expander-header clearfix university">
 
         <a href="" class="blue-collapse icon expand"></a>
-        <%= link_to image_tag(univer.logo.url(:icon)), "", :class => "logo" %>
+        <%= link_to image_tag(@user.university.logo.url(:icon)), "", :class => "logo" %>
 
         <h4>
-          <%= link_to truncate(univer.name, :length => 160), "" %>
+          <%= link_to truncate(@user.university.name, :length => 160), "" %>
         </h4>
         <div class="expander-actions">
           <a class="expand-all icon expand"></a>
@@ -52,7 +50,7 @@
 
       <div class="expander-content node">
 
-        <% univer.subjects.each do |sub| %>
+        <% @user.university.subjects.each do |sub| %>
            <div class="expander-subject parent">
 
              <div class="gray-box">
@@ -68,7 +66,7 @@
 
             <div class="level-1 clearfix node">
               <% sub.folders.top.each do |folder| %>
-                <%= render "shared/folder", :folder => folder %>
+                <%= render "shared/folder", :folder => folder, :univer => @user.university %>
               <% end %>
               <% sub.documents.each do |doc| %>
                 <%= render 'shared/file_row', :document => doc %>
@@ -79,17 +77,17 @@
         <% end %>
 
         <div class="level-1 clearfix node">
-          <% univer.folders.top.each do |folder| %>
+          <% @user.university.folders.top.each do |folder| %>
             <%= render "shared/folder", :folder => folder %>
           <% end %>
         </div>
 
-        <%= link_to "Добавить предмет", university_subjects_path(univer), :class => "button green-button" %>
+        <%= link_to "Добавить предмет", university_subjects_path(@user.university), :class => "button green-button" %>
 
       </div>
     </div>
 
-<% end %>
+
 
 <% content_for :sidebar do %>
   <%= render "detailed", :user => @user %>
