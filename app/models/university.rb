@@ -43,8 +43,14 @@ class University < ActiveRecord::Base
   end
 
   #Подсчет рейтинга университета
-  def raiting
-    Document.in_path(self.id.to_s).sum(:raiting)
+  # def raiting
+  #   Document.in_path(self.id.to_s).sum(:raiting)
+  # end
+  
+  # Reculculate rating.
+  # TODO: Create cron task to reculculate ratings for all
+  def rating!
+    update_attribute(:rating, documents.map {|d| d.rating}.sum)
   end
 
   #Количество файлов
