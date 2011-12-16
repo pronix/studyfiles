@@ -4,8 +4,69 @@
     </div>
 
     <div class="sign-in-up">
-      <%= link_to t("sign_in"), new_user_session_path %>
+      <%= link_to t("sign_in"), "", :class => "open-modal", :rel => "registration-modal" %>
       &nbsp;&nbsp;/&nbsp;&nbsp;
-      <%= link_to t("sign_up"), new_user_registration_path, :class => "sign-up" %>
+      <%= link_to t("sign_up"), "", :class => "sign-up open-modal", :rel => "registration-modal" %>
     </div>
+
+    <div id="registration-modal" class="modal-window">
+      <h1>Войти или зарегистрироваться</h1>
+      <div class="forms">
+
+        <%= form_for(:user, :as => :user, :url => user_registration_path, :html => { :class => "registration" } ) do |f| %>
+            <h2>Завести новый аккаунт</h2>
+
+            <p class="name">
+    	      <label>Имя и фамилия</label><br />
+    	      <input type="text"/>
+    	    </p>
+    	    <p class="email">
+              <%= f.label :email %>
+              <%= f.email_field :email, :id => "new_user_email" %>
+    	    </p>
+
+    	    <p class="passwd">
+               <%= f.label :password %>
+               <%= f.password_field :password, :id => "new_user_password" %>
+    	    </p>
+
+    	    <p class="passwd">
+               <%= f.label :password_confirmation %>
+               <%= f.password_field :password_confirmation %>
+    	    </p>
+
+            <br />
+            <%= recaptcha_tags %>
+
+            <%= f.submit "Завести аккаунт", :class => "button vblue-button" %>
+        <% end %>
+
+        <%= form_for(:user, :as => :user, :html => {:class => "login"}, :url => user_session_path) do |f| %>
+    	<h2>Войти</h2>
+    	    <p class="email">
+              <%= f.label :email %>
+              <%= f.email_field :email, :id => "exist_user_email"  %>
+    	    </p>
+
+    	    <p class="passwd">
+               <%= f.label :password %>
+               <%= f.password_field :password, :id => "exist_user_password" %>
+    	    </p>
+
+            <% if Devise.mappings[:user].rememberable? -%>
+              <p class="remember-me">
+                <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+    	      </p>
+            <% end -%>
+
+    	    <a href="#">Востановить пароль</a>
+            <p>
+              <%= f.submit "Войти", :class => "button green-button" %>
+            </p>
+          <% end %>
+
+      </div>
+      <a href="#" class="close-modal"><%= image_tag("close-modal.png") %></a>
+    </div>
+
 </div>

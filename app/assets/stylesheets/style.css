@@ -1442,6 +1442,9 @@ html[xmlns] .clearfix {
         vertical-align: top;
       }
 
+      .recaptchatable {
+        font-size: 0.8em;
+      }
       .captcha a {
         font-size: 1em;
         border: none;
@@ -1477,10 +1480,23 @@ html[xmlns] .clearfix {
 #registration-modal {
   position: absolute;
   background: url('modal-enter.png') left top repeat-x;
+
+  background-image: linear-gradient(bottom, #e3f4f8 0%, #f8fcfd 90%);
+  background-image: -o-linear-gradient(bottom, #e3f4f8 0%, #f8fcfd 90%);
+  background-image: -moz-linear-gradient(bottom, #e3f4f8 0%, #f8fcfd 90%);
+  background-image: -webkit-linear-gradient(bottom, #e3f4f8 0%, #f8fcfd 90%);
+  background-image: -ms-linear-gradient(bottom, #e3f4f8 0%, #f8fcfd 90%);
+  background-image: -webkit-gradient(
+  	linear,
+  	left bottom,
+  	left top,
+  	color-stop(0, #e3f4f8),
+  	color-stop(0.9, #f8fcfd)
+  );
+
   padding: 25px 25px 25px 45px;
   border-radius: 5px;
   box-shadow: 0 0 25px 7px #C8CDCF;
-  margin-top: 100px;
 }
       #registration-modal fieldset{
         border: none;
@@ -1491,6 +1507,11 @@ html[xmlns] .clearfix {
         display: inline-block;
         vertical-align: top;
         width: 285px;
+      }
+
+      #registration-modal .button {
+        display: block;
+        margin: 10px 0;
       }
       #registration-modal h1 {
         margin: 0 0 10px 0;
