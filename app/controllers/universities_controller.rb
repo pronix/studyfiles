@@ -38,7 +38,7 @@ class UniversitiesController < ApplicationController
   end
 
   def create
-    @preview = ImagePreview.find(params[:preview_id])
+    @preview = params[:preview_id] ? ImagePreview.find(params[:preview_id]) : nil
     @university = University.new(params[:university])
     if @university.save
         current_user.universities << @university

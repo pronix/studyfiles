@@ -17,6 +17,7 @@ class Subject < ActiveRecord::Base
     indexes name
     indexes abbreviation
     indexes universities.name, :as => :university_name
+    has section_id
   end
 
 end

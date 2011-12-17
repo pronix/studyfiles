@@ -945,6 +945,7 @@ html[xmlns] .clearfix {
         display: none;
       }
           .expanded-subjects-list h5 {
+            clear: both;
             font-size: 1.4em;
             border-bottom: 1px dotted #d4d4d4;
             padding-bottom: 10px;
@@ -1593,11 +1594,13 @@ html[xmlns] .clearfix {
   height: 515px;
 }
 
-#univer-chooser-modal {
+#univer-chooser-modal, #subject-chooser-modal {
   width: 580px;
 }
-#create-univer-modal {
+#create-subject-modal, #create-univer-modal {
   width: 570px;
+}
+#create-univer-modal {
   padding-bottom: 40px;
 }
   #create-univer-modal .button.green-button {
@@ -1606,11 +1609,11 @@ html[xmlns] .clearfix {
     bottom: 25px;
   }
 
-#univer-chooser-modal .search-form-container {
+#univer-chooser-modal .search-form-container, #subject-chooser-modal .search-form-container{
   margin: 0 -15px;
 }
 
-#univer-chooser-modal .search-form div {
+#subject-chooser-modal .search-form div, #univer-chooser-modal .search-form div {
   width: 78%;
 }
 
@@ -1618,7 +1621,7 @@ html[xmlns] .clearfix {
 #preview2 { width: 54px; height: 54px; }
 #preview3 { width: 34px; height: 34px; }
 
-#univer-chooser-modal .button.blue-button {
+#subject-chooser-modal .button.blue-button, #univer-chooser-modal .button.blue-button {
   line-height: 25px;
   height: 25px;
   color: white !important;

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 class SubjectsController < ApplicationController
 
-  before_filter :load_univer, :only => [:index,:new,:edit,:create]
+  before_filter :load_univer, :only => [:index, :new,:edit,:create]
+
   def index
-    @subjects = Subject.search(params[:search], :conditions => {:university_name => @university.name})
+    @subjects = Subject.search(params[:search], :conditions => {:university_name => @university.name}, :with => {:section_id => 0})
   end
 
   def new

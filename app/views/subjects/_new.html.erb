@@ -1,0 +1,12 @@
+<div class="modal-window" id="create-subject-modal">
+  <h3>Добавить предмет</h3>
+
+  <%= form_for [@university, @subject] do |f| %>
+    <%= render "form", :f => f %>
+  <% end %>
+
+  <a href="#" class="close-modal">
+    <%= image_tag("close-modal.png") %>
+  </a>
+
+</div>

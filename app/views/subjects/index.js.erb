@@ -1,0 +1,11 @@
+if ($("#subject-chooser-modal").length > 0) {
+  $("#subject-chooser-modal .expanded-subjects-list").html("<%= escape_javascript( render "modal_search_results", :subjects => @subjects) %>");
+}
+else {
+  $(".modal-window").remove();
+    $("body").append("<%= escape_javascript(render 'modal_search', :subjects => @subjects) %>");
+  $("#subject-chooser-modal").modal({
+    closeClass: 'close-modal',
+    autoResize: true
+  });
+}

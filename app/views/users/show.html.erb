@@ -68,7 +68,7 @@
 
             <div class="level-1 clearfix node">
               <% sub.folders.top.each do |folder| %>
-                <%= render "shared/folder", :folder => folder %>
+                <%= render "shared/folder", :folder => folder, :univer => univer %>
               <% end %>
             </div>
 
@@ -77,11 +77,11 @@
 
         <div class="level-1 clearfix node">
           <% univer.folders.top.each do |folder| %>
-            <%= render "shared/folder", :folder => folder %>
+            <%= render "shared/folder", :folder => folder, :univer => univer %>
           <% end %>
         </div>
 
-        <%= link_to "Добавить предмет", university_subjects_path(univer), :class => "button green-button" %>
+        <%= link_to "Добавить предмет", university_subjects_path(univer), :class => "button green-button", :remote => true %>
 
       </div>
     </div>

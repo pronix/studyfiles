@@ -1,14 +1,21 @@
-<fieldset class="column span-18">
-  <p class="column span-14">
-    <%= f.label :name, "Полное название" %>
-    <%= f.text_field :name %>
-  </p>
-  <p class="column span-14">
-    <%= f.label :abbreviation, "Аббревиатура" %>
-    <%= f.text_field :abbreviation %>
-  </p>
-  <p>
-    <%= f.label :section_id, "Раздел" %>
-    <%= f.select :section_id, Subject.sectionized.collect {|p| [ p.name, p.id ] }, { :include_blank => true}  %>
-  </p>
-</fieldset>
+<dl class="form-list">
+
+  <dt><%= f.label :abbreviation, "Аббревиатура" %></dt>
+  <dd>
+    <div class="clearable-container">
+      <%= f.text_field :abbreviation, :style => "width: 440px;", :class => "clearable" %>
+      <a class="clearer icon"></a>
+    </div>
+  </dd>
+
+  <dt><%= f.label :name, "Полное название" %></dt>
+  <dd><%= f.text_field :name, :style => "width: 440px;" %></dd>
+
+
+  <dt><%= f.label :section_id, "Раздел" %></dt>
+  <dd><div class="fakeshadow"><%= f.select :section_id, Subject.sectionized.collect {|p| [ p.name, p.id ] }, { :include_blank => true}  %></div></dd>
+
+  <dt></dt>
+  <dd><%= f.submit "Добавить", :class => "button green-button" %></dd>
+
+</dl>

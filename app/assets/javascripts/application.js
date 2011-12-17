@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 
   //Очищалка инпутов
-  $('.clearer').click(function() {
+  $('.clearer').live('click', function() {
     $(this).parent('.clearable-container').find('.clearable').val('');
   });
 
