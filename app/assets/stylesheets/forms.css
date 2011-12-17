@@ -2,7 +2,7 @@
 	width: 13px;
 	height: 13px;
 	padding: 0;
-	background: url(../images/icons/checkboxed.png) no-repeat;
+	background: url(icons/checkboxed.png) no-repeat;
 	display: block;
 	float: left;
         cursor: pointer;

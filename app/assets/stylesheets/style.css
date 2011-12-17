@@ -1006,15 +1006,15 @@ html[xmlns] .clearfix {
   margin-bottom: 27px;
  }
 
-    .news-item div:last-child > * {
+    .news-item div:last-child form > *, .news-item div:last-child span {
       float: left;
       line-height: 21px;
       margin-left: 7px;
     }
-        .news-item div:last-child > .checkbox {
+        .news-item div:last-child form > .checkbox {
           margin-top: 3px;
         }
-        .news-item div:last-child > .checkboxed {
+        .news-item div:last-child form > .checkboxed {
           margin-left: 3px;
           color: #666666;
         }

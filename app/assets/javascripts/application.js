@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.simplemodal-1.4.1
+//= require custom-form-elements
 
 $(document).ready(function(){
 
@@ -55,4 +56,8 @@ $(document).ready(function(){
     $("#ajaxuploader").submit();
   });
 
+
+  $(".news-item form > .checkbox").live('click', function() {
+      $(this).parent('form').submit();
+  })
 });
