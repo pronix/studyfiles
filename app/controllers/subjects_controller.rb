@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class SubjectsController < ApplicationController
 
-  before_filter :load_univer, :only => [:index, :new,:edit,:create]
+  before_filter :load_univer, :only => [:index, :new, :edit, :create, :show]
 
   def index
     @subjects = Subject.search(params[:search], :conditions => {:university_name => @university.name}, :with => {:section_id => 0})
@@ -24,6 +24,10 @@ class SubjectsController < ApplicationController
     end
   end
 
+  def show
+    @subject = @university.subjects.find(params[:id])
+  end
+
   def create
     @subject = Subject.new(params[:subject])
     if @subject.save
@@ -34,7 +38,9 @@ class SubjectsController < ApplicationController
     end
     redirect_to user_path(current_user)
   end
+
   private
+
   def load_univer
     @university = University.find(params[:university_id])
   end

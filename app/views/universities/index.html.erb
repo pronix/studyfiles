@@ -24,7 +24,7 @@
               <ul class="subjects-list">
                   <% univer.subjects.first(4).each do |sub| %>
                     <li>
-                      <%= link_to sub.name, "#" %>
+                      <%= link_to sub.name, university_subject_path(univer, sub) %>
                     </li>
                   <% end %>
                   <li><%= link_to "...", "#", :class => "expand-subjects-list", :title => "Раскрыть #{univer.abbreviation}" %></li>
