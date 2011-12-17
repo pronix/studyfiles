@@ -1,0 +1,9 @@
+<%= @subject.name %>
+
+<% @subject.folders.by_univer(@university).each do |f| %>
+  <%= render "shared/folder", :folder => f, :univer => @university %>
+<% end %>
+
+<% @subject.documents.by_univer(@university).each do |d| %>
+  <%= render "shared/file_row", :document => d %>
+<% end %>

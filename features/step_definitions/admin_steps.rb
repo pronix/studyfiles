@@ -9,7 +9,12 @@ end
 Допустим /^университет "(.+)" имеет следующие предметы:$/ do |univer, table|
   univer = University.find_by_abbreviation(univer)
   table.hashes.each do |hash|
-    Factory(:subject, hash).universities << univer
+    if Subject.find_by_name(hash[:name])
+      subject = Subject.find_by_name(hash[:name])
+      subject.universities << univer
+    else
+      Factory(:subject, hash).universities << univer
+    end
   end
 end
 

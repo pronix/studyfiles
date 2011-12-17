@@ -33,3 +33,13 @@ folder7:
   name: Петрова
   description: <%= Faker::Lorem.paragraph %>
   university: mgu
+
+folder_subject_dimploms:
+  name: Дипломы
+  subject: math
+  university: mgu
+  
+folder_subject_kursovue:
+  name: Курсовые работы
+  subject: math
+  university: mgu
