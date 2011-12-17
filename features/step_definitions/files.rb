@@ -102,9 +102,13 @@ end
 
 Допустим /^в университете "(.+)" есть следующие предметы:$/ do |univer, table|
   univer = University.find_by_abbreviation(univer)
-  table.hashes.each do |h|
-    s = Factory(:subject, h)
-    s.universities << univer
+  table.hashes.each do |hash|
+    if Subject.find_by_name(hash[:name])
+      subject = Subject.find_by_name(hash[:name])
+      subject.universities << univer
+    else
+      Factory(:subject, hash).universities << univer
+    end
   end
 end
 

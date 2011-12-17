@@ -11,6 +11,7 @@ class Folder < ActiveRecord::Base
   scope :unsorted, where(:university_id => nil)
   scope :top, where(:path => '')
   scope :unsubjected, where(:subject_id => nil)
+  scope :by_univer, lambda{|univer| where(:university_id => univer.id)}
 
   after_create :create_log
   before_create :default_path_name
