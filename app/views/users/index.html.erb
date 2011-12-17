@@ -20,7 +20,7 @@
       <li>
            <div class="expander-header">
              <span class="rating">
-               <img src="images/icons/star1.png" />
+               <%= image_tag "icons/star1.png" %>
              </span>
 
              <%= link_to image_tag(user.avatar.url(:icon)), user_path(user) %>
@@ -43,7 +43,7 @@
              </div>
 
              <div class="place">
-               <img src="images/icons/thin-first-place.png" />
+               <%= image_tag "icons/thin-first-place.png" %>
                <h4>
                  <% if user.top_university.present? %>
                    <%= user.top_university_rating %>
