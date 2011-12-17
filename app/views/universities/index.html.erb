@@ -37,7 +37,7 @@
                     <dl>
                       <dt></dt>
                       <dd>
-                        <%= link_to section.name, "#" %>
+                        <%= link_to section.name, university_subject_path(univer, section) %>
                         <% if can? :edit, section %>
                           <%= link_to "", edit_university_subject_path(univer, section), :title => "Редактировать #{section.name}", :class => "icon edit"   %>
                         <% end %>
@@ -48,7 +48,7 @@
                           <%= sub.abbreviation %>
                         </dt>
                         <dd>
-                          <%= link_to sub.name, "#" %>
+                          <%= link_to sub.name, university_subject_path(univer, sub) %>
                           <% if can? :edit, sub %>
                             <%= link_to "", edit_university_subject_path(univer, sub), :title => "Редактировать #{sub.name}", :class => "icon edit"   %>
                           <% end %>
