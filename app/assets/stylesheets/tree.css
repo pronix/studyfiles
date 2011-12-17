@@ -189,7 +189,8 @@
           top: 6px;;
         }
         .expander-header > .rating {
-          width: 50px;
+          width: 40px;
+          white-space: nowrap;
           text-align: right;
         }
 
