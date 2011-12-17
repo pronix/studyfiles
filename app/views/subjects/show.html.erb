@@ -1,9 +1,30 @@
-<%= @subject.name %>
+<div class="expander parent">
 
-<% @subject.folders.by_univer(@university).each do |f| %>
-  <%= render "shared/folder", :folder => f, :univer => @university %>
-<% end %>
+       <div class="expander-header university">
+         <a class="blue-collapse icon expand"></a>
+         <a href="#" class="icon flag2"></a>
+         <h4>
+           <%= @subject.name %>
+         </h4>
+         <div class="expander-actions">
+           <%= link_to "", "", :class => "expand-all expand icon" %>
+           <%= link_to "", "", :class => "folder-plus icon" %>
+           <%= link_to "", "", :class => "file-plus icon" %>
+         </div>
+       </div>
 
-<% @subject.documents.by_univer(@university).each do |d| %>
-  <%= render "shared/file_row", :document => d %>
-<% end %>
+       <div class="expander-content node">
+            <div class="level-1 clearfix node">
+
+              <% @subject.folders.by_univer(@university).each do |folder| %>
+                <%= render "shared/folder", :folder => folder, :univer => @university  %>
+              <% end %>
+
+              <% @subject.documents.by_univer(@university).unfolded.each do |document| %>
+                <%= render "shared/file_row", :document => document %>
+              <% end %>
+
+            </div>
+       </div>
+
+</div>

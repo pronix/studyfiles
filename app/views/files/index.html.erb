@@ -1,8 +1,10 @@
 <%= sort_link @search, :rating, "По рейтингу" %>
 <% @universities.each do |univer| %>
   <div class="expander parent">
-    <%= univer.rating %>
     <div class="expander-header clearfix university">
+      <span class="rating">
+        <%= rating(univer) %>
+      </span>
       <a href="" class="blue-collapse icon expand"></a>
       <%= link_to image_tag(univer.logo.url(:icon)), "", :class => "logo" %>
 
