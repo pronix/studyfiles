@@ -1,9 +1,74 @@
-<% @users.each do |user| %>
-  <%= link_to user.name, user_path(user) %>
-  Рейтинг: <%= user.raiting %>
-  Рейтинг в вузе <%= user.top_university_rating %>
-  Файлов: <%= user.documents.count %>
-  <% if user.top_university.present? %>
-    <%= user.top_university.abbreviation %>
-  <% end %>
+<div class="search-form-container clearfix search-with-filters">
+      <div>
+        <h2>
+          <a href="" class="icon flag2"></a>
+          Все ВУЗы
+          <a href="" class="icon green-btn-expnd"></a>
+          <a href="" class="icon green-btn-close"></a>
+        </h2>
+        <%= form_tag users_path, :method => :get, :class => "search-form" do %>
+            <%= text_field_tag :search, params[:search], :placeholder =>  "Введите имя пользователя", :id => "search" %>
+          <button id="search_button" class="button blue-button">
+            Найти
+          </button>
+        <% end %>
+      </div>
+</div>
+
+<ul class="users-list">
+    <% @users.sort{ |a,b| b.raiting <=> a.raiting }.each do |user| %>
+      <li>
+           <div class="expander-header">
+             <span class="rating">
+               <img src="images/icons/star1.png" />
+             </span>
+
+             <%= link_to image_tag(user.avatar.url(:icon)), user_path(user) %>
+
+             <h4>
+               <%= link_to user.name, user_path(user) %>
+             </h4>
+
+             <div>
+               <%= user.created_at.strftime("%d.%m.%Y") %>
+             </div>
+
+             <div class="det-rating">
+               Рейтинг <br />
+               <b><%= user.raiting %></b>
+             </div>
+
+             <div class="files-counter">
+                 Файлов <%= user.documents.count %>
+             </div>
+
+             <div class="place">
+               <img src="images/icons/thin-first-place.png" />
+               <h4>
+                 <% if user.top_university.present? %>
+                   <%= user.top_university_rating %>
+                   <%= link_to user.top_university.abbreviation, "" %>
+                 <% end %>
+               </h4>
+             </div>
+           </div>
+      </li>
+    <% end %>
+</ul>
+
+<div class="pagination">
+    <span>Страница:</span>
+    <%= will_paginate @users, :previous_label => raw("&larr; <span>Ctrl</span>"),
+      :next_label => raw("<span>Ctrl</span> &rarr;"), :container => false  %>
+</div>
+
+<% content_for :sidebar do %>
+  <h3>Ваша позиция</h3>
+  <%= link_to current_user.name, user_path(current_user) %>
+  <%= render "rating", :user => current_user %>
+  <div class="gray-box gray-notification">
+    <p>
+       Ваш рейтинг - это суммарный рейтинг всех ваших файлов
+    </p>
+  </div>
 <% end %>
