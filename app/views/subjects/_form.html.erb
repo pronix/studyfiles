@@ -16,6 +16,6 @@
   <dd><div class="fakeshadow"><%= f.select :section_id, Subject.sectionized.collect {|p| [ p.name, p.id ] }, { :include_blank => true}  %></div></dd>
 
   <dt></dt>
-  <dd><%= f.submit "Добавить", :class => "button green-button" %></dd>
+  <dd><%= f.submit "Создать", :class => "button green-button" %></dd>
 
 </dl>

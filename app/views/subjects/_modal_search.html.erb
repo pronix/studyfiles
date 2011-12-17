@@ -7,7 +7,7 @@
           <%= link_to "Добавить", new_university_subject_path(@university), :class => "button blue-button popuper", :remote => true, :title => "Cоздать новый" %>
           <%= form_tag university_subjects_path, :method => :get, :remote => true, :class => "search-form" do %>
             <div class="clearable-container">
-              <%= text_field_tag :search, params[:search], :placeholder =>  "Фильтр ...", :id => "univer_modal_search_form", :class => "clearable" %>
+              <%= text_field_tag :search, params[:search], :placeholder =>  "Фильтр ...", :id => "subject_modal_search_form", :class => "clearable" %>
               <a class="clearer icon"></a>
             </div>
           <% end %>
