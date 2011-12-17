@@ -81,7 +81,9 @@
           <% end %>
         </div>
 
-        <%= link_to "Добавить предмет", university_subjects_path(univer), :class => "button green-button", :remote => true %>
+        <% if can? :add_subject, univer %>
+          <%= link_to "Добавить предмет", university_subjects_path(univer), :class => "button green-button", :remote => true %>
+        <% end %>
 
       </div>
     </div>
@@ -92,5 +94,7 @@
   <%= render "detailed", :user => @user %>
 <% end %>
 
-<%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
-<%= link_to "Добавить ВУЗ", universities_path, :class => "button green-button", :remote => true %>
+<% if @user == current_user %>
+  <%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
+  <%= link_to "Добавить ВУЗ", universities_path, :class => "button green-button", :remote => true %>
+<% end %>
