@@ -65,3 +65,12 @@ input[type=text], input[type=email], input[type=password], div.fakeshadow, texta
 #logo-previews > img {
   margin-right: 13px;
 }
+
+.submit-box {
+  padding: 10px 0 20px 0;
+}
+.submit-box .button {
+  display: block;
+  width: 120px;
+  margin: 0 auto;
+}

@@ -1,12 +1,17 @@
+<h2>Обратная связь</h2>
 <%= form_for :feedback, :url => feedback_path do |f| %>
-  <%= f.label :name, "Имя" %>
-  <%= f.text_field :name %>
+  <dl class="form-list">
+    <dt><%= f.label :name, "Имя" %></dt>
+    <dd><%= f.text_field :name %></dd>
 
-  <%= f.label :email, "E-mail" %>
-  <%= f.email_field :email %>
+    <dt><%= f.label :email, "E-mail" %></dt>
+    <dd><%= f.email_field :email %></dd>
 
-  <%= f.label :message, "Ваше сообщение" %>
-  <%= f.text_area :message %>
+    <dt><%= f.label :message, "Ваше сообщение" %></dt>
+    <dd><%= f.text_area :message, :cols => 60, :rows => 10 %></dd>
 
-  <%= f.submit "Отправить" %>
+  </dl>
+  <div class="gray-box submit-box">
+    <%= f.submit "Отправить", :class => "button green-button" %>
+  </div>
 <% end %>
