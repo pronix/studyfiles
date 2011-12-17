@@ -27,6 +27,7 @@ class Document < ActiveRecord::Base
   scope :processed, where(:item_proceed => true)
   scope :unfolded, where(:folder_id => nil)
   scope :unsubjected, where(:subject_id => nil)
+  scope :by_univer, lambda{|univer| where(:university_id => univer.id)}
 
   #вытаскиваем первые два символа с хеша
   def first_folder

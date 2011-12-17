@@ -1,15 +1,13 @@
 class Subject < ActiveRecord::Base
-
-  validates :name,         :presence => true
+  validates :name, :presence => true, :uniqueness => true
 
   belongs_to :section, :class_name => "Subject", :foreign_key => "section_id"
+
   has_many :subjects, :foreign_key => "section_id"
-
-
-  has_and_belongs_to_many :universities
-
   has_many :documents
   has_many :folders
+
+  has_and_belongs_to_many :universities, :uniq => true
 
   scope :sectionized, where(:section_id => nil)
 
