@@ -1,0 +1,5 @@
+<% 1.upto(10).each do |f| %>
+faq_<%= f %>:
+  question: <%= Faker::Lorem.sentence %>
+  answer: <%= Faker::Lorem.paragraphs.to_s %>
+<% end %>
