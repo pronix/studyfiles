@@ -31,7 +31,7 @@
 
         <div class="level-1 clearfix node">
           <% sub.folders.top.each do |folder| %>
-            <%= render "shared/folder", :folder => folder %>
+            <%= render "shared/folder", :folder => folder, :univer => @university %>
           <% end %>
           <% sub.documents.each do |doc| %>
             <%= render 'shared/file_row', :document => doc %>
