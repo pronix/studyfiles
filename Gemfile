@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
 
-
 gem 'pg'
 gem 'warden'
 gem 'devise'
@@ -39,15 +38,10 @@ gem 'prototype-rails', :git => 'git://github.com/rails/prototype-rails.git' #д�
 gem 'faker'
 
 group :test,:development do
-  # For help
-  gem 'seed-fu', '~> 2.1.0'
-
   #использользуем для подсветки синтаксиса в исходных кодах
   gem 'coderay'
   gem 'builder'
   gem 'silent-postgres'
-
-  gem 'jquery-rails'
 
   # For test
   gem 'factory_girl_rails'
