@@ -8,6 +8,8 @@ class UniversitiesController < ApplicationController
   def index
     @news = Novelty.main
     @universities = University.search(params[:search], :star => true, :page => params[:page], :per_page => 4)
+    @top_users = User.all.sort{ |a,b| b.raiting <=> a.raiting }.first(10)
+    @top_universities = University.all.sort{ |a,b| b.rating <=> a.rating }.first(10)
   end
 
   def search

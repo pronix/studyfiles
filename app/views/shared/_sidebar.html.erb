@@ -24,41 +24,14 @@
 
         <div id="users-top">
               <ul>
-                <li>
-                  <a href="#">Константин Константинопольский</a>
-                  <div class="user-rait">
-                    <span>195</span>
-                  </div>
-                </li>
-
-                <li>
-                  <a href="#">Владимир Красносельцев</a>
-                  <div class="user-rait">
-                    <span>186</span>
-                  </div>
-                </li>
-
-                <li>
-                  <a href="#">Борис Румянцев</a>
-                  <div class="user-rait">
-                    <span>180</span>
-                  </div>
-                </li>
-
-                <li>
-                  <a href="#">Игорь Маховецкий</a>
-                  <div class="user-rait">
-                    <span>175</span>
-                  </div>
-                </li>
-
-                <li>
-                  <a href="#">Надежда Рубеншпингель</a>
-                  <div class="user-rait">
-                    <span>162</span>
-                  </div>
-                </li>
-
+                <% @top_users.each do |user| %>
+                  <li>
+                    <%= link_to user.name, user_path(user) %>
+                    <div class="user-rait">
+                      <span><%= user.raiting %></span>
+                    </div>
+                  </li>
+                <% end %>
               </ul>
               <div class="userc-count">
                 <%= link_to "Всего пользователей", users_path %>
@@ -67,7 +40,20 @@
         </div>
 
         <div id="universities-top">
-          Hello, tab!
+              <ul>
+                <% @top_universities.each do |univer| %>
+                  <li>
+                    <%= link_to univer.name, university_folders_path(univer) %>
+                    <div class="user-rait">
+                      <span><%= univer.rating %></span>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+              <div class="userc-count">
+                <%= link_to "Всего университетов", universities_path %>
+                <%= University.count %>
+              </div>
         </div>
     </div>
 

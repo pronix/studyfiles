@@ -21,37 +21,13 @@
         </dd>
       </dl>
 
+      <%= render "rating", :user => user %>
 
-      <p class="gray-box clearfix">
-        Рейтинг:
-        <span style="float: right;">1 058</span>
-      </p>
-
-      <div class="place clearfix">
-        <span>
-          <span>место</span>
-          <b>12</b>
-        </span>
-        <span>- в общем ТОПе</span>
-      </div>
-
-      <div class="place gray-box clearfix">
-        <span>
-          <%= image_tag "icons/first-place.png" %>
-        </span>
-        <span>- в МГУ</span>
-      </div>
-
-      <div class="place clearfix">
-        <span>
-          <span>место</span>
-          <b>143</b>
-        </span>
-        <span>- в МИЭТ</span>
-      </div>
   </div>
   <!-- USER DETAILS BLOCK END -->
 
+
+<% if user == current_user %>
   <!-- LEGEND START -->
   <div class="yellow-notification notification closable legend">
     <a class="close icon"></a>
@@ -93,6 +69,10 @@
   </div>
   <!-- LEGEND END -->
 
-<% if user == current_user %>
   <%= render "shared/news", :news => @news %>
+
+<% else %>
+
+  <%= link_to "Написать в личку", new_discussion_path(:id => @user.id), :class => "button blue-button", :id => "pmme" %>
+
 <% end %>

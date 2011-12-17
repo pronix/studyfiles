@@ -8,5 +8,9 @@ class Ability
       can :manage, :all
     end
 
+    can :add_subject, University do |univer|
+      user.universities.include? univer
+    end
+
   end
 end

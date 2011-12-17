@@ -80,6 +80,10 @@ html[xmlns] .clearfix {
   padding: 5px;
 }
 
+#pmme {
+  width: 220px;
+  padding: 0;
+}
 
 /*
  *
@@ -265,6 +269,7 @@ html[xmlns] .clearfix {
     padding: 0 28px;
     border: none;
     text-decoration: none;
+    text-align: center;
   }
 
     .button.green-button {
@@ -429,13 +434,13 @@ html[xmlns] .clearfix {
     background-position  : -352px -0px;
  }
 
- #green-btn-close_png {
+ .green-btn-close {
     height               : 13px;
     width                : 13px;
     background-position  : -370px -0px;
  }
 
- #green-btn-expnd_png {
+ .green-btn-expnd {
     height               : 13px;
     width                : 13px;
     background-position  : -383px -0px;
@@ -606,6 +611,27 @@ html[xmlns] .clearfix {
 .search-form-container.without-button-search .search-form input {
   width: 100%;
 
+}
+.search-with-filters {
+  height: auto;
+  padding: 24px;
+  background-image: linear-gradient(bottom, #dcf5f9 0%, #f7fcfd 90%);
+  background-image: -o-linear-gradient(bottom, #dcf5f9 0%, #f7fcfd 90%);
+  background-image: -moz-linear-gradient(bottom, #dcf5f9 0%, #f7fcfd 90%);
+  background-image: -webkit-linear-gradient(bottom, #dcf5f9 0%, #f7fcfd 90%);
+  background-image: -ms-linear-gradient(bottom,  #dcf5f9 0%, #f7fcfd 90%);
+  background-image: -webkit-gradient(
+  	linear,
+  	left bottom,
+  	left top,
+  	color-stop(0, #dcf5f9),
+  	color-stop(0.9, #f7fcfd))
+}
+.search-with-filters .search-form {
+  margin-top: 16px;
+}
+.search-with-filters .search-form input {
+  width: 545px;
 }
 
 /* SEARCH FORM CONTAINER END */

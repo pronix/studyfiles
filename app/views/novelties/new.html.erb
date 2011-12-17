@@ -1,5 +1,7 @@
 <h2>Добавление новости</h2>
 <%= form_for :novelty, :url => novelties_path do |f| %>
   <%= render 'form', :f => f %>
-  <%= f.submit 'Сохранить' %>
+  <div class="gray-box submit-box">
+    <%= f.submit 'Сохранить', :class => "button green-button" %>
+  </div>
 <% end %>

@@ -5,7 +5,7 @@
       <div>
 
         <%= form_tag universities_path, :method => :get, :class => "search-form" do %>
-            <%= text_field_tag :search, params[:search], :placeholdr =>  "Введите название ВУЗа или предмета", :id => "search" %>
+            <%= text_field_tag :search, params[:search], :placeholder =>  "Введите название ВУЗа или предмета", :id => "search" %>
           <button id="search_button" class="button blue-button">
             Найти
           </button>
