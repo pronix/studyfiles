@@ -11,6 +11,5 @@ class Ability
     can :add_subject, University do |univer|
       user.universities.include? univer
     end
-
   end
 end

@@ -71,7 +71,17 @@ class User < ActiveRecord::Base
     user_universities.order('rating DESC').first.rating
   end
 
+  # INBOXES
+
   def unread_message_count
     discussions.map { |d| d.unread_messages_count_for(self) }.sum
+  end
+
+  def all_senders
+    User.find(Speaker.where(:discussion_id => discussion_ids).map {|s| s.user_id})
+  end
+
+  def sender_messages(user)
+    Message.where(:user_id => user.id, :discussion_id => discussion_ids)
   end
 end

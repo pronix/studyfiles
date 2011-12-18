@@ -21,6 +21,8 @@ module NavigationHelpers
       logs_path
     when /редактирования настроек/
       edit_account_path
+    when /страницу дискуссий/
+      discussions_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
