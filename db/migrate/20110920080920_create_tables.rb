@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 class CreateTables < ActiveRecord::Migration
   def change
-    create_table :messages do |t|
-      t.integer :user_id
-      t.text :text
-      t.integer :from_user_id
-      t.timestamps
-    end
     create_table :sections do |t|
       t.string :name
       t.timestamps
@@ -17,7 +11,6 @@ class CreateTables < ActiveRecord::Migration
       t.integer :section_id
       t.timestamps
     end
-
     #отношение предметов и папок
     create_table :subject_folders, :id => false do |t|
       t.integer :folder_id

@@ -72,6 +72,6 @@ class User < ActiveRecord::Base
   end
 
   def unread_message_count
-    Discussion.unread_for(self).count
+    discussions.map { |d| d.unread_messages_count_for(self) }.sum
   end
 end
