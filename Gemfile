@@ -16,17 +16,17 @@ gem 'ffi', '1.0.11'
 gem 'thinking-sphinx', '2.0.10'
 gem 'cancan'
 gem 'haml'
+
 gem 'unicorn'
 gem 'meta_search'
 gem 'whenever'
 
-gem 'inboxes', :path => 'vendor/inboxes'
 gem 'hierarchy', :path => 'vendor/plugins/hierarchy'
-
 gem 'recaptcha', :require => 'recaptcha/rails'
 
 gem 'rails-settings-cached', :require => 'rails-settings'
 gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
+gem 'inboxes', :git => 'git://github.com/evrone/inboxes.git'
 
 gem 'capistrano'
 gem 'capistrano-ext'
