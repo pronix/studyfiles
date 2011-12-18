@@ -24,7 +24,7 @@
 
      <p class="file-row-previews"></p>
 
-     <div class="<%== "level-#{folder.level+2}" %> clearfix node">
+     <div class="<%== "level-#{folder.level}" %> clearfix node">
        <% folder.documents.each do |document| %>
          <%= render "shared/file_row", :document => document %>
        <% end %>
