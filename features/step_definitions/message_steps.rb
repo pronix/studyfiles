@@ -22,3 +22,12 @@ end
   dis = Discussion.create(:recipient_tokens => [sender.id, recipient.id])
   1.upto(amount.to_i).each { Message.create(:discussion => dis, :user => sender, :body => "dasdsadas") }
 end
+
+Допустим /^сообщения от пользователя "(.+)" написаны давно$/ do |user|
+  Message.where(:user_id => User.find_by_email(user).id).update_all(:created_at => Time.now - 1.day,
+                                                                    :updated_at => Time.now - 1.day)
+end
+
+Допустим /^последнее сообщение от пользователя "(.+)" содержит текст "(.+)"$/ do |user, message|
+  Message.find_by_user_id(User.find_by_email(user)).update_attribute(:body, message)
+end

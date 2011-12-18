@@ -84,4 +84,9 @@ class User < ActiveRecord::Base
   def sender_messages(user)
     Message.where(:user_id => user.id, :discussion_id => discussion_ids)
   end
+
+  def last_descussion
+    retun [] unless discussions.present?
+    discussions.order('updated_at DESC').first
+  end
 end
