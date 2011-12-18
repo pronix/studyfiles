@@ -17,9 +17,10 @@ class User < ActiveRecord::Base
 
   has_many :user_universities, :dependent => :destroy
   has_many :universities, :through => :user_universities, :uniq => true
-  
+
   has_inboxes
 
+  has_and_belongs_to_many :subjects, :uniq => true
   has_and_belongs_to_many :roles, :uniq => true
 
   has_attached_file :avatar, :styles => { :medium => "128x128", :thumb => "54x54", :icon => "34x34" }
@@ -43,6 +44,10 @@ class User < ActiveRecord::Base
       return email
     end
     name
+  end
+
+  def university_subjects(univer)
+    self.subjects.select { |c| c.university_ids.include?(univer.id) }
   end
 
   #Подсчет рейтинга пользователя

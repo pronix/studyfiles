@@ -31,12 +31,19 @@ class SubjectsController < ApplicationController
   def create
     @subject = Subject.new(params[:subject])
     if @subject.save
+      current_user.subjects << @subject
       @university.subjects << @subject
       flash[:notice] = "Добавлен предмет"
     else
       flash[:alert] = "Не получилось добавить предмет"
     end
     redirect_to user_path(current_user)
+  end
+
+  def add_user
+    @subject = Subject.find(params[:id])
+    current_user.subjects << @subject
+    redirect_to request.referer
   end
 
   private

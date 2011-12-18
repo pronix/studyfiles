@@ -72,14 +72,16 @@
         </h4>
         <div class="expander-actions">
           <a class="expand-all icon expand"></a>
-          <a class="green-expand icon"></a>
+          <% if can? :add_subject, univer %>
+            <%= link_to "", university_subjects_path(univer), :class => "green-expand icon", :remote => true %>
+          <% end %>
           <a class="dred-cross icon"></a>
         </div>
       </div>
 
       <div class="expander-content node">
 
-        <% univer.subjects.each do |sub| %>
+        <% @user.university_subjects(univer).each do |sub| %>
            <div class="expander-subject parent">
 
              <div class="gray-box">
@@ -94,7 +96,7 @@
              </div>
 
             <div class="level-1 clearfix node">
-              <% sub.folders.top.each do |folder| %>
+              <% sub.folders.top.where(:user_id => @user.id).each do |folder| %>
                 <%= render "shared/folder", :folder => folder, :univer => univer %>
               <% end %>
             </div>
@@ -103,7 +105,7 @@
         <% end %>
 
         <div class="level-1 clearfix node">
-          <% univer.folders.top.each do |folder| %>
+          <% univer.folders.top.where(:user_id => @user.id).each do |folder| %>
             <%= render "shared/folder", :folder => folder, :univer => univer %>
           <% end %>
         </div>

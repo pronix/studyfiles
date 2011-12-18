@@ -8,6 +8,7 @@ class Subject < ActiveRecord::Base
   has_many :folders
 
   has_and_belongs_to_many :universities, :uniq => true
+  has_and_belongs_to_many :users, :uniq => true
 
   scope :sectionized, where(:section_id => nil)
 

@@ -64,6 +64,12 @@ class UniversitiesController < ApplicationController
     end
   end
 
+  def add_user
+    @university = University.find(params[:id])
+    current_user.universities << @university
+    redirect_to request.referer
+  end
+
 
   private
 

@@ -15,6 +15,9 @@ Studyfiles::Application.routes.draw do
       get 'search'
       post 'preview_logo'
     end
+    member do
+      put 'add_user'
+    end
     resources :folders
     resources :subjects
   end
@@ -32,7 +35,11 @@ Studyfiles::Application.routes.draw do
 
   resources :faqs
   resources :novelties
-  resources :subjects
+  resources :subjects do
+    member do
+      put 'add_user'
+    end
+  end
   resource :feedback, :controller => 'feedback', :only => [:new, :create]
   resources :logs
   resources :files
