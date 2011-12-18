@@ -1,0 +1,25 @@
+Настройки пользователя
+<%= form_for :user, :url => account_path, :html => {:method => :put} do |f| %>
+<%= f.label :name, "Имя и фамилия" %>
+<%= f.text_field :name %>
+
+<%= image_tag @user.avatar.path %>
+
+<%= f.label :avatar, "Аватар, фото" %>
+<%= f.file_field :avatar %>
+
+<%= f.label :subscriber, "Высылать уведомления о личных сообщениях на email" %>
+<%= f.check_box :subscriber %>
+
+<%= f.submit "Сохранить" %>
+<% end %>
+
+<%= form_for :user, :url => account_path, :html => { :method => :put } do |f| %>
+   <%= f.label :current_password, "Старый пароль" %>
+   <%= f.password_field :current_password %></p>
+
+  <p><%= f.label :password, "Новый пароль" %><br />
+  <%= f.password_field :password %></p>
+
+  <p><%= f.submit "Сменить пароль" %></p>
+<% end %>

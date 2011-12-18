@@ -1,7 +1,8 @@
 Studyfiles::Application.routes.draw do
 
 
-  devise_for :users, :controllers => { :registrations => "registrations" },:sign_out_via => [ :post, :delete, :get ]
+  devise_for :users, :controllers => { :registrations => "registrations" },
+  :sign_out_via => [ :post, :delete, :get ]
 
   resources :documents do
     resources :votes
@@ -29,6 +30,8 @@ Studyfiles::Application.routes.draw do
     resources :documents
     resources :universities
   end
+
+  resource :account
 
   resources :faqs
   resources :novelties
