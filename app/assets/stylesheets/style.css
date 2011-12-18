@@ -1040,7 +1040,7 @@ html[xmlns] .clearfix {
         .news-item div:last-child form > .checkbox {
           margin-top: 3px;
         }
-        .news-item div:last-child form > .checkboxed {
+        .checkboxed {
           margin-left: 3px;
           color: #666666;
         }

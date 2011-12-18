@@ -40,6 +40,8 @@ input[type=text], input[type=email], input[type=password], div.fakeshadow, texta
 
 .form-list dt {
   float: left;
+  line-height: 25px;
+  font-size: 1.1em;
   width: 120px;
 }
 
@@ -55,8 +57,13 @@ input[type=text], input[type=email], input[type=password], div.fakeshadow, texta
   position: absolute;
   right: 0;
   opacity: 0;
+  margin: 0 12px 0 0;
+  height: 27px;
   width: 110px;
 }
+
+.fakeupload .button { cursor: pointer; }
+
 
 #logo-previews {
   margin: 12px 0 12px 120px;
@@ -69,7 +76,7 @@ input[type=text], input[type=email], input[type=password], div.fakeshadow, texta
 .submit-box {
   padding: 10px 0 20px 0;
 }
-.submit-box .button {
+.submit-box > .button {
   display: block;
   width: 120px;
   margin: 0 auto;
