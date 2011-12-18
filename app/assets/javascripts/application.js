@@ -3,6 +3,17 @@
 //= require jquery.simplemodal-1.4.1
 //= require custom-form-elements
 
+function wrap(elements, wrap, size) {
+  // thanks array_chunk :) http://phpjs.org/functions/array_chunk:306
+  var x, i = 0, c = -1, l = elements.length, n = [];
+  for(i; i < l; i++){
+    (x = i % size) ? n[c][x] = elements[i] : n[++c] = [elements[i]];
+  }
+  l = n.length;
+  for(i = 0; i < l; i++) {
+    $(n[i]).wrapAll(wrap);
+  }
+}
 $(document).ready(function(){
 
   //TODO переделать только для старых бразуеров
@@ -59,5 +70,13 @@ $(document).ready(function(){
 
   $(".news-item form > .checkbox").live('click', function() {
       $(this).parent('form').submit();
-  })
+  });
+
+
+
+  //$('p').filter(function() {
+  //      return $.trim($(this).text()) === ''
+  //  }).remove();
+  //wrap($('.content div > *'), '<div class="page" style="border: 1px solid black"></div>', 8);
+
 });
