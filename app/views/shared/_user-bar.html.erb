@@ -1,7 +1,7 @@
 <div id="user-bar" class="login-bar clearfix">
 
     <span>
-        <big>Иван Иваныч</big>
+        <big><%= current_user.name %></big>
         &nbsp;&nbsp;/&nbsp;&nbsp;
         <%= link_to current_user.documents.count, user_path(current_user) %>
     </span>
