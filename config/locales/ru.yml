@@ -5,6 +5,11 @@ ru:
       short: "%d %b"
       long: "%d %B %Y"
 
+  message:
+    one: Сообщение
+    few: Сообщения
+    many: Сообщений
+    other: Сообщений
   univer_abbr:
     one:   "ВУЗ"
     few:   "ВУЗа"

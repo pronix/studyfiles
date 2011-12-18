@@ -7,7 +7,7 @@
     </span>
 
     <span id="inbox-notify" class="has-messages">
-      <%= link_to "1 сообщение", discussions_path, :title => "Личные сообщения" %></li>
+      <%= link_to "#{current_user.unread_message_count} #{t(:message, :count => current_user.unread_message_count)}", discussions_path, :title => "Личные сообщения" %></li>
     </span>
 
 

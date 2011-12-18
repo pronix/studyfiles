@@ -1,7 +1,6 @@
 = form_for @discussion do |f|
   %p
-    =#FIXME эту строку ниже надо переписать красиво
-    = raw('<h3> Сообщение пользователю ' + User.find_by_id(params[:id]).name + '</h3>')
+    = raw('<h3> Сообщение пользователю ' + current_user.name + '</h3>')
     %br
     = hidden_field_tag "discussion[recipient_tokens]", params[:id]
   %p

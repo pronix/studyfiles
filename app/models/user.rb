@@ -70,4 +70,8 @@ class User < ActiveRecord::Base
     return nil unless user_universities.present?
     user_universities.order('rating DESC').first.rating
   end
+
+  def unread_message_count
+    Discussion.unread_for(self).count
+  end
 end
