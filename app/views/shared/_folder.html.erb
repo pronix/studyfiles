@@ -14,7 +14,9 @@
        <%= link_to folder.name, "#", :class => "expand", :title => "Раскрыть #{folder.name}" %>
      </span>
 
-     <span class="file-row-size"><%= folder.files_count %></span>
+     <span class="file-row-size">
+        <%= "#{folder.files_count} #{ t(:file, :count => folder.files_count)}" %>
+     </span>
 
      <span class="file-row-date"><%= folder.created_at.strftime("%d.%m.%Y") %></span>
 
@@ -22,7 +24,7 @@
 
      <p class="file-row-previews"></p>
 
-     <div class="<%== "level-#{folder.level+1}" %> clearfix node">
+     <div class="<%== "level-#{folder.level}" %> clearfix node">
        <% folder.documents.each do |document| %>
          <%= render "shared/file_row", :document => document %>
        <% end %>

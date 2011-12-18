@@ -3,9 +3,13 @@ if ($("#subject-chooser-modal").length > 0) {
 }
 else {
   $(".modal-window").remove();
-    $("body").append("<%= escape_javascript(render 'modal_search', :subjects => @subjects) %>");
+  $("body").append("<%= escape_javascript(render 'modal_search', :subjects => @subjects) %>");
   $("#subject-chooser-modal").modal({
     closeClass: 'close-modal',
-    autoResize: true
+    autoResize: true,
+    onClose: function() {
+      $.modal.close();
+      $(".modal-window").remove();
+    }
   });
 }

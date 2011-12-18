@@ -1,5 +1,14 @@
 <%= render "shared/univer-search" %>
 
+<div class="yellow-notification notification closable">
+  <a class="close icon"></a>
+  <div>
+    <p>
+      Несортированные файлы не отображаются в общем каталоге, но доступны другим пользователям для скачивания с вашей страницы.
+    </p>
+  </div>
+</div>
+
 <div class="expander parent">
 
        <div class="expander-header university">
@@ -11,7 +20,7 @@
          <div class="expander-actions">
            <%= link_to "", "", :class => "expand-all expand icon" %>
            <%= link_to "", "", :class => "folder-plus icon" %>
-           <%= link_to "", "", :class => "file-plus icon" %>
+           <%= link_to "", new_user_document_path(current_user), :class => "file-plus icon" %>
          </div>
        </div>
 
@@ -27,8 +36,26 @@
               <% end %>
 
             </div>
+       <% if @user == current_user %>
+         <%= link_to "Добавить файлы", new_user_document_path(current_user), :class => "button green-button" %>
+       <% end %>
+
        </div>
 
+</div>
+
+<div class="yellow-notification notification closable">
+  <a class="close icon"></a>
+  <div>
+    <p>
+      Чтобы добавить файлы в общий каталог:
+    </p>
+    <ul class="unordered-list">
+    	<li>Добавьте ВУЗ с помощью кнопки ниже;</li>
+    	<li>Добавьте предмет;</li>
+    	<li>Загрузите файлы со своего компьютера или перетащите их мышкой из несортированных.</li>
+    </ul>
+  </div>
 </div>
 
 
@@ -45,14 +72,16 @@
         </h4>
         <div class="expander-actions">
           <a class="expand-all icon expand"></a>
-          <a class="green-expand icon"></a>
+          <% if can? :add_subject, univer %>
+            <%= link_to "", university_subjects_path(univer), :class => "green-expand icon", :remote => true %>
+          <% end %>
           <a class="dred-cross icon"></a>
         </div>
       </div>
 
       <div class="expander-content node">
 
-        <% univer.subjects.each do |sub| %>
+        <% @user.university_subjects(univer).each do |sub| %>
            <div class="expander-subject parent">
 
              <div class="gray-box">
@@ -67,7 +96,7 @@
              </div>
 
             <div class="level-1 clearfix node">
-              <% sub.folders.top.each do |folder| %>
+              <% sub.folders.top.where(:user_id => @user.id).each do |folder| %>
                 <%= render "shared/folder", :folder => folder, :univer => univer %>
               <% end %>
             </div>
@@ -76,7 +105,7 @@
         <% end %>
 
         <div class="level-1 clearfix node">
-          <% univer.folders.top.each do |folder| %>
+          <% univer.folders.top.where(:user_id => @user.id).each do |folder| %>
             <%= render "shared/folder", :folder => folder, :univer => univer %>
           <% end %>
         </div>
@@ -95,6 +124,5 @@
 <% end %>
 
 <% if @user == current_user %>
-  <%= link_to "Добавить файлы", new_user_document_path(current_user) %> <br />
   <%= link_to "Добавить ВУЗ", universities_path, :class => "button green-button", :remote => true %>
 <% end %>

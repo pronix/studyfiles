@@ -1,3 +1,5 @@
+<% top_users = User.all.sort{ |a,b| b.raiting <=> a.raiting }.first(10) %>
+<% top_universities = University.all.sort{ |a,b| b.rating <=> a.rating }.first(10) %>
 <div class="salat-box">
   <% if current_user %>
     <%= link_to "", new_user_document_path(current_user), :class => "add-file-button" %>
@@ -6,7 +8,7 @@
   <% end %>
 </div>
 
-<%= render "shared/news", :news => @news %>
+<%= render "shared/news", :news => Novelty.main %>
 
 <!-- TOPS BLOCK START -->
 <div class="top-10">
@@ -24,7 +26,7 @@
 
         <div id="users-top">
               <ul>
-                <% @top_users.each do |user| %>
+                <% top_users.each do |user| %>
                   <li>
                     <%= link_to user.name, user_path(user) %>
                     <div class="user-rait">
@@ -41,7 +43,7 @@
 
         <div id="universities-top">
               <ul>
-                <% @top_universities.each do |univer| %>
+                <% top_universities.each do |univer| %>
                   <li>
                     <%= link_to univer.name, university_folders_path(univer) %>
                     <div class="user-rait">

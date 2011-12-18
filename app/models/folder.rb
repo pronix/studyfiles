@@ -3,7 +3,7 @@ class Folder < ActiveRecord::Base
   include Hierarchy
 
   has_many :documents
-  
+
   belongs_to :user
   belongs_to :university
   belongs_to :subject
@@ -15,9 +15,9 @@ class Folder < ActiveRecord::Base
 
   after_create :create_log
   before_create :default_path_name
-  
+
   def level
-    index_path.size
+    index_path.size + 2
   end
 
   def top_level?

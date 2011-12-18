@@ -3,7 +3,7 @@
   <% universities.each do |univer| %>
         <dl>
           <dt><%= univer.abbreviation %></dt>
-          <dd><%= link_to univer.name, university_folders_path(univer) %></dd>
+          <dd><%= link_to univer.name, add_user_university_path(univer), :method => :put %></dd>
         </dl>
   <% end %>
   </li>
