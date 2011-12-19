@@ -19,7 +19,7 @@ set :rvm_ruby_string, 'ruby-1.9.2-head'
 after "deploy:finalize_update", "deploy:db:symlink"
 after "deploy:finalize_update", "deploy:create_log"
 
-
+after 'deploy:update_code', 'deploy:clear_public_system'
 after 'deploy:update_code', 'deploy:stop_sphinx'
 after 'deploy:update_code', 'delayed_job:stop'
 after 'deploy:update_code', 'unicorn:graceful_stop'
@@ -46,6 +46,9 @@ end
 
 
 namespace :deploy do
+  task :clear_public_system do
+    run "cd #{latest_release} && rm -rf public/system/*"
+  end
 
   task :load_seed do
     run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake db:seed"
