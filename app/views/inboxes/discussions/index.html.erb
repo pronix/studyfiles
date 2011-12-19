@@ -14,7 +14,6 @@
 
 <div id="chat-contacts">
   <h3>Ваши собеседники</h3>
-
   <!-- CONTACTS LIST START -->
   <ul id="contacts-list">
     <% current_user.all_senders.each do |sender| %>
@@ -32,30 +31,32 @@
 </div>
 
 <div id="messaging">
+  <% if current_user.last_descussion.present? %>
+    <%= form_for Message.new, :url => discussion_messages_path(current_user.last_descussion.id) do |f| %>
+      <%= f.label :body, "Ваше сообщение" %>
+      <%= f.text_area :body, :rows => 8, :cols => 50 %>
 
-  <%= form_for Message.new, :url => discussion_messages_path(current_user.last_descussion.id) do |f| %>
-    <%= f.label :body, "Ваше сообщение" %>
-    <%= f.text_area :body, :rows => 8, :cols => 50 %>
-
-    <%= f.submit "Отправить", :class => "button blue-button" %>
-  <% end %>
-
-  <ul id="messages">
-    <% current_user.last_descussion.messages.each do |m| %>
-         <li class="<%== "my-message" if m.user == current_user %>">
-           <span>
-             <% if m.user == current_user %>
-                Вы,
-             <% else %>
-                <%= m.user.name if m.user == current_user %>,
-             <% end %>
-             <%= m.created_at.strftime("%d.%m.%Y в %H:%M") %>
-           </span>
-           <p><%= m.body %></p>
-         </li>
+      <%= f.submit "Отправить", :class => "button blue-button" %>
     <% end %>
-  </ul>
 
+    <ul id="messages">
+      <% current_user.last_descussion.messages.each do |m| %>
+        <li class="<%== "my-message" if m.user == current_user %>">
+          <span>
+            <% if m.user == current_user %>
+              Вы,
+            <% else %>
+              <%= m.user.name if m.user == current_user %>,
+            <% end %>
+            <%= m.created_at.strftime("%d.%m.%Y в %H:%M") %>
+          </span>
+          <p><%= m.body %></p>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    У вас пока нет сообщений
+  <% end %>
 </div>
 
 
