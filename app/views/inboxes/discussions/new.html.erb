@@ -1,0 +1,11 @@
+<%= form_for @discussion, :url => discussions_path do |f| %>
+  Получатель: <%= User.find(params[:id]).name.present? ? User.find(params[:id]).name : 'Имя не указанно' %>
+  <%= hidden_field_tag 'recipient_user_id', params[:id] %>
+
+  <%= fields_for :messages do |m| %>
+    <%= m.label :body, "Текст сообщения" %>
+    <%= m.text_area :body %>
+  <% end %>
+
+  <%= f.submit "Отправить" %>
+<% end %>

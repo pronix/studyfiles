@@ -23,7 +23,8 @@ module NavigationHelpers
       edit_account_path
     when /страницу дискуссий/
       discussions_path
-
+    when /пользовательскую страницу "(.+)"/
+      user_path(User.find_by_email($1))
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
