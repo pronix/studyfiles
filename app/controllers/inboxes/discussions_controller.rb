@@ -5,7 +5,8 @@ class Inboxes::DiscussionsController < Inboxes::BaseController
   before_filter :load_and_check_discussion_recipient, :only => [:new]
   
   def index
-    @discussions = current_user.discussions
+    @discussion = current_user.last_disscusion
+    @messages = @discussion.messages
   end
 
   # GET /discussions/1
@@ -25,10 +26,9 @@ class Inboxes::DiscussionsController < Inboxes::BaseController
   # POST /discussions
   # POST /discussions.json
   def create
-    recipient = User.find(params[:recipient_user_id])
-    if @discussion = Discussion.find_between_users(current_user, recipient)
-      Message.create(:user => current_user, :discussion => @discussion,
-                     :body => params[:messages][:body])
+    if @discussion = Discussion.find(params[:discussion_id])
+      Message.create(params[:message].merge({:discussion => @discussion,
+                                            :user => current_user}))
     else
       @discussion = Discussion.new
       @discussion.recipient_ids = [current_user.id, recipient.id]
@@ -36,7 +36,7 @@ class Inboxes::DiscussionsController < Inboxes::BaseController
       Message.create(:user => current_user, :discussion => @discussion,
                      :body => params[:messages][:body])
     end
-    redirect_to root_path, :notice => 'Сообщение отправленно'
+    redirect_to discussion_messages_path(@discussion), :notice => 'Сообщение отправленно'
   end
   
   private

@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
     Message.where(:user_id => user.id, :discussion_id => discussion_ids)
   end
 
-  def last_descussion
+  def last_disscusion
     return [] unless discussions.present?
     discussions.order('updated_at DESC').first
   end

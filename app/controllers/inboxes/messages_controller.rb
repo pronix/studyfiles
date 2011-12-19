@@ -4,6 +4,12 @@ class Inboxes::MessagesController < Inboxes::BaseController
   # load_and_authorize_resource :discussion
   load_resource :message, :through => :discussion, :shallow => true
 
+  def index
+    @discussion = Discussion.find(params[:discussion_id])
+    @messages = Message.order('id DESC').where(:discussion_id => @discussion.id)
+    render 'inboxes/discussions/index'
+  end
+
   def create
     @discussion = Discussion.find(params[:discussion_id])
     @message = Message.new(params[:message])

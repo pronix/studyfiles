@@ -1,0 +1,24 @@
+<div id="messaging">
+  <%= form_for Message.new, :url => discussions_path(:discussion_id => discussion.id) do |f| %>
+    <%= f.label :body, "Ваше сообщение" %>
+    <%= f.text_area :body, :rows => 8, :cols => 50 %>
+
+    <%= f.submit "Отправить", :class => "button blue-button" %>
+  <% end %>
+
+  <ul id="messages">
+    <% messages.each do |m| %>
+      <li class="<%== "my-message" if m.user == current_user %>">
+        <span>
+          <% if m.user == current_user %>
+            Вы,
+          <% else %>
+            <%= m.user.name %>,
+          <% end %>
+          <%= m.created_at.strftime("%d.%m.%Y в %H:%M") %>
+        </span>
+        <p><%= m.body %></p>
+      </li>
+    <% end %>
+  </ul>
+</div>

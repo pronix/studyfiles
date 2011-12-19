@@ -1,0 +1,15 @@
+<div id="chat-contacts">
+  <h3>Ваши собеседники</h3>
+  <ul id="contacts-list">
+    <% current_user.all_senders.each do |sender| %>
+      <li>
+        <%= image_tag sender.avatar.url(:icon), :class => "avatar" %>
+      	<div>
+             <%= link_to sender.name, discussion_messages_path(Discussion.find_between_users(current_user, sender)) %>
+             <%= link_to "#{current_user.sender_messages(sender).count} #{t(:message, :count => current_user.sender_messages(sender).count)}", user_path(sender), :class => "messages-counter" %>
+             <%= link_to "Профиль пользователя", user_path(sender) %>
+      	</div>
+      </li>
+    <% end %>
+  </ul>
+</div>
