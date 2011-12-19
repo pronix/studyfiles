@@ -73,8 +73,15 @@ class User < ActiveRecord::Base
 
   # INBOXES
 
+  def unread_messages
+    speaker = Speaker.find_by_user_id(self.id)
+    return [] unless speaker.present?
+    Message.where("discussion_id in (?) AND user_id != ? AND updated_at > ?",
+                  discussion_ids, self.id, speaker.updated_at)
+  end
+  
   def unread_message_count
-    discussions.map { |d| d.unread_messages_count_for(self) }.sum
+    unread_messages.count
   end
 
   def all_senders

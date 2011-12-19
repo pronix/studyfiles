@@ -31,3 +31,12 @@ end
 Допустим /^последнее сообщение от пользователя "(.+)" содержит текст "(.+)"$/ do |user, message|
   Message.find_by_user_id(User.find_by_email(user)).update_attribute(:body, message)
 end
+
+
+Допустим /^пользователь "(.+)" должен иметь (\d+) не прочитанное сообщение$/ do |user, amount|
+  User.find_by_email(user).unread_message_count.should == amount.to_i
+end
+
+Допустим /^последнее присланное пользователю "(.+)" содержит "(.+)"$/ do |user, message|
+  User.find_by_email(user).unread_messages.last.body.should == message
+end

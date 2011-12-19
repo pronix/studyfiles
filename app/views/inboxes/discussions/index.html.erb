@@ -5,6 +5,12 @@
   <%= link_to "Профиль пользователя", user_path(sender) %>
 <% end %>
 
+<%= form_for Message.new, :url => discussion_messages_path(current_user.last_descussion.id) do |f| %>
+  <%= f.label :body, "Ваше сообщение" %>
+  <%= f.text_area :body %>
+
+  <%= f.submit "Отправить" %>
+<% end %>
 
 <% current_user.last_descussion.messages.each do |m| %>
   <%= m.body %>
