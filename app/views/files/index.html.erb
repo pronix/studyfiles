@@ -48,7 +48,7 @@
 	<% univer.folders.top.unsubjected.each do |folder| %>
           <%= render "shared/folder", :folder => folder, :univer => univer %>
 	<% end %>
-	<% univer.documents.each do |doc| %>
+	<% univer.documents.unfolded.each do |doc| %>
 	  <%= render 'shared/file_row', :document => doc %>
 	<% end %>
       </div>

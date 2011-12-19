@@ -74,6 +74,12 @@ $(document).ready(function(){
   });
 
 
+  $('.popup-preview').click(function(e) {
+     e.preventDefault();
+     window.open ($(this).attr('href'), 'newwindow', config='height=500, width=900, toolbar=no, menubar=no')
+  });
+
+
 
   $('p').filter(function() {
         return $.trim($(this).text()) === ''

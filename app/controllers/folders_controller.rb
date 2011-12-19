@@ -22,6 +22,7 @@ class FoldersController < ApplicationController
 
   def show
     @folder = Folder.find(params[:id])
+    render :layout => 'previews'
   end
 
   def update

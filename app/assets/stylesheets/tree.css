@@ -228,3 +228,35 @@
 
 /* EXPANDER END */
 
+
+
+
+/* FOR PREVIEWS */
+
+.mini-wrapper .level-1 {
+  width: 666px;
+}
+
+.mini-wrapper .level-1:nth-child(even) {
+  background: #f8f9f1;
+  padding-top: 6px;
+}
+.mini-wrapper .file-row-user {
+  display: none;
+}
+
+.mini-wrapper .level-2 { }
+.mini-wrapper .level-3 { }
+.mini-wrapper .level-4 { }
+.mini-wrapper .level-5 { }
+.mini-wrapper .level-6 { }
+.mini-wrapper .level-7 { }
+.mini-wrapper .level-8 { }
+
+
+
+.mini-wrapper .level-2, .mini-wrapper .level-4, .mini-wrapper .level-5, .mini-wrapper .level-6, .mini-wrapper .level-7, .mini-wrapper .level-3, .mini-wrapper .level-8 {
+  display: block;
+  background: white;
+}
+

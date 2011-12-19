@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Studyfiles</title>
+  <link rel="icon" type="image/image/vnd.microsoft.icon" href="/images/favi.ico" />
+  <%= stylesheet_link_tag "style.css", "forms.css", "tree.css", "jquery-ui.css" %>
+  <%= javascript_include_tag "application", "jquery-ui", "nested_form",  "cookies" %>
+  <%= csrf_meta_tag %>
+</head>
+
+<body>
+
+<div class="mini-wrapper clearfix">
+
+    <div id="header">
+      <div class="nav-bar">
+        <div class="logo-box">
+          <%= link_to image_tag("logo.png", :alt => "StudyFiles"), root_path %>
+          <div class="about-logo">
+            Учебные материалы.<br />
+            Все предметы. Все ВУЗы
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="details">
+      <%= yield :preview_details %>
+    </div>
+
+    <div class="content two-col">
+      <%= yield %>
+    </div>
+
+</div>
+
+</body>
+<script>
+  $(function() {
+    setInterval(function() {
+        if( $.cookie('download_finished') == "true" ) {
+          $.cookie('download_finished', null);
+          location.reload();
+        }
+    }, 200);
+  })
+</script>
+</html>

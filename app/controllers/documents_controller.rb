@@ -13,6 +13,7 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
+    render :layout => 'previews'
   end
 
   def create

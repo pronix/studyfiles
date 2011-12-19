@@ -127,6 +127,11 @@ class Folder < ActiveRecord::Base
     docs.size
   end
 
+  def files_size
+    docs = self.get_documents
+    docs.sum{|d| d.item_file_size}
+  end
+
   def get_documents
     docs = []
     docs.concat(self.documents)
