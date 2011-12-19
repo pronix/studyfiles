@@ -1,6 +1,40 @@
 require 'spec_helper'
 
 describe Document do
+
+  describe "Unzip document", :current => true do
+    before(:each) do
+      FileUtils.rm_rf(Rails.root.join('tmp/unzipped'))
+      @doc = Factory(:document,
+                     :folder => nil,
+                     :subject => nil,
+                     :university => nil,
+                     :item => File.new(Rails.root.join('sample_documents/test_archive.zip')))
+    end
+    before(:all) do
+      @unzipped_dir = Rails.root.join('tmp/unzipped')
+    end
+
+    it "Should unzip archive" do
+      @doc.unzip_file
+      File.exist?(@unzipped_dir).should == true
+      File.exist?(File.join(@unzipped_dir, @doc.id.to_s, 'test_archive')).should == true
+      File.exist?(File.join(@unzipped_dir, @doc.id.to_s, 'test_archive/sozdanie.doc')).should == true
+      File.exist?(File.join(@unzipped_dir, @doc.id.to_s, 'test_archive/folder_1/vshe.gif')).should == true
+      Document.find_by_name('sozdanie.doc').should be_true
+      Document.find_by_name('vshe.gif').should be_true
+      Document.find_by_name('sozdanie.doc').folder.name.should == 'test_archive'
+      Document.find_by_name('sozdanie.doc').folder.path.should == ''
+      Document.find_by_name('vshe.gif').folder.parent.should == Folder.find_by_name('test_archive')
+    end
+
+    it "Should delete arhive after processing" do
+      @doc.file_processing
+      Document.where(:id => @doc.id).present?.should == false
+    end
+    
+  end
+  
   describe "Move documents to folder" do
     before(:each) do
       @folder = Factory(:folder)

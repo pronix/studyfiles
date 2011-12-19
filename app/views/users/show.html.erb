@@ -27,8 +27,8 @@
        <div class="expander-content node">
             <div class="level-1 clearfix node">
 
-              <% @user.folders.unsorted.each do |folder| %>
-                <%= render "shared/folder", :folder => folder %>
+	      <% @user.folders.unsorted.each do |folder| %>
+                <%= render "shared/folder_nude", :folder => folder %>
               <% end %>
 
               <% @user.documents.unfolded.each do |document| %>

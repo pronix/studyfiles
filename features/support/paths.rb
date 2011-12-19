@@ -25,6 +25,9 @@ module NavigationHelpers
       discussions_path
     when /пользовательскую страницу "(.+)"/
       user_path(User.find_by_email($1))
+    when /страницу загрузки документов для пользователя "(.+)"/
+      new_user_document_path(User.find_by_email($1))
+      
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
