@@ -1,17 +1,61 @@
-Ваши собеседники
-<% current_user.all_senders.each do |sender| %>
-  <%= sender.name %>
-  <%= current_user.sender_messages(sender).count %> <%= t(:message, :count => current_user.sender_messages(sender).count) %>
-  <%= link_to "Профиль пользователя", user_path(sender) %>
-<% end %>
+<ul id="breadcrumbs">
+  <li>
+        <%= link_to "Главная", universities_path %>
+  </li>
+  <li>
+        <%= link_to "Личный кабинет", edit_account_path %>
+  </li>
+  <li>
+        <%= link_to "Сообщения", discussions_path %>
+  </li>
+</ul>
 
-<%= form_for Message.new, :url => discussion_messages_path(current_user.last_descussion.id) do |f| %>
-  <%= f.label :body, "Ваше сообщение" %>
-  <%= f.text_area :body %>
+<h2><span>Сообщения</span></h2>
 
-  <%= f.submit "Отправить" %>
-<% end %>
+<div id="chat-contacts">
+  <h3>Ваши собеседники</h3>
 
-<% current_user.last_descussion.messages.each do |m| %>
-  <%= m.body %>
-<% end %>
+  <!-- CONTACTS LIST START -->
+  <ul id="contacts-list">
+    <% current_user.all_senders.each do |sender| %>
+      <li>
+        <%= image_tag sender.avatar.url(:icon), :class => "avatar" %>
+      	<div>
+             <%= link_to sender.name, user_path(sender) %>
+             <%= link_to "#{current_user.sender_messages(sender).count} #{t(:message, :count => current_user.sender_messages(sender).count)}", user_path(sender), :class => "messages-counter" %>
+             <%= link_to "Профиль пользователя", user_path(sender) %>
+      	</div>
+      </li>
+    <% end %>
+  </ul>
+  <!-- CONTACTS LIST END -->
+</div>
+
+<div id="messaging">
+
+  <%= form_for Message.new, :url => discussion_messages_path(current_user.last_descussion.id) do |f| %>
+    <%= f.label :body, "Ваше сообщение" %>
+    <%= f.text_area :body, :rows => 8, :cols => 50 %>
+
+    <%= f.submit "Отправить", :class => "button blue-button" %>
+  <% end %>
+
+  <ul id="messages">
+    <% current_user.last_descussion.messages.each do |m| %>
+         <li class="<%== "my-message" if m.user == current_user %>">
+           <span>
+             <% if m.user == current_user %>
+                Вы,
+             <% else %>
+                <%= m.user.name if m.user == current_user %>,
+             <% end %>
+             <%= m.created_at.strftime("%d.%m.%Y в %H:%M") %>
+           </span>
+           <p><%= m.body %></p>
+         </li>
+    <% end %>
+  </ul>
+
+</div>
+
+

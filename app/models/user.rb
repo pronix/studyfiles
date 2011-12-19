@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
     Message.where("discussion_id in (?) AND user_id != ? AND updated_at > ?",
                   discussion_ids, self.id, speaker.updated_at)
   end
-  
+
   def unread_message_count
     unread_messages.count
   end
@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
   end
 
   def last_descussion
-    retun [] unless discussions.present?
+    return [] unless discussions.present?
     discussions.order('updated_at DESC').first
   end
 end

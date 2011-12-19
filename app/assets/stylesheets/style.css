@@ -1312,6 +1312,10 @@ html[xmlns] .clearfix {
   #messaging {
     float: left;
     width: 420px;
+    padding-top: 40px;
+  }
+  #messaging form > .button {
+    margin-top: 10px;
   }
 
   #messaging .pagination a {
