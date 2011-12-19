@@ -7,7 +7,7 @@ class Document < ActiveRecord::Base
 
   has_attached_file :item,
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",
-      :path => ":rails_root/public/assets/documents/:first_folder/:second_folder/:sha"
+      :path => ":rails_root/public/system/documents/:first_folder/:second_folder/:sha"
   
   before_save :default_name
 
@@ -79,29 +79,33 @@ class Document < ActiveRecord::Base
   end
 
   #Распаковка zip архива
-  def unzip_file(destination)
-    file = self.item.path
-    user = self.user_id
-    destination = Rails.root.to_s + destination
-    files = Array.new
-    Zip::ZipFile.open(file) { |zip_file|
-     zip_file.each { |f|
-       f_path=File.join(destination, f.name)
-       FileUtils.mkdir_p(File.dirname(f_path))
-       zip_file.extract(f, f_path) unless File.exist?(f_path)
-       files.push(f_path)
-     }
-    }
-    until files.empty?
-      document_path = files.pop
-      if File.directory? document_path
-        Dir.rmdir(document_path)
-      else
-        document = File.open(document_path)
-        Document.create(:user_id => user, :item => document)
-        File.delete(document_path)
+  def unzip_file
+    def generate_folder(path, parent=nil)
+      Dir.glob(File.join(path, '*')).each do |file|
+        if File.directory?(file)
+          folder = Folder.create(:user => user, :name => File.basename(file))
+          if parent
+            folder.parent = parent
+            folder.save
+          end
+          generate_folder(file, folder)
+        else
+          doc = Document.create(:user => user, :name => File.basename(file), :item => File.new(file))
+          if parent
+            doc.update_attribute(:folder, parent)
+          end
+        end
       end
     end
+    
+    unzipped_dir = Rails.root.join('tmp/unzipped')
+    tmp_unzipped_dir = File.join(unzipped_dir, id.to_s)
+    
+    FileUtils.mkdir_p(unzipped_dir) unless File.exist?(unzipped_dir)
+    FileUtils.rm_rf(tmp_unzipped_dir)
+    
+    %x[unzip #{item.path} -d #{tmp_unzipped_dir}]
+    generate_folder(tmp_unzipped_dir)
   end
 
   def queue_process_item
@@ -109,14 +113,13 @@ class Document < ActiveRecord::Base
   end
 
   def file_processing
-    self.process #Обрабатываем файл
-    if self.item.content_type == 'application/zip' #Если это был архив, то удаляем его
+    process #Обрабатываем файл
+    if self.item.content_type == 'application/zip'
+      FileUtils.rm_rf(item.path)
       self.delete
-      File.delete(self.item.path)
     else
-      self.item_processed = true #Иначе отмечаем что файл обработан
+      update_attribute(:item_processed, true)
     end
-    self.save!
   end
 
   #handle_asynchronously :unzip_file, :run_at => Proc.new { 10.second.from_now }, :priority => 0
@@ -162,14 +165,15 @@ class Document < ActiveRecord::Base
     file_type = item.content_type
     case file_type
     when 'application/zip'
-      self.unzip_file "/public/zips"
-    when 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/rtf'
+      unzip_file
+    when 'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/rtf'
       self.office_to_html
     else
       return
       # self.source_to_html
     end
-    already_processed!
   end
 
   def source_to_html
