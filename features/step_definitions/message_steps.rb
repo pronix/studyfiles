@@ -40,3 +40,8 @@ end
 Допустим /^последнее присланное пользователю "(.+)" содержит "(.+)"$/ do |user, message|
   User.find_by_email(user).unread_messages.last.body.should == message
 end
+
+
+Допустим /^я не должен видеть "(.+)" в собеседниках$/ do |text|
+  find_by_id('contacts-list').should have_no_content(text)
+end

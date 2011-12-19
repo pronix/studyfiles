@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
   end
 
   def all_senders
-    User.find(Speaker.where(:discussion_id => discussion_ids).map {|s| s.user_id})
+    User.find(Speaker.where("discussion_id in (?) AND user_id !=?", discussion_ids, id).map {|s| s.user_id})
   end
 
   def sender_messages(user)
