@@ -1,0 +1,27 @@
+  <div class="user-details">
+    <%= image_tag user.avatar.url(:medium), :class => "avatar" %>
+
+      <h3><%= user.name %></h3>
+
+      <dl class="user-statistics clearfix">
+        <dt>Зарегистрирован</dt>
+        <dd><%= l user.created_at, :format => "%d %B %Y" %></dd>
+
+        <dt>Последний вход</dt>
+        <dd><%= l user.last_sign_in_at, :format => "%d %B %Y" rescue '' %></dd>
+
+        <dt>Загрузил</dt>
+        <dd>
+          <%= "#{user.documents.count} #{ t(:file, :count => user.documents.count)}" %> на <%= number_to_human_size(user.documents.sum(:item_file_size)) %>
+        </dd>
+
+        <dt>Скачал</dt>
+        <dd>
+          244 файла на 126,1 Мб
+        </dd>
+      </dl>
+
+      <%= render "users/rating", :user => user %>
+
+  </div>
+  <!-- USER DETAILS BLOCK END -->

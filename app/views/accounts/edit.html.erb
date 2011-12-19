@@ -1,25 +1,62 @@
-Настройки пользователя
+<h2>Настройки пользователя</h2>
 <%= form_for :user, :url => account_path, :html => {:method => :put} do |f| %>
-<%= f.label :name, "Имя и фамилия" %>
-<%= f.text_field :name %>
+  <dl class="form-list">
+    <dt><%= f.label :name, "Имя и фамилия" %></dt>
+    <dd>
+      <div class="clearable-container">
+        <%= f.text_field :name, :style => "width: 440px;", :class => "clearable" %>
+        <a class="clearer icon"></a>
+      </div>
+    </dd>
 
-<%= image_tag @user.avatar.path %>
+    <dt></dt>
+    <dd>
+      <div id="logo-previews">
+        <%= image_tag @user.avatar.url(:medium), :class => "avatar" %>
+        <%= image_tag @user.avatar.url(:thumb), :class => "avatar" %>
+        <%= image_tag @user.avatar.url(:icon), :class => "avatar" %>
+      </div>
+    </dd>
 
-<%= f.label :avatar, "Аватар, фото" %>
-<%= f.file_field :avatar %>
+    <dt><%= f.label :avatar, "Аватар, фото" %></dt>
+    <dd>
+      <div class="fakeupload">
+          <input type="text" name="fakeupload"  style="width: 225px;" /> <!-- browse button is here as background -->
+          <span class="button blue-button">Выбрать</span>
+          <%= f.file_field :avatar %>
+      </div>
+    </dd>
 
-<%= f.label :subscriber, "Высылать уведомления о личных сообщениях на email" %>
-<%= f.check_box :subscriber %>
+    <dt></dt>
+    <dd>
+      <%= f.check_box :subscriber, :class => "styled" %>
+      <%= f.label :subscriber, " Высылать уведомления о личных сообщениях на email", :class => "checkboxed" %>
+    </dd>
+  </dl>
 
-<%= f.submit "Сохранить" %>
+  <div class="gray-box submit-box" style="padding-bottom: 5px;">
+    <dl class="form-list">
+      <dt></dt>
+      <dd><%= f.submit "Сохранить", :class => "button green-button" %></dd>
+    </dl>
+  </div>
 <% end %>
 
+
+<h2 style="font-size: 1.8em">Смена пароля</h2>
 <%= form_for :user, :url => account_path, :html => { :method => :put } do |f| %>
-   <%= f.label :current_password, "Старый пароль" %>
-   <%= f.password_field :current_password %></p>
+  <dl class="form-list">
 
-  <p><%= f.label :password, "Новый пароль" %><br />
-  <%= f.password_field :password %></p>
+    <dt><%= f.label :current_password, "Старый пароль" %></dt>
+    <dd><%= f.password_field :current_password %></dd>
 
-  <p><%= f.submit "Сменить пароль" %></p>
+    <dt><%= f.label :password, "Новый пароль" %></dt>
+    <dd><%= f.password_field :password %></dd>
+
+    <dt></dt>
+    <dd><%= f.submit "Сменить пароль", :class => "button vblue-button" %></dd>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render "users/stats", :user => @user %>
 <% end %>

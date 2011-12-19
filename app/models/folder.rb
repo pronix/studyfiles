@@ -17,7 +17,8 @@ class Folder < ActiveRecord::Base
   before_create :default_path_name
 
   def level
-    index_path.size + 2
+    level = index_path.size <= 5 ? index_path.size + 2 : 7
+    level
   end
 
   def top_level?
