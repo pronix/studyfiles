@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require jquery.simplemodal-1.4.1
 //= require custom-form-elements
+//= require smartpaginator
 
 function wrap(elements, wrap, size) {
   // thanks array_chunk :) http://phpjs.org/functions/array_chunk:306
@@ -74,9 +75,23 @@ $(document).ready(function(){
 
 
 
-  //$('p').filter(function() {
-  //      return $.trim($(this).text()) === ''
-  //  }).remove();
-  //wrap($('.content div > *'), '<div class="page" style="border: 1px solid black"></div>', 8);
+  $('p').filter(function() {
+        return $.trim($(this).text()) === ''
+    }).remove();
+  wrap($('#document-contents > div:not(#top-pager) > *'), '<div class="page"></div>', 8);
+
+ $('#pager').smartpaginator({ totalrecords: $("div.page").length,
+                              recordsperpage: 1,
+                              datacontainer: 'document-contents > div',
+                              dataelement: 'div.page',
+                              length: 18,
+                              theme: 'black' });
+
+ $("#prev").click(function() {$("#origin-prev").click();});
+ $("#next").click(function() {$("#origin-next").click();});
+ $(".beg").click(function() { $("#origin-first").click();})
+ $(".end").click(function() { $("#origin-last").click();})
+
+
 
 });

@@ -1,4 +1,24 @@
+<%= stylesheet_link_tag "document_preview" %>
 <%= link_to "Пожаловаться на файл", new_feedback_path %>
 <%= link_to "Скачать", "#" %>
 <%= @document.name %>
-<%= render :file => @document.item_html %>
+
+<div id="document-preview">
+    <div id="top-pager" class="pager">
+      <a class="beg btn"></a>
+      <a id="prev" class="btn prev"></a>
+      <span id="pager-nav"></span>
+      <a id="next" class="btn next"></a>
+      <a class="end btn"></a>
+    </div>
+
+    <div id="document-contents">
+      <%= render :file => @document.item_html %>
+    </div>
+
+    <div id="bottom-pager" class="pager">
+      <a class="beg btn"></a>
+      <a class="end btn"></a>
+      <div id="pager"></div>
+    </div>
+</div>
