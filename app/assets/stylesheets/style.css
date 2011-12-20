@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font:  11px  arial;
 }
 body {
@@ -91,9 +92,17 @@ html[xmlns] .clearfix {
 
   .wrapper {
     width: 940px;
-    margin: 0 auto;
     padding: 0 30px;
+    margin: 0 auto;
   }
+
+  body > .wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -117px;
+  }
+
 
   .sidebar {
     width: 220px;
@@ -897,6 +906,7 @@ html[xmlns] .clearfix {
     }
 
 
+#push { height: 117px; clear: both; }
 #footer {
   background: #ffffff url('bottom-gradient.png') bottom center repeat-x;
   height: 67px;
