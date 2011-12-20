@@ -7,4 +7,7 @@ def rand_avatar
   File.new Dir.glob(Rails.root.join('db/sample/avatars', '*')).shuffle.first
 end
 
-User.all.each {|u| u.update_attribute(:avatar, rand_avatar)}
+User.all.each do |u|
+  u.update_attribute(:avatar, rand_avatar)
+  u.universities << University.all.shuffle.first(rand(3))
+end

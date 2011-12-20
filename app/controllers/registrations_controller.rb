@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    if verify_recaptcha || Rails.env.test? || Rails.env.cucumber? || Rails.env.development?
+    if verify_recaptcha || !Rails.env.production? 
       super
     else
       build_resource
