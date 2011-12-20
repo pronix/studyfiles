@@ -80,7 +80,7 @@ class University < ActiveRecord::Base
   end
 
   def update_user_rating!
-    users.sort_by{ |elem| elem.raiting }.each do |u|
+    users.sort{ |a,b| b.raiting <=> a.raiting }.each do |u|
       r = 1
       user_universities.find(u).update_attribute(:rating, r)
       r += 1
@@ -89,7 +89,10 @@ class University < ActiveRecord::Base
 
   class << self
     def rating!
-      all.each {|u| u.rating!}
+      all.each do |u|
+        u.rating!
+        u.update_user_rating!
+      end
     end
   end
 end
