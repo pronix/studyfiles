@@ -6,7 +6,7 @@ class Inboxes::MessagesController < Inboxes::BaseController
 
   def index
     init_discussion
-    @messages = @discussion.messages
+    @messages = @discussion.messages.paginate(:page => params[:page], :per_page => 7)
     @discussion.mark_as_read_for(current_user)
     render 'inboxes/discussions/index'
   end

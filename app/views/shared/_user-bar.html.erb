@@ -6,7 +6,7 @@
         <%= link_to current_user.documents.count, user_path(current_user) %>
     </span>
 
-    <span id="inbox-notify" class="has-messages">
+    <span id="inbox-notify" class="<%= 'has-messages' if current_user.unread_messages_count > 0 %>">
       <%= link_to unread_messages_count, discussions_path, :title => "Личные сообщения" %></li>
     </span>
 
