@@ -1,5 +1,8 @@
-<% 1.upto(10).each do |f| %>
-faq_<%= f %>:
-  question: <%= Faker::Lorem.sentence %>
-  answer: "<%= Faker::Lorem.paragraphs.join("\n") %>"
-<% end %>
+general:
+  question: Общие вопросы
+
+add_files:
+  question: Добавление файлов
+
+filter:
+  question: Фильтр файлов

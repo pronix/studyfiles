@@ -1,7 +1,7 @@
 class FaqsController < ApplicationController
 
   def index
-    @faqs = Faq.all
+    @faqs = Faq.top_level
   end
 
 end

@@ -8,13 +8,15 @@
 </ul>
 <h2>Помощь</h2>
 <div class="faq-block">
-  <h3>Общие вопросы</h3>
-  <ol>
-    <% @faqs.each do |f| %>
-      <li>
-         <h4><%= f.question %></h4>
-         <div class="gray-box"><%= simple_format(f.answer) %></div>
-      </li>
-    <% end %>
-  </ol>
+  <% @faqs.each do |faq| %>
+    <h3><%= faq.question %></h3>
+    <ol>
+      <% faq.children.each do |f| %>
+	<li>
+          <h4><%= f.question %></h4>
+          <div class="gray-box"><%= simple_format(f.answer) %></div>
+	</li>
+      <% end %>
+    </ol>
+  <% end %>
 </div>
