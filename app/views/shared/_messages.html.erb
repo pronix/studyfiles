@@ -21,4 +21,12 @@
       </li>
     <% end %>
   </ul>
+
+<div class="pagination">
+    <span>Страница:</span>
+
+    <%= will_paginate messages, :previous_label => raw("&larr; <span>Ctrl</span>"),
+      :next_label => raw("<span>Ctrl</span> &rarr;"), :container => false  %>
+
+</div>
 </div>

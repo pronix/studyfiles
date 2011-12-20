@@ -1,6 +1,19 @@
-<% @faqs.each do |f| %>
-  <p>
-    <h3><%= f.question %></h3>
-    <%= simple_format(f.answer) %>
-  </p>
-<% end %>
+<ul id="breadcrumbs">
+  <li>
+        <%= link_to "Главная", universities_path %>
+  </li>
+  <li>
+        <%= link_to t("help"), faqs_path %>
+  </li>
+</ul>
+<h2>Помощь</h2>
+<div class="faq-block">
+  <ol>
+    <% @faqs.each do |f| %>
+      <li>
+         <h3><%= f.question %></h3>
+         <p><%= simple_format(f.answer) %></p>
+      </li>
+    <% end %>
+  </ol>
+</div>

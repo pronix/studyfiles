@@ -9,7 +9,7 @@
 	  <% if dis.unread_messages_count_for(current_user) > 0 %>
 	    <span id="inbox-notify" class="has-messages">
 	      <%= link_to "#{dis.recipient_messages_count(current_user)} #{t(:message, :count => dis.recipient_messages_count(current_user))}",
-		  discussion_messages_path(dis), :class => "messages-counter" %>
+		  discussion_messages_path(dis), :class => "messages-counter has-messages" %>
 	    </span>
 	  <% else %>
 	    <%= link_to "#{dis.recipient_messages_count(current_user)} #{t(:message, :count => dis.recipient_messages_count(current_user))}",
