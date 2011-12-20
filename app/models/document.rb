@@ -48,6 +48,10 @@ class Document < ActiveRecord::Base
     update_attribute(:item_processed, true)
   end
 
+  def has_preview?
+    item_processed and item_file_size > 0
+  end
+
   # def move_to_folder(folder)
   #   transaction do
   #     update_attribute(:folder, folder)

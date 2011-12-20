@@ -1,5 +1,5 @@
 <% 1.upto(10).each do |n| %>
 news_<%= n %>:
-  title: Titile number <%= n %>
-  text: This is text <%= n %>
+  title: <%= Faker::Lorem.words.join(' ') %>
+  text: "<%= Faker::Lorem.paragraphs.join("\n") %>"
 <% end %>

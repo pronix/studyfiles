@@ -15,7 +15,7 @@
         <dd><%= number_to_human_size(@document.item_file_size) %></dd>
       </dl>
       <%= link_to "Пожаловаться на файл", new_feedback_path %>
-      <%= link_to "Скачать", "#", :class => "button green-button" %>
+      <%= link_to "Скачать", download_document_path(@document), :class => "button green-button" %>
 <% end %>
 
 <h3><%= link_to @document.university.name, university_folders_path(@document.university) %></h3>
@@ -23,7 +23,11 @@
 
 <ul id="breadcrumbs" class="file-bread">
   <li>
-        <%= link_to(@document.folder.name, folder_path(@document.folder)) if @document.folder %>
+    <% if @document.folder && @document.university.present? %>
+      <%= link_to @document.folder.name, university_folder_path(@document.folder.university, @document.folder) %>
+    <% else %>
+      <%= link_to(@document.folder.name, folder_path(@document.folder)) if @document.folder %>
+    <% end %>
   </li>
   <li>
     <%= extension_icon_link(@document) %> <b><%= @document.name %></b>

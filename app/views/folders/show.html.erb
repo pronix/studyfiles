@@ -15,7 +15,7 @@
         <dd><%= number_to_human_size(@folder.files_size) %></dd>
       </dl>
       <%= link_to "Пожаловаться на папку", new_feedback_path %>
-      <%= link_to "Скачать все", "#", :class => "button green-button", :title => "Скачать все" %>
+      <%= link_to "Скачать все", download_folder_path(@folder), :class => "button green-button", :title => "Скачать все" %>
 <% end %>
 
 <h3><%= link_to @folder.university.name, university_folders_path(@folder.university) %></h3>

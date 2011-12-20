@@ -3,16 +3,13 @@ mgu:
   name: Московский государственный университет
   abbreviation: МГУ
   city: Москва
-  rating: <%= rand(100) - 50 %>
 
 pnipu:
   name: Пермский национальный исследовательский политехнический институт
   abbreviation: ПНИПУ
   city: Пермь
-  rating: <%= rand(100) - 50 %>
   
 hse:
   name: Высшая школа экономики
   abbreviation: ВШЭ
   city: Москва
-  rating: <%= rand(100) - 50 %>

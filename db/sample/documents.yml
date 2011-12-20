@@ -2,23 +2,28 @@ konspect:
   name: документ1.doc
   university: mgu
   folder: folder3
+  user: user_1
 
 doc1:
   name: документ3.doc
   university: mgu
   folder: folder3
+  user: user_2
 
 doc3:
   name: бытие.doc
   university: mgu
   folder: folder4
+  user: user_2
 
 doc4:
   name: КВопросы к экзамену.doc
   university: mgu
   folder: folder4
+  user: user_1
 
 picture1:
   name: NGU.gif
   university: mgu
   folder: folder4
+  user: user_1
