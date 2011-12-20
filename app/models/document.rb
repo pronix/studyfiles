@@ -121,8 +121,6 @@ class Document < ActiveRecord::Base
     if self.item.content_type == 'application/zip'
       FileUtils.rm_rf(item.path)
       self.delete
-    else
-      update_attribute(:item_processed, true)
     end
   end
 
@@ -178,6 +176,7 @@ class Document < ActiveRecord::Base
       return
       # self.source_to_html
     end
+    update_attribute(:item_processed, true)
   end
 
   def source_to_html
