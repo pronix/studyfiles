@@ -1722,3 +1722,20 @@ html[xmlns] .clearfix {
 #breadcrumbs.file-bread li:last-child:after {
   content: "";
 }
+
+
+
+
+/*
+ *
+ *
+ * FAQS */
+
+  .faq-block ol li {
+    list-style-type: decimal;
+  }
+  .faq-block ol li p{
+    margin-left: -12px;
+  }
+
+/* FAQS END */

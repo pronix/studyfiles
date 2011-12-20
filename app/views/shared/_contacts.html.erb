@@ -8,7 +8,7 @@
 	  <%= link_to user_name(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)) %>
 	  <% if Discussion.find_between_users(current_user, sender).has_unread?(current_user) %>
 	    <span id="inbox-notify" class="has-messages">
-	      <%= link_to messages_by_user(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)), :class => "messages-counter" %>
+	      <%= link_to messages_by_user(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)), :class => "messages-counter has-messages" %>
 	    </span>
 	  <% else %>
 	    <%= link_to messages_by_user(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)), :class => "messages-counter" %>

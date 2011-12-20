@@ -4,7 +4,7 @@ class Inboxes::DiscussionsController < Inboxes::BaseController
 
   def index
     @discussion = current_user.discussions.last_one
-    @messages = @discussion.messages
+    @messages = @discussion.messages.paginate(:page => params[:page], :per_page => 7)
     @discussion.mark_as_read_for(current_user)
   end
 
