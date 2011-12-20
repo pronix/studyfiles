@@ -5,9 +5,15 @@
       <li>
         <%= image_tag sender.avatar.url(:icon), :class => "avatar" %>
       	<div>
-             <%= link_to sender.name, discussion_messages_path(Discussion.find_between_users(current_user, sender)) %>
-             <%= link_to "#{current_user.sender_messages(sender).count} #{t(:message, :count => current_user.sender_messages(sender).count)}", user_path(sender), :class => "messages-counter" %>
-             <%= link_to "Профиль пользователя", user_path(sender) %>
+	  <%= link_to user_name(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)) %>
+	  <% if Discussion.find_between_users(current_user, sender).has_unread?(current_user) %>
+	    <span id="inbox-notify" class="has-messages">
+	      <%= link_to messages_by_user(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)), :class => "messages-counter" %>
+	    </span>
+	  <% else %>
+	    <%= link_to messages_by_user(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)), :class => "messages-counter" %>
+	  <% end %>
+          <%= link_to "Профиль пользователя", user_path(sender) %>
       	</div>
       </li>
     <% end %>

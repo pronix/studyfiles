@@ -14,7 +14,7 @@
     Допустим в системе существует пользователь с логином и паролем "user@example.com/secret"
     Допустим я авторизован как пользователь с логином и паролем "user@example.com/secret"
     
-@current
+@green
   Сценарий: Загрузка zip архива  
     И я иду на страницу загрузки документов для пользователя "user@example.com"
     И я прикреплю файл "test_archive.zip" в поле "user_documents_attributes_2_item"

@@ -21,12 +21,13 @@ gem 'unicorn'
 gem 'meta_search'
 gem 'whenever'
 
+gem 'inboxes', :path => 'vendor/inboxes'
 gem 'hierarchy', :path => 'vendor/plugins/hierarchy'
 gem 'recaptcha', :require => 'recaptcha/rails'
 
 gem 'rails-settings-cached', :require => 'rails-settings'
 gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
-gem 'inboxes', :git => 'git://github.com/evrone/inboxes.git'
+
 
 gem 'capistrano'
 gem 'capistrano-ext'
@@ -50,8 +51,6 @@ group :test,:development do
   gem 'cucumber-rails'
   gem 'database_cleaner'
 
-  gem 'launchy'
-
   # Spork
   gem 'spork', :git => 'git://github.com/sporkrb/spork.git'
   gem 'guard-spork', :git => 'git://github.com/guard/guard-spork.git'
@@ -59,6 +58,7 @@ group :test,:development do
   gem 'guard-rspec', :git => 'git://github.com/guard/guard-rspec.git'
 
   # Not important
-  gem 'rails-erd', :require => false
+  # gem 'rails-erd', :require => false
   gem 'ruby-debug19', :require => false
+  gem 'launchy', :require => false
 end

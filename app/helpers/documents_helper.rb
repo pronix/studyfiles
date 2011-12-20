@@ -41,4 +41,8 @@ module DocumentsHelper
     return raw("<span>#{object.rating}</span>")
   end
 
+  def user_name(user=current_user)
+    user.name ? user.name : 'Аноним'
+  end
+
 end

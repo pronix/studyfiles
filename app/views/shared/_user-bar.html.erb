@@ -1,13 +1,17 @@
 <div id="user-bar" class="login-bar clearfix">
 
     <span>
-        <big><%= current_user.name %></big>
+        <big><%= user_name %></big>
         &nbsp;&nbsp;/&nbsp;&nbsp;
         <%= link_to current_user.documents.count, user_path(current_user) %>
     </span>
 
     <span id="inbox-notify" class="has-messages">
-      <%= link_to "#{current_user.unread_message_count} #{t(:message, :count => current_user.unread_message_count)}", discussions_path, :title => "Личные сообщения" %></li>
+      <% if current_user.unread_message_count.present? %>
+	<%= link_to "#{current_user.unread_message_count} #{t(:message, :count => current_user.unread_message_count)}", discussions_path, :title => "Личные сообщения" %></li>
+      <% else %>
+	<%= link_to "0 #{t(:message, :count => 0)}", discussions_path, :title => "Личные сообщения" %></li>
+      <% end %>
     </span>
 
 

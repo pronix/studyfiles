@@ -5,18 +5,19 @@ class Inboxes::MessagesController < Inboxes::BaseController
   load_resource :message, :through => :discussion, :shallow => true
 
   def index
-    @discussion = Discussion.find(params[:discussion_id])
-    @messages = Message.order('id DESC').where(:discussion_id => @discussion.id)
+    init_discussion
+    @messages = @discussion.messages
+    @discussion.mark_as_read_for(current_user)
     render 'inboxes/discussions/index'
   end
 
   def create
-    @discussion = Discussion.find(params[:discussion_id])
-    @message = Message.new(params[:message])
-    @message.update_attributes(:user => current_user, :discussion => @discussion)
+    @message.user = current_user
+    @message.discussion = @discussion
+    @message.save
 
     respond_to do |format|
-      format.html { redirect_to discussions_path }
+      format.html { redirect_to @message.discussion }
       format.js
     end
   end

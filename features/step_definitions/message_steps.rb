@@ -38,10 +38,24 @@ end
 end
 
 Допустим /^последнее присланное пользователю "(.+)" содержит "(.+)"$/ do |user, message|
-  User.find_by_email(user).unread_messages.last.body.should == message
+  Message.where("user_id != ?", User.find_by_email(user)).last.body.should == message
+  
 end
 
 
 Допустим /^я не должен видеть "(.+)" в собеседниках$/ do |text|
   find_by_id('contacts-list').should have_no_content(text)
+end
+
+Допустим /^пользователь "(.+)" просто имеет со мной дискуссию$/ do |ext_user|
+  Discussion.create(:recipient_tokens => [User.find_by_email('user@example.com').id,
+                                          User.find_by_email(ext_user).id])
+end
+
+Допустим /^пользователь "(.+)" давно не заходил на страницу$/ do |user|
+  User.find_by_email(user).speakers.last.update_attribute(:updated_at, Time.now - 1.day)
+end
+
+Допустим /^все сообщения пришли только что$/ do
+  Message.update_all(:updated_at => Time.now)
 end
