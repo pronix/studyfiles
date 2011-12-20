@@ -1,6 +1,12 @@
 require 'active_record/fixtures'
 require 'faker'
 
+namespace :university do
+  task :rating => :environment do
+    University.rating!
+  end
+end
+
 namespace :db do
   task :load_default => :environment do
     fixtures_dir = File.expand_path('db/default', Rails.root)

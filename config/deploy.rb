@@ -15,5 +15,7 @@ set :repository,  "git@github.com:pronix/studyfiles.git"
 
 set :deploy_via, :remote_cache
 set :keep_releases, 3
-set :bundle_flags,       "--quiet"
+set :bundle_flags, "--quiet"
 set :rails_env, "production"
+
+set :whenever_command, "bundle exec whenever"

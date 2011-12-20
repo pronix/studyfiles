@@ -35,12 +35,20 @@ after 'deploy:load_seed', 'deploy:load_sample'
 after 'deploy:migrate', 'deploy:activate_sphinx'
 after 'deploy:migrate', 'deploy:precompile_assets'
 
+after 'deploy:migrate', 'misc:university_rating'
+
 namespace :delayed_job do
   task :restart do
         run "cd #{latest_release}; RAILS_ENV=#{rails_env} script/delayed_job restart"
   end
   task :stop do
     run "cd #{latest_release}; RAILS_ENV=#{rails_env} script/delayed_job stop"
+  end
+end
+
+namespace :misc do
+  task :university_rating do
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake university:rating"
   end
 end
 

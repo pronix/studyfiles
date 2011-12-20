@@ -86,4 +86,10 @@ class University < ActiveRecord::Base
       r += 1
     end
   end
+
+  class << self
+    def rating!
+      all.each {|u| u.rating!}
+    end
+  end
 end

@@ -18,7 +18,9 @@
       <%= link_to "Скачать", download_document_path(@document), :class => "button green-button" %>
 <% end %>
 
-<h3><%= link_to @document.university.name, university_folders_path(@document.university) %></h3>
+<% if @document.university.present? %>
+  <h3><%= link_to @document.university.name, university_folders_path(@document.university) %></h3>
+<% end %>
 <h3 style="font-weight: normal;"><%= link_to(@document.subject.name, "") if @document.subject %></h3>
 
 <ul id="breadcrumbs" class="file-bread">
