@@ -44,10 +44,8 @@
 
         <div class="place">
 	  <% if user.top_university.present? %>
-	    <%#= university_rating(user.top_university_rating) %>
             <span class="university-place rating">
-              место <br />
-              <b><%= "9" %></b>
+	      <%== university_rating(user.top_university_rating) %>
             </span>
 	    <h4><%= link_to user.top_university.abbreviation, university_folders_path(user.top_university) %></h4>
 	  <% end %>
