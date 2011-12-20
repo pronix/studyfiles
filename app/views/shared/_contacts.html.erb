@@ -1,21 +1,22 @@
 <div id="chat-contacts">
   <h3>Ваши собеседники</h3>
   <ul id="contacts-list">
-    <% current_user.all_senders.each do |sender| %>
+    <% current_user.discussions.as_contacts.each do |dis| %>
       <li>
-        <%= image_tag sender.avatar.url(:icon), :class => "avatar" %>
+        <%= image_tag dis.another_user(current_user).avatar.url(:icon), :class => "avatar" %>
       	<div>
-	  <%= link_to user_name(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)) %>
-	  <% if Discussion.find_between_users(current_user, sender).has_unread?(current_user) %>
+	  <%= link_to user_name(dis.another_user(current_user)), discussion_messages_path(dis) %>
+	  <% if dis.unread_messages_count_for(current_user) > 0 %>
 	    <span id="inbox-notify" class="has-messages">
-	      <%= link_to messages_by_user(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)), :class => "messages-counter" %>
+	      <%= link_to "#{dis.recipient_messages_count(current_user)} #{t(:message, :count => dis.recipient_messages_count(current_user))}",
+		  discussion_messages_path(dis), :class => "messages-counter" %>
 	    </span>
 	  <% else %>
-	    <%= link_to messages_by_user(sender), discussion_messages_path(Discussion.find_between_users(current_user, sender)), :class => "messages-counter" %>
+	    <%= link_to "#{dis.recipient_messages_count(current_user)} #{t(:message, :count => dis.recipient_messages_count(current_user))}",
+		discussion_messages_path(dis), :class => "messages-counter" %>
 	  <% end %>
-          <%= link_to "Профиль пользователя", user_path(sender) %>
+          <%= link_to "Профиль пользователя", user_path(dis.another_user(current_user)) %>
       	</div>
-      </li>
     <% end %>
   </ul>
 </div>

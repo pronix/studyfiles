@@ -34,7 +34,8 @@ end
 
 
 Допустим /^пользователь "(.+)" должен иметь (\d+) не прочитанное сообщение$/ do |user, amount|
-  User.find_by_email(user).unread_message_count.should == amount.to_i
+  Message.where(:user_id => User.find_by_email(user)).count.should == amount.to_i
+  # User.find_by_email(user).unread_message_count.should == amount.to_i
 end
 
 Допустим /^последнее присланное пользователю "(.+)" содержит "(.+)"$/ do |user, message|

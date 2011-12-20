@@ -11,4 +11,6 @@
 </ul>
 <h2><span>Сообщения</span></h2>
 <%= render 'shared/contacts' %>
-<%= render 'shared/messages', :messages => @messages, :discussion => @discussion %>
+<% if @discussion.present? %>
+  <%= render 'shared/messages', :messages => @messages, :discussion => @discussion %>
+<% end %>

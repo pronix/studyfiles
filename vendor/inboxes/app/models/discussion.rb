@@ -38,10 +38,19 @@ class Discussion < ActiveRecord::Base
     order('updated_at DESC').first
   end
 
-  def has_unread?(user)
-    speaker = Speaker.find_by_user_id(user.id)
-    return false unless speaker.nil?
-    true if messages.where('user_id !=? AND updated_at > ?', user.id, speaker.updated_at).present?
+  def self.as_contacts
+    to_out = []
+    with_messages.order('created_at DESC').each {|d| to_out << d if d.speakers.count == 2}
+    return to_out
+  end
+
+  def another_user(user)
+    speaker = speakers.where('user_id != ?', user.id).first
+    speaker.user
+  end
+
+  def recipient_messages_count(user)
+    messages.where('user_id != ?', user.id).count
   end
 
   def recipient_tokens=(ids)

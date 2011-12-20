@@ -4,8 +4,10 @@ class Inboxes::DiscussionsController < Inboxes::BaseController
 
   def index
     @discussion = current_user.discussions.last_one
-    @messages = @discussion.messages
-    @discussion.mark_as_read_for(current_user)
+    if @discussion.present?
+      @messages = @discussion.messages
+      @discussion.mark_as_read_for(current_user)
+    end
   end
 
   def show
