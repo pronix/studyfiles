@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 module DocumentsHelper
 
+  def star_image(rating)
+    return image_tag("icons/star#{rating}.png") if rating >= 1 && rating <= 3
+    rating
+  end
+
   def extension_icon_link(document)
     ext = ""
     case document.extension

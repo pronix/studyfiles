@@ -16,44 +16,46 @@
 </div>
 
 <ul class="users-list">
-    <% @users.sort{ |a,b| b.raiting <=> a.raiting }.each do |user| %>
-      <li>
-           <div class="expander-header">
-             <span class="rating">
-               <%= image_tag "icons/star1.png" %>
-             </span>
+  <% i = 1 %>
+  <% @users.sort{ |a,b| b.raiting <=> a.raiting }.each do |user| %>
+    <li>
+      <div class="expander-header">
+        <span class="rating">
+          <%= star_image(i) %>
+        </span>
 
-             <%= link_to image_tag(user.avatar.url(:icon)), user_path(user) %>
+        <%= link_to image_tag(user.avatar.url(:icon)), user_path(user) %>
 
-             <h4>
-               <%= link_to user_name(user), user_path(user) %>
-             </h4>
+        <h4>
+          <%= link_to user_name(user), user_path(user) %>
+        </h4>
 
-             <div>
-               <%= user.created_at.strftime("%d.%m.%Y") %>
-             </div>
+        <div>
+          <%= user.created_at.strftime("%d.%m.%Y") %>
+        </div>
 
-             <div class="det-rating">
-               Рейтинг <br />
-               <b><%= user.raiting %></b>
-             </div>
+        <div class="det-rating">
+          Рейтинг <br />
+          <b><%= user.raiting %></b>
+        </div>
 
-             <div class="files-counter">
-                 Файлов <%= user.documents.count %>
-             </div>
+        <div class="files-counter">
+          Файлов <%= user.documents.count %>
+        </div>
 
-             <div class="place">
-               <%= image_tag "icons/thin-first-place.png" %>
-               <h4>
-                 <% if user.top_university.present? %>
-                   <%= user.top_university_rating %>
-                   <%= link_to user.top_university.abbreviation, "" %>
-                 <% end %>
-               </h4>
-             </div>
-           </div>
-      </li>
-    <% end %>
+        <div class="place">
+          <%= image_tag "icons/thin-first-place.png" %>
+          <h4>
+            <% if user.top_university.present? %>
+              <%= user.top_university_rating %>
+              <%= link_to user.top_university.abbreviation, "" %>
+            <% end %>
+          </h4>
+        </div>
+      </div>
+    </li>
+    <% i += 1 %>
+  <% end %>
 </ul>
 
 <div class="pagination">
