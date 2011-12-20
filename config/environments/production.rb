@@ -46,4 +46,19 @@ Studyfiles::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  config.middleware.use ExceptionNotifier,
+  :email_prefix => "[Notify-Studifiles] ",
+  :sender_address => %{"notify" <notify@kremenev.com>},
+  :exception_recipients => %w{ezo@kremenev.com}
 end
+
+ActionMailer::Base.smtp_settings = {
+  :address              => "smtp.gmail.com", 
+  :port                 => 587,  
+  :domain               => "kremenev.com",  
+  :user_name            => "notify@kremenev.com",  
+  :password             => "PasswordMoloko",  
+  :authentication       => "plain",  
+  :enable_starttls_auto => true
+}

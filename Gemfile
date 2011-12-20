@@ -38,6 +38,8 @@ gem 'prototype-rails', :git => 'git://github.com/rails/prototype-rails.git' #д�
 # For sample migrations on dev server
 gem 'faker'
 
+gem 'exception_notification'
+
 group :test,:development do
   #использользуем для подсветки синтаксиса в исходных кодах
   gem 'coderay'
