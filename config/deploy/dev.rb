@@ -90,7 +90,11 @@ namespace :deploy do
   end
 
   task :activate_sphinx do
-    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:configure"
+    if ENV['NEW']
+      run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:configure"
+    else
+      run "ln -nfs #{shared_path}/production.sphinx.conf #{latest_release}/config/production.sphinx.conf"
+    end
     run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:index"
     run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:start"
   end
