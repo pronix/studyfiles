@@ -13,7 +13,7 @@ class Document < ActiveRecord::Base
 
   validates :item, :presence => true
 
-  after_save :queue_process_item
+  after_create :queue_process_item
 
   has_many :votes
   has_many :user_votes, :through => :votes, :source => :user
