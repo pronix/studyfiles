@@ -1391,6 +1391,12 @@ html[xmlns] .clearfix {
       .users-list li .expander-header .rating img  {
         margin-top: 5px;
       }
+      .users-list li .expander-header .place-rating.rating {
+        text-align: center;
+        color: #BAC6CB;
+        font-size: 2em;
+        font-weight: bold;
+      }
       .users-list li .expander-header > .rating {
         margin-right: 18px;
         width: 40px;
@@ -1411,6 +1417,12 @@ html[xmlns] .clearfix {
            .users-list .place > h4 a {
             color: #004C62;
           }
+        .university-place.rating {
+          line-height: 19px;
+          padding-top: 8px;
+          color: #BAC6CB;
+          font-size: 0.9em;
+        }
 
         .users-list li .expander-header .files-counter {
           text-align: left;
