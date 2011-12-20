@@ -97,4 +97,16 @@ class User < ActiveRecord::Base
     return [] unless discussions.present?
     discussions.order('updated_at DESC').first
   end
+
+  class << self
+    # Update overall rating for each user
+    def overall_rating!
+      r = 1
+      all.sort{ |a,b| b.raiting <=> a.raiting }.each do |u|
+        u.update_attribute(:overall_rating, r)
+        r += 1
+      end
+    end
+  end
+  
 end

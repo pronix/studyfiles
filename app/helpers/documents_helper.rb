@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 module DocumentsHelper
 
+  def university_rating(rating)
+    return image_tag("icons/univer_place_#{rating}.png") if rating >= 1 && rating <= 3
+  end
+  
   def star_image(rating)
     return image_tag("icons/star#{rating}.png") if rating >= 1 && rating <= 3
     rating

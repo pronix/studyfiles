@@ -16,12 +16,11 @@
 </div>
 
 <ul class="users-list">
-  <% i = 1 %>
   <% @users.sort{ |a,b| b.raiting <=> a.raiting }.each do |user| %>
     <li>
       <div class="expander-header">
         <span class="rating">
-          <%= star_image(i) %>
+          <%= star_image(user.overall_rating) %>
         </span>
 
         <%= link_to image_tag(user.avatar.url(:icon)), user_path(user) %>
@@ -44,17 +43,13 @@
         </div>
 
         <div class="place">
-          <%= image_tag "icons/thin-first-place.png" %>
-          <h4>
-            <% if user.top_university.present? %>
-              <%= user.top_university_rating %>
-              <%= link_to user.top_university.abbreviation, "" %>
-            <% end %>
-          </h4>
+	  <% if user.top_university.present? %>
+	    <%= university_rating(user.top_university_rating) %>
+	    <h4><%= link_to user.top_university.abbreviation, university_folders_path(user.top_university) %></h4>
+	  <% end %>
         </div>
       </div>
     </li>
-    <% i += 1 %>
   <% end %>
 </ul>
 

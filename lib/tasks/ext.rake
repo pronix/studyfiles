@@ -1,9 +1,10 @@
 require 'active_record/fixtures'
 require 'faker'
 
-namespace :university do
-  task :rating => :environment do
+namespace :rating do
+  task :update_all => :environment do
     University.rating!
+    User.overall_rating!
   end
 end
 

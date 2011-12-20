@@ -11,3 +11,6 @@ User.all.each do |u|
   u.update_attribute(:avatar, rand_avatar)
   u.universities << University.all.shuffle.first(rand(3))
 end
+
+# Create overall rating
+User.overall_rating!
