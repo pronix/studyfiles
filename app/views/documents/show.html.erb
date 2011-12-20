@@ -1,4 +1,52 @@
-<%= link_to "Пожаловаться на файл", new_feedback_path %>
-<%= link_to "Скачать", "#" %>
-<%= @document.name %>
-<%= render :file => @document.item_html %>
+<%= stylesheet_link_tag "document_preview" %>
+
+<% content_for :preview_details do %>
+
+      <dl class="file-details clearfix">
+        <dt>Рейтинг:</dt>
+        <dd><%= rating(@document) %></dd>
+
+        <dt>Добавил:</dt>
+        <dd><%= link_to(@document.user.name, user_path(@document.user)) if @document.user %></dd>
+
+        <dt>Дата:</dt>
+        <dd><%= @document.created_at.strftime("%d.%m.%Y") %>
+        <dt>Размер:</dt>
+        <dd><%= number_to_human_size(@document.item_file_size) %></dd>
+      </dl>
+      <%= link_to "Пожаловаться на файл", new_feedback_path %>
+      <%= link_to "Скачать", "#", :class => "button green-button" %>
+<% end %>
+
+<h3><%= link_to @document.university.name, university_folders_path(@document.university) %></h3>
+<h3 style="font-weight: normal;"><%= link_to(@document.subject.name, "") if @document.subject %></h3>
+
+<ul id="breadcrumbs" class="file-bread">
+  <li>
+        <%= link_to(@document.folder.name, folder_path(@document.folder)) if @document.folder %>
+  </li>
+  <li>
+    <%= extension_icon_link(@document) %> <b><%= @document.name %></b>
+  </li>
+</ul>
+
+
+<div id="document-preview">
+    <div id="top-pager" class="pager">
+      <a class="beg btn"></a>
+      <a id="prev" class="btn prev"></a>
+      <span id="pager-nav"></span>
+      <a id="next" class="btn next"></a>
+      <a class="end btn"></a>
+    </div>
+
+    <div id="document-contents">
+      <%= render :file => @document.item_html %>
+    </div>
+
+    <div id="bottom-pager" class="pager">
+      <a class="beg btn"></a>
+      <a class="end btn"></a>
+      <div id="pager"></div>
+    </div>
+</div>

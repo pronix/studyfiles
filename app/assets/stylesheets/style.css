@@ -1660,3 +1660,55 @@ html[xmlns] .clearfix {
 /* MODAL WINDOWS END */
 
 
+.mini-wrapper {
+  width: 666px;
+  position: relative;
+  margin: 20px auto;
+  font-size: 12px;
+}
+
+.mini-wrapper > #details{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 150px;
+  z-index: 5;
+}
+
+
+.mini-wrapper #details .button {
+  width: 94px;
+}
+
+.mini-wrapper #details dl dt {
+  float: left;
+  color: #818181;
+  clear: left;
+  width: 52px;
+}
+.mini-wrapper #details dl dd {
+  float: right;
+  text-align: right;
+}
+
+.mini-wrapper #details > a {
+  color: #004c62; /* DARK BLUE */
+}
+
+.mini-wrapper #details .button {
+  color: white;
+  margin-top: 15px;
+  width: 94px;
+}
+
+.mini-wrapper #header {
+  height: auto;
+}
+
+#breadcrumbs.file-bread, #breadcrumbs.folder-bread {
+  margin: 18px 0 50px 0;
+}
+
+#breadcrumbs.file-bread li:last-child:after {
+  content: "";
+}

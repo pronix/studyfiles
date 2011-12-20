@@ -1,5 +1,42 @@
-<%= @folder.name %>
-<%= link_to "Пожаловаться на папку", "#" %>
-<%= link_to "Скачать все", "#" %>
+<%= stylesheet_link_tag "document_preview" %>
 
-<%= render "shared/folder", :folder => @folder, :univer => (@university ? @university : nil) %>
+<% content_for :preview_details do %>
+
+      <dl class="file-details clearfix">
+        <dt>Рейтинг:</dt>
+        <dd><%= rating(@folder) %></dd>
+
+        <dt>Добавил:</dt>
+        <dd><%= link_to(@folder.user.name, user_path(@folder.user)) if @folder.user %></dd>
+
+        <dt>Дата:</dt>
+        <dd><%= @folder.created_at.strftime("%d.%m.%Y") %>
+        <dt>Размер:</dt>
+        <dd><%= number_to_human_size(@folder.files_size) %></dd>
+      </dl>
+      <%= link_to "Пожаловаться на папку", new_feedback_path %>
+      <%= link_to "Скачать все", "#", :class => "button green-button", :title => "Скачать все" %>
+<% end %>
+
+<h3><%= link_to @folder.university.name, university_folders_path(@folder.university) %></h3>
+<h3 style="font-weight: normal;"><%= link_to(@folder.subject.name, "") if @folder.subject %></h3>
+
+
+<ul id="breadcrumbs" class="folder-bread">
+  <% @folder.index_path.each do |i| %>
+    <% fold = Folder.find(i) %>
+      <li>
+        <%= link_to fold.name, university_folder_path(@folder.university, fold) %>
+      </li>
+  <% end %>
+</ul>
+
+
+<ul id="breadcrumbs" class="file-bread">
+  <li>
+  </li>
+</ul>
+
+<div class="level-1 clearfix">
+  <%= render "shared/folder", :folder => @folder, :univer => (@university ? @university : nil) %>
+</div>

@@ -1,0 +1,142 @@
+﻿#document-preview {
+      box-shadow: 0 0 15px 1px #C8CDCF;
+      width: 666px;
+}
+
+#top-pager {
+  font-size: 0.8em;
+  width: 225px;
+}
+
+#top-pager .pageinfo {
+  padding-right: 2px;
+}
+
+#top-pager .pageinfo b {
+  padding-left: 3px;
+}
+
+
+#top-pager, #bottom-pager {
+  padding: 0 18px;
+}
+
+#bottom-pager .end.btn {
+  float: right;
+}
+
+.page {
+  padding: 15px;
+}
+
+.pager
+{
+        font-size: 0.9em;
+	width: 630px;
+	height: 29px;
+	padding: 0;
+	margin: 0;
+        line-height: 29px;
+	background: url("icons/pager-bg.png") repeat-x;
+	/*border-radius: 8px;
+	-moz-border-radius: 8px;*/
+}
+.pager div.short
+{
+	float: right;
+	margin: 0;
+	padding: 0;
+	margin-right: 10px;
+	width: 74px;
+}
+.pager ul
+{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	float: left;
+}
+.pager ul li
+{
+	display: inline;
+        font-size: 1em;
+}
+.pager ul li a.normal
+{
+	text-decoration: none;
+	display: inline-table;
+	width: 22px;
+	height: 20px;
+	text-align: center;
+}
+.pager span
+{
+	margin-left: 4px;
+	color: #003151;
+	float: left;
+        cursour: pointer;
+}
+.pager .btn
+{
+	display: block;
+	width: 40px;
+	text-align: center;
+	float: left;
+	padding: 0;
+	margin: 0;
+	margin-left: 4px;
+	cursor: pointer;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+.pager ul li a.active
+{
+	text-decoration: none;
+	display: inline-table;
+	width: 21px;
+	height: 20px;
+	text-align: center;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+
+/*black*/.black
+{
+}
+.black.normal
+{
+        background: none;
+	color: #003151;
+}
+.black.active
+{
+        background: none;
+	color: black;
+}
+.pager .btn
+{
+  display: inline-block;
+  height: 29px;
+  width: 18px;
+}
+
+.pager .btn.prev { background: url("icons/pager-prev.png") no-repeat left center;}
+.pager .btn.prev.current { background: url("icons/pager-prev-cur.png") no-repeat left center;}
+.pager .btn.next { background: url("icons/pager-next.png") no-repeat right center;}
+.pager .btn.next.current { background: url("icons/pager-next-cur.png") no-repeat right center;}
+
+.pager .btn.beg { background: url("icons/pager-beg.png") no-repeat left center;}
+.pager .btn.beg.current { background: url("icons/pager-beg-cur.png") no-repeat left center;}
+.pager .btn.end { background: url("icons/pager-end.png") no-repeat right center;}
+.pager .btn.end.current { background: url("icons/pager-end-cur.png") no-repeat right center;}
+
+#origin-first, #origin-last { background: none;}
+
+#origin-prev { float: left; }
+#origin-next { float: right; }
+
+#origin-last { margin-left: 8px;}
+
+
+.pageinfo { color: black !important; }
+
