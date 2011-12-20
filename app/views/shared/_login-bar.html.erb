@@ -17,23 +17,23 @@
             <h2>Завести новый аккаунт</h2>
 
             <div class="clearable-container name">
-              <%= f.label :name %><br />
+              <%= f.label :name, "Имя, фамилия" %><br />
               <%= f.text_field :name, :class => "clearable" %>
               <a class="clearer icon"></a>
             </div>
 
     	    <p class="email">
-              <%= f.label :email %><br />
+              <%= f.label :email, "Email" %><br />
               <%= f.email_field :email, :id => "new_user_email" %>
     	    </p>
 
     	    <p class="passwd">
-               <%= f.label :password %><br />
+               <%= f.label :password, "Пароль" %><br />
                <%= f.password_field :password, :id => "new_user_password" %>
     	    </p>
 
     	    <p class="passwd">
-               <%= f.label :password_confirmation %><br />
+               <%= f.label :password_confirmation, "Повторите пароль" %><br />
                <%= f.password_field :password_confirmation %>
     	    </p>
 
@@ -57,7 +57,7 @@
 
             <% if Devise.mappings[:user].rememberable? -%>
               <p class="remember-me">
-                <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+                <%= f.check_box :remember_me %> <%= f.label :remember_me, "Запомнить меня" %>
     	      </p>
             <% end -%>
 
