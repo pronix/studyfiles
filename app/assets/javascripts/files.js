@@ -36,4 +36,18 @@ $(function() {
       $(this).closest('.with-more').find('.more-block').show();
     });
 
+    $(".file-row").bind("contextmenu",function(e){
+      if (e.which === 3) {
+        e.preventDefault();
+        if ($(this).hasClass("selected")) {
+          $(this).removeClass("selected");
+        }
+        else
+        {
+          $(this).addClass("selected");
+        }
+      }
+      return false;
+    });
+
 });

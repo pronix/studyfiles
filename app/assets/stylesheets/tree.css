@@ -54,7 +54,8 @@
 /* FILE ROW TITLE WIDTHS */
 
 .file-row {
-  margin-bottom: 9px;
+  margin-bottom: 2px;
+  padding-top: 5px;
   clear: both;
 }
     .file-row > span {
@@ -262,3 +263,8 @@
   background: white;
 }
 
+
+.file-row.selected {
+  background: #ffdc44;
+  border-radius: 3px;
+}
