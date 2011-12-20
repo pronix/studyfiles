@@ -437,7 +437,7 @@ html[xmlns] .clearfix {
     background-position  : -327px -0px;
  }
 
- #folder-small_png {
+ .folder-small {
     height               : 18px;
     width                : 18px;
     background-position  : -352px -0px;
@@ -479,8 +479,8 @@ html[xmlns] .clearfix {
     background-position  : -438px -0px;
  }
 
- #mouse_png {
-    height               : 18px;
+ .mouse {
+   height               : 18px;
     width                : 18px;
     background-position  : -446px -0px;
  }
@@ -1176,7 +1176,14 @@ html[xmlns] .clearfix {
         padding: 10px 120px 10px 45px;
       }
       .yellow-notification.legend > div {
-        padding: 10px 30px 10px 45px;
+        padding: 25px 22px 10px 25px;
+        background-position: 12px 10px;
+      }
+      .yellow-notification.legend  ul {
+        margin-top: 5px;
+      }
+      .yellow-notification.legend  ul .icon{
+        margin-right: 5px;
       }
       .yellow-notification > div p {
         padding-bottom: 5px;
