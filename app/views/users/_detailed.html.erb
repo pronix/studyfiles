@@ -1,6 +1,4 @@
-
-  <%= render "stats", :user => user %>
-
+<%= render "stats", :user => user %>
 
 <% if user == current_user %>
   <!-- LEGEND START -->
@@ -43,11 +41,9 @@
     </div>
   </div>
   <!-- LEGEND END -->
-
   <%= render "shared/news", :news => @news %>
-
 <% else %>
-
-  <%= link_to "Написать в личку", new_discussion_path(:id => @user.id), :class => "button blue-button", :id => "pmme" %>
-
+  <% if current_user %>
+    <%= link_to "Написать в личку", new_discussion_path(:id => @user.id), :class => "button blue-button", :id => "pmme" %>
+  <% end %>
 <% end %>
