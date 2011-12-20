@@ -25,7 +25,7 @@
        </div>
 
        <div class="expander-content node">
-            <div class="level-1 clearfix node">
+            <div class="level-1 clearfix node <%== 'my-files' if @user == current_user %>">
 
 	      <% @user.folders.unsorted.each do |folder| %>
                 <%= render "shared/folder_nude", :folder => folder %>
@@ -61,7 +61,7 @@
 
 <% @user.universities.each do | univer | %>
 
-    <div class="expander parent">
+    <div class="expander parent <%== 'usered' if @user == current_user %>">
       <div class="expander-header clearfix university">
 
         <a href="" class="blue-collapse icon expand"></a>
@@ -95,7 +95,7 @@
                </div>
              </div>
 
-            <div class="level-1 clearfix node">
+            <div class="level-1 clearfix node <%== 'my-files' if @user == current_user %>">
               <% sub.folders.top.where(:user_id => @user.id).each do |folder| %>
                 <%= render "shared/folder", :folder => folder, :univer => univer %>
               <% end %>

@@ -69,6 +69,8 @@
 
     .file-row-title a {
       text-decoration: none;
+      display: inline-block;
+      overflow: hidden;
       border-bottom: 1px dotted #08C;
     }
 
@@ -241,7 +243,7 @@
   background: #f8f9f1;
   padding-top: 6px;
 }
-.mini-wrapper .file-row-user {
+.mini-wrapper .file-row-user, .my-files .file-row-user {
   display: none;
 }
 
