@@ -4,24 +4,20 @@
 </p>
 
 <div class="place clearfix">
-  <span>
-    <span>место</span>
-    <b>12</b>
-  </span>
-  <span>- в общем ТОПе</span>
+  <% if user.overall_rating.present? %>
+    <span>
+      <span>место</span>
+      <b><%= user.overall_rating %></b>
+    </span>
+    <span>- в общем ТОПе</span>
+  <% end %>
 </div>
 
-<div class="place gray-box clearfix">
-  <span>
-    <%= image_tag "icons/first-place.png" %>
-  </span>
-  <span>- в МГУ</span>
-</div>
-
-<div class="place clearfix">
-  <span>
-    <span>место</span>
-    <b>143</b>
-  </span>
-  <span>- в МИЭТ</span>
-</div>
+<% user.user_universities.sort_by(&:rating).each do |uu| %>
+  <div class="place <%= uu.in_top? ? 'gray-box clearfix' : 'clearfix' %>">
+    <span>
+      <%== university_rating_2(uu.rating) %>
+    </span>
+    <span>- <%= uu.university.abbreviation %></span>
+  </div>
+<% end %>

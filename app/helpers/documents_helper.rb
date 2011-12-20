@@ -4,6 +4,11 @@ module DocumentsHelper
   def university_rating(rating)
     return image_tag("icons/univer_place_#{rating}.png") if rating >= 1 && rating <= 3
   end
+
+  def university_rating_2(rating)
+    return image_tag("icons/univer_place_ext_#{rating}.png") if rating >= 1 && rating <= 3
+    %Q(<span>место</span><b>#{rating}</b></span>)
+  end
   
   def star_image(rating)
     return image_tag("icons/star#{rating}.png") if rating >= 1 && rating <= 3
