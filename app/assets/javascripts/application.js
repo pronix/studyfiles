@@ -4,8 +4,8 @@
 //= require custom-form-elements
 //= require smartpaginator
 
+//Оборачиваем каждые size блоков в wrap
 function wrap(elements, wrap, size) {
-  // thanks array_chunk :) http://phpjs.org/functions/array_chunk:306
   var x, i = 0, c = -1, l = elements.length, n = [];
   for(i; i < l; i++){
     (x = i % size) ? n[c][x] = elements[i] : n[++c] = [elements[i]];
@@ -15,12 +15,14 @@ function wrap(elements, wrap, size) {
     $(n[i]).wrapAll(wrap);
   }
 }
+
 $(document).ready(function(){
 
   //TODO переделать только для старых бразуеров
   $(".sidebar .top-10 li:even").each(function(){
     $(this).addClass("odd");
   });
+
 
   //раскрыть список предметов
   $('.expand-subjects-list').click(function(){
@@ -29,6 +31,8 @@ $(document).ready(function(){
     return false
   });
 
+
+  //Открываем по ссылке с этим классом модальное окно с id = rel этой ссылки
   $('.open-modal').click(function(e) {
       e.preventDefault();
       var modalWindow = $(this).attr('rel');
@@ -37,6 +41,7 @@ $(document).ready(function(){
         autoResize: true
       });
   });
+
 
   //Если нужен переход от одного модального к другому
   $(".popuper").live('click', function() {
@@ -49,7 +54,10 @@ $(document).ready(function(){
     $(this).parent('.clearable-container').find('.clearable').val('');
   });
 
+
+  //Табы для Топ-10 юзеров\универов
   $('#tops-tabs').tabs();
+
 
   //Закрывалка блоков
   $('.close').live('click', function(e) {
@@ -69,11 +77,13 @@ $(document).ready(function(){
   });
 
 
+  //По клику на чекбокс в новостях обновляем страницу
   $(".news-item form > .checkbox").live('click', function() {
       $(this).parent('form').submit();
   });
 
 
+  //Превью папки\документа открываем в новом окне
   $('.popup-preview').click(function(e) {
      e.preventDefault();
      window.open ($(this).attr('href'), 'newwindow', config='height=500, width=900, toolbar=no, menubar=no')
@@ -81,23 +91,39 @@ $(document).ready(function(){
 
 
 
-  $('p').filter(function() {
+  //Просмотрщик файлов
+
+  //Удаляем пустые элементы документа
+  $('#document-contents > div:not(#top-pager) *').filter(function() {
         return $.trim($(this).text()) === ''
     }).remove();
+
+  //И каждые 8 элементов оборачиваем в страницу
   wrap($('#document-contents > div:not(#top-pager) > *'), '<div class="page"></div>', 8);
 
- $('#pager').smartpaginator({ totalrecords: $("div.page").length,
+  //И генерируем пагинацию по этим страницам
+  $('#pager').smartpaginator({ totalrecords: $("div.page").length,
                               recordsperpage: 1,
                               datacontainer: 'document-contents > div',
                               dataelement: 'div.page',
                               length: 18,
                               theme: 'black' });
 
- $("#prev").click(function() {$("#origin-prev").click();});
- $("#next").click(function() {$("#origin-next").click();});
- $(".beg").click(function() { $("#origin-first").click();})
- $(".end").click(function() { $("#origin-last").click();})
+  //Внешние ссылки для управления пагинацией
+  $("#prev").click(function() {$("#origin-prev").click();});
+  $("#next").click(function() {$("#origin-next").click();});
+  $(".beg").click(function() { $("#origin-first").click();})
+  $(".end").click(function() { $("#origin-last").click();})
 
 
+  //Навигация по нажатию на ctrl
+  $(document).keydown(function(e) {
+        if (e.keyCode == 37 && e.ctrlKey) {
+          document.location = $(".pagination a.previous_page").attr('href');
+        }
+        else if (e.keyCode == 39 && e.ctrlKey) {
+          document.location = $(".pagination a.next_page").attr('href');
+        }
+  });
 
 });
