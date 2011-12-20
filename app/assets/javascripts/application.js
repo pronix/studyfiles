@@ -115,6 +115,10 @@ $(document).ready(function(){
   $(".beg").click(function() { $("#origin-first").click();})
   $(".end").click(function() { $("#origin-last").click();})
 
+  //Разворачивающиеся вопросы в FAQ
+  $(".faq-block li h4").click(function() {
+    $(this).addClass('choosed').parent().find('.gray-box').show();
+  })
 
   //Навигация по нажатию на ctrl
   $(document).keydown(function(e) {
