@@ -11,7 +11,7 @@ class Document < ActiveRecord::Base
   
   before_save :default_name
 
-  validates :item,         :presence => true
+  validates :item, :presence => true
 
   after_save :queue_process_item
 
@@ -23,11 +23,14 @@ class Document < ActiveRecord::Base
   belongs_to :folder
   belongs_to :subject
 
-  scope :unsorted, where(:university_id => nil)
-  scope :processed, where(:item_proceed => true)
-  scope :unfolded, where(:folder_id => nil)
-  scope :unsubjected, where(:subject_id => nil)
-  scope :by_univer, lambda{|univer| where(:university_id => univer.id)}
+
+  scope :available, where(:tmp => false)  
+  scope :unsorted, available.where(:university_id => nil)
+  scope :processed, available.where(:item_proceed => true)
+  scope :unfolded, available.where(:folder_id => nil)
+  scope :unsubjected, available.where(:subject_id => nil)
+  scope :by_univer, lambda{|univer| available.
+    where(:university_id => univer.id)}
 
   #вытаскиваем первые два символа с хеша
   def first_folder
@@ -50,6 +53,10 @@ class Document < ActiveRecord::Base
 
   def has_preview?
     item_processed and item_file_size > 0
+  end
+
+  def available!
+    update_attribute(:tmp, false)
   end
 
   # def move_to_folder(folder)
@@ -118,9 +125,11 @@ class Document < ActiveRecord::Base
 
   def file_processing
     process #Обрабатываем файл
-    if self.item.content_type == 'application/zip'
+    if item.content_type == 'application/zip'
       FileUtils.rm_rf(item.path)
       self.delete
+    else
+      available!
     end
   end
 
@@ -160,8 +169,8 @@ class Document < ActiveRecord::Base
 
   #конвертирование исходного кода в html
   def default_name
-      self.name = self.item_file_name if self.name.blank?
-    end
+    self.name = self.item_file_name if self.name.blank?
+  end
 
   def process
     file_type = item.content_type

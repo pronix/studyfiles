@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Document do
 
-  describe "Unzip document", :current => true do
+  describe "Unzip document" do
     before(:each) do
       FileUtils.rm_rf(Rails.root.join('tmp/unzipped'))
       @doc = Factory(:document,
