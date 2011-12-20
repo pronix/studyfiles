@@ -1731,11 +1731,35 @@ html[xmlns] .clearfix {
  *
  * FAQS */
 
+
+  .faq-block h3 {
+    font-size: 1.4em;
+  }
+
   .faq-block ol li {
     list-style-type: decimal;
+    color: #81817f;
+    font-size: 1.1em;
+    margin-bottom: 18px;
   }
-  .faq-block ol li p{
-    margin-left: -12px;
+
+  .faq-block ol li h4{
+    border-bottom: 1px dotted #004c62;
+    display: inline;
+    cursor: pointer;
+    font-weight: normal;
+    color: #004c62; /* DARK BLUE */
+  }
+  .faq-block ol li h4.choosed {
+    color: #81817f;
+    border: none;
+    cursor: auto;
+  }
+
+  .faq-block ol li .gray-box{
+    display: none;
+    margin: 5px 0 0 -16px;
+    border-radius: 2px;
   }
 
 /* FAQS END */
