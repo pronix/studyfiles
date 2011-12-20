@@ -116,7 +116,7 @@ $(document).ready(function(){
   $(".end").click(function() { $("#origin-last").click();})
 
   //Разворачивающиеся вопросы в FAQ
-  $(".faq-block li h3").click(function() {
+  $(".faq-block li h4").click(function() {
     $(this).addClass('choosed').parent().find('.gray-box').show();
   })
 
