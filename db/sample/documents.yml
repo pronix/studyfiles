@@ -1,29 +1,59 @@
+admin_file_1:
+  user: admin_user
+  name: документ3.doc
+  description: "<%= Faker::Lorem.paragraph %>"
+  
+admin_file_2:
+  user: admin_user
+  name: документ3.doc
+  description: "<%= Faker::Lorem.paragraph %>"
+  
+admin_file_3:
+  user: admin_user
+  name: бытие.doc
+  description: "<%= Faker::Lorem.paragraph %>"
+  
+admin_file_4:
+  user: admin_user
+  name: КВопросы к экзамену.doc
+  description: "<%= Faker::Lorem.paragraph %>"
+
+admin_file_5:
+  user: admin_user
+  name: NGU.gif
+  description: "<%= Faker::Lorem.paragraph %>"
+  
 konspect:
   name: документ1.doc
   university: mgu
   folder: folder3
   user: user_1
+  description: "<%= Faker::Lorem.paragraph %>"
 
 doc1:
   name: документ3.doc
   university: mgu
   folder: folder3
   user: user_2
+  description: "<%= Faker::Lorem.paragraph %>"
 
 doc3:
   name: бытие.doc
   university: mgu
   folder: folder4
   user: user_2
+  description: "<%= Faker::Lorem.paragraph %>"
 
 doc4:
   name: КВопросы к экзамену.doc
   university: mgu
   folder: folder4
   user: user_1
+  description: "<%= Faker::Lorem.paragraph %>"
 
 picture1:
   name: NGU.gif
   university: mgu
   folder: folder4
   user: user_1
+  description: "<%= Faker::Lorem.paragraph %>"

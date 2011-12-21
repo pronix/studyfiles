@@ -9,7 +9,7 @@
     <span class="file-row-actions">
       <%= link_to "", download_document_path(document), :class => "download icon", :title => "Скачать #{document.name}" %>
     </span>
-
+    <%= link_to "Редактировать", edit_document_path(document) if can? :manage, document %>
     <% if document.has_preview? %>
       <%= link_to truncate(document.name, :length => 42, :omission => ""), document_path(document),
 	  :title => "Предпросмотр #{document.name}", :class => "popup-preview" %>

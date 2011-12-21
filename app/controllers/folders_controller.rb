@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 class FoldersController < ApplicationController
-  # before_filter :authenticate_user!
   before_filter :find_folder
 
   def index
@@ -8,6 +7,9 @@ class FoldersController < ApplicationController
 
   def new
     @folder = Folder.new
+  end
+
+  def edit
   end
 
   def create
@@ -26,13 +28,8 @@ class FoldersController < ApplicationController
   end
 
   def update
-    @folder = (current_user.admin? ? Folder.find_by_id(params[:id]) : current_user.folders.find_by_id(params[:id]))
-    if @folder.update_attributes(params[:folder])
-      flash[:notice] = "Папка успешно изменена"
-    else
-      flash[:alert] = "Папка не изменена!"
-    end
-    redirect_to folders_path
+    @folder.update_attributes(params[:folder])
+    redirect_to user_path(@folder.user), notice: "Папка обновленна"
   end
 
   def download

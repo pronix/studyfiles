@@ -3,6 +3,7 @@
 
      <span class="file-row-icons">
        <%= link_to "", "", :class => "folder-full icon expand" %>
+       <%= link_to("Редактировать", edit_folder_path(folder)) if can? :manage, folder %>
      </span>
 
      <span class="file-row-title">

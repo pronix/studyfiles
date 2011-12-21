@@ -7,7 +7,7 @@
         <dd><%= rating(@document) %></dd>
 
         <dt>Добавил:</dt>
-        <dd><%= link_to(@document.user.name, user_path(@document.user)) if @document.user %></dd>
+        <dd><%= link_to(user_name(@document.user), user_path(@document.user)) if @document.user %></dd>
 
         <dt>Дата:</dt>
         <dd><%= @document.created_at.strftime("%d.%m.%Y") %>
