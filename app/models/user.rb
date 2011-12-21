@@ -23,11 +23,21 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :subjects, :uniq => true
   has_and_belongs_to_many :roles, :uniq => true
+  has_and_belongs_to_many :downloads, :join_table => 'users_downloads', :class_name => 'Document'
 
   has_attached_file :avatar, :styles => { :medium => "128x128", :thumb => "54x54", :icon => "34x34" }
 
   after_create :add_default_role
 
+  def download_object(obj)
+    if obj.class.to_s == 'Folder'
+      downloads << obj.documents
+      downloads << Document.where(:folder_id => obj.children.map {|f| f.id})
+    else
+      downloads << obj
+    end
+  end
+  
   def add_default_role
     add_role('user')
   end

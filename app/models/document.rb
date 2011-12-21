@@ -23,6 +23,8 @@ class Document < ActiveRecord::Base
   belongs_to :folder
   belongs_to :subject
 
+  has_and_belongs_to_many :downloads, :join_table => 'users_downloads', :class_name => 'User'
+
 
   scope :available, where(:tmp => false)  
   scope :unsorted, available.where(:university_id => nil)

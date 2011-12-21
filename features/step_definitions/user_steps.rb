@@ -83,3 +83,18 @@ end
 Допустим /^я обновлю райтинг для вуза "(.+)"$/ do |univer|
   University.find_by_abbreviation(univer).update_user_rating!
 end
+
+Допустим /^в системе есть файл "(.+)" с размером (\d+)$/ do |file, file_size|
+  doc = Factory(:document, :item => File.new(Rails.root.join('sample_documents', file)),
+                :name => file)
+  doc.item_file_size.should == file_size.to_i
+end
+
+Допустим /^пользователь скачал файл "(.+)"$/ do |doc|
+  User.find_by_email('user@example.com').download_object Document.find_by_name(doc)
+end
+
+Допустим /^пользователь должен иметь у себя в скаченном файл "(.+)"$/ do |doc|
+  User.find_by_email('user@example.com').downloads.find_by_name(doc).should be_true
+end
+

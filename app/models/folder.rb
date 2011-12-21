@@ -154,6 +154,4 @@ class Folder < ActiveRecord::Base
   def create_log
     SiteLog.create_foler(self)
   end
-
-
 end

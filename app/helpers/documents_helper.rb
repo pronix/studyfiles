@@ -2,16 +2,19 @@
 module DocumentsHelper
 
   def university_rating(rating)
+    %Q(место<br/><b>-</b>) unless rating.present?
     return image_tag("icons/univer_place_#{rating}.png") if rating && rating >= 1 && rating <= 3
     %Q(место<br/><b>#{rating}</b>)
   end
 
   def university_rating_2(rating)
+    return %Q(<span>место</span><b>-</b></span>) unless rating.present?
     return image_tag("icons/univer_place_ext_#{rating}.png") if rating >= 1 && rating <= 3
     %Q(<span>место</span><b>#{rating}</b></span>)
   end
   
   def star_image(rating)
+    return '' unless rating.present?
     return image_tag("icons/star#{rating}.png") if rating >= 1 && rating <= 3
     rating
   end

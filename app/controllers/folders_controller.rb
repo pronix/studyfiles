@@ -41,6 +41,7 @@ class FoldersController < ApplicationController
       redirect_to_back and return
     end
     @folder = Folder.find(params[:id])
+    current_user.download_object(@folder)
     send_file @folder.zip_folder, :filename => @folder.zip_name, :type => "application/zip"
   end
 

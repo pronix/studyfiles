@@ -64,7 +64,7 @@ class DocumentsController < ApplicationController
       vote.update_attributes(:grade => 1, :vote_type => true)
       cookies["download_finished"] = { :value => "true", :expires => 1.second.from_now }
     end
-
+    current_user.download_object @doc if current_user
     send_file(@doc.item.path, :filename => @doc.item_file_name)
   end
 

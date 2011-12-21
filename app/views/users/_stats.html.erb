@@ -17,7 +17,7 @@
 
         <dt>Скачал</dt>
         <dd>
-          244 файла на 126,1 Мб
+          <%= user.downloads.count %> <%= t(:file, :count => user.downloads.count) %> на <%= number_to_human_size user.downloads.sum(:item_file_size) %>
         </dd>
       </dl>
 
