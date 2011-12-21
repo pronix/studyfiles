@@ -425,16 +425,22 @@ html[xmlns] .clearfix {
     background-position  : -283px -0px;
  }
 
+ .selected .folder-full {
+    height               : 25px;
+    width                : 25px;
+    background-position  : -327px 3px;
+  }
+
  .folder-plus {
     height               : 18px;
     width                : 18px;
     background-position  : -309px -0px;
  }
 
- #folder-selected_png {
+ .folder-selected {
     height               : 18px;
     width                : 25px;
-    background-position  : -327px -0px;
+    background-position  : -327px 3px;
  }
 
  .folder-small {

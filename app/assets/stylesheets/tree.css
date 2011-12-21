@@ -30,6 +30,10 @@
   border-radius: 5px 0 0 5px;
 }
 
+.level-4, .level-5, .level-6, .level-7, .level-8 {
+  margin: 6px 0;
+}
+
 .level-4 { background: #c7ebf0; }
 .level-5 { background: #b6e0e6; }
 .level-6 { background: #a2d8e0; }
@@ -40,9 +44,9 @@
 /* FILE ROW TITLE WIDTHS */
 .level-1 .file-row-title { width: 277px; }
 .level-1 .folder-row > .file-row-title { width: 305px; }
-.level-2 .file-row-title { width: 267px; }
+.level-2 .file-row-title { width: 270px; }
 .level-2 .folder-row > .file-row-title { width: 295px; }
-.level-4 .file-row-title, .level-5 .file-row-title, .level-6 .file-row-title, .level-7 .file-row-title, .level-8 .file-row-title, .level-3 .file-row-title { width: 256px; }
+.level-4 .file-row-title, .level-5 .file-row-title, .level-6 .file-row-title, .level-7 .file-row-title, .level-8 .file-row-title, .level-3 .file-row-title { width: 284px !important; }
 
 .level-1.my-files .file-row-title { width: 416px; }
 .level-1.my-files .folder-row > .file-row-title { width: 445px; }
@@ -70,8 +74,6 @@
 
     .file-row-title a {
       text-decoration: none;
-      display: inline-block;
-      overflow: hidden;
       border-bottom: 1px dotted #08C;
     }
 
@@ -124,6 +126,9 @@
   .expander {
     margin: 30px 0;
   }
+    .expander-subject {
+      margin-top: 20px;
+    }
     .expander-header {
       line-height: 54px;
       min-height: 54px;
@@ -268,6 +273,7 @@
   background: #ffdc44;
   border-radius: 3px;
 }
+
 
 
 .mover-checkbox {

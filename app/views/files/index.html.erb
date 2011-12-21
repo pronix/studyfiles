@@ -36,7 +36,7 @@
             <% sub.folders.top.each do |folder| %>
               <%= render "shared/folder", :folder => folder, :univer => univer %>
             <% end %>
-            <% sub.documents.each do |doc| %>
+            <% sub.documents.unfolded.each do |doc| %>
               <%= render 'shared/file_row', :document => doc %>
             <% end %>
           </div>
@@ -48,7 +48,7 @@
 	<% univer.folders.top.unsubjected.each do |folder| %>
           <%= render "shared/folder", :folder => folder, :univer => univer %>
 	<% end %>
-	<% univer.documents.unfolded.each do |doc| %>
+	<% univer.documents.unfolded.unsubjected.each do |doc| %>
 	  <%= render 'shared/file_row', :document => doc %>
 	<% end %>
       </div>

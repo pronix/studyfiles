@@ -94,4 +94,12 @@ class DocumentsController < ApplicationController
     end
   end
 
+
+  def destroy
+    @doc = Document.find(params[:id])
+    @doc.destroy
+    flash[:notice] = "Файл удалён."
+    redirect_to request.referer
+  end
+
 end
