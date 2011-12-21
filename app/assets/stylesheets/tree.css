@@ -50,9 +50,9 @@
 
 .level-1.my-files .file-row-title { width: 416px; }
 .level-1.my-files .folder-row > .file-row-title { width: 445px; }
-.my-files .level-2 .file-row-title { width: 407px; }
+.my-files .level-2 .file-row-title { width: 410px; }
 .my-files .level-2 .folder-row > .file-row-title { width: 435px; }
-.my-files .level-3 .file-row-title, .my-files .level-4 .file-row-title, .my-files .level-5 .file-row-title, .my-files .level-6 .file-row-title, .my-files .level-7 .file-row-title, .my-files .level-8 .file-row-title { width: 396px; }
+.my-files .level-3 .file-row-title, .my-files .level-4 .file-row-title, .my-files .level-5 .file-row-title, .my-files .level-6 .file-row-title, .my-files .level-7 .file-row-title, .my-files .level-8 .file-row-title { width: 424px !important; }
 
 
 /* FILE ROW TITLE WIDTHS */
@@ -127,7 +127,7 @@
     margin: 30px 0;
   }
     .expander-subject {
-      margin-top: 20px;
+      margin-bottom: 20px;
     }
     .expander-header {
       line-height: 54px;
@@ -220,7 +220,7 @@
       line-height: 34px;
       font-size: 1.2em;
       padding: 0 0 0 15px;
-      margin-bottom: 17px;
+      margin-bottom: 0;
       background: #fafafa;
     }
       .expander-subject > .gray-box > .icon {
