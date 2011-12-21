@@ -1,4 +1,5 @@
 <div class="file-row clearfix">
+  <%= check_box_tag "document_ids[]", document.id, false, :class => "mover-checkbox" %>
   <span class="file-row-rating"><%= rating(document) %></span>
   <span class="file-row-icons">
     <%= document_rater(document) %>

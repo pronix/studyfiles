@@ -268,3 +268,8 @@
   background: #ffdc44;
   border-radius: 3px;
 }
+
+
+.mover-checkbox {
+  display: none;
+}

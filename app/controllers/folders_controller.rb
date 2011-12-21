@@ -1,23 +1,28 @@
 # -*- coding: utf-8 -*-
 class FoldersController < ApplicationController
   # before_filter :authenticate_user!
-  before_filter :find_folder
+  before_filter :find_folder, :only => [:download, :show]
 
   def index
   end
 
   def new
-    @folder = Folder.new
+    @university = University.find(params[:university]) if params[:university]
+    @subject = Subject.find(params[:subject]) if params[:subject]
+    @parent = Folder.find(params[:parent_id]) if params[:parent_id]
+
+    @folder = Folder.new(:user => current_user, :university => @university, :subject => @subject)
   end
 
   def create
     @folder = Folder.new(params[:folder])
     if @folder.save
+      @folder.copy_to_folder(Folder.find(params[:parent])) if params[:parent]
       flash[:notice] = "Папка успешно создана"
     else
       flash[:alert] = "Папка не создана!"
     end
-    redirect_to folders_path
+    redirect_to user_path(current_user)
   end
 
   def show
@@ -43,6 +48,14 @@ class FoldersController < ApplicationController
     @folder = Folder.find(params[:id])
     current_user.download_object(@folder)
     send_file @folder.zip_folder, :filename => @folder.zip_name, :type => "application/zip"
+  end
+
+  def move
+
+    folder = Folder.find(params[:destination])
+    folder.move_files(params[:folder_ids], params[:document_ids])
+
+    redirect_to request.referer
   end
 
   private

@@ -1,4 +1,5 @@
 <div class="file-row clearfix folder-row parent">
+  <%= check_box_tag "folder_ids[]", folder.id, false, :class => "mover-checkbox" %>
   <span class="file-row-rating"><%= rating(folder) %></span>
 
      <span class="file-row-icons">
@@ -7,9 +8,14 @@
 
      <span class="file-row-title">
        <span class="file-row-actions">
+         <%= link_to "", "", :value => folder.id, :class => "slate icon action-link" %>
 	 <%= link_to "", university_folder_path(univer, folder), :class => "flag icon popup-preview",
 	     :title => "Открыть #{folder.name}" %>
          <%= link_to "", download_folder_path(folder), :class => "download icon", :title => "Скачать #{folder.name}" %>
+         <%= link_to "", new_folder_path(:parent_id => folder.id, :university => folder.university, :subject => folder.subject), :class => "folder-plus icon" %>
+         <%= link_to "", new_user_document_path(current_user, :folder => folder, :subject => folder.subject, :university => folder.university), :class => "file-plus icon" %>
+         <%= link_to "", "", :class => "dred-cross icon" %>
+
        </span>
        <%= link_to folder.name, "#", :class => "expand", :title => "Раскрыть #{folder.name}" %>
      </span>

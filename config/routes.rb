@@ -25,6 +25,7 @@ Studyfiles::Application.routes.draw do
   resources :folders do
     member do
       get 'download'
+      post 'move'
     end
   end
 

@@ -14,5 +14,8 @@
 
       <button type="submit" class="btn primary" title="Создать папку">Создать</button>
     </p>
+  <%= f.hidden_field :subject_id, :value => @subject.id if @subject %>
+  <%= f.hidden_field :university_id, :value => @university.id if @university %>
+  <%= hidden_field_tag(:parent, @parent.id) if @parent  %>
   </fieldset>
 <% end %>
