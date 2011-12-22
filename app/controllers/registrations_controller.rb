@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    if verify_recaptcha || !Rails.env.production? 
+    if verify_recaptcha || !Rails.env.production?
       super
     else
       build_resource

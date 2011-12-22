@@ -1,1 +1,16 @@
-$("#univer-chooser-modal .expanded-subjects-list").html("<%= escape_javascript( render "modal_search_results", :universities => @universities) %>");
+if ($("#univer-chooser-modal").length > 0) {
+  $("#univer-chooser-modal .expanded-subjects-list").html("<%= escape_javascript( render "modal_search_results", :universities => @universities) %>");
+}
+else {
+  $(".modal-window").remove();
+  $("body").append("<%= escape_javascript(render 'modal_search', :universities => @universities) %>");
+  $("#univer-chooser-modal").modal({
+    closeClass: 'close-modal',
+    autoResize: true,
+    onClose: function() {
+      $.modal.close();
+      $(".modal-window").remove();
+    }
+  });
+}
+
