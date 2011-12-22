@@ -50,7 +50,7 @@ Studyfiles::Application.configure do
   config.middleware.use ExceptionNotifier,
   :email_prefix => "[Notify-Studifiles] ",
   :sender_address => %{"notify" <notify@kremenev.com>},
-  :exception_recipients => %w{ezo@kremenev.com}
+  :exception_recipients => %w{ezo@kremenev.com fodojyko@gmail.com}
 end
 
 ActionMailer::Base.smtp_settings = {

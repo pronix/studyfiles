@@ -3,7 +3,7 @@ class NoveltiesController < ApplicationController
   before_filter :authorize, :only => [:new, :create, :edit, :update]
 
   def index
-    @news = Novelty.order('created_at DESC').
+    @news = Novelty.order('created_at DESC, id DESC').
       paginate(:page => params[:page], :per_page => 5)
   end
 
