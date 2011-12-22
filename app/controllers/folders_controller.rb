@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class FoldersController < ApplicationController
   # before_filter :authenticate_user!
-  before_filter :find_folder, :only => [:download, :show]
+  before_filter :find_folder, :only => [:download, :show, :index]
 
   def index
   end
