@@ -6,7 +6,7 @@
         <p>
           <%= novelty.text %>
         </p>
-        <span><%= novelty.date %></span>
+        <span><%= l novelty.created_at, :format => '%d %B %Y' %></span>
         <%= link_to image_tag("close-news.png"), "#", :class => "close" %>
       </div>
   <% end %>
