@@ -9,7 +9,7 @@
      <span class="file-row-title">
        <span class="file-row-actions">
          <% if can? :manage, folder %>
-           <%= link_to "", edit_folder_path(folder), :class => "edit icon", :title => "Редактировить #{folder.name}" %>
+           <%= link_to "", edit_folder_path(folder), :class => "edit icon", :title => "Редактировить #{folder.name}", :remote => true %>
             <%= link_to "", "", :value => folder.id, :class => "slate icon action-link" %>
          <% end %>
 
@@ -35,7 +35,7 @@
 
      <span class="file-row-user"><%= link_to truncate(folder.user.nickname, :length => 17, :omission => ""), user_path(folder.user) if folder.user %></span> <!-- FIXME -->
 
-     <p class="file-row-previews"></p>
+     <div class="file-row-previews" id="folder-<%= folder.id %>"></div>
 
      <div class="<%== "level-#{folder.level}" %> clearfix node">
        <% folder.documents.each do |document| %>

@@ -1,0 +1,16 @@
+<%= form_for document do |f| %>
+  <dl class="form-list in-tree-form">
+    <dt><%= rating(document) %></dt>
+    <dd>
+      <div class="clearable-container">
+        <%= f.text_field :name, :class => "clearable" %>
+        <a class="clearer icon"></a>
+      </div>
+    </dd>
+
+    <dt></dt>
+    <dd><%= f.text_area :description, :rows => 5, :cols => 60 %></dd>
+
+    <dt></dt>
+    <dd><%= f.submit "Сохранить", :class => "button blue-button" %></dd>
+<% end %>

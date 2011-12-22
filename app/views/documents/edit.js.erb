@@ -1,0 +1,2 @@
+$("#document-<%= @file.id %> form").remove();
+$("#document-<%= @file.id %>").append("<%= escape_javascript(render "documents/info_form", :document => @file) %>");

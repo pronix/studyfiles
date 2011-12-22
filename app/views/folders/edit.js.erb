@@ -1,0 +1,3 @@
+if ($("#folder-<%=@folder.id %> form").length == 0) {
+  $("#folder-<%=@folder.id %>").append("<%= escape_javascript(render "folders/form", :folder => @folder) %>");
+}
