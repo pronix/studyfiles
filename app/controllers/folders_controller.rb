@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class FoldersController < ApplicationController
   # before_filter :authenticate_user!
-  before_filter :find_folder, :only => [:download, :show, :index]
+  before_filter :find_folder, :except => [:move, :new]
 
   def index
   end
@@ -35,7 +35,7 @@ class FoldersController < ApplicationController
 
   def update
     @folder.update_attributes(params[:folder])
-    redirect_to user_path(@folder.user), notice: "Папка обновленна"
+    redirect_to request.referer, notice: "Папка обновленна"
   end
 
   def download

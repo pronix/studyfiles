@@ -118,6 +118,9 @@
         clear: both;
         font-size: 1.1em;
       }
+      .file-row-previews form {
+        padding-top: 15px;
+      }
 
 /* FILE TREE END */
 
