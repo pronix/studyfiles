@@ -1,6 +1,10 @@
 <p>
   <%= f.text_field :name %>
   <%= f.file_field :item %>
+  <%= f.hidden_field :subject_id, :value => @subject.id if @subject %>
+  <%= f.hidden_field :university_id, :value => @university.id if @university %>
+  <%= f.hidden_field :folder_id, :value => @folder.id if @folder %>
+
   <%= f.link_to_remove "X" %>
 </p>
 

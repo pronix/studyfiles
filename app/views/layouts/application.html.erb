@@ -9,7 +9,7 @@
   <%= csrf_meta_tag %>
 </head>
 
-<body>
+<body <%== "class='logged-in'" if current_user %>
 <div class="alert-message warning"><%= notice %></div>
 <div class="alert-message error"><%= alert %></div>
 

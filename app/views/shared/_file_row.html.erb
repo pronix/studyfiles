@@ -1,4 +1,5 @@
 <div class="file-row clearfix">
+  <%= check_box_tag "document_ids[]", document.id, false, :class => "mover-checkbox" %>
   <span class="file-row-rating"><%= rating(document) %></span>
   <span class="file-row-icons">
     <%= document_rater(document) %>
@@ -7,9 +8,14 @@
 
   <span class="file-row-title">
     <span class="file-row-actions">
+      <% if can? :manage, document %>
+        <%= link_to "", edit_document_path(document), :class => "edit icon", :title => "Редактировать #{document.name}" %>
+      <% end %>
       <%= link_to "", download_document_path(document), :class => "download icon", :title => "Скачать #{document.name}" %>
+      <% if can? :manage, document %>
+        <%= link_to "", document_path(document), :class => "dred-cross icon", :title => "Удалить#{document.name}", :method => :delete %>
+      <% end %>
     </span>
-    <%= link_to "Редактировать", edit_document_path(document) if can? :manage, document %>
     <% if document.has_preview? %>
       <%= link_to truncate(document.name, :length => 42, :omission => ""), document_path(document),
 	  :title => "Предпросмотр #{document.name}", :class => "popup-preview" %>

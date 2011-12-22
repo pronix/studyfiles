@@ -31,6 +31,19 @@ class Folder < ActiveRecord::Base
     index_path.delete_if{|x| x == 0}.map { |id| objects[id].first }
   end
 
+  def move_files(folder_ids, document_ids)
+    if folder_ids
+      folder_ids.each do |i|
+        Folder.find(i).copy_to_folder(self)
+      end
+    end
+    if document_ids
+      document_ids.each do |i|
+          Document.find(i).copy_to_folder(self)
+      end
+    end
+  end
+
 
   #Копирум  из одной папки в другую
   def copy_to_folder(folder)

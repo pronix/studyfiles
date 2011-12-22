@@ -36,18 +36,30 @@ $(function() {
       $(this).closest('.with-more').find('.more-block').show();
     });
 
-    $(".file-row").bind("contextmenu",function(e){
+    $(".logged-in .file-row").bind("contextmenu",function(e){
       if (e.which === 3) {
         e.preventDefault();
+        var checkbox = $(this).closest('.file-row').find(' > .mover-checkbox');
         if ($(this).hasClass("selected")) {
           $(this).removeClass("selected");
+          checkbox.prop("checked", false);
         }
         else
         {
           $(this).addClass("selected");
+          checkbox.prop("checked", true);
         }
       }
       return false;
+    });
+
+
+    $(".logged-in .action-link").live('click', function(e) {
+        e.preventDefault();
+        var where = $(this).attr('value');
+        var form = $(this).closest('.mover-form');
+        form.find("input[name=destination]").val(where);
+        form.submit();
     });
 
 });

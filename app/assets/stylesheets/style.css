@@ -425,16 +425,22 @@ html[xmlns] .clearfix {
     background-position  : -283px -0px;
  }
 
+ .selected .folder-full {
+    height               : 25px;
+    width                : 25px;
+    background-position  : -327px 3px;
+  }
+
  .folder-plus {
     height               : 18px;
     width                : 18px;
     background-position  : -309px -0px;
  }
 
- #folder-selected_png {
+ .folder-selected {
     height               : 18px;
     width                : 25px;
-    background-position  : -327px -0px;
+    background-position  : -327px 3px;
  }
 
  .folder-small {
@@ -1248,7 +1254,7 @@ html[xmlns] .clearfix {
           }
           .place > span:first-child img {
             width: 42px;
-            margin: 0 auto;
+            margin: 0 auto !important;
           }
           .place > span > * {
             display: block;
@@ -1391,6 +1397,11 @@ html[xmlns] .clearfix {
       .users-list li .expander-header .rating img  {
         margin-top: 5px;
       }
+      .users-list li .expander-header > h4 {
+          white-space: nowrap;
+          max-width: 130px;
+          overflow: hidden;
+       }
       .users-list li .expander-header .place-rating.rating {
         text-align: center;
         color: #BAC6CB;
@@ -1422,6 +1433,9 @@ html[xmlns] .clearfix {
           padding-top: 8px;
           color: #BAC6CB;
           font-size: 0.9em;
+        }
+        .university-place.rating > span, .university-place-rating > b{
+          margin-left: -24px;
         }
 
         .users-list li .expander-header .files-counter {

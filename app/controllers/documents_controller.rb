@@ -8,7 +8,12 @@ class DocumentsController < ApplicationController
 
   def new
     @user = User.find(params[:user_id])
-    @documents = Array.new(3) { @user.documents.build }
+
+    @university = University.find(params[:university]) if params[:university]
+    @subject = Subject.find(params[:subject]) if params[:subject]
+    @folder = Folder.find(params[:folder]) if params[:folder]
+
+    @documents = Array.new(3) { @user.documents.build(:folder => @folder, :university => @university, :subject => @subject) }
   end
 
   def show
@@ -83,6 +88,14 @@ class DocumentsController < ApplicationController
     else
       redirect_to request.referer
     end
+  end
+
+
+  def destroy
+    @doc = Document.find(params[:id])
+    @doc.destroy
+    flash[:notice] = "Файл удалён."
+    redirect_to request.referer
   end
 
 end
