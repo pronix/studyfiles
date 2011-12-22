@@ -13,7 +13,23 @@ def has_files?(dir, files)
 end
 
 describe Folder do
-  describe "Zip folder", :current => true do
+  describe "Delte folder" do
+    it "Should delete all files and subfolders" do
+      main_folder = Factory(:folder)
+      s_folder = Factory(:folder)
+      s_folder.parent = main_folder
+      s_folder.save
+      main_folder.children.present?.should == true
+      doc1 = Factory(:document, :folder => main_folder)
+      doc2 = Factory(:document, :folder => s_folder)
+      main_folder.destroy
+      Folder.find_by_id(main_folder.id).present?.should == false
+      Document.find_by_id(doc1.id).present?.should == false
+      Folder.find_by_id(s_folder.id).present?.should == false
+      Document.find_by_id(doc2.id).present?.should == false
+    end
+  end
+  describe "Zip folder" do
     before(:all) do
       @zip_path = Rails.root.join('public/system/ziped_clients')
       @doc_file1 = File.new(Rails.root.join('test/fixtures/files/document1.doc'))
@@ -63,7 +79,8 @@ describe Folder do
         zip_path = @folder.zip_folder
         zip_path.should == Rails.root.join('public/system/ziped_clients', "#{@folder.id.to_s}.zip")
         unzip(zip_path)
-        Dir.glob(File.join(@zip_path, @folder.id.to_s, '**', '*.doc')).present?.should == true
+        Dir.glob(File.join(@zip_path, @folder.id.to_s, '*
+*', '*.doc')).present?.should == true
       end
     end
     

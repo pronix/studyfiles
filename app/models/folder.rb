@@ -2,7 +2,7 @@
 class Folder < ActiveRecord::Base
   include Hierarchy
 
-  has_many :documents
+  has_many :documents, :dependent => :destroy
 
   belongs_to :user
   belongs_to :university
@@ -15,7 +15,12 @@ class Folder < ActiveRecord::Base
 
   after_create :create_log
   before_create :default_path_name
+  before_destroy :delete_sub_folder
 
+  def delete_sub_folder
+    children.destroy_all
+  end
+  
   def level
     level = index_path.size <= 5 ? index_path.size + 2 : 7
     level
