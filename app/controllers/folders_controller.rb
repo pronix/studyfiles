@@ -14,6 +14,9 @@ class FoldersController < ApplicationController
     @folder = Folder.new(:user => current_user, :university => @university, :subject => @subject)
   end
 
+  def edit
+  end
+
   def create
     @folder = Folder.new(params[:folder])
     if @folder.save
@@ -31,13 +34,8 @@ class FoldersController < ApplicationController
   end
 
   def update
-    @folder = (current_user.admin? ? Folder.find_by_id(params[:id]) : current_user.folders.find_by_id(params[:id]))
-    if @folder.update_attributes(params[:folder])
-      flash[:notice] = "Папка успешно изменена"
-    else
-      flash[:alert] = "Папка не изменена!"
-    end
-    redirect_to folders_path
+    @folder.update_attributes(params[:folder])
+    redirect_to user_path(@folder.user), notice: "Папка обновленна"
   end
 
   def download

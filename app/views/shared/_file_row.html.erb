@@ -16,7 +16,6 @@
         <%= link_to "", document_path(document), :class => "dred-cross icon", :title => "Удалить#{document.name}", :method => :delete %>
       <% end %>
     </span>
-
     <% if document.has_preview? %>
       <%= link_to truncate(document.name, :length => 42, :omission => ""), document_path(document),
 	  :title => "Предпросмотр #{document.name}", :class => "popup-preview" %>

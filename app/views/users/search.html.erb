@@ -1,0 +1,24 @@
+<%= render "shared/search_from_file" %>
+
+<div class="yellow-notification notification closable">
+  <a class="close icon"></a>
+  <div>
+    <p>
+      Несортированные файлы не отображаются в общем каталоге, но доступны другим пользователям для скачивания с вашей страницы.
+    </p>
+  </div>
+</div>
+
+<div class="expander-content node">
+  <div class="level-1 clearfix node <%== 'my-files' if @user == current_user %>">
+
+    <% @documents.each do |document| %>
+      <%= render "shared/file_row", :document => document %>
+    <% end %>
+
+  </div>
+  <% if @user == current_user %>
+    <%= link_to "Добавить файлы", new_user_document_path(current_user), :class => "button green-button" %>
+  <% end %>
+
+</div>

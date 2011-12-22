@@ -9,7 +9,7 @@
      <span class="file-row-title">
        <span class="file-row-actions">
          <% if can? :manage, folder %>
-            <%= link_to "", edit_folder_path(folder), :class => "edit icon" %>
+           <%= link_to "", edit_folder_path(folder), :class => "edit icon", :title => "Редактировить #{folder.name}" %>
             <%= link_to "", "", :value => folder.id, :class => "slate icon action-link" %>
          <% end %>
 

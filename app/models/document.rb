@@ -26,6 +26,11 @@ class Document < ActiveRecord::Base
   has_and_belongs_to_many :downloads, :join_table => 'users_downloads', :class_name => 'User'
 
 
+  define_index do
+    indexes :txt_doc
+    indexes :user_id
+  end
+
   scope :available, where(:tmp => false)  
   scope :unsorted, available.where(:university_id => nil)
   scope :processed, available.where(:item_proceed => true)
@@ -207,10 +212,20 @@ class Document < ActiveRecord::Base
     File.open(self.item.path + ".html", "w"){ |f| f.write(highlighted) }
   end
 
+  def txt_doc!
+    f_path = item.path + '.txt'
+    FileUtils.rm_rf f_path if File.exist? f_path
+    %x[abiword --to=txt #{item.path} && sed -i.bak "/^$/d" #{f_path}]
+    update_attribute(:txt_doc, File.open(f_path).read)
+    FileUtils.rm_rf f_path
+    FileUtils.rm_rf f_path + '.bak'
+  end
+
   #представление msofice документа кода в html
   def office_to_html
     unless File.exist? item.path + "html"
       %x[abiword --to=html #{self.item.path}]
+      txt_doc!
     end
     return item.path + "html"
   end

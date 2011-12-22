@@ -1,0 +1,17 @@
+<div class="search-form-container">
+      <div class="search-word">
+        <%= t("search") %>
+      </div>
+      <div>
+
+        <%= form_tag "", :method => :get, :class => "search-form" do %>
+            <%= text_field_tag :search, params[:search], :placeholder =>  "Поиск по содержимому файлов", :id => "search" %>
+          <button id="search_button" class="button blue-button">Найти</button>
+        <% end %>
+
+        <div class="search-statistic statistics">
+        </div>
+
+      </div>
+</div>
+

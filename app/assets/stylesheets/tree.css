@@ -42,7 +42,7 @@
 
 
 /* FILE ROW TITLE WIDTHS */
-.level-1 .file-row-title { width: 277px; }
+.level-1 .file-row-title { width: 270px; }
 .level-1 .folder-row > .file-row-title { width: 305px; }
 .level-2 > .file-row-title { width: 270px; }
 .level-2 > .folder-row > .file-row-title { width: 295px; }
@@ -206,6 +206,9 @@
           height: 16px;
           right: 10px;
           top: 6px;;
+        }
+        .expander-header .expander-actions {
+          right: 17px;
         }
         .expander-header > .rating {
           width: 40px;
