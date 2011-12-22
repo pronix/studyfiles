@@ -13,7 +13,7 @@
   <% end %>
 </div>
 
-<% user.user_universities.sort_by(&:rating).each do |uu| %>
+<% user.user_universities.order('rating DESC').each do |uu| %>
   <div class="place <%= uu.in_top? ? 'gray-box clearfix' : 'clearfix' %>">
     <span>
       <%== university_rating_2(uu.rating) %>
