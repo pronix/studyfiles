@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
 
   after_create :add_default_role
 
+  def self.top_users(_limit=10)
+    order('created_at ASC').sort{ |a,b| b.raiting <=> a.raiting }.first(_limit)
+  end
+  
   def download_object(obj)
     if obj.class.to_s == 'Folder'
       downloads << obj.documents

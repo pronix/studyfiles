@@ -6,12 +6,16 @@ class UniversitiesController < ApplicationController
 
   #Главная страница
   def index
-    @universities = University.order('rating DESC').search(params[:search], :star => true, :page => params[:page], :per_page => 4)
+    @universities = University.
+      search(params[:search], :star => true, :page => params[:page],
+             :per_page => 4, :order => :rating, :sort_mode => :desc)
   end
 
   def search
     if params[:search].strip.length > 0
-      @universities = University.search(:conditions => {:name => params[:search]}, :star => true)
+      @universities = University.
+        search(:conditions => {:name => params[:search]},
+               :star => true, :order => :rating, :sort_mode => :desc)
     else
       @universities = University.all
     end

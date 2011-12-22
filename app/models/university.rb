@@ -22,9 +22,14 @@ class University < ActiveRecord::Base
     indexes city
     indexes subjects.name, :as => :subject_name
     indexes folders.name, :as => :folder_name
+    has rating
   end
 
+  def self.top_universities(_limit=10)
+    search(:order => :rating, :sort_mode => :desc).first(_limit)
+  end
 
+  
   # Return university documents without folder
   def documents_without_folder
     documents.unfolded
