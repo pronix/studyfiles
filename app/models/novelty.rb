@@ -5,20 +5,18 @@ class Novelty < ActiveRecord::Base
   validates :text, :presence => true
   validates :title, :presence => true
 
-  default_scope :order => 'created_at DESC'
-
-  scope :main, where(:main => true)
+  scope :main, where(:main => true).order('created_at DESC')
 
   def on_main
-    self.update_attributes(:main => true)
+    update_attributes(:main => true)
   end
 
   def from_main
-    self.update_attributes(:main => false)
+    update_attributes(:main => false)
   end
 
   def date
-    self.created_at.strftime("%d %B %Y")
+    created_at.strftime("%d %B %Y")
   end
 
 end

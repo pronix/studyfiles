@@ -3,7 +3,8 @@ class NoveltiesController < ApplicationController
   before_filter :authorize, :only => [:new, :create, :edit, :update]
 
   def index
-    @news = Novelty.paginate(:page => params[:page], :per_page => 5)
+    @news = Novelty.order('created_at DESC').
+      paginate(:page => params[:page], :per_page => 5)
   end
 
   def new
@@ -16,11 +17,8 @@ class NoveltiesController < ApplicationController
 
   def update
     @novelty = Novelty.find(params[:id])
-    if @novelty.update_attributes(params[:novelty])
-      redirect_to novelties_path
-    else
-      render :edit
-    end
+    @novelty.update_attributes(params[:novelty])
+    redirect_to novelties_path
   end
 
   def create

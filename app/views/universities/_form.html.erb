@@ -1,21 +1,22 @@
-  <dt><%= f.label :abbreviation, "Аббревиатура" %></dt>
-  <dd>
-    <div class="clearable-container">
-      <%= f.text_field :abbreviation, :style => "width: 440px;", :class => "clearable" %>
-      <a class="clearer icon"></a>
-    </div>
-  </dd>
-
-  <dt><%= f.label :name, "Название" %></dt>
-  <dd><%= f.text_field :name, :style => "width: 440px;" %></dd>
-
-  <dt><%= f.label :city, "Город" %></dt>
-  <dd><%= f.text_field :city, :style => "width: 225px;" %></dd>
-
-  <div id="logo-previews">
-    <%= image_tag 'anpoi.jpg', :class => "avatar", :id => "preview1" %>
-    <%= image_tag 'anpoi.jpg', :class => "avatar", :id => "preview2" %>
-    <%= image_tag 'anpoi.jpg', :class => "avatar", :id => "preview3" %>
+<dt><%= f.label :abbreviation, "Аббревиатура" %></dt>
+<dd>
+  <div class="clearable-container">
+    <%= f.text_field :abbreviation, :style => "width: 440px;", :class => "clearable" %>
+    <a class="clearer icon"></a>
   </div>
+</dd>
 
-  <button type="submit" class="button green-button" title="Создать  университет">Создать</button>
+<dt><%= f.label :name, "Название" %></dt>
+<dd><%= f.text_field :name, :style => "width: 440px;" %></dd>
+
+<dt><%= f.label :city, "Город" %></dt>
+<dd><%= f.text_field :city, :style => "width: 225px;" %></dd>
+
+<dt><%= f.label :logo, "Логотип" %></dt>
+<dd><%= f.file_field :logo, :style => "width: 225px;" %></dd>
+
+<div id="logo-previews">
+  <%= image_tag @university.logo.url(:full), :class => "avatar", :id => "preview1" %>
+  <%= image_tag @university.logo.url(:thumb), :class => "avatar", :id => "preview2" %>
+  <%= image_tag @university.logo.url(:icon), :class => "avatar", :id => "preview3" %>
+</div>
