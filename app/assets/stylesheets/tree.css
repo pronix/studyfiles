@@ -154,6 +154,9 @@
         }
         .expander-header > h4 {
           font-size: 1.2em;
+          white-space: nowrap;
+          max-width: 130px;
+          overflow: hidden;
           font-weight: normal;
         }
           .expander-header > h4 a {
