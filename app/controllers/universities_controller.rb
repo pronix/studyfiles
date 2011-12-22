@@ -6,7 +6,7 @@ class UniversitiesController < ApplicationController
 
   #Главная страница
   def index
-    @universities = University.search(params[:search], :star => true, :page => params[:page], :per_page => 4)
+    @universities = University.order('rating DESC').search(params[:search], :star => true, :page => params[:page], :per_page => 4)
   end
 
   def search

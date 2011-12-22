@@ -13,3 +13,10 @@ hse:
   name: Высшая школа экономики
   abbreviation: ВШЭ
   city: Москва
+
+<% 1.upto(30).each do |i| %>
+university_<%= i %>:
+  name: Универсистет <%= i %>
+  abbreviation: У<%= i %>
+  city: Москва
+<% end %>
