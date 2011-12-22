@@ -11,6 +11,7 @@ class UniversitiesController < ApplicationController
              :per_page => 4, :order => :rating, :sort_mode => :desc)
   end
 
+
   def search
     if params[:search].strip.length > 0
       @universities = University.
