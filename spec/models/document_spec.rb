@@ -1,7 +1,26 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe Document do
 
+  describe "Create doc_txt" do
+    before(:each) do
+      @doc = Factory(:document,
+                     :folder => nil,
+                     :subject => nil,
+                     :university => nil,
+                     :item => File.new(Rails.root.join('sample_documents/сознание.doc')))
+    end
+
+    it "Should create doc_txt field" do
+      @doc.file_processing
+      @doc.txt_doc.present?.should be_true
+      File.exist?(@doc.item.path + '.txt').should == false
+      File.exist?(@doc.item.path + '.html').should == true
+      File.exist?(@doc.item.path + '.txt.bak').should == false
+    end
+  end
+  
   describe "Unzip document" do
     before(:each) do
       FileUtils.rm_rf(Rails.root.join('tmp/unzipped'))
