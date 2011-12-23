@@ -29,6 +29,8 @@ module NavigationHelpers
       new_user_document_path(User.find_by_email($1))
     when /университетскую страницу "(.+)"/
       university_folders_path(University.find_by_abbreviation($1))
+    when /странице пользователей/
+      users_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
