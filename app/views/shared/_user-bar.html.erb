@@ -3,7 +3,7 @@
     <span>
         <big><%= user_name %></big>
         &nbsp;&nbsp;/&nbsp;&nbsp;
-        <%= link_to current_user.documents.count, user_path(current_user) %>
+        <%= link_to "#{current_user.documents.count} #{t(:file, :count => current_user.documents.count)} ", user_path(current_user) %>
     </span>
 
     <span id="inbox-notify" class="<%= 'has-messages' if current_user.unread_messages_count > 0 %>">
