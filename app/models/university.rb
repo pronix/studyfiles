@@ -22,9 +22,16 @@ class University < ActiveRecord::Base
     indexes city
     indexes subjects.name, :as => :subject_name
     indexes folders.name, :as => :folder_name
-    has rating
+    has rating, available
   end
 
+  # University is available if it has documents or subjects or folder
+  # This check should be run before sphinx index
+  def recheck_available
+    update_attribute(:available, true) if
+      documents.present? || subjects.present? || folders.present?
+  end
+  
   def self.top_universities(_limit=10)
     search(:order => :rating, :sort_mode => :desc).first(_limit)
   end
@@ -95,6 +102,7 @@ class University < ActiveRecord::Base
   class << self
     def rating!
       all.each do |u|
+        u.recheck_available
         u.rating!
         u.update_user_rating!
       end

@@ -3,6 +3,7 @@ class CreateUniversities < ActiveRecord::Migration
     create_table :universities do |t|
       t.string :name, :abbreviation, :city
       t.integer :rating, :default => 0
+      t.boolean :available, :default => false
       t.timestamps
 
       t.string :logo_file_name, :logo_content_type

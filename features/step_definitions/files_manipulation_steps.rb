@@ -41,3 +41,7 @@ end
   Factory(:folder, :user => User.find_by_email('user@example.com'),
           :university => nil, :subject => nil, :name => folder)
 end
+
+Допустим /^файл "(.+)" принадлежит университету "(.+)"$/ do |file, univer|
+  Factory(:document, :university => University.find_by_abbreviation(univer))
+end

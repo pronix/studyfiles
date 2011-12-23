@@ -7,8 +7,10 @@ class UniversitiesController < ApplicationController
   #Главная страница
   def index
     @universities = University.
-      search(params[:search], :star => true, :page => params[:page],
-             :per_page => 4, :order => :rating, :sort_mode => :desc)
+      search(params[:search],
+             :without => {:available => false},
+             :star => true, :page => params[:page],
+             :per_page => 15, :order => :rating, :sort_mode => :desc)
   end
 
 

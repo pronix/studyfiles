@@ -27,3 +27,7 @@ end
 Допустим /^я должен видеть "(.+)" в листе университетов$/ do |text|
   find(:css, '.universities-list').has_content?(text).should == true
 end
+
+Допустим /^речекни университеты!$/ do
+  University.all.each {|u| u.recheck_available}
+end
