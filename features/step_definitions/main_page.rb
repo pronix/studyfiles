@@ -19,3 +19,11 @@ end
   Factory(:vote, :document => doc, :grade => rating.to_i)
   univer.rating!
 end
+
+Допустим /^я не должен видеть "(.+)" в листе университетов$/ do |text|
+  find(:css, '.universities-list').has_content?(text).should == false
+end
+
+Допустим /^я должен видеть "(.+)" в листе университетов$/ do |text|
+  find(:css, '.universities-list').has_content?(text).should == true
+end
