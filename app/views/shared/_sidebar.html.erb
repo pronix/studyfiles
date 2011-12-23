@@ -2,7 +2,7 @@
   <% if current_user %>
     <%= link_to "", new_user_document_path(current_user), :class => "add-file-button" %>
   <% else %>
-    <%= link_to "", new_user_session_path, :class => "add-file-button" %>
+    <%= link_to "", "", :class => "add-file-button open-modal", :rel => "registration-modal", :title => "Добавить файл" %>
   <% end %>
 </div>
 
