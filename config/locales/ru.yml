@@ -5,6 +5,11 @@ ru:
       short: "%d %b"
       long: "%d %B %Y"
 
+  subject:
+    one: Предмет
+    few: Предмета
+    many: Предметов
+    other: Предметов
   message:
     one: Сообщение
     few: Сообщения

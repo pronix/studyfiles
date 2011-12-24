@@ -33,7 +33,8 @@ class University < ActiveRecord::Base
   end
   
   def self.top_universities(_limit=10)
-    search(:order => :rating, :sort_mode => :desc).first(_limit)
+    search(:order => :rating, :sort_mode => :desc,
+           :without => {:available => false}).first(_limit)
   end
 
   def quick_rating

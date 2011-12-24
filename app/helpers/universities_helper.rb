@@ -16,6 +16,9 @@ module UniversitiesHelper
 
   #Статистика для поиска
   def search_statistic(university = nil)
-     "На сайте: #{University.count} ВУЗов, #{Subject.count} предметов, #{Document.count} файлов на #{((Document.sum(:item_file_size).to_f / (1024**3)).round(1))} Гб"
+    u_count = University.search_count
+    s_count = Subject.search_count
+    d_count = Document.search_count
+    "На сайте: #{u_count} #{t(:univer_abbr, :count => u_count)}, #{s_count} #{t(:subject, :count => s_count)}, #{d_count} #{t(:file, :count => d_count)} на #{number_to_human_size Document.sum(:item_file_size)}"
   end
 end

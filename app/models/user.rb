@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   after_create :add_default_role
   
   def self.top_users(_limit=10)
-    order('rating DESC, created_at ASC').limit(_limit)
+    search(:order => :rank, :sort_mode => :asc).first(_limit)
   end
   
   def download_object(obj)
