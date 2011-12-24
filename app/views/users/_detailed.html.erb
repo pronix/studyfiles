@@ -1,46 +1,46 @@
 <%= render "stats", :user => user %>
 
 <% if user == current_user %>
-  <!-- LEGEND START -->
-  <div class="yellow-notification notification closable legend">
-    <a class="close icon"></a>
-    <div>
-      <h4>Действия</h4>
-      <ul>
-        <li>
-          <span class="icon edit"></span>Редактировать название и описание
-        </li>
-        <li>
-          <span class="icon slate"></span>Вставить выделенные файлы в эту папку
-        </li>
-        <li>
-          <span class="icon download"></span>Скачать (можно применять для нескольких выделенных файлов)
-        </li>
-        <li>
-          <span class="icon folder-plus"></span>Создать папку
-        </li>
-        <li>
-          <span class="icon file-plus"></span>Добавить файлы со своего компьютера
-        </li>
-        <li>
-          <span class="icon dred-cross"></span>Удалить (можно применять для нескольких выделенных файлов)
-        </li>
-        <li>
-          <span class="icon expand-all"></span>Развернуть всё дерево вкладок
-        </li>
-        <li>
-          <span class="icon green-expand"></span>Добавить предмет
-        </li>
-        <li>
-          <span class="icon folder-small"></span>Файлы и папки можно перетаскивать мышкой, схватив их за иконку (можно применять для нескольких выделенных файлов)
-        </li>
-        <li>
-          <span class="icon mouse"></span>Чтобы выделить несколько  файлов нажмите на них правой кнопкой мыши
-        </li>
-      </ul>
+  <% if show_notify(3) %>
+    <div class="yellow-notification notification closable legend">
+      <%= link_close_notify(3) %>
+      <div>
+	<h4>Действия</h4>
+	<ul>
+          <li>
+            <span class="icon edit"></span>Редактировать название и описание
+          </li>
+          <li>
+            <span class="icon slate"></span>Вставить выделенные файлы в эту папку
+          </li>
+          <li>
+            <span class="icon download"></span>Скачать (можно применять для нескольких выделенных файлов)
+          </li>
+          <li>
+            <span class="icon folder-plus"></span>Создать папку
+          </li>
+          <li>
+            <span class="icon file-plus"></span>Добавить файлы со своего компьютера
+          </li>
+          <li>
+            <span class="icon dred-cross"></span>Удалить (можно применять для нескольких выделенных файлов)
+          </li>
+          <li>
+            <span class="icon expand-all"></span>Развернуть всё дерево вкладок
+          </li>
+          <li>
+            <span class="icon green-expand"></span>Добавить предмет
+          </li>
+          <li>
+            <span class="icon folder-small"></span>Файлы и папки можно перетаскивать мышкой, схватив их за иконку (можно применять для нескольких выделенных файлов)
+          </li>
+          <li>
+            <span class="icon mouse"></span>Чтобы выделить несколько  файлов нажмите на них правой кнопкой мыши
+          </li>
+	</ul>
+      </div>
     </div>
-  </div>
-  <!-- LEGEND END -->
+  <% end %>
   <%= render "shared/news", :news => @news %>
 <% else %>
   <% if current_user %>

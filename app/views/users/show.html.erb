@@ -1,13 +1,15 @@
 <%= render "shared/search_from_file" %>
 
-<div class="yellow-notification notification closable">
-  <a class="close icon"></a>
-  <div>
-    <p>
-      Несортированные файлы не отображаются в общем каталоге, но доступны другим пользователям для скачивания с вашей страницы.
-    </p>
-  </div>
-</div>
+<% if show_notify(1) %>
+  <div class="yellow-notification notification closable">
+    <%= link_close_notify(1) %>
+    <div>
+      <p>
+	Несортированные файлы не отображаются в общем каталоге, но доступны другим пользователям для скачивания с вашей страницы.
+      </p>
+    </div>
+  </div> 
+<% end %>
 
 <%= form_for move_folder_path, :class => "mover-form" do %>
 
@@ -50,21 +52,21 @@
 
 </div>
 <% end %>
-
-<div class="yellow-notification notification closable">
-  <a class="close icon"></a>
-  <div>
-    <p>
-      Чтобы добавить файлы в общий каталог:
-    </p>
-    <ul class="unordered-list">
+<% if show_notify(2) %>
+  <div class="yellow-notification notification closable">
+    <%= link_close_notify(2) %>
+    <div>
+      <p>
+	Чтобы добавить файлы в общий каталог:
+      </p>
+      <ul class="unordered-list">
     	<li>Добавьте ВУЗ с помощью кнопки ниже;</li>
     	<li>Добавьте предмет;</li>
     	<li>Загрузите файлы со своего компьютера или перетащите их мышкой из несортированных.</li>
-    </ul>
+      </ul>
+    </div>
   </div>
-</div>
-
+<% end %>
 
 <% @user.universities.each do | univer | %>
 

@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
   has_many :user_universities, :dependent => :destroy
   has_many :universities, :through => :user_universities, :uniq => true
+  has_many :read_notifications
 
   has_inboxes
 
@@ -36,6 +37,11 @@ class User < ActiveRecord::Base
   
   def self.top_users(_limit=10)
     search(:order => :rank, :sort_mode => :asc).first(_limit)
+  end
+
+  def read_notify?(notify_id)
+    true if read_notifications.where(:notification_type => 'notify',
+                                     :notification_id => notify_id).present?
   end
   
   def download_object(obj)

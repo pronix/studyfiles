@@ -46,6 +46,7 @@ Studyfiles::Application.routes.draw do
   resource :feedback, :controller => 'feedback', :only => [:new, :create]
   resources :logs
   resources :files
+  resource :read_notification, :only => :update
 
   root :to => "universities#index"
 end

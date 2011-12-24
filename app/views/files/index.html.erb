@@ -9,16 +9,13 @@
       </span>
       <a href="" class="blue-collapse icon expand"></a>
       <%= link_to image_tag(univer.logo.url(:icon)), "", :class => "logo" %>
-
       <h4>
 	<%= link_to "#{univer.abbreviation} #{truncate(univer.name, :length => 160)}", "" %>
       </h4>
       <div class="expander-actions">
 	<a class="expand-all icon expand"></a>
-        <%= render "shared/university_actions", :univer => univer %>
       </div>
     </div>
-
     <div class="expander-content node">
       <% univer.subjects.each do |sub| %>
 	<div class="expander-subject parent">
