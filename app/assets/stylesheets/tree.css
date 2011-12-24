@@ -54,7 +54,7 @@
       right: 300px;
     }
 
-    .my-files .file-row-title {
+    .my-files .file-row-title, .mini-wrapper .file-row-title {
       right: 170px;
     }
 
@@ -150,7 +150,7 @@
     }
     .expander-header {
       line-height: 54px;
-      max-height: 54px;
+      height: 54px;
       padding-left: 25px;
       position: relative;
       box-shadow: 0 0 11px lightgray; /* Параметры тени */
