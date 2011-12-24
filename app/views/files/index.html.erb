@@ -1,5 +1,7 @@
 <%= sort_link @search, :rating, "По рейтингу" %>
 <% @universities.each do |univer| %>
+
+  <% if !univer.documents.empty? || !univer.folders.empty? %>
   <div class="expander parent">
     <div class="expander-header clearfix university">
       <span class="rating">
@@ -13,8 +15,7 @@
       </h4>
       <div class="expander-actions">
 	<a class="expand-all icon expand"></a>
-	<a class="green-expand icon"></a>
-	<a class="dred-cross icon"></a>
+        <%= render "shared/university_actions", :univer => univer %>
       </div>
     </div>
 
@@ -26,9 +27,6 @@
             <a href="#" class="expand"><%= sub.name %></a>
             <div class="expander-actions">
               <a class="expand-all icon expand"></a>
-              <a class="folder-plus icon"></a>
-              <a class="file-plus icon"></a>
-              <a class="dred-cross icon"></a>
             </div>
           </div>
 
@@ -54,6 +52,7 @@
       </div>
     </div>
   </div>
+  <% end %>
 <% end %>
 
 <% content_for :sidebar do %>

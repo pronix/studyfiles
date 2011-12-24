@@ -8,22 +8,8 @@
 
   <span class="file-row-title">
     <span class="file-row-actions">
-      <% if can? :manage, document %>
-        <%= link_to "", edit_document_path(document), :class => "edit icon", :title => "Редактировать #{document.name}", :remote => true %>
-      <% end %>
-      <%= link_to "", download_document_path(document), :class => "download icon", :title => "Скачать #{document.name}" %>
-      <% if can? :manage, document %>
-        <%= link_to "", document_path(document), :class => "dred-cross icon", :title => "Удалить#{document.name}", :method => :delete %>
-      <% end %>
+      <%= render "shared/file_actions", :document => document %>
     </span>
-    <% if document.has_preview? %>
-      <%= link_to truncate(document.name, :length => 42, :omission => ""), document_path(document),
-	  :title => "Предпросмотр #{document.name}", :class => "popup-preview" %>
-    <% else %>
-            <%= link_to truncate(document.name, :length => 42, :omission => ""), "#" %>
-    <% end %>
-
-  </span>
   <span class="file-row-size"><%= number_to_human_size(document.item_file_size) %></span>
 
   <span class="file-row-date"><%= document.created_at.strftime("%d.%m.%Y") %></span>

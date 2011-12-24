@@ -7,12 +7,14 @@ $(function() {
         var expander = $(this);
         if ( node.is(":visible") ) {
           node.hide();
+          expander.closest('.file-row').removeClass("collapsed-block");
           if (expander.hasClass('blue-collapse')) {
             expander.removeClass('blue-collapse').addClass('blue-expand');
           }
         }
         else {
           node.show();
+          expander.closest('.file-row').addClass("collapsed-block");
           if (expander.hasClass('blue-expand')) {
             expander.removeClass('blue-expand').addClass('blue-collapse')
           }
@@ -26,6 +28,7 @@ $(function() {
         var root = $(this).closest('.parent');
         root.find('.node').show();
         root.find('.blue-expand').removeClass('blue-expand').addClass('blue-collapse').show();
+        root.find('.file-row').addClass('collapsed-block');
       }
     );
 

@@ -1,0 +1,10 @@
+<% if current_page?(:controller => "users", :action => "show", :id => current_user.id) %>
+  <% if can?(:add_subject, univer) %>
+    <%= link_to "", university_subjects_path(univer), :class => "green-expand icon", :remote => true %>
+  <% end %>
+
+  <a class="dred-cross icon"></a>
+
+<% end %>
+
+

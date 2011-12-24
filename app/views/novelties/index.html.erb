@@ -5,7 +5,8 @@
 <h2>Новости</h2>
 
 <% @news.each do |novelty| %>
-  <div class="news-item clearfix">
+  <div class="news-item clearfix ">
+    <a name="novelty-<%== novelty.id %>"></a>
     <h4><%= link_to novelty.title, "#" %></h4>
 
     <p><%= novelty.text %></p>

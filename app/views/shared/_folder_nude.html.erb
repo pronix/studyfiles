@@ -3,14 +3,22 @@
 
      <span class="file-row-icons">
        <%= link_to "", "", :class => "folder-full icon expand" %>
-       <%= link_to("Редактировать", edit_folder_path(folder)) if can? :manage, folder %>
      </span>
 
      <span class="file-row-title">
        <span class="file-row-actions">
+         <% if can? :manage, folder %>
+           <%= link_to "", edit_folder_path(folder), :class => "edit icon", :title => "Редактировить #{folder.name}", :remote => true %>
+            <%= link_to "", "", :value => folder.id, :class => "slate icon action-link" %>
+         <% end %>
 	 <%= link_to "", "#", :class => "flag icon",
 	     :title => "Открыть #{folder.name}", :target => '_blank' %>
          <%= link_to "", download_folder_path(folder), :class => "download icon", :title => "Скачать #{folder.name}" %>
+         <% if can? :manage, folder %>
+            <%= link_to "", new_folder_path(:parent_id => folder.id, :university => folder.university, :subject => folder.subject), :class => "folder-plus icon" %>
+            <%= link_to "", new_user_document_path(current_user, :folder => folder, :subject => folder.subject, :university => folder.university), :class => "file-plus icon" %>
+            <%= link_to "", "", :class => "dred-cross icon" %>
+          <% end %>
        </span>
        <%= link_to folder.name, "#", :class => "expand", :title => "Раскрыть #{folder.name}" %>
      </span>
