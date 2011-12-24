@@ -5,10 +5,11 @@ $(function() {
     var that = $(this);
     var conc = that.parent().find('.inactive-rater');
     var virgin = true;
-    conc.removeClass('inactive-rater').addClass('async-rater').attr('href', conc.attr('name')).attr('name', '');
+
     that.addClass('inactive-rater').removeClass('async-rater').attr('name', that.attr('href')).attr('href', '');
 
     if (conc.length > 0) {
+      conc.removeClass('inactive-rater').addClass('async-rater').attr('href', conc.attr('name')).attr('name', '');
       virgin = false;
     }
     if (that.hasClass('check-true-unselected')) {
@@ -16,21 +17,24 @@ $(function() {
       if (virgin) {
         modification = 1;
       }
+      else {
+        conc.addClass("check-false-unselected").removeClass('check-false')
+          .attr('title', "Уменьшить рейтинг файла " + that.attr('rel'));
+      }
 
       that.removeClass('check-true-unselected').addClass('check-true').attr('title', "Вы уже увеличили рейтинг файла " + that.attr('rel'));
 
-      conc.addClass("check-false-unselected").removeClass('check-false')
-        .attr('title', "Уменьшить рейтинг файла " + that.attr('rel'));
     }
     else if (that.hasClass('check-false-unselected')) {
       modification = -2;
       if (virgin) {
         modification = -1;
       }
+      else {
+        conc.addClass("check-true-unselected").removeClass('check-true').attr('title', "Увеличить рейтинг файла " + that.attr('rel'));
+      }
 
       that.removeClass('check-false-unselected').addClass('check-false').attr('title', "Вы уже уменьшили рейтинг файла " + that.attr('rel'));
-
-      conc.addClass("check-true-unselected").removeClass('check-true').attr('title', "Увеличить рейтинг файла " + that.attr('rel'));
     }
 
     that.parents('.file-row').each(function(i) {

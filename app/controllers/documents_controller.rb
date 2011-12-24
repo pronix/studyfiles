@@ -75,13 +75,7 @@ class DocumentsController < ApplicationController
     vote = Vote.where(conditions).first || Vote.create(conditions)
     type = params[:vote_type]
 
-    if type
-      grade = 1
-    else
-      grade = -1
-    end
-
-    vote.update_attributes(:grade => grade, :vote_type => type)
+    vote.update_attributes(:vote_type => type)
 
     if params[:redirect_to]
       redirect_to params[:redirect_to]
