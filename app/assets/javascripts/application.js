@@ -3,6 +3,8 @@
 //= require jquery.simplemodal-1.4.1
 //= require custom-form-elements
 //= require smartpaginator
+//= require files
+//= require async_rater
 
 //Оборачиваем каждые size блоков в wrap
 function wrap(elements, wrap, size) {
