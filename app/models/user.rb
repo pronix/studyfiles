@@ -27,8 +27,13 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => { :medium => "128x128", :thumb => "54x54", :icon => "34x34" }
 
-  after_create :add_default_role
+  define_index do
+    indexes :name
+    has rating, rank
+  end
 
+  after_create :add_default_role
+  
   def self.top_users(_limit=10)
     order('rating DESC, created_at ASC').limit(_limit)
   end
