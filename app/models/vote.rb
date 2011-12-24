@@ -10,6 +10,7 @@ class Vote < ActiveRecord::Base
 
   def update_rating
     if Rails.env.production?
+      delay.update_rating!
     else
       update_rating!
     end
