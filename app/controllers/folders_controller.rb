@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class FoldersController < ApplicationController
   # before_filter :authenticate_user!
-  before_filter :find_folder, :except => [:move, :new]
+  before_filter :find_folder, :except => [:move, :new, :create]
 
   def index
   end

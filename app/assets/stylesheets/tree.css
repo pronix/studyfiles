@@ -42,30 +42,34 @@
 
 
 /* FILE ROW TITLE WIDTHS */
-.level-1 .file-row-title { width: 270px; }
-.level-1 .folder-row > .file-row-title { width: 305px; }
-.level-2 > .file-row-title { width: 270px; }
-.level-2 > .folder-row > .file-row-title { width: 295px; }
-.level-4  .folder-row > .file-row-title, .level-5 .folder-row > .file-row-title, .level-6 .folder-row > .file-row-title, .level-7 .folder-row > .file-row-title, .level-8 .folder-row > .file-row-title, .level-3 .folder-row > .file-row-title { width: 284px; }
-
-.level-4 .file-row-title, .level-5 .file-row-title, .level-6 .file-row-title, .level-7 .file-row-title, .level-8 .file-row-title, .level-3 .file-row-title { width: 259px; }
-
-.level-1.my-files .file-row-title { width: 416px; }
-.level-1.my-files .folder-row > .file-row-title { width: 445px; }
-.my-files .level-2 > .file-row-title { width: 410px; }
-.my-files .level-2 > .folder-row > .file-row-title { width: 435px; }
-.my-files .level-3 .folder-row > .file-row-title, .my-files .level-4 .folder-row > .file-row-title, .my-files .level-5 .folder-row > .file-row-title, .my-files .level-6 .folder-row > .file-row-title, .my-files .level-7 .folder-row > .file-row-title, .my-files .level-8 .folder-row > .file-row-title { width: 424px; }
-
-.my-files .level-3 .file-row-title, .my-files .level-4 .file-row-title, .my-files .level-5 .file-row-title, .my-files .level-6 .file-row-title, .my-files .level-7 .file-row-title, .my-files .level-8 .file-row-title { width: 399px; }
-
-
-/* FILE ROW TITLE WIDTHS */
 
 .file-row {
   margin-bottom: 2px;
   padding-top: 5px;
   clear: both;
+  position: relative;
 }
+    .file-row-title {
+      position: absolute;
+      right: 300px;
+    }
+
+    .my-files .file-row-title {
+      right: 170px;
+    }
+
+.level-1 .file-row-title { left: 95px; }
+.level-2 .file-row-title { left: 105px; }
+.level-3 .file-row-title { left: 110px; }
+
+.level-1 .folder-row > .file-row-title { left: 70px; }
+.level-2 .folder-row > .file-row-title { left: 80px; }
+.level-3 .folder-row > .file-row-title { left: 85px; }
+
+
+
+/* FILE ROW TITLE WIDTHS END */
+
     .file-row > span {
       float: left;
       font-size: 1.1em;
