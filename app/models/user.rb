@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   after_create :add_default_role
 
   def self.top_users(_limit=10)
-    order('created_at ASC').sort{ |a,b| b.raiting <=> a.raiting }.first(_limit)
+    order('rating DESC, created_at ASC').limit(_limit)
   end
   
   def download_object(obj)
@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
       downloads << obj
     end
   end
-  
+
   def add_default_role
     add_role('user')
   end
@@ -66,9 +66,9 @@ class User < ActiveRecord::Base
   end
 
   #Подсчет рейтинга пользователя
-  def raiting
+  def quick_rating
     return 0 unless documents.present?
-    documents.map {|d| d.rating}.sum
+    documents.map {|d| d.quick_rating}.sum
   end
 
   def get_new_documents_names(size)
@@ -77,12 +77,12 @@ class User < ActiveRecord::Base
 
   def top_university
     return nil unless user_universities.present?
-    user_universities.order('rating DESC').first.university
+    user_universities.order('rank DESC').first.university
   end
 
   def top_university_rating
     return nil unless user_universities.present?
-    user_universities.order('rating DESC').first.rating
+    user_universities.order('rank DESC').first.rank
   end
 
   # INBOXES
@@ -113,11 +113,10 @@ class User < ActiveRecord::Base
   end
 
   class << self
-    # Update overall rating for each user
     def overall_rating!
       r = 1
-      all.sort{ |a,b| b.raiting <=> a.raiting }.each do |u|
-        u.update_attribute(:overall_rating, r)
+      order('rating DESC').each do |u|
+        u.update_attribute(:rank, r)
         r += 1
       end
     end

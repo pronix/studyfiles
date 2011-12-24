@@ -1,22 +1,22 @@
 <p class="gray-box clearfix">
   Рейтинг:
-  <span style="float: right;"><%= user.raiting %></span>
+  <span style="float: right;"><%= user.quick_rating %></span>
 </p>
 
 <div class="place clearfix">
-  <% if user.overall_rating.present? %>
+  <% if user.rank.present? %>
     <span>
       <span>место</span>
-      <b><%= user.overall_rating %></b>
+      <b><%= user.rank %></b>
     </span>
     <span>- в общем ТОПе</span>
   <% end %>
 </div>
 
-<% user.user_universities.order('rating DESC').each do |uu| %>
+<% user.user_universities.order('rank DESC').each do |uu| %>
   <div class="place <%= uu.in_top? ? 'gray-box clearfix' : 'clearfix' %>">
     <span>
-      <%== university_rating_2(uu.rating) %>
+      <%== university_rating_2(uu.rank) %>
     </span>
     <span>- <%= uu.university.abbreviation %></span>
   </div>

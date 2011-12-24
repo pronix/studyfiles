@@ -4,6 +4,7 @@ class CreateFolders < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.integer :user_id, :university_id, :subject_id
+      t.integer :rating, :null => false, :default => 0
       t.timestamps
     end
     update "ALTER TABLE \"folders\" ADD \"path\" LTREE NOT NULL DEFAULT ''"

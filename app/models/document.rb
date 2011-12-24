@@ -142,30 +142,38 @@ class Document < ActiveRecord::Base
 
   #handle_asynchronously :unzip_file, :run_at => Proc.new { 10.second.from_now }, :priority => 0
 
-  #Увеличение рейтинга файла при скачке
-  def to_download_file
-    self.raiting += (self.raiting == -1 ? 2 : 1)
-  end
+  # #Увеличение рейтинга файла при скачке
+  # def to_download_file
+  #   rating += (self.raiting == -1 ? 2 : 1)
+  # end
 
-  #увелчение рейтинга пользователем
-  def increase_raiting_by(user)
-    self.raiting += (self.raiting == -1 ? 2 : 1)
-    user.user_votes << self
-  end
+  # #увелчение рейтинга пользователем
+  # def increase_raiting_by(user)
+  #   self.raiting += (self.raiting == -1 ? 2 : 1)
+  #   user.user_votes << self
+  # end
 
-  #уменьшение рейтинга пользователем
-  def decrease_raiting_by(user)
-    self.raiting -= (self.raiting == 1 ? 2 : 1)
-    user.votes << Vote.new(:user_id => user.id, :document_id => self.id, :vote_type => false)
-  end
+  # #уменьшение рейтинга пользователем
+  # def decrease_raiting_by(user)
+  #   self.raiting -= (self.raiting == 1 ? 2 : 1)
+  #   user.votes << Vote.new(:user_id => user.id, :document_id => self.id, :vote_type => false)
+  # end
 
   #определение разрешение файла (для вывода в html)
   def extension
     self.item_file_name.split(".").last
   end
 
-  def rating
-    self.votes.sum(:grade)
+  def quick_rating
+    _rating = []
+    votes.each do |v|
+      if v.vote_type
+        _rating << v.grade
+      else
+        _rating << 0 - v.grade
+      end
+    end
+    _rating.sum
   end
 
 

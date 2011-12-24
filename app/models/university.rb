@@ -36,6 +36,9 @@ class University < ActiveRecord::Base
     search(:order => :rating, :sort_mode => :desc).first(_limit)
   end
 
+  def quick_rating
+    documents.map {|d| d.quick_rating }.sum
+  end
   
   # Return university documents without folder
   def documents_without_folder
@@ -63,7 +66,7 @@ class University < ActiveRecord::Base
   # Reculculate rating.
   # TODO: Create cron task to reculculate ratings for all
   def rating!
-    update_attribute(:rating, documents.map {|d| d.rating}.sum)
+    update_attribute(:rating, documents.sum(:rating))
   end
 
   #Количество файлов
@@ -91,10 +94,11 @@ class University < ActiveRecord::Base
     self.subjects.limit(5)
   end
 
-  def update_user_rating!
+  # Update user univeristy rank by univeristy
+  def user_rank!
     r = 1
-    users.sort{ |a,b| b.raiting <=> a.raiting }.each do |u|
-      user_universities.find_by_user_id(u.id).update_attribute(:rating, r)
+    users.order('rating DESC').each do |u|
+      user_universities.find_by_user_id(u.id).update_attribute(:rank, r)
       r += 1
     end
   end
@@ -104,7 +108,7 @@ class University < ActiveRecord::Base
       all.each do |u|
         u.recheck_available
         u.rating!
-        u.update_user_rating!
+        u.user_rank!
       end
     end
   end

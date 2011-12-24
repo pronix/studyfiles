@@ -5,12 +5,6 @@ class CreateTables < ActiveRecord::Migration
       t.string :name
       t.timestamps
     end
-    create_table :subjects do |t|
-      t.string :name
-      t.string :abbreviation
-      t.integer :section_id
-      t.timestamps
-    end
     #отношение предметов и папок
     create_table :subject_folders, :id => false do |t|
       t.integer :folder_id

@@ -81,7 +81,7 @@ end
 end
 
 Допустим /^я обновлю райтинг для вуза "(.+)"$/ do |univer|
-  University.find_by_abbreviation(univer).update_user_rating!
+  University.find_by_abbreviation(univer).user_rank!
 end
 
 Допустим /^в системе есть файл "(.+)" с размером (\d+)$/ do |file, file_size|

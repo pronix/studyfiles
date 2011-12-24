@@ -6,6 +6,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.boolean :item_processed, :default => false
       t.boolean :tmp, :default => true, :null => false
       t.text :description, :txt_doc
+      t.integer :rating, :null => false, :default => 0
 
       t.integer :item_file_size
       t.string :item_file_name, :item_content_type

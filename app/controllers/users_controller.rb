@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :search, :only => :show
 
   def index
-    @users = User.paginate(:page => params[:page], :per_page => 5)
+    @users = User.paginate(:page => params[:page], :per_page => 5).order('rating DESC')
   end
 
   def show
