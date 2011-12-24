@@ -37,7 +37,7 @@
                   <li>
                     <h5><%= section.name %></h5>
                     <dl>
-                      <dt></dt>
+                      <dt><%= section.abbreviation %></dt>
                       <dd>
                         <%= link_to section.name, university_subject_path(univer, section) %>
                         <% if can? :edit, section %>

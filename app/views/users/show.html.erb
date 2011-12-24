@@ -23,8 +23,8 @@
          </h4>
          <div class="expander-actions">
            <%= link_to "", "", :class => "expand-all expand icon" %>
-           <%= link_to "", "", :class => "folder-plus icon" %>
 	   <% if current_user %>
+             <%= link_to "", new_folder_path, :class => "folder-plus icon" %>
              <%= link_to "", new_user_document_path(current_user), :class => "file-plus icon" %>
 	   <% end %>
          </div>

@@ -1,5 +1,7 @@
 <%= sort_link @search, :rating, "По рейтингу" %>
 <% @universities.each do |univer| %>
+
+  <% if !univer.documents.empty? || !univer.folders.empty? %>
   <div class="expander parent">
     <div class="expander-header clearfix university">
       <span class="rating">
@@ -54,6 +56,7 @@
       </div>
     </div>
   </div>
+  <% end %>
 <% end %>
 
 <% content_for :sidebar do %>

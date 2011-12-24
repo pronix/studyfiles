@@ -66,9 +66,16 @@
 .level-2 .folder-row > .file-row-title { left: 80px; }
 .level-3 .folder-row > .file-row-title { left: 85px; }
 
-
-
 /* FILE ROW TITLE WIDTHS END */
+
+
+.collapsed-block > .file-row-icons .folder-full {
+    height               : 20px;
+    margin-right: 6px !important;
+    width                : 23px;
+    background-position  : -260px -0px;
+}
+
 
     .file-row > span {
       float: left;
@@ -138,11 +145,12 @@
     margin: 30px 0;
   }
     .expander-subject {
-      margin-bottom: 20px;
+      padding: 5px 0;
+      border-bottom: 1px dotted #d4d4d4;
     }
     .expander-header {
       line-height: 54px;
-      min-height: 54px;
+      max-height: 54px;
       padding-left: 25px;
       position: relative;
       box-shadow: 0 0 11px lightgray; /* Параметры тени */

@@ -1008,7 +1008,6 @@ html[xmlns] .clearfix {
         display: none;
       }
           .expanded-subjects-list h5 {
-            clear: both;
             font-size: 1.4em;
             border-bottom: 1px dotted #d4d4d4;
             padding-bottom: 10px;
