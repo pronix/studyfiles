@@ -81,7 +81,7 @@ end
 end
 
 Допустим /^я обновлю райтинг для вуза "(.+)"$/ do |univer|
-  University.find_by_abbreviation(univer).update_user_rating!
+  University.find_by_abbreviation(univer).user_rank!
 end
 
 Допустим /^в системе есть файл "(.+)" с размером (\d+)$/ do |file, file_size|
@@ -98,3 +98,7 @@ end
   User.find_by_email('user@example.com').downloads.find_by_name(doc).should be_true
 end
 
+Допустим /^пользователь "(.+)" должен быть первым в юзер листе$/ do |user|
+  user = User.find_by_email(user)
+  find(:css, '.users-list').find(:xpath, '//h4//a').text.should == user.name
+end

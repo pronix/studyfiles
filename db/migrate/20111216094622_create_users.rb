@@ -8,7 +8,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.boolean :subscriber
 
-      t.integer :overall_rating
+      t.integer :rating, :null => false, :default => 0
+      t.integer :rank
       
       t.string :avatar_file_name, :avatar_content_type
       t.integer :avatar_file_size

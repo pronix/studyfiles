@@ -129,9 +129,9 @@ class Folder < ActiveRecord::Base
   end
 
   #Подсчет рейтинга папки
-  def rating
+  def quick_rating
     docs = self.get_documents
-    docs.sum{|d| d.rating }
+    docs.sum{|d| d.quick_rating }
   end
 
   #Путь у вложеных объектов

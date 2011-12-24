@@ -3,7 +3,7 @@ class UserUniversity < ActiveRecord::Base
   belongs_to :university
 
   def in_top?
-    return false unless rating.present?
-    true if rating >= 1 and rating <= 3
+    return false unless rank.present?
+    true if rank >= 1 and rank <= 3
   end
 end
