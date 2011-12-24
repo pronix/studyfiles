@@ -8,7 +8,7 @@ class Document < ActiveRecord::Base
   has_attached_file :item,
       :url  => "/assets/documents/:first_folder/:second_folder/:sha",
       :path => ":rails_root/public/system/documents/:first_folder/:second_folder/:sha"
-  
+
   before_save :default_name
 
   validates :item, :presence => true
@@ -31,7 +31,7 @@ class Document < ActiveRecord::Base
     indexes :user_id
   end
 
-  scope :available, where(:tmp => false)  
+  scope :available, where(:tmp => false)
   scope :unsorted, available.where(:university_id => nil)
   scope :processed, available.where(:item_proceed => true)
   scope :unfolded, available.where(:folder_id => nil)
@@ -115,13 +115,13 @@ class Document < ActiveRecord::Base
         end
       end
     end
-    
+
     unzipped_dir = Rails.root.join('tmp/unzipped')
     tmp_unzipped_dir = File.join(unzipped_dir, id.to_s)
-    
+
     FileUtils.mkdir_p(unzipped_dir) unless File.exist?(unzipped_dir)
     FileUtils.rm_rf(tmp_unzipped_dir)
-    
+
     %x[unzip #{item.path} -d #{tmp_unzipped_dir}]
     generate_folder(tmp_unzipped_dir)
   end

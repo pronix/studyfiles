@@ -19,7 +19,7 @@ class Vote < ActiveRecord::Base
   def update_rating!
     return unless grade.present?
     vote = 0
-    vote = vote_type ? vote + grade : vote - grade
+    vote = vote_type ? grade : -grade
     document.update_attribute(:rating, document.rating + vote)
     if document.folder.present?
       document.folder.update_attribute(:rating, document.folder.rating + vote)

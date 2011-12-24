@@ -4,7 +4,7 @@ class CreateVotes < ActiveRecord::Migration
       t.integer :document_id
       t.integer :user_id
       t.boolean :vote_type
-      t.integer :grade
+      t.integer :grade, :default => 1
 
       t.timestamps
     end

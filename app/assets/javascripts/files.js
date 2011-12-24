@@ -39,7 +39,7 @@ $(function() {
       $(this).closest('.with-more').find('.more-block').show();
     });
 
-    $(".logged-in .file-row").bind("contextmenu",function(e){
+    $(".logged-in .my-files .file-row").bind("contextmenu",function(e){
       if (e.which === 3) {
         e.preventDefault();
         var checkbox = $(this).closest('.file-row').find(' > .mover-checkbox');

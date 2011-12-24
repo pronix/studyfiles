@@ -5,6 +5,8 @@
 //= require smartpaginator
 //= require files
 //= require async_rater
+//= require jquery-ui
+
 
 //Оборачиваем каждые size блоков в wrap
 function wrap(elements, wrap, size) {
@@ -130,6 +132,22 @@ $(document).ready(function(){
         else if (e.keyCode == 39 && e.ctrlKey) {
           document.location = $(".pagination a.next_page").attr('href');
         }
+  });
+
+  prevXhr = null;
+
+  $('.modal-window .search-form-container.without-button-search .search-form').live("ajax:beforeSend", function(evt, xhr) {
+    prevXhr = xhr;
+  });
+
+  $('.modal-window .search-form-container.without-button-search .search-form input').live('keyup', function(){
+    if ($(this).val().length <= 60) {
+        if (prevXhr) {
+          prevXhr.abort();
+          console.log('Aborting previous xhr request');
+        }
+        $(this).parent().submit();
+    }
   });
 
 });
