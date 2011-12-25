@@ -1,11 +1,35 @@
-<%= nested_form_for @user, :url => user_documents_url,  :method => "post",  :multipart => true do |f| %>
+<div id="universalUploader" >
+<noscript>Place standard form with file input here for users who have disabled JS in browser.<br/>
+Form snippet:<br/>
+<form id="myform" name="myform" action="url to file processing script"  method="post" enctype="multipart/form-data">
+<input name="Filedata" type="file"><br>
+<input type="submit" value="Upload" />
+</form>
+ </noscript>
+</div>
 
-  <div id="documents">
-    <%= f.fields_for :documents, @documents do |builder| %>
-      <%= render "documents/form", :f => builder %>
-    <% end %>
-  </div>
- <p><%= f.link_to_add "Добавить файл", :documents %></p>
-
-  <%= submit_tag "Загрузить" %>
+<%= form_tag :id => "ids" do %>
 <% end %>
+
+<script type="text/javascript">
+
+universalUploader.init({
+	uploaders: "drag-and-drop",
+	singleUploader : true,
+        renderTabHeader: false,
+	holder: "universalUploader",
+	width: "400",
+	height: "300",
+	//Url to file processing script
+        url: "<%= user_documents_url %>",
+        postFields :{
+          <%= "subject : #{@subject.id}," if @subject %>
+          <%= "university : #{@university.id}," if @university %>
+          <%= "folder : #{@folder.id},"  if @folder %>
+          <%= "authenticity_token : '#{form_authenticity_token}'" %>
+        },
+});
+
+</script>
+
+

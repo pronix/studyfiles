@@ -7,6 +7,7 @@
 //= require async_rater
 //= require jquery-ui
 //= require modals
+//= require uploader/universalUploader
 
 
 //Оборачиваем каждые size блоков в wrap
