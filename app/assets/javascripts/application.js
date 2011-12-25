@@ -51,6 +51,7 @@ $(document).ready(function(){
   //Закрывалка блоков
   $('.close').live('click', function(e) {
     e.preventDefault();
+    $(this).closest('.file-row-previews').find('.short-desc').show();
     container = $(this).parent('.closable').parent('.closable-container.with-bg');
     $(this).closest('.closable').remove();
     if ( container.children().length == 0) {

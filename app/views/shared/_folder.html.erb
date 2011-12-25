@@ -21,7 +21,19 @@
 
      <span class="file-row-user"><%= link_to truncate(folder.user.nickname, :length => 17, :omission => ""), user_path(folder.user) if folder.user %></span> <!-- FIXME -->
 
-     <div class="file-row-previews" id="folder-<%= folder.id %>"></div>
+      <div class="file-row-previews" id="folder-<%= folder.id %>">
+        <% if folder.description %>
+          <p class="short-desc">
+            <%= truncate(folder.description, :length => 93, :omission => "") %>
+            <% if folder.description.length > 93 %>
+              <a href="">...</a>
+              </p>
+              <p class="full-desc">
+              <%= folder.description %><a href=""></a>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
 
      <div class="<%== "level-#{folder.level}" %> clearfix node">
        <% folder.documents.each do |document| %>

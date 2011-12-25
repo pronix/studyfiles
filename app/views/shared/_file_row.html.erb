@@ -16,5 +16,17 @@
 
   <span class="file-row-user"><%= link_to truncate(document.user.nickname, :length => 17, :omission => ""), user_path(document.user) if document.user %></span>
 
-  <div class="file-row-previews" id="document-<%= document.id %>"></div>
+  <div class="file-row-previews" id="document-<%= document.id %>">
+    <% if document.description %>
+      <p class="short-desc">
+        <%= truncate(document.description, :length => 93, :omission => "") %>
+        <% if document.description.length > 93 %>
+          <a href="">...</a>
+          </p>
+          <p class="full-desc">
+          <%= document.description %><a href=""></a>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
 </div>
