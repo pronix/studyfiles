@@ -13,4 +13,4 @@ User.all.each do |u|
 end
 
 # Create overall rating
-User.overall_rating!
+User.rank!
