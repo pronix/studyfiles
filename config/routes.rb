@@ -17,6 +17,7 @@ Studyfiles::Application.routes.draw do
     end
     member do
       put 'add_user'
+      put 'remove_user'
     end
     resources :folders
     resources :subjects

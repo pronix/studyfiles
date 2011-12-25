@@ -77,6 +77,12 @@ class UniversitiesController < ApplicationController
     redirect_to request.referer
   end
 
+  def remove_user
+    @university = University.find(params[:id])
+    current_user.universities.delete(@university)
+    redirect_to request.referer
+  end
+
 
   private
 
