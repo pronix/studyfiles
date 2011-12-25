@@ -14,7 +14,8 @@
         <% end %>
       </div>
 </div>
-
+<%= link_to "по рейтингу", files_path(:sort => @sort.blank? ? 'rating DESC' : (@sort == 'rating DESC' ? 'rating ASC' : 'rating DESC')) %>
+<!-- <%= link_to "по рейтингу", files_path(:sort => 'rating DESC') %> -->
 <% @universities.each do |univer| %>
   <% if !univer.documents.empty? || !univer.folders.empty? %>
   <div class="expander parent">
@@ -43,10 +44,10 @@
           </div>
 
           <div class="level-1 clearfix node">
-            <% sub.folders.top.each do |folder| %>
-              <%= render "shared/folder", :folder => folder, :univer => univer %>
+            <% sub.folders.top.order(@sort).each do |folder| %>
+              <%= render "shared/folder", :folder => folder, :univer => univer, :sort => @sort %>
             <% end %>
-            <% sub.documents.unfolded.each do |doc| %>
+            <% sub.documents.unfolded.order(@sort).each do |doc| %>
               <%= render 'shared/file_row', :document => doc %>
             <% end %>
           </div>
