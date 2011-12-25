@@ -33,6 +33,8 @@ module NavigationHelpers
       users_path
     when /файлы/
       files_path
+    when /поиск в файлах/
+      search_files_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

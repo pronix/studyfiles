@@ -45,7 +45,12 @@ Studyfiles::Application.routes.draw do
   end
   resource :feedback, :controller => 'feedback', :only => [:new, :create]
   resources :logs
-  resources :files
+  resources :files do
+    collection do
+      match "/search" => "files#search", :via => :get, :as => :search
+    end
+  end
+
   resource :read_notification, :only => :update
 
   root :to => "universities#index"

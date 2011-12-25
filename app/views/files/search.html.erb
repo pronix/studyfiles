@@ -1,0 +1,23 @@
+<div class="search-form-container clearfix search-with-filters">
+      <div>
+        <h2>
+          <a href="" class="icon flag2"></a>
+          Все ВУЗы
+          <a href="" class="icon green-btn-expnd"></a>
+          <a href="" class="icon green-btn-close"></a>
+        </h2>
+        <%= form_tag search_files_path, :method => :get, :class => "search-form" do %>
+            <%= text_field_tag :search, params[:search], :placeholder =>  "Введите название или описания файла или папки", :id => "search" %>
+          <button id="search_button" class="button blue-button">
+            Найти
+          </button>
+        <% end %>
+      </div>
+</div>
+<% @results.each do |result| %>
+  <% if result.class.to_s == 'Folder' %>
+    <%= render "shared/folder_nude", :folder => result %>
+  <% else %>
+    <%= render "shared/file_row", :document => result %>
+  <% end %>
+<% end %>
