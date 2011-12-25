@@ -6,6 +6,7 @@
 //= require files
 //= require async_rater
 //= require jquery-ui
+//= require modals
 
 
 //Оборачиваем каждые size блоков в wrap

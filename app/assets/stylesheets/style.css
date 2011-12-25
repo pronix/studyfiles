@@ -664,7 +664,10 @@ html[xmlns] .clearfix {
   	color-stop(0.9, #f7fcfd))
 }
 .search-with-filters .search-form {
-  margin-top: 16px;
+  margin-top: 0px;
+}
+.search-with-filters .search-form h2 {
+  margin-bottom: 16px;
 }
 .search-with-filters  > div {
   width:100%;

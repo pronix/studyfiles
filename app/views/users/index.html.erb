@@ -1,16 +1,18 @@
 <div class="search-form-container clearfix search-with-filters">
       <div>
-        <h2>
-          <a href="" class="icon flag2"></a>
-          Все ВУЗы
-          <a href="" class="icon green-btn-expnd"></a>
-          <a href="" class="icon green-btn-close"></a>
-        </h2>
         <%= form_tag users_path, :method => :get, :class => "search-form" do %>
-            <%= text_field_tag :search, params[:search], :placeholder =>  "Введите имя пользователя", :id => "search" %>
-          <button id="search_button" class="button blue-button">
-            Найти
-          </button>
+          <h2>
+            <a href="" class="icon flag2"></a>
+            <span id="univer_filter_text">Все ВУЗы</span>
+            <%= link_to "", search_universities_path(:search => ""), :class => "icon green-btn-expnd", :remote => true %>
+            <%= link_to "", "", :class => "icon green-btn-close", :id => "clear-subject-filter" %>
+          </h2>
+
+          <%= text_field_tag :search, params[:search], :placeholder =>  "Введите имя пользователя", :id => "search" %>
+          <%= hidden_field_tag(:univer_filter, "") %>
+
+
+          <button id="search_button" class="button blue-button">Найти</button>
         <% end %>
       </div>
 </div>
