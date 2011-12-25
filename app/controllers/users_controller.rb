@@ -9,7 +9,7 @@ class UsersController < ApplicationController
                          :page => params[:page],
                          :per_page => 5,
                          :order => :rank,
-                         :sort_mode => :desc,
+                         :sort_mode => :asc,
                          :without => {:rank => 0})
     @users = @users.search(:with => {:university_ids => univer.id}) if univer
   end

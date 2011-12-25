@@ -957,6 +957,23 @@ html[xmlns] .clearfix {
           display: inline-block;
         }
 
+        #rainbow-dash {
+          height: 4px; background-image: linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+          background-image: -o-linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+          background-image: -moz-linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+          background-image: -webkit-linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+          background-image: -ms-linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+
+          background-image: -webkit-gradient(
+          	linear,
+          	right top,
+          	left top,
+          	color-stop(0.96, rgb(0,203,230)),
+          	color-stop(0.63, rgb(0,57,149)),
+          	color-stop(0.36, rgb(0,41,106)),
+          	color-stop(0.07, rgb(129,228,0))
+          );
+  }
 
 /*
  *
