@@ -1,0 +1,13 @@
+<%= render :partial => "search" %>
+
+<% @users.each do |user| %>
+  <%= user_name(user) %>
+  <div class="level-1 clearfix node">
+    <% user.folders.top.order(@sort).each do |folder| %>
+      <%= render "shared/folder", :folder => folder, :sort => @sort %>
+    <% end %>
+    <% user.documents.unfolded.order(@sort).each do |doc| %>
+      <%= render 'shared/file_row', :document => doc %>
+    <% end %>
+  </div>
+<% end %>

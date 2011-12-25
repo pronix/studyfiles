@@ -2,10 +2,21 @@ class FilesController < ApplicationController
   before_filter :sort_order
   
   def index
-    @universities = University.
-      search(params[:search],
-             :without => {:available => false},
-             :star => true, :order => @order, :sort_mode => @sort_a)
+    unless params[:group_by].present?
+      @universities = University.
+      search(:without => {:available => false},
+             :order => :rating, :sort_mode => :desc)
+    else
+      case params[:group_by]
+      when 'subjects'
+        @subjects = Subject.search
+        render "subjects"
+      when 'users'
+        @users = User.search(:star => true, :order => @order,
+                             :sort_mode => @sort_a)
+        render "users"
+      end
+    end
   end
 
   def search

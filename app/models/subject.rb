@@ -13,10 +13,10 @@ class Subject < ActiveRecord::Base
   scope :sectionized, where(:section_id => nil)
 
   define_index do
-    indexes name
-    indexes abbreviation
+    indexes :name
+    indexes :abbreviation
     indexes universities.name, :as => :university_name
-    has section_id
+    has :section_id, :created_at
   end
 
 end

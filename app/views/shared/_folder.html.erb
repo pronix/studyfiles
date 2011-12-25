@@ -1,4 +1,5 @@
 <% sort = sort ? sort : '' %>
+<% univer = univer.present? ? univer : '' %>
 <div class="file-row clearfix folder-row parent">
   <%= check_box_tag "folder_ids[]", folder.id, false, :class => "mover-checkbox" %>
   <span class="file-row-rating"><%= rating(folder) %></span>

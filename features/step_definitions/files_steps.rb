@@ -23,3 +23,8 @@ end
   find(:xpath, "//a[text()=\"#{folder}\" and @class=\"expand\"]/parent::span/parent::div//div[@class=\"level-2 clearfix node\"]//span[@class=\"file-row-title\"]/a").
     text.should == doc
 end
+
+Допустим /^у пользователя "(.+)" есть папки:$/ do |user, table|
+  user = User.find_by_email(user)
+  table.hashes.each {|h| Factory(:folder, h.merge({:user => user}))}
+end
