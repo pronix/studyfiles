@@ -17,6 +17,12 @@ class Folder < ActiveRecord::Base
   before_create :default_path_name
   before_destroy :delete_sub_folder
 
+  define_index do
+    indexes :name
+    indexes :description
+    has :rating, :created_at
+  end
+  
   def delete_sub_folder
     children.destroy_all
   end

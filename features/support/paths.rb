@@ -31,6 +31,10 @@ module NavigationHelpers
       university_folders_path(University.find_by_abbreviation($1))
     when /странице пользователей/
       users_path
+    when /файлы/
+      files_path
+    when /поиск в файлах/
+      search_files_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

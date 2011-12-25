@@ -1,3 +1,4 @@
+<% sort = sort ? sort : '' %>
 <div class="file-row clearfix folder-row parent">
   <%= check_box_tag "folder_ids[]", folder.id, false, :class => "mover-checkbox" %>
   <span class="file-row-rating"><%= rating(folder) %></span>
@@ -36,11 +37,11 @@
       </div>
 
      <div class="<%== "level-#{folder.level}" %> clearfix node">
-       <% folder.documents.each do |document| %>
+       <% folder.documents.order(sort).each do |document| %>
          <%= render "shared/file_row", :document => document %>
        <% end %>
-       <% folder.children.each do |node_folder| %>
-         <%= render "shared/folder", :folder => node_folder, :univer => univer %>
+       <% folder.children.order(sort).each do |node_folder| %>
+         <%= render "shared/folder", :folder => node_folder, :univer => univer, :sort => sort %>
        <% end %>
      </div>
 </div>

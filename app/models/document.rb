@@ -29,6 +29,9 @@ class Document < ActiveRecord::Base
   define_index do
     indexes :txt_doc
     indexes :user_id
+    indexes :name
+    indexes :description
+    has :rating, :created_at
   end
 
   scope :available, where(:tmp => false)
