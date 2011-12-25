@@ -48,6 +48,8 @@ Studyfiles::Application.routes.draw do
   resources :logs
   resources :files do
     collection do
+      match "by/:group" => "files#index", :via => :get,
+      :as => :group_by, :constraints => { :state => /users|subjects/ }
       match "/search" => "files#search", :via => :get, :as => :search
     end
   end

@@ -7,7 +7,7 @@
           <a href="" class="icon green-btn-close"></a>
         </h2>
         <%= form_tag search_files_path, :method => :get, :class => "search-form" do %>
-            <%= text_field_tag :search, params[:search], :placeholder =>  "Введите название или описания файла или папки", :id => "search" %>
+            <%= text_field_tag :search_keyword, params[:search_keyword], :placeholder =>  "Введите название или описания файла или папки", :id => "search" %>
           <button id="search_button" class="button blue-button">
             Найти
           </button>

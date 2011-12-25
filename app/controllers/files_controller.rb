@@ -2,39 +2,33 @@ class FilesController < ApplicationController
   before_filter :sort_order
   
   def index
-    unless params[:group_by].present?
-      @universities = University.
-      search(:without => {:available => false},
-             :order => :rating, :sort_mode => :desc)
+    case params[:group]
+    when 'subjects'
+      @search = Subject.metasearch(params[:search])
+      @subjects = @search
+      render "subjects"
+    when 'users'
+      @search = User.metasearch(params[:search])
+      @users = @search
+      render 'users'
     else
-      case params[:group_by]
-      when 'subjects'
-        @subjects = Subject.search
-        render "subjects"
-      when 'users'
-        @users = User.search(:star => true, :order => @order,
-                             :sort_mode => @sort_a)
-        render "users"
-      end
+      @search = University.metasearch(params[:search])
+      @universities = @search
     end
   end
 
+
   def search
-    @results = ThinkingSphinx.search params[:search],
+    @results = ThinkingSphinx.search params[:search_keyword],
     :classes => [Document, Folder]
   end
 
   private
   def sort_order
-    if @sort = params[:sort]
-      if @sort == 'rating DESC'
-        @order = :rating
-        @sort_a = :desc
-      end
+    if params[:search].present? and params[:search]['meta_sort'].present?
+      @sort = params[:search]['meta_sort'].to_s.gsub('.', ' ')
     else
-      @sort = ''
-      @order = :rating
-      @sort_a = :desc
+      @sort = 'name ASC'
     end
   end
 end
