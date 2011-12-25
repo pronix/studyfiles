@@ -25,6 +25,8 @@ class University < ActiveRecord::Base
     has rating, available
   end
 
+  scope :available, where(:available => true)
+
   # University is available if it has documents or subjects or folder
   # This check should be run before sphinx index
   def recheck_available

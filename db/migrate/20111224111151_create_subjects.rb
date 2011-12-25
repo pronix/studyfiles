@@ -3,6 +3,7 @@ class CreateSubjects < ActiveRecord::Migration
     t.string :name
     t.string :abbreviation
     t.integer :section_id
+    t.integer :rating
     t.timestamps
   end
 end

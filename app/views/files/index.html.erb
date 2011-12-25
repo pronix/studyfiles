@@ -1,12 +1,4 @@
-<% render :partial => "search" %>
-
-<%= link_to "по рейтингу", files_path(:sort => @sort.blank? ? 'rating DESC' : (@sort == 'rating DESC' ? 'rating ASC' : 'rating DESC')) %>
-<%= link_to "алфавиту", files_path(:sort => @sort.blank? ? 'name ASC' : (@sort == 'name ASC' ? 'name DESC' : 'name ASC')) %>
-<%= link_to "дате", files_path(:sort => @sort.blank? ? 'created_at DESC' : (@sort == 'created_at DESC' ? 'created_at ASC' : 'created_at DESC')) %>
-
-<%= link_to "по ВУЗам/предметам", files_path(:group_by => 'subjects') %>
-<%= link_to "пользователям", files_path(:group_by => 'users') %>
-<%= link_to "нет", files_path %>
+<%= render :partial => "search" %>
 
 <% @universities.each do |univer| %>
   <% if !univer.documents.empty? || !univer.folders.empty? %>
@@ -25,7 +17,7 @@
       </div>
     </div>
     <div class="expander-content node">
-      <% univer.subjects.each do |sub| %>
+      <% univer.subjects.order(@sort).each do |sub| %>
 	<div class="expander-subject parent">
           <div class="gray-box">
             <a class="blue-collapse icon expand"></a>
@@ -43,15 +35,14 @@
               <%= render 'shared/file_row', :document => doc %>
             <% end %>
           </div>
-
 	</div>
       <% end %>
 
       <div class="level-1 clearfix node">
-	<% univer.folders.top.unsubjected.each do |folder| %>
-          <%= render "shared/folder", :folder => folder, :univer => univer %>
+	<% univer.folders.top.unsubjected.order(@sort).each do |folder| %>
+          <%= render "shared/folder", :folder => folder, :univer => univer, :sort => @sort %>
 	<% end %>
-	<% univer.documents.unfolded.unsubjected.each do |doc| %>
+	<% univer.documents.unfolded.unsubjected.order(@sort).each do |doc| %>
 	  <%= render 'shared/file_row', :document => doc %>
 	<% end %>
       </div>
