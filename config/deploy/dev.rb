@@ -6,7 +6,7 @@ role :db,  "studyfiles.adenin.ru:6022"
 
 set :deploy_to, "/var/www/#{application}"
 
-set :branch, "ezo"
+set :branch, "fodoj"
 set :user, "rvm_user"
 
 set :thinking_sphinx_configure_args, "./configure --with-pgsql=/usr/include/pgsql --prefix=#{shared_path}/sphinx"
