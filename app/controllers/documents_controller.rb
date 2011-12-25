@@ -71,11 +71,16 @@ class DocumentsController < ApplicationController
 
   def rate
     @doc = Document.find(params[:id])
+
     conditions = { :document_id => @doc.id, :user_id => current_user.id }
-    vote = Vote.where(conditions).first || Vote.create(conditions)
+
     type = params[:vote_type]
 
-    vote.update_attributes(:vote_type => type)
+    if Vote.where(conditions).first
+      Vote.where(conditions).first.update_attributes(:vote_type => type)
+    else
+      Vote.create(conditions.merge({:vote_type => type}))
+    end
 
     if params[:redirect_to]
       redirect_to params[:redirect_to]

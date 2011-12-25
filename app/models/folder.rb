@@ -20,7 +20,7 @@ class Folder < ActiveRecord::Base
   def delete_sub_folder
     children.destroy_all
   end
-  
+
   def level
     level = index_path.size <= 5 ? index_path.size + 2 : 7
     level
@@ -56,6 +56,25 @@ class Folder < ActiveRecord::Base
     self.parent = folder
     self.save
   end
+
+
+  def rollback_vote(type)
+    sign = false
+    new_rating = 0
+    sign = true if rating >= 0
+
+    if (type)
+      new_rating = rating.abs - 1
+      new_rating = sign ? new_rating : -new_rating
+    elsif (!type)
+      new_rating = rating - 1
+    end
+
+    ancestors.each {|p| p.rollback_vote(type)}
+
+    self.update_attribute(:rating, new_rating)
+  end
+
 
   #Копируем папку в университет
   def copy_to_university(university)

@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   after_create :add_default_role
-  
+
   def self.top_users(_limit=10)
     search(:order => :rank, :sort_mode => :asc).first(_limit)
   end
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
     true if read_notifications.where(:notification_type => 'notify',
                                      :notification_id => notify_id).present?
   end
-  
+
   def download_object(obj)
     if obj.class.to_s == 'Folder'
       downloads << obj.documents
@@ -80,6 +80,21 @@ class User < ActiveRecord::Base
   def quick_rating
     return 0 unless documents.present?
     documents.map {|d| d.quick_rating}.sum
+  end
+
+  def rollback_vote(type)
+    sign = false
+    new_rating = 0
+    sign = true if rating >= 0
+
+    if (type)
+      new_rating = rating.abs - 1
+      new_rating = sign ? new_rating : -new_rating
+    elsif (!type)
+      new_rating = rating - 1
+    end
+
+    self.update_attribute(:rating, new_rating)
   end
 
   def get_new_documents_names(size)
@@ -132,5 +147,5 @@ class User < ActiveRecord::Base
       end
     end
   end
-  
+
 end

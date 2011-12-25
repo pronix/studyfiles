@@ -167,15 +167,36 @@ class Document < ActiveRecord::Base
   def quick_rating
     _rating = []
     votes.each do |v|
-      if v.vote_type
         _rating << v.grade
-      else
-        _rating << 0 - v.grade
-      end
     end
     _rating.sum
   end
 
+  #so proud of myself
+  def rollback_vote(type)
+    sign = false
+    new_rating = 0
+    sign = true if rating >= 0
+
+    if (type)
+      new_rating = rating.abs - 1
+      new_rating = sign ? new_rating : -new_rating
+    elsif (!type)
+      new_rating = rating - 1
+    end
+
+    self.update_attribute(:rating, new_rating)
+
+    if folder.present?
+      folder.rollback_vote(type)
+    end
+    if university.present?
+      university.rollback_vote(type)
+    end
+    if user.present?
+      user.rollback_vote(type)
+    end
+  end
 
   def item_html
     html_path = item.path + '.html'

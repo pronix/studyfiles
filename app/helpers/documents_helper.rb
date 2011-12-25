@@ -63,7 +63,7 @@ module DocumentsHelper
                   :method => :put,
                   :title => "Вы уже уменьшили рейтинг файла #{document.name}",
                   :rel => document.name, :remote => true,
-                  :name => rate_document_path(document, :vote_type => true)
+                  :name => rate_document_path(document)
                end
     return inc_rate + dec_rate
   end

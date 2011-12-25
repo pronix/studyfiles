@@ -31,7 +31,7 @@ class University < ActiveRecord::Base
     update_attribute(:available, true) if
       documents.present? || subjects.present? || folders.present?
   end
-  
+
   def self.top_universities(_limit=10)
     search(:order => :rating, :sort_mode => :desc,
            :without => {:available => false}).first(_limit)
@@ -40,7 +40,7 @@ class University < ActiveRecord::Base
   def quick_rating
     documents.map {|d| d.quick_rating }.sum
   end
-  
+
   # Return university documents without folder
   def documents_without_folder
     documents.unfolded
@@ -68,6 +68,21 @@ class University < ActiveRecord::Base
   # TODO: Create cron task to reculculate ratings for all
   def rating!
     update_attribute(:rating, documents.sum(:rating))
+  end
+
+  def rollback_vote(type)
+    sign = false
+    new_rating = 0
+    sign = true if rating >= 0
+
+    if (type)
+      new_rating = rating.abs - 1
+      new_rating = sign ? new_rating : -new_rating
+    elsif (!type)
+      new_rating = rating - 1
+    end
+
+    self.update_attribute(:rating, new_rating)
   end
 
   #Количество файлов
