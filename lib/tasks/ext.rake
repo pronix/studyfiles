@@ -4,7 +4,7 @@ require 'faker'
 namespace :rating do
   task :update_all => :environment do
     University.rating!
-    User.overall_rating!
+    User.rank!
   end
 end
 

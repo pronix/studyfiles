@@ -4,6 +4,6 @@ every '*/10 * * * *' do
   rake "rating:update_all"
 end
 
-every 1.hour do
+every '*/10 * * * *' do
   rake "thinking_sphinx:index"
 end
