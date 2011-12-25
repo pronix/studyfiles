@@ -37,13 +37,5 @@ class Vote < ActiveRecord::Base
     if document.user.present?
       document.user.update_attribute(:rating, document.user.rating + vote)
     end
-
-    puts "VOTE TYPE 1 #{vote_type}"
-    puts "VOTE 1 #{vote}"
-    puts "GRADE 1 #{grade}"
-    puts "RATE 1 #{document.rating}"
-    puts "FOLDER RATE 1 #{document.folder.rating}"
-
   end
-
 end
