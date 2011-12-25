@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
   end
 
   class << self
-    def overall_rating!
+    def rank!
       r = 1
       order('rating DESC').each do |u|
         u.update_attribute(:rank, r)
