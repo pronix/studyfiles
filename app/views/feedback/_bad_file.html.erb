@@ -1,0 +1,17 @@
+<div class="modal-window" id="bad-file-modal">
+  <h3><small>Сообщить о проблеме с файлом</small></h3>
+<%= form_for :feedback, :url => feedback_path do |f| %>
+
+    <%= f.text_area :message, :cols => 66, :rows => 10 %>
+  <div class="red-box">
+    <p>email для ответа (не обязательно)<p>
+
+    <%= f.email_field :email %>
+
+    <%= f.submit "Отправить", :class => "button red-button" %>
+  </div>
+
+  <a href="#" class="close-modal">
+    <%= image_tag("close-modal.png") %>
+  </a>
+<% end %>

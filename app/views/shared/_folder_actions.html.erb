@@ -5,7 +5,8 @@
 
 <%= link_to "", university_folder_path(folder.university, folder), :class => "flag icon popup-preview",
     :title => "Открыть #{folder.name}" %>
-<%= link_to "", download_folder_path(folder), :class => "download icon", :title => "Скачать #{folder.name}" %>
+
+<%= link_to("", download_folder_path(folder), :class => "download icon", :title => "Скачать #{folder.name}") if current_user %>
 
 <% if can?(:manage, folder) && current_page?(:controller => "users", :action => "show", :id => current_user.id) %>
    <%= link_to "", new_folder_path(:parent_id => folder.id, :university => folder.university, :subject => folder.subject), :class => "folder-plus icon" %>

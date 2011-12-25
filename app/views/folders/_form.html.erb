@@ -1,4 +1,4 @@
-<%= form_for folder do |f| %>
+<%= form_for folder, :html => {:class => "closable"} do |f| %>
   <dl class="form-list in-tree-form">
     <dt><%= rating(folder) %></dt>
     <dd>
@@ -12,5 +12,11 @@
     <dd><%= f.text_area :description, :rows => 5, :cols => 60 %></dd>
 
     <dt></dt>
-    <dd><%= f.submit "Сохранить", :class => "button blue-button" %></dd>
+    <dd>
+      <%= f.submit "Сохранить", :class => "button blue-button" %>
+      <span class="close info-form-close">
+        <span class="lred-cross icon"></span>
+        <a href="">Отменить</a>
+      </span>
+    </dd>
 <% end %>

@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
 
   define_index do
     indexes :name
+    has universities(:id), :as => :university_ids
     has rating, rank
   end
 

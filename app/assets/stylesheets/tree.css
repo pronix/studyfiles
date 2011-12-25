@@ -253,7 +253,8 @@
       }
 
       .expander .green-button {
-        margin-left: 70px;
+        margin: 15px 0 0 70px;
+
       }
 
 /* EXPANDER END */
@@ -284,10 +285,25 @@
 .mini-wrapper .level-8 { }
 
 
+.file-row-previews p {
+  margin-left: 35px;
+}
+
+.file-row-previews .full-desc {
+  display: none;
+}
+
 
 .mini-wrapper .level-2, .mini-wrapper .level-4, .mini-wrapper .level-5, .mini-wrapper .level-6, .mini-wrapper .level-7, .mini-wrapper .level-3, .mini-wrapper .level-8 {
   display: block;
   background: white;
+}
+
+.mini-wrapper .file-row-previews .short-desc {
+  display: none;
+}
+.mini-wrapper .file-row-previews .full-desc {
+  display: block;
 }
 
 

@@ -65,4 +65,11 @@ $(function() {
         form.submit();
     });
 
+
+    $('.short-desc > a').live('click', function(e) {
+       e.preventDefault();
+       $(this).parent().hide();
+       $(this).closest('.file-row-previews').find('.full-desc').show()
+    });
+
 });

@@ -75,6 +75,16 @@ html[xmlns] .clearfix {
   padding: 2px;
 }
 
+.red-box {
+  background: #ffcbcb;
+  border-radius: 5px;
+  padding: 12px 12px 20px 12px;
+}
+
+.modal-window .red-box {
+  width: 425px;
+}
+
 .gray-box {
   border-radius: 5px;
   background: #f8f9f1;
@@ -486,7 +496,7 @@ html[xmlns] .clearfix {
     background-position  : -420px -0px;
  }
 
- #lred-cross_png {
+ .lred-cross {
     height               : 13px;
     width                : 8px;
     background-position  : -438px -0px;
@@ -664,7 +674,10 @@ html[xmlns] .clearfix {
   	color-stop(0.9, #f7fcfd))
 }
 .search-with-filters .search-form {
-  margin-top: 16px;
+  margin-top: 0px;
+}
+.search-with-filters .search-form h2 {
+  margin-bottom: 16px;
 }
 .search-with-filters  > div {
   width:100%;
@@ -954,6 +967,23 @@ html[xmlns] .clearfix {
           display: inline-block;
         }
 
+        #rainbow-dash {
+          height: 4px; background-image: linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+          background-image: -o-linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+          background-image: -moz-linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+          background-image: -webkit-linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+          background-image: -ms-linear-gradient(right , rgb(0,203,230) 96%, rgb(0,57,149) 63%, rgb(0,41,106) 36%, rgb(129,228,0) 7%);
+
+          background-image: -webkit-gradient(
+          	linear,
+          	right top,
+          	left top,
+          	color-stop(0.96, rgb(0,203,230)),
+          	color-stop(0.63, rgb(0,57,149)),
+          	color-stop(0.36, rgb(0,41,106)),
+          	color-stop(0.07, rgb(129,228,0))
+          );
+  }
 
 /*
  *
@@ -1189,6 +1219,18 @@ html[xmlns] .clearfix {
             cursor: pointer;
             text-decoration: none;
   }
+
+  .close.info-form-close {
+    position: static;
+    line-height: 16px;
+    margin-left:5px;
+  }
+    .close.info-form-close .icon {
+      margin-bottom: -2px;
+    }
+    .close.info-form-close a {
+      color: #e82a2a;
+    }
 
   .yellow-notification {
     background: url("orange-ribbon.png") bottom left repeat-x;
@@ -1723,6 +1765,11 @@ html[xmlns] .clearfix {
   color: white !important;
   float: right;
 }
+
+#bad-file-modal {
+  width: 550px
+}
+
 /* MODAL WINDOWS END */
 
 
@@ -1771,8 +1818,13 @@ html[xmlns] .clearfix {
   height: auto;
 }
 
+.mini-wrapper .description {
+  margin-bottom: 35px;
+  font-size: 1.2em;
+}
+
 #breadcrumbs.file-bread, #breadcrumbs.folder-bread {
-  margin: 18px 0 50px 0;
+  margin: 18px 0 20px 0;
 }
 
 #breadcrumbs.file-bread li:last-child:after {
