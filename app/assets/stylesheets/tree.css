@@ -46,6 +46,7 @@
 .file-row {
   margin-bottom: 2px;
   padding-top: 5px;
+  padding-bottom: 3px;
   clear: both;
   position: relative;
 }

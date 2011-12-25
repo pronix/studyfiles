@@ -8,10 +8,10 @@
 	Несортированные файлы не отображаются в общем каталоге, но доступны другим пользователям для скачивания с вашей страницы.
       </p>
     </div>
-  </div> 
+  </div>
 <% end %>
 
-<%= form_for move_folder_path, :class => "mover-form" do %>
+<%= form_tag move_folder_path, :class => "mover-form" do %>
 
 <input type="hidden" name="destination" value="" >
 
