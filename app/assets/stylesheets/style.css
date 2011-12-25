@@ -486,7 +486,7 @@ html[xmlns] .clearfix {
     background-position  : -420px -0px;
  }
 
- #lred-cross_png {
+ .lred-cross {
     height               : 13px;
     width                : 8px;
     background-position  : -438px -0px;
@@ -1209,6 +1209,18 @@ html[xmlns] .clearfix {
             cursor: pointer;
             text-decoration: none;
   }
+
+  .close.info-form-close {
+    position: static;
+    line-height: 16px;
+    margin-left:5px;
+  }
+    .close.info-form-close .icon {
+      margin-bottom: -2px;
+    }
+    .close.info-form-close a {
+      color: #e82a2a;
+    }
 
   .yellow-notification {
     background: url("orange-ribbon.png") bottom left repeat-x;

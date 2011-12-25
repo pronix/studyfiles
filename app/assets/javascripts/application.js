@@ -37,22 +37,6 @@ $(document).ready(function(){
   });
 
 
-  //Открываем по ссылке с этим классом модальное окно с id = rel этой ссылки
-  $('.open-modal').click(function(e) {
-      e.preventDefault();
-      var modalWindow = $(this).attr('rel');
-      $("#"+modalWindow).modal({
-        closeClass: 'close-modal',
-        autoResize: true
-      });
-  });
-
-
-  //Если нужен переход от одного модального к другому
-  $(".popuper").live('click', function() {
-    $.modal.close();
-  })
-
 
   //Очищалка инпутов
   $('.clearer').live('click', function() {
@@ -68,7 +52,7 @@ $(document).ready(function(){
   $('.close').live('click', function(e) {
     e.preventDefault();
     container = $(this).parent('.closable').parent('.closable-container.with-bg');
-    $(this).parent('.closable').remove();
+    $(this).closest('.closable').remove();
     if ( container.children().length == 0) {
       container.css('background', 'none');
     }
