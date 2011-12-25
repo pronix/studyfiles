@@ -299,6 +299,13 @@
   background: white;
 }
 
+.mini-wrapper .file-row-previews .short-desc {
+  display: none;
+}
+.mini-wrapper .file-row-previews .full-desc {
+  display: block;
+}
+
 
 .file-row.selected {
   background: #ffdc44;

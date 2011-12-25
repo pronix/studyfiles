@@ -14,7 +14,7 @@
         <dt>Размер:</dt>
         <dd><%= number_to_human_size(@document.item_file_size) %></dd>
       </dl>
-      <%= link_to "Пожаловаться на файл", new_feedback_path %>
+      <%= link_to "Пожаловаться на файл", new_feedback_path, :remote => true %>
       <%= link_to "Скачать", download_document_path(@document), :class => "button green-button" %>
 <% end %>
 
@@ -35,6 +35,10 @@
     <%= extension_icon_link(@document) %> <b><%= @document.name %></b>
   </li>
 </ul>
+
+<div class="description">
+  <%= @document.description %>
+</div>
 
 
 <div id="document-preview">

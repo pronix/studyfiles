@@ -1,0 +1,10 @@
+$(".modal-window").remove();
+<% if params[:folder] %>
+  $("body").append("<%= escape_javascript(render 'bad_folder') %>");
+<% else %>
+  $("body").append("<%= escape_javascript(render 'bad_file') %>");
+<% end %>
+$("#bad-file-modal").modal({
+  closeClass: 'close-modal',
+  autoResize: true
+});

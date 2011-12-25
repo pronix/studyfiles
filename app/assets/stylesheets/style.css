@@ -75,6 +75,16 @@ html[xmlns] .clearfix {
   padding: 2px;
 }
 
+.red-box {
+  background: #ffcbcb;
+  border-radius: 5px;
+  padding: 12px 12px 20px 12px;
+}
+
+.modal-window .red-box {
+  width: 425px;
+}
+
 .gray-box {
   border-radius: 5px;
   background: #f8f9f1;
@@ -1755,6 +1765,11 @@ html[xmlns] .clearfix {
   color: white !important;
   float: right;
 }
+
+#bad-file-modal {
+  width: 550px
+}
+
 /* MODAL WINDOWS END */
 
 
@@ -1803,8 +1818,13 @@ html[xmlns] .clearfix {
   height: auto;
 }
 
+.mini-wrapper .description {
+  margin-bottom: 35px;
+  font-size: 1.2em;
+}
+
 #breadcrumbs.file-bread, #breadcrumbs.folder-bread {
-  margin: 18px 0 50px 0;
+  margin: 18px 0 20px 0;
 }
 
 #breadcrumbs.file-bread li:last-child:after {
