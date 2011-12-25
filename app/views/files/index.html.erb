@@ -15,7 +15,8 @@
       </div>
 </div>
 <%= link_to "по рейтингу", files_path(:sort => @sort.blank? ? 'rating DESC' : (@sort == 'rating DESC' ? 'rating ASC' : 'rating DESC')) %>
-<!-- <%= link_to "по рейтингу", files_path(:sort => 'rating DESC') %> -->
+<%= link_to "алфавиту", files_path(:sort => @sort.blank? ? 'name ASC' : (@sort == 'name ASC' ? 'name DESC' : 'name ASC')) %>
+
 <% @universities.each do |univer| %>
   <% if !univer.documents.empty? || !univer.folders.empty? %>
   <div class="expander parent">
