@@ -96,6 +96,7 @@ namespace :deploy do
   namespace :db do
     task :symlink do
       run "ln -nfs #{shared_path}/database.yml #{latest_release}/config/database.yml"
+      run "ln -nfs #{shared_path}/sphinx.yml #{latest_release}/config/sphinx.yml"
     end
   end
 
