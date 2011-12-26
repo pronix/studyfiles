@@ -22,7 +22,7 @@ class Folder < ActiveRecord::Base
     indexes :description
     has :rating, :created_at
   end
-  
+
   def delete_sub_folder
     children.destroy_all
   end
@@ -50,7 +50,11 @@ class Folder < ActiveRecord::Base
     end
     if document_ids
       document_ids.each do |i|
-          Document.find(i).copy_to_folder(self)
+          doc = Document.find(i)
+          doc.rollback_rating
+          doc.copy_to_folder(self)
+          self.update_attribute(:rating, self.rating + doc.rating)
+          ancestors.each {|p| p.update_attribute(:rating, p.rating + doc.rating)}
       end
     end
   end

@@ -35,7 +35,7 @@
        <div class="expander-content node">
             <div class="level-1 clearfix node <%== 'my-files' if @user == current_user %>">
 
-	      <% @user.folders.unsorted.each do |folder| %>
+	      <% @user.folders.unsorted.top.each do |folder| %>
                 <%= render "shared/folder_nude", :folder => folder %>
               <% end %>
 
