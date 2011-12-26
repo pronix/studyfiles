@@ -39,17 +39,25 @@ $(function() {
       $(this).closest('.with-more').find('.more-block').show();
     });
 
-    $(".logged-in .my-files .file-row").bind("contextmenu",function(e){
+    $(".slate").hide();
+
+    $(".logged-in .my-files .file-row").live("contextmenu",function(e){
       if (e.which === 3) {
         e.preventDefault();
         var checkbox = $(this).closest('.file-row').find(' > .mover-checkbox');
         if ($(this).hasClass("selected")) {
           $(this).removeClass("selected");
+          $(this).find('> .file-row-title .slate').show();
           checkbox.prop("checked", false);
+          if ($('.selected').length == 0) {
+            $(".file-row .slate").hide();
+          }
         }
         else
         {
           $(this).addClass("selected");
+          $(".file-row:not(.selected) .slate").show();
+          $(this).find('> .file-row-title .slate').hide();
           checkbox.prop("checked", true);
         }
       }

@@ -36,7 +36,7 @@
             <div class="level-1 clearfix node <%== 'my-files' if @user == current_user %>">
 
 	      <% @user.folders.unsorted.top.each do |folder| %>
-                <%= render "shared/folder_nude", :folder => folder %>
+                <%= render "shared/folder", :folder => folder %>
               <% end %>
 
               <% @user.documents.unsorted.unfolded.each do |document| %>
@@ -51,7 +51,6 @@
        </div>
 
 </div>
-<% end %>
 <% if show_notify(2) %>
   <div class="yellow-notification notification closable">
     <%= link_close_notify(2) %>
@@ -70,7 +69,6 @@
 
 <% @user.universities.each do | univer | %>
 
-<%= form_tag move_folder_path, :class => "mover-form"  do %>
 <input type="hidden" name="destination" value="" >
 
     <div class="expander parent <%== 'usered' if @user == current_user %>">

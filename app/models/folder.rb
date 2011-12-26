@@ -73,6 +73,7 @@ class Folder < ActiveRecord::Base
   def copy_to_folder(folder)
     #строим новый путь
     self.parent = folder
+    self.update_attribute(:university, folder.university)
     self.save
   end
 

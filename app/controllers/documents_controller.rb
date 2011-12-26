@@ -54,7 +54,7 @@ class DocumentsController < ApplicationController
 
     conditions = { :document_id => @doc.id, :user_id => (current_user ? current_user.id : nil) }
 
-    if Vote.where(conditions).empty?
+    if Vote.where(conditions).empty? && current_user
       vote = Vote.create(conditions)
       vote.update_attributes(:grade => 1, :vote_type => true)
       cookies["download_finished"] = { :value => "true", :expires => 1.second.from_now }

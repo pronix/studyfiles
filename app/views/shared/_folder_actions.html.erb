@@ -3,8 +3,8 @@
    <%= link_to "", "", :value => folder.id, :class => "slate icon action-link" %>
 <% end %>
 
-<%= link_to "", university_folder_path(folder.university, folder), :class => "flag icon popup-preview",
-    :title => "Открыть #{folder.name}" %>
+<%= link_to("", university_folder_path(folder.university, folder), :class => "flag icon popup-preview",
+    :title => "Открыть #{folder.name}") if folder.university %>
 
 <%= link_to("", download_folder_path(folder), :class => "download icon", :title => "Скачать #{folder.name}") if current_user %>
 
