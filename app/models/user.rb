@@ -141,6 +141,7 @@ class User < ActiveRecord::Base
 
   class << self
     def rank!
+      all.each {|u| u.update_attribute(:rating, u.quick_rating)}
       r = 1
       order('rating DESC').each do |u|
         u.update_attribute(:rank, r)
