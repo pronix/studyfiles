@@ -10,7 +10,7 @@
 
      <span class="file-row-title">
        <span class="file-row-actions">
-          <%= render "shared/folder_actions", :folder => folder %>
+         <%= render "shared/folder_actions", :folder => folder, :univer => univer %>
        </span>
        <%= link_to folder.name, "#", :class => "expand", :title => "Раскрыть #{folder.name}" %>
      </span>
