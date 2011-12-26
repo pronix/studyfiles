@@ -15,12 +15,15 @@
         <% end %>
       </div>
 </div>
-<% @results.each do |result| %>
+
+<% @documents.each do |doc| %>
   <div class="level-1 clearfix node">
-      <% if result.class.to_s == 'Folder' %>
-        <%= render "shared/folder_nude", :folder => result %>
-      <% else %>
-        <%= render "shared/file_row", :document => result %>
-      <% end %>
+    <%= render "shared/file_row", :document => doc %>
+  </div>
+<% end %>
+
+<% @folders.each do |folder| %>
+  <div class="level-1 clearfix node">
+    <%= render "shared/folder_nude", :folder => folder %>
   </div>
 <% end %>

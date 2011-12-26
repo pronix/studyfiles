@@ -18,10 +18,13 @@ class FilesController < ApplicationController
   end
 
   def search
-    @results = ThinkingSphinx.search params[:search_keyword],
-    :conditions => {:university_name => params[:univer_name],
-      :subject_name => params[:subject_name]},
-    :classes => [Document, Folder]
+    univer_filter = params[:univer_filter].present? ? {:university_name => params[:univer_filter]} : {}
+    subject_filter = params[:subject_filter].present? ? {:subject_name => params[:subject_filter]} : {}
+    result_filter = univer_filter.merge(subject_filter)
+    @documents = Document.search(params[:search_keyword],
+                                 :conditions => {}.merge(result_filter))
+    @folders = Folder.search(params[:search_keyword],
+                                 :conditions => {}.merge(result_filter))
   end
 
   private
