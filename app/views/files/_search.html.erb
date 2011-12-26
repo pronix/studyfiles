@@ -17,9 +17,9 @@
 
             <div id="group_by">
               <span>Группировать</span>
-              <%= link_to "по ВУЗам/предметам", group_by_files_path(:group => 'subjects') %>
-              <%= link_to "пользователям", group_by_files_path(:group => 'users') %>
-              <%= link_to "нет", files_path %>
+              <%= link_to "по ВУЗам/предметам", group_by_files_path(:group => 'subjects'), :class => (params[:group] == 'subjects' ? 'current-group' : '') %>
+              <%= link_to "пользователям", group_by_files_path(:group => 'users'), :class => (params[:group] == 'users' ? 'current-group' : '')  %>
+              <%= link_to "нет", files_path, :class => (params[:group] == nil ? 'current-group' : '')  %>
             </div>
           </div>
             <%= text_field_tag :search_keyword, params[:search_keyword], :placeholder =>  "Введите название или описания файла или папки", :id => "search" %>

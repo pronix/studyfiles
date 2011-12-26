@@ -1894,7 +1894,7 @@ html[xmlns] .clearfix {
     text-decoration: none;
   }
 
-  .sort_link.asc, .sort_link.desc {
+  .sort_link.asc, .sort_link.desc, a.current-group {
     color: white;
     font-weight: bold;
     border-radius: 5px;
