@@ -32,10 +32,9 @@ after 'deploy:migrate', 'delayed_job:restart'
 after 'deploy:migrate', 'deploy:load_seed'
 after 'deploy:load_seed', 'deploy:load_sample'
 
+after 'deploy:migrate', 'misc:rating_update'
 after 'deploy:migrate', 'deploy:activate_sphinx'
 after 'deploy:migrate', 'deploy:precompile_assets'
-
-after 'deploy:migrate', 'misc:rating_update'
 
 namespace :delayed_job do
   task :restart do

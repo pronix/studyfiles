@@ -25,7 +25,7 @@ class University < ActiveRecord::Base
     has rating, available
   end
 
-  scope :available, where(:available => true)
+  scope :availables, where(:available => true)
 
   # University is available if it has documents or subjects or folder
   # This check should be run before sphinx index
@@ -35,7 +35,7 @@ class University < ActiveRecord::Base
   end
 
   def self.top_universities(_limit=10)
-    order('rating DESC').available.first(_limit)
+    order('rating DESC').availables.first(_limit)
   end
 
   def quick_rating
