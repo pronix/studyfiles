@@ -3,7 +3,7 @@
         <%= form_tag users_path, :method => :get, :class => "search-form" do %>
           <h2>
             <a href="" class="icon flag2"></a>
-            <span id="univer_filter_text"><%= params[:univer_filter] %><%= "Все ВУЗы" if params[:univer_filter].strip.length == 0 %></span>
+            <span id="univer_filter_text"><%= params[:univer_filter] %><%= "Все ВУЗы" unless params[:univer_filter].present? %></span>
             <%= link_to "", search_universities_path(:search => ""), :class => "icon green-btn-expnd", :remote => true %>
             <%= link_to "", "", :class => "icon green-btn-close", :id => "clear-subject-filter" %>
           </h2>
