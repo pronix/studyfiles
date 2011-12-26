@@ -138,6 +138,6 @@
 <% end %>
 
 <% if @user == current_user %>
-  <%= link_to "Добавить ВУЗ", search_universities_path(:search => ""), :class => "button green-button", :remote => true %>
+  <%= link_to "Добавить ВУЗ", search_universities_path(:search => "", :my_files => true), :class => "button green-button", :remote => true %>
 <% end %>
 
