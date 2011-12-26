@@ -442,10 +442,10 @@ html[xmlns] .clearfix {
     background-position  : -283px -0px;
  }
 
- .selected .folder-full {
-    height               : 25px;
-    width                : 25px;
-    background-position  : -327px 3px;
+ .selected >  .file-row-icons .folder-full {
+    height               : 25px !important;
+    width                : 25px !important;
+    background-position  : -327px 3px !important;
   }
 
  .folder-plus {
