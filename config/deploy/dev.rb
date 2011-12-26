@@ -9,7 +9,7 @@ set :deploy_to, "/var/www/#{application}"
 set :branch, "ezo"
 set :user, "rvm_user"
 
-set :thinking_sphinx_configure_args, "./configure --with-pgsql=/usr/include/pgsql --prefix=#{shared_path}/sphinx"
+set :thinking_sphinx_configure_args, " --with-pgsql=/usr/include/pgsql --prefix=#{shared_path}/sphinx --enable-id64"
 
 set :rvm_type, :user
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
@@ -52,6 +52,21 @@ namespace :misc do
 end
 
 
+namespace :sphinx do
+  task :install do
+    commands = <<-CMD
+        wget -q http://sphinxsearch.com/files/sphinx-2.0.3-release.tar.gz >> sphinx.log
+        tar xzvf sphinx-2.0.3-release.tar.gz
+        cd sphinx-2.0.3-release
+        ./configure #{thinking_sphinx_configure_args}
+        make
+        make install
+        rm -rf sphinx-2.0.3-release.tar.gz sphinx-2.0.3-release
+        CMD
+        run commands.split(/\n\s+/).join(" && ")
+  end
+end
+
 namespace :deploy do
   task :clear_public_system do
     run "cd #{latest_release} && rm -rf public/system/*"
@@ -89,11 +104,7 @@ namespace :deploy do
   end
 
   task :activate_sphinx do
-    if ENV['NEW']
-      run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:configure"
-    else
-      run "ln -nfs #{shared_path}/production.sphinx.conf #{latest_release}/config/production.sphinx.conf"
-    end
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:configure"
     run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:index"
     run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake thinking_sphinx:start"
   end
