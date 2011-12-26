@@ -17,7 +17,7 @@
 
             <div id="group_by">
               <span>Группировать</span>
-              <%= link_to "по ВУЗам/предметам", group_by_files_path(:group => 'subjects') %>
+              <%= link_to "по ВУЗам/предметам", group_by_files_path(:group => 'subjects'), :class => "current-group" %>
               <%= link_to "пользователям", group_by_files_path(:group => 'users') %>
               <%= link_to "нет", files_path %>
             </div>

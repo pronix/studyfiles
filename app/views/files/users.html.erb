@@ -1,5 +1,15 @@
 <%= render :partial => "search" %>
 
+<script type="text/javascript" language="javascript" charset="utf-8">
+//<![CDATA[
+$(function() {
+        $('.parent').find('.node').hide();
+        $('.parent').find('.blue-collapse').removeClass('blue-collapse').addClass('blue-expand').show();
+        $('.parent').find('.file-row').removeClass('collapsed-block');
+    })
+//]]>
+</script>
+
 <% @users.each do |user| %>
     <div class="expander parent">
            <div class="expander-header">
