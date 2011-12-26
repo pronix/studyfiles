@@ -36,35 +36,40 @@ module DocumentsHelper
   def document_rater(document)
     vote = Vote.where(:document_id => document.id, :user_id => (current_user ? current_user.id : nil))
 
-    inc_rate = if !vote.first || !vote.first.vote_type
-                  link_to "", rate_document_path(document, :vote_type => true),
-                    :class => "async-rater check-true-unselected icon",
-                    :method => :put,
-                    :title => "Увеличить рейтинг #{document.name}",
-                    :rel => document.name, :remote => true
-               else
-                  link_to "", "",
-                    :class => "check-true icon inactive-rater",
-                    :method => :put,
-                    :title => "Вы уже увеличили рейтинг файла #{document.name}",
-                    :rel => document.name, :remote => true,
-                    :name => rate_document_path(document, :vote_type => true)
-               end
+    if current_user
+        inc_rate = if !vote.first || !vote.first.vote_type
+                      link_to "", rate_document_path(document, :vote_type => true),
+                        :class => "async-rater check-true-unselected icon",
+                        :method => :put,
+                        :title => "Увеличить рейтинг #{document.name}",
+                        :rel => document.name, :remote => true
+                   else
+                      link_to "", "",
+                        :class => "check-true icon inactive-rater",
+                        :method => :put,
+                        :title => "Вы уже увеличили рейтинг файла #{document.name}",
+                        :rel => document.name, :remote => true,
+                        :name => rate_document_path(document, :vote_type => true)
+                   end
 
-    dec_rate = if !vote.first || vote.first.vote_type
-                link_to "", rate_document_path(document),
-                  :class => "async-rater check-false-unselected icon",
-                  :method => :put,
-                  :title => "Уменьшить рейтинг #{document.name}",
-                  :rel => document.name, :remote => true
-               else
-                link_to "", "",
-                  :class => "check-false icon inactive-rater",
-                  :method => :put,
-                  :title => "Вы уже уменьшили рейтинг файла #{document.name}",
-                  :rel => document.name, :remote => true,
-                  :name => rate_document_path(document)
-               end
+        dec_rate = if !vote.first || vote.first.vote_type
+                    link_to "", rate_document_path(document),
+                      :class => "async-rater check-false-unselected icon",
+                      :method => :put,
+                      :title => "Уменьшить рейтинг #{document.name}",
+                      :rel => document.name, :remote => true
+                   else
+                    link_to "", "",
+                      :class => "check-false icon inactive-rater",
+                      :method => :put,
+                      :title => "Вы уже уменьшили рейтинг файла #{document.name}",
+                      :rel => document.name, :remote => true,
+                      :name => rate_document_path(document)
+                   end
+    else
+        inc_rate = link_to "", "", :class => "check-true-unselected icon open-modal", :rel => "registration-modal"
+        dec_rate = link_to "", "", :class => "check-false-unselected icon open-modal", :rel => "registration-modal"
+    end
     return inc_rate + dec_rate
   end
 
