@@ -202,6 +202,21 @@ class Document < ActiveRecord::Base
     end
   end
 
+
+  def rollback_rating(only_ancestors=false)
+    sign = false
+    sign = true if rating >= 0
+
+    new_rating = sign ? -rating : rating.abs
+
+    if folder.present?
+      folder.update_attribute(:rating, folder.rating + new_rating) if !only_ancestors
+      folder.ancestors.each {|p| p.update_attribute(:rating, p.rating + new_rating)}
+    end
+  end
+
+
+
   def item_html
     html_path = item.path + '.html'
     return html_path if File.exist?(html_path)

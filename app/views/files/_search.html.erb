@@ -2,23 +2,32 @@
       <div>
         <h2>
           <a href="" class="icon flag2"></a>
-          Все ВУЗы
-          <a href="" class="icon green-btn-expnd"></a>
-          <a href="" class="icon green-btn-close"></a>
+          <span id="univer_filter_text"><%= params[:univer_filter] %><%= "Все ВУЗы" if !params[:univer_filter] %></span>
+          <%= link_to "", search_universities_path(:search => ""), :class => "icon green-btn-expnd", :remote => true %>
+          <%= link_to "", "", :class => "icon green-btn-close", :id => "clear-subject-filter" %>
         </h2>
         <%= form_tag search_files_path, :method => :get, :class => "search-form" do %>
+          <div class="clearfix">
+            <div id="sort_by">
+              <span>Сортировать</span>
+              <%= sort_link @search, :rating, "по рейтингу", :default_order => :desc %>
+              <%= sort_link @search, :name, "алфавиту", :default_order => :asc %>
+              <%= sort_link @search, :created_at, "дате", :default_order => :desc %>
+            </div>
+
+            <div id="group_by">
+              <span>Группировать</span>
+              <%= link_to "по ВУЗам/предметам", group_by_files_path(:group => 'subjects') %>
+              <%= link_to "пользователям", group_by_files_path(:group => 'users') %>
+              <%= link_to "нет", files_path %>
+            </div>
+          </div>
             <%= text_field_tag :search_keyword, params[:search_keyword], :placeholder =>  "Введите название или описания файла или папки", :id => "search" %>
+            <%= hidden_field_tag(:univer_filter, "") %>
           <button id="search_button" class="button blue-button">
             Найти
           </button>
         <% end %>
       </div>
 </div>
-<%= sort_link @search, :rating, "по рейтингу", :default_order => :desc %>
-<%= sort_link @search, :name, "алфавиту", :default_order => :asc %>
-<%= sort_link @search, :created_at, "дате", :default_order => :desc %>
 
-
-<%= link_to "по ВУЗам/предметам", group_by_files_path(:group => 'subjects') %>
-<%= link_to "пользователям", group_by_files_path(:group => 'users') %>
-<%= link_to "нет", files_path %>

@@ -2,12 +2,13 @@
       <div>
         <h2>
           <a href="" class="icon flag2"></a>
-          Все ВУЗы
-          <a href="" class="icon green-btn-expnd"></a>
-          <a href="" class="icon green-btn-close"></a>
+          <span id="univer_filter_text"><%= params[:univer_filter] %><%= "Все ВУЗы" if !params[:univer_filter] %></span>
+          <%= link_to "", search_universities_path(:search => ""), :class => "icon green-btn-expnd", :remote => true %>
+          <%= link_to "", "", :class => "icon green-btn-close", :id => "clear-subject-filter" %>
         </h2>
         <%= form_tag search_files_path, :method => :get, :class => "search-form" do %>
             <%= text_field_tag :search_keyword, params[:search_keyword], :placeholder =>  "Введите название или описания файла или папки", :id => "search" %>
+            <%= hidden_field_tag(:univer_filter, "") %>
           <button id="search_button" class="button blue-button">
             Найти
           </button>
@@ -15,9 +16,11 @@
       </div>
 </div>
 <% @results.each do |result| %>
-  <% if result.class.to_s == 'Folder' %>
-    <%= render "shared/folder_nude", :folder => result %>
-  <% else %>
-    <%= render "shared/file_row", :document => result %>
-  <% end %>
+  <div class="level-1 clearfix node">
+      <% if result.class.to_s == 'Folder' %>
+        <%= render "shared/folder_nude", :folder => result %>
+      <% else %>
+        <%= render "shared/file_row", :document => result %>
+      <% end %>
+  </div>
 <% end %>

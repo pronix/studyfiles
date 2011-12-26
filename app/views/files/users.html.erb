@@ -1,14 +1,71 @@
 <%= render :partial => "search" %>
 
 <% @users.each do |user| %>
-  <%= user_name(user) %>
-  <div class="level-1 clearfix node">
-    <% user.folders.top.order(@sort).each do |folder| %>
-      <%= render "shared/folder", :folder => folder, :sort => @sort %>
-    <% end %>
-    <% user.documents.unfolded.order(@sort).each do |doc| %>
-      <%= render 'shared/file_row', :document => doc %>
-    <% end %>
-  </div>
-<% end %>
+    <div class="expander parent">
+           <div class="expander-header">
+             <span class="rating"><%= rating(user) %></span>
+             <a class="blue-collapse icon expand"></a>
+             <%= link_to image_tag(user.avatar.url(:icon)), user_path(user), :class => "avatar" %>
+             <h4>
+               <a href="#"><%= user_name(user) %></a>
+             </h4>
+             <div class="expander-actions">
+               <%= link_to "", "", :class => "expand-all expand icon" %>
+             </div>
+           </div>
 
+
+          <div class="expander-content node">
+            <% user.universities.each do |univer| %>
+
+            <div class="expander-subject parent university">
+
+              <div class="gray-box">
+                <span class="rating"><%= rating(univer) %></span>
+                <a class="blue-collapse icon expand"></a>
+                <%= link_to image_tag(univer.logo.url(:icon)), "", :class => "logo" %>
+                <a href="#" class="expand title"><%= univer.name %></a>
+                <div class="expander-actions">
+                  <a class="expand-all icon expand"></a>
+                </div>
+              </div>
+
+              <div class="node">
+                <% user.university_subjects(univer).each do |sub| %>
+                   <div class="expander-subject parent">
+
+                     <div class="gray-box">
+                       <a class="blue-collapse icon expand"></a>
+                       <a href="#" class="expand"><%= sub.name %></a>
+                       <div class="expander-actions">
+                         <a class="expand-all icon expand"></a>
+                       </div>
+                     </div>
+
+                    <div class="level-1 clearfix node">
+                      <% sub.folders.top.where(:user_id => user.id).each do |folder| %>
+                        <%= render "shared/folder", :folder => folder, :univer => univer %>
+                      <% end %>
+
+                      <% sub.documents.unfolded.each do |document| %>
+                        <%= render "shared/file_row", :document => document %>
+                      <% end %>
+                    </div>
+
+                   </div>
+                <% end %>
+
+                <div class="level-1 clearfix node">
+                  <% univer.folders.unsubjected.top.where(:user_id => user.id).each do |folder| %>
+                    <%= render "shared/folder", :folder => folder, :univer => univer %>
+                  <% end %>
+	          <% univer.documents.unfolded.unsubjected.order(@sort).each do |doc| %>
+	            <%= render 'shared/file_row', :document => doc %>
+	          <% end %>
+                </div>
+              </div>
+
+              </div>
+            <% end %>
+          </div>
+<% end %>

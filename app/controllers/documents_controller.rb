@@ -7,13 +7,11 @@ class DocumentsController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
-
     @university = University.find(params[:university]) if params[:university]
     @subject = Subject.find(params[:subject]) if params[:subject]
     @folder = Folder.find(params[:folder]) if params[:folder]
 
-    @documents = Array.new(3) { @user.documents.build(:folder => @folder, :university => @university, :subject => @subject) }
+    @user = User.find(params[:user_id])
   end
 
   def show
@@ -24,25 +22,21 @@ class DocumentsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
 
-    @user.update_attributes(params[:user])
-    flash[:notice] = "Обрабатываются файлы: #{@user.get_new_documents_names(params[:user][:documents_attributes].size)}. После обработки они появятся в списке ваших файлов."
-    redirect_to user_path(@user)
-    #else
-    #  flash[:notice] = "Ошибка!"
-    #  render :action => "new"
-    #end
-    #@files = params[:documents].collect { |file| @user.documents.new(file) }
-    #if request.post? && @files.all?(&:valid?)
-      #@files.each(&:save!)
-   #   #if @file.item.content_type == 'application/zip'
-      #  flash[:notice] = "Ваш архив принят на обработку"
-      #else
-      #  flash[:notice] = "Файл успешно создан"
-      #end
+    file = params[:Filedata]
 
-    #else
-     # flash[:alert] = "Файл не создан!"
-   # end
+    @university = University.find(params[:university]) if params[:university]
+    @subject = Subject.find(params[:subject]) if params[:subject]
+    @folder = Folder.find(params[:folder]) if params[:folder]
+
+    @doc = Document.new(:item => file,
+                        :user => @user,
+                        :folder => @folder,
+                        :university => @university,
+                        :subject => @subject)
+    @doc.save
+
+    #flash[:notice] = "Обрабатываются файлы: #{@user.get_new_documents_names(params[:user][:documents_attributes].size)}. После обработки они появятся в списке ваших файлов."
+    redirect_to user_path(@user)
   end
 
   def edit

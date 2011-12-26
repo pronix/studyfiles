@@ -10,7 +10,7 @@
   <%= link_to truncate(document.name, :length => 42, :omission => ""), document_path(document),
       :title => "Предпросмотр #{document.name}", :class => "popup-preview" %>
 <% else %>
-        <%= link_to truncate(document.name, :length => 42, :omission => ""), "#" %>
+        <%= link_to truncate(document.name, :length => 42, :omission => ""), document.item.url %>
 <% end %>
 
 

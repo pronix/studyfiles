@@ -46,6 +46,7 @@
 .file-row {
   margin-bottom: 2px;
   padding-top: 5px;
+  padding-bottom: 3px;
   clear: both;
   position: relative;
 }
@@ -317,3 +318,35 @@
 .mover-checkbox {
   display: none;
 }
+
+
+
+/* MORE TREES!!! */
+
+.expander-subject.university > .gray-box {
+  height: 54px;
+  line-height: 54px;
+}
+.expander-subject.university > .gray-box  > a.title{
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.expander-subject.university > .gray-box  .rating{
+  display: inline-block;
+  text-align: right;
+  width: 52px;
+  padding-right: 5px;
+}
+.expander-subject.university .logo img{
+  margin-bottom: -10px;
+  padding: 0 10px;
+  display: inline-block;
+}
+
+.expander-subject.university .expander-subject .gray-box {
+  background: none;
+}
+
+
+
+/* END */

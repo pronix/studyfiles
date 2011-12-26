@@ -1,4 +1,5 @@
 <div class="file-row clearfix folder-row parent">
+  <%= check_box_tag "folder_ids[]", folder.id, false, :class => "mover-checkbox" %>
   <span class="file-row-rating"><%= rating(folder) %></span>
 
      <span class="file-row-icons">
@@ -8,7 +9,7 @@
      <span class="file-row-title">
        <span class="file-row-actions">
          <% if can? :manage, folder %>
-           <%= link_to "", edit_folder_path(folder), :class => "edit icon", :title => "Редактировить #{folder.name}", :remote => true %>
+           <%= link_to "", edit_folder_path(folder), :class => "edit icon", :title => "Редактировать #{folder.name}", :remote => true %>
             <%= link_to "", "", :value => folder.id, :class => "slate icon action-link" %>
          <% end %>
 	 <%= link_to "", "#", :class => "flag icon",

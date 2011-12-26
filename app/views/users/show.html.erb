@@ -8,10 +8,10 @@
 	Несортированные файлы не отображаются в общем каталоге, но доступны другим пользователям для скачивания с вашей страницы.
       </p>
     </div>
-  </div> 
+  </div>
 <% end %>
 
-<%= form_for move_folder_path, :class => "mover-form" do %>
+<%= form_tag move_folder_path, :class => "mover-form" do %>
 
 <input type="hidden" name="destination" value="" >
 
@@ -35,7 +35,7 @@
        <div class="expander-content node">
             <div class="level-1 clearfix node <%== 'my-files' if @user == current_user %>">
 
-	      <% @user.folders.unsorted.each do |folder| %>
+	      <% @user.folders.unsorted.top.each do |folder| %>
                 <%= render "shared/folder_nude", :folder => folder %>
               <% end %>
 
@@ -138,6 +138,6 @@
 <% end %>
 
 <% if @user == current_user %>
-  <%= link_to "Добавить ВУЗ", search_universities_path(:search => ""), :class => "button green-button", :remote => true %>
+  <%= link_to "Добавить ВУЗ", search_universities_path(:search => "", :my_files => true), :class => "button green-button", :remote => true %>
 <% end %>
 

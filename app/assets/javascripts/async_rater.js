@@ -1,6 +1,6 @@
 $(function() {
 
-  $(".async-rater").live('click', function(e) {
+  $(".logged-in .async-rater").live('click', function(e) {
     var modification = 0;
     var that = $(this);
     var conc = that.parent().find('.inactive-rater');

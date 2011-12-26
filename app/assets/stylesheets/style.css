@@ -1871,3 +1871,34 @@ html[xmlns] .clearfix {
   }
 
 /* FAQS END */
+
+#sort_by, #group_by {
+  margin: 16px 0;
+}
+
+#sort_by {
+  float: left;
+}
+
+#group_by {
+  float: right;
+}
+  #sort_by > span , #group_by > span {
+    color: #686566;
+    padding-right: 15px;
+  }
+
+  #sort_by > a, #group_by > a {
+    margin: 0 5px;
+    border-bottom: 1px dotted #08C;
+    text-decoration: none;
+  }
+
+  .sort_link.asc, .sort_link.desc {
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    background: #5cc904;
+    padding: 2px 5px;
+    border: none !important;
+  }

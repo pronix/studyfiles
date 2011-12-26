@@ -24,7 +24,7 @@ class Folder < ActiveRecord::Base
     indexes subjects(:name), :as => :subject_name
     has :rating, :created_at
   end
-  
+
   def delete_sub_folder
     children.destroy_all
   end
@@ -47,12 +47,23 @@ class Folder < ActiveRecord::Base
   def move_files(folder_ids, document_ids)
     if folder_ids
       folder_ids.each do |i|
-        Folder.find(i).copy_to_folder(self)
+        folder = Folder.find(i)
+        folder.documents.each do |doc|
+          doc.rollback_rating(true)
+        end
+        folder.copy_to_folder(self)
+        folder.documents.each do |doc|
+          folder.ancestors.each {|p| p.update_attribute(:rating, p.rating + doc.rating)}
+        end
       end
     end
     if document_ids
       document_ids.each do |i|
-          Document.find(i).copy_to_folder(self)
+          doc = Document.find(i)
+          doc.rollback_rating
+          doc.copy_to_folder(self)
+          self.update_attribute(:rating, self.rating + doc.rating)
+          ancestors.each {|p| p.update_attribute(:rating, p.rating + doc.rating)}
       end
     end
   end
