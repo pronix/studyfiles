@@ -55,7 +55,7 @@ class Document < ActiveRecord::Base
 
   #копируем файл в папку
   def copy_to_folder(folder)
-    self.update_attributes(:folder_id => folder.id)
+    self.update_attributes(:folder_id => folder.id, :university => folder.university)
   end
 
   def already_processed!
