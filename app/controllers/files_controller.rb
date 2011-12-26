@@ -17,9 +17,10 @@ class FilesController < ApplicationController
     end
   end
 
-
   def search
     @results = ThinkingSphinx.search params[:search_keyword],
+    :conditions => {:university_name => params[:univer_name],
+      :subject_name => params[:subject_name]},
     :classes => [Document, Folder]
   end
 

@@ -30,6 +30,8 @@ class Document < ActiveRecord::Base
     indexes :txt_doc
     indexes :name
     indexes :description
+    indexes universities(:name), :as => :university_name
+    indexes subjects(:name), :as => :subject_name
     has :rating, :created_at
   end
 
