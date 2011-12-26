@@ -19,10 +19,10 @@ class University < ActiveRecord::Base
 
   define_index do
     indexes [name, abbreviation], :as => :name
-    indexes city
+    indexes :city
     indexes subjects.name, :as => :subject_name
     indexes folders.name, :as => :folder_name
-    has rating, available
+    has :rating, :available
   end
 
   scope :availables, where(:available => true)
